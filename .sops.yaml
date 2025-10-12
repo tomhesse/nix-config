@@ -1,0 +1,19 @@
+keys:
+  users:
+    - &tom 1663EC2E7C8C8E95BE959EB3ABF77DD0DF58CFF4
+  hosts:
+    - &thor age1wztfp8w2upv6y5dcas8kfqqv7mcggr907y5tvdqzqu86etp4adxqpucpk7
+
+creation_rules:
+  - path_regex: hosts/thor/secrets\.ya?ml$
+    key_groups:
+      - age:
+        - *thor
+        pgp:
+        - *tom
+  - path_regex: hosts/secrets\.ya?ml$
+    key_groups:
+      - age:
+        - *thor
+        pgp:
+        - *tom
