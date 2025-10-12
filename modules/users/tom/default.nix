@@ -30,4 +30,6 @@ in
     hashedPasswordFile = config.sops.secrets."users/tom/password".path;
     openssh.authorizedKeys.keys = sshKeys;
   };
+
+  home-manager.users.tom = import ../../../home/tom/${config.networking.hostName}.nix;
 }
