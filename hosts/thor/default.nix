@@ -5,6 +5,8 @@
     ./hardware-configuration.nix
 
     ../../modules/users/tom
+
+    ../../modules/optional/wireless.nix
   ];
 
   disko = {
