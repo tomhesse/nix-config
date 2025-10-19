@@ -4,7 +4,10 @@
 
   wayland.windowManager.hyprland.settings = {
     "$mainMod" = "SUPER";
+    "$terminal" = "uwsm app -- kitty";
     bind = [
+      "$mainMod SHIFT, RETURN, exec, $terminal"
+
       "$mainMod, j, layoutmsg, cyclenext"
       "$mainMod, k, layoutmsg, cycleprev"
       "$mainMod, i, layoutmsg, addmaster"
