@@ -6,6 +6,7 @@
 
     ../../modules/users/tom
 
+    ../../modules/optional/pipewire.nix
     ../../modules/optional/secureboot.nix
     ../../modules/optional/wireless.nix
   ];
