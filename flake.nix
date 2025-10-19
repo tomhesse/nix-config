@@ -4,6 +4,11 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
 
+    catppuccin = {
+      url = "github:catppuccin/nix/release-25.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     devshell = {
       url = "github:numtide/devshell";
       inputs.nixpkgs.follows = "nixpkgs";
