@@ -10,6 +10,7 @@
     ../../modules/optional/pipewire.nix
     ../../modules/optional/plymouth.nix
     ../../modules/optional/secureboot.nix
+    ../../modules/optional/window-manager.nix
     ../../modules/optional/wireless.nix
   ];
 
