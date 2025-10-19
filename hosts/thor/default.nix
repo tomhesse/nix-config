@@ -8,6 +8,7 @@
 
     ../../modules/optional/display-manager.nix
     ../../modules/optional/pipewire.nix
+    ../../modules/optional/plymouth.nix
     ../../modules/optional/secureboot.nix
     ../../modules/optional/wireless.nix
   ];
