@@ -32,4 +32,6 @@ in
   };
 
   home-manager.users.tom = import ../../../home/tom/${config.networking.hostName}.nix;
+
+  security.pam.services.hyprlock = { };
 }
