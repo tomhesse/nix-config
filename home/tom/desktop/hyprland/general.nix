@@ -3,7 +3,7 @@
     general = {
       border_size = 2;
       gaps_out = 10;
-      "col.active_border" = "$red";
+      "col.active_border" = "$mauve";
       "col.inactive_border" = "$surface0";
       layout = "master";
     };
