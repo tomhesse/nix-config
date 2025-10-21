@@ -16,7 +16,7 @@
 
     tooltip {
       background: @base;
-      border: 2px solid @blue;
+      border: 2px solid @mauve;
       border-radius: 8px;
       color: @text;
       padding: 5px;
@@ -124,7 +124,7 @@
     }
 
     #memory {
-      color: @mauve;
+      color: @maroon;
     }
 
     #mpris {
@@ -165,7 +165,7 @@
     }
 
     #workspaces button.visible {
-      color: @blue;
+      color: @mauve;
     }
   '';
 }
