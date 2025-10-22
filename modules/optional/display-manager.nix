@@ -1,5 +1,16 @@
 { pkgs, ... }:
 {
+  environment.persistence."/persist".files = [
+    {
+      file = "/var/lib/sddm/state.conf";
+      parentDirectory = {
+        user = "sddm";
+        group = "sddm";
+        mode = "0750";
+      };
+    }
+  ];
+
   catppuccin.sddm = {
     font = "Fira Sans";
     fontSize = "12";
