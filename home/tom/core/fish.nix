@@ -5,10 +5,7 @@ in
 {
   home.persistence."/persist/${config.home.homeDirectory}" = {
     directories = [
-      "${relativeDataHome}/fish/generated_completions"
-    ];
-    files = [
-      "${relativeDataHome}/fish/fish_history"
+      "${relativeDataHome}/fish"
     ];
   };
 
