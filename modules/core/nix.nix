@@ -5,6 +5,7 @@
         "flakes"
         "nix-command"
       ];
+      use-xdg-base-directories = true;
     };
   };
 }
