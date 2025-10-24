@@ -1,0 +1,3 @@
+{
+  catppuccin.firefox.enable = false;
+}
