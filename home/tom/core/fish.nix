@@ -14,5 +14,8 @@ in
     interactiveShellInit = ''
       set fish_greeting
     '';
+    shellAbbrs = {
+      gpgkick = ''gpg-connect-agent "scd serialno" "learn --force" /bye'';
+    };
   };
 }
