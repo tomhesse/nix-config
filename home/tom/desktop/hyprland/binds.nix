@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  home.packages = builtins.attrValues { inherit (pkgs) brightnessctl; };
+  home.packages = builtins.attrValues { inherit (pkgs) brightnessctl playerctl; };
 
   wayland.windowManager.hyprland.settings = {
     "$mainMod" = "SUPER";
@@ -55,6 +55,12 @@
       "$mainMod SHIFT, period, movewindow, mon:+1"
     ];
     bindl = [
+      ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+      ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+      ",XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+      ",XF86AudioPrev, exec, playerctl previous"
+      ",XF86AudioPlay, exec, playerctl play-pause"
+      ",XF86AudioNext, exec, playerctl next"
       ",XF86MonBrightnessUp, exec, brightnessctl set 10%+"
       ",XF86MonBrightnessDown, exec, brightnessctl set 10%-"
     ];
