@@ -194,6 +194,22 @@
           definedAliases = [ "@ghr" ];
         };
 
+        "ArchWiki" = {
+          urls = [
+            {
+              template = "https://wiki.archlinux.org/index.php";
+              params = [
+                {
+                  name = "search";
+                  value = "{searchTerms}";
+                }
+              ];
+            }
+          ];
+          icon = "https://wiki.archlinux.org/favicon.ico";
+          definedAliases = [ "@alw" ];
+        };
+
         google.metaData.hidden = true;
         bing.metaData.hidden = true;
         ecosia.metaData.hidden = true;
