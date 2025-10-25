@@ -4,14 +4,10 @@
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
     ./hardware-configuration.nix
 
+    ../../modules/desktop
     ../../modules/users/tom
 
-    ../../modules/optional/display-manager.nix
-    ../../modules/optional/pipewire.nix
-    ../../modules/optional/plymouth.nix
     ../../modules/optional/secureboot.nix
-    ../../modules/optional/window-manager.nix
-    ../../modules/optional/wireless.nix
   ];
 
   disko = {
