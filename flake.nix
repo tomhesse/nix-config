@@ -40,6 +40,11 @@
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
+    nixvim = {
+      url = "github:nix-community/nixvim/nixos-25.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     sops-nix = {
       url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
