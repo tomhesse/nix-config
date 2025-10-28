@@ -20,6 +20,8 @@ in
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true;
-    pinentry.package = pkgs.pinentry-curses;
+    pinentry.package = pkgs.pinentry-rofi.override {
+      rofi = pkgs.rofi-wayland;
+    };
   };
 }
