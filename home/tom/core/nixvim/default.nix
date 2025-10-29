@@ -22,6 +22,7 @@ in
 
   programs.nixvim = {
     enable = true;
+    defaultEditor = true;
 
     imports = lib.mapAttrsToList (name: _: ./. + "/${name}") (
       lib.filterAttrs (
