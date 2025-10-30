@@ -23,6 +23,14 @@ in
     '';
     shellAbbrs = {
       gpgkick = ''gpg-connect-agent "scd serialno" "learn --force" /bye'';
+      "--help" = {
+        position = "anywhere";
+        expansion = "--help | bat -plhelp";
+      };
+      "-h" = {
+        position = "anywhere";
+        expansion = "-h | bat -plhelp";
+      };
     };
   };
 }
