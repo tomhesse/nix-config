@@ -139,8 +139,8 @@ in
           ];
         };
         on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
-        on-scroll-up = "${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_SINK@ 5%+ --limit 1.0";
-        on-scroll-down = "${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_SINK@ 5%-";
+        on-scroll-up = "${pkgs.local.dunst-scripts}/bin/volume-up";
+        on-scroll-down = "${pkgs.local.dunst-scripts}/bin/volume-down";
         tooltip = false;
       };
 
