@@ -52,11 +52,18 @@
   };
 
   outputs =
-    { flake-parts, nixpkgs, ... }@inputs:
+    {
+      flake-parts,
+      nixpkgs,
+      self,
+      ...
+    }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
 
       imports = [
+        ./overlays
+
         inputs.devshell.flakeModule
         inputs.git-hooks.flakeModule
       ];
@@ -80,6 +87,7 @@
                 ./modules/core
                 ./modules/disko
                 (hostsDir + "/${name}")
+                { nixpkgs.overlays = builtins.attrValues self.overlays; }
               ];
             };
         in
