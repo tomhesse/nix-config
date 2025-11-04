@@ -164,6 +164,9 @@ in
 
           "(.*)Mozilla Firefox" = "󰈹 Firefox";
           "(.*) — Mozilla Firefox" = "󰈹 $1";
+
+          "(.*)Discord(.*)" = " $1Discord$2";
+          "vesktop" = " Discord";
         };
         tooltip = false;
       };
