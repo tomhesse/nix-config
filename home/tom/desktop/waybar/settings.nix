@@ -154,7 +154,7 @@ in
         rewrite = {
           "" = " Hyprland";
           "~" = " Terminal";
-          "zsh" = " Terminal";
+          "fish" = " Terminal";
           "kitty" = " Terminal";
 
           "tmux(.*)" = " Tmux";
