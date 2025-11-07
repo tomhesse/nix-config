@@ -1,9 +1,3 @@
 {
-  xdg = {
-    enable = true;
-    autostart = {
-      enable = true;
-      readOnly = true;
-    };
-  };
+  xdg.enable = true;
 }

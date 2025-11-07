@@ -4,6 +4,10 @@ let
 in
 {
   xdg = {
+    autostart = {
+      enable = true;
+      readOnly = true;
+    };
     userDirs = {
       enable = true;
       desktop = null;
