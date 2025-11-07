@@ -1,13 +1,16 @@
 { pkgs, ... }:
 {
-  home.packages = builtins.attrValues { inherit (pkgs) playerctl; };
+  home.packages = builtins.attrValues { inherit (pkgs) playerctl wl-clipboard; };
 
   wayland.windowManager.hyprland.settings = {
     "$mainMod" = "SUPER";
+    "$clipboard" =
+      "uwsm app -- cliphist list | rofi -dmenu -display-columns 2 | cliphist decode | wl-copy";
     "$locker" = "uwsm app -- hyprlock";
     "$menu" = "uwsm app -- rofi -show drun";
     "$terminal" = "uwsm app -- kitty";
     bind = [
+      "$mainMod, V, exec, $clipboard"
       "$mainMod SHIFT, L, exec, $locker"
       "$mainMod, P, exec, $menu"
       "$mainMod SHIFT, RETURN, exec, $terminal"
