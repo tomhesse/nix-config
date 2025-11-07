@@ -35,6 +35,11 @@ in
       splashTheming = true;
       splashColor = "rgb(203, 166, 247)";
       splashBackground = "rgb(24, 24, 37)";
+      spellCheckLanguages = [
+        "en"
+        "en-US"
+        "de-DE"
+      ];
     };
     vencord = {
       settings = {
