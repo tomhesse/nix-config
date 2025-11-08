@@ -5,6 +5,7 @@
     grammarPackages = builtins.attrValues {
       inherit (pkgs.vimPlugins.nvim-treesitter.builtGrammars)
         markdown
+        markdown_inline
         nix
         ;
     };
