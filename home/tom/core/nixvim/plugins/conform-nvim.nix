@@ -3,6 +3,7 @@
   extraPackages = builtins.attrValues {
     inherit (pkgs)
       nixfmt-rfc-style
+      prettierd
       ;
   };
   plugins.conform-nvim = {
@@ -12,6 +13,9 @@
     '';
     settings = {
       formatters_by_ft = {
+        markdown = [
+          "prettierd"
+        ];
         nix = [
           "nixfmt"
         ];
