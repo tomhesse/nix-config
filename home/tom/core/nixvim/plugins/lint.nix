@@ -1,6 +1,14 @@
+{ pkgs, ... }:
 {
+  extraPackages = builtins.attrValues {
+    inherit (pkgs)
+      deadnix
+      nix
+      statix
+      ;
+  };
   plugins.lint = {
-    enable = false;
+    enable = true;
     autoCmd.event = [
       "BufEnter"
       "BufWritePost"
