@@ -3,6 +3,7 @@
   extraPackages = builtins.attrValues {
     inherit (pkgs)
       deadnix
+      markdownlint-cli
       nix
       statix
       ;
@@ -15,6 +16,9 @@
       "InsertLeave"
     ];
     lintersByFt = {
+      markdown = [
+        "markdownlint"
+      ];
       nix = [
         "nix"
         "deadnix"
