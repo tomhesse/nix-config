@@ -1,8 +1,8 @@
 {
   imports = [
-    ./core
+    ./../../core
 
-    ./desktop
+    ./../../desktop
   ];
 
   wallpaper = builtins.fetchurl {

@@ -38,7 +38,7 @@ in
     openssh.authorizedKeys.keys = sshKeys;
   };
 
-  home-manager.users.tom = import ../../../home/tom/${config.networking.hostName}.nix;
+  home-manager.users.tom = import ../../../home/tom/hosts/${config.networking.hostName};
 
   security.pam.services.hyprlock = { };
 }
