@@ -17,8 +17,15 @@ let
   );
 in
 {
-  sops.secrets."users/tom/password" = {
-    neededForUsers = true;
+  sops.secrets = {
+    "users/tom/password" = {
+      neededForUsers = true;
+    };
+    "users/tom/age-key" = {
+      path = "${config.home-manager.users.tom.xdg.configHome}/sops/age/keys.txt";
+      owner = "${config.users.users.tom.name}";
+      group = "${config.users.users.tom.group}";
+    };
   };
 
   users.users.tom = {
