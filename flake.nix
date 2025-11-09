@@ -145,6 +145,7 @@
 
                 packages = builtins.attrValues {
                   inherit (pkgs)
+                    age
                     deadnix
                     git
                     gnupg
