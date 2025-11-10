@@ -1,7 +1,7 @@
 {
   plugins.nvim-tree = {
     enable = true;
-    autoClose = true;
+    autoClose = false;
   };
 
   keymaps = [
