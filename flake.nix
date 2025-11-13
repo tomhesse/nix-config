@@ -69,6 +69,7 @@
               };
               modules = [
                 ./modules/core
+                ./modules/desktop
                 ./modules/disko
                 (hostsDir + "/${name}")
               ];
