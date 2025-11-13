@@ -25,5 +25,16 @@ in
       wayland.enable = true;
       package = pkgs.kdePackages.sddm;
     };
+
+    environment.persistence."/persist".files = [
+      {
+        file = "/var/lib/sddm/state.conf";
+        parentDirectory = {
+          user = "sddm";
+          group = "sddm";
+          mode = "0750";
+        };
+      }
+    ];
   };
 }
