@@ -1,4 +1,9 @@
-{ lib, osConfig, ... }:
+{
+  lib,
+  osConfig,
+  pkgs,
+  ...
+}:
 let
   inherit (lib) mkIf;
 
@@ -56,6 +61,13 @@ in
         "$mainMod, period, focusmonitor, +1"
         "$mainMod SHIFT, comma, movewindow, mon:-1"
         "$mainMod SHIFT, period, movewindow, mon:+1"
+      ];
+      bindl = [
+        ",XF86AudioMute, exec, ${pkgs.local.dunst-scripts}/bin/volume-mute"
+        ",XF86AudioLowerVolume, exec, ${pkgs.local.dunst-scripts}/bin/volume-down"
+        ",XF86AudioRaiseVolume, exec, ${pkgs.local.dunst-scripts}/bin/volume-up"
+        ",XF86MonBrightnessUp, exec, ${pkgs.local.dunst-scripts}/bin/brightness-up"
+        ",XF86MonBrightnessDown, exec, ${pkgs.local.dunst-scripts}/bin/brightness-down"
       ];
       bindm = [
         "$mainMod, mouse:272, movewindow"
