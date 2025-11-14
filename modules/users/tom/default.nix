@@ -21,6 +21,9 @@ let
     )
   );
 
+  desktopModulePath = ../../../home/tom/desktop;
+  desktopModule = optional config.hostSpec.desktop.enable desktopModulePath;
+
   hostModulePath = ../../home/tom/hosts + "/${hostName}";
   hostModule = optional (pathExists hostModulePath) hostModulePath;
 in
@@ -46,6 +49,7 @@ in
       imports = [
         ../../../home/tom/core
       ]
+      ++ desktopModule
       ++ hostModule;
     };
   };
