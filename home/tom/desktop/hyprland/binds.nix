@@ -8,8 +8,10 @@ in
   wayland.windowManager.hyprland = mkIf enabled {
     settings = {
       "$mainMod" = "SUPER";
+      "$menu" = "uwsm app -- rofi -show drun";
       "$terminal" = "uwsm app -- kitty";
       bind = [
+        "$mainMod, P, exec, $menu"
         "$mainMod SHIFT, RETURN, exec, $terminal"
 
         "$mainMod, j, layoutmsg, cyclenext"
