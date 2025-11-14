@@ -24,7 +24,7 @@ let
   desktopModulePath = ../../../home/tom/desktop;
   desktopModule = optional config.hostSpec.desktop.enable desktopModulePath;
 
-  hostModulePath = ../../home/tom/hosts + "/${hostName}";
+  hostModulePath = ../../../home/tom/hosts + "/${hostName}";
   hostModule = optional (pathExists hostModulePath) hostModulePath;
 in
 {
