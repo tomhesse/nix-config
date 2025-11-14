@@ -150,6 +150,8 @@ in
               ""
             ];
           };
+          on-scroll-up = "${pkgs.local.dunst-scripts}/bin/volume-up";
+          on-scroll-down = "${pkgs.local.dunst-scripts}/bin/volume-down";
           tooltip = false;
         };
 
