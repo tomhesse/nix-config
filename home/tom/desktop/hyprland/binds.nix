@@ -13,9 +13,11 @@ in
   wayland.windowManager.hyprland = mkIf enabled {
     settings = {
       "$mainMod" = "SUPER";
+      "$locker" = "uwsm app -- hyprlock";
       "$menu" = "uwsm app -- rofi -show drun";
       "$terminal" = "uwsm app -- kitty";
       bind = [
+        "$mainMod SHIFT, L, exec, $locker"
         "$mainMod, P, exec, $menu"
         "$mainMod SHIFT, RETURN, exec, $terminal"
 
