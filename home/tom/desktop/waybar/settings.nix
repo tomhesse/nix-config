@@ -12,7 +12,9 @@ let
   powerMenu = pkgs.writeShellApplication {
     name = "power-menu";
     runtimeInputs = with pkgs; [
+      coreutils
       gawk
+      hyprlock
       systemd
       uwsm
       rofi-wayland # TODO: Change to rofi when rofi 2.0.0 is available
