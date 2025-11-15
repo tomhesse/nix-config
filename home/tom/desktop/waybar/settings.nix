@@ -5,7 +5,7 @@
   ...
 }:
 let
-  inherit (lib) mkIf;
+  inherit (lib) getExe' mkIf;
 
   enabled = osConfig.hostSpec.desktop.window-manager.hyprland.enable;
 
@@ -46,10 +46,11 @@ let
       esac
     '';
   };
+
+  volume-up = getExe' pkgs.local.dunst-scripts "volume-up";
+  volume-down = getExe' pkgs.local.dunst-scripts "volume-down";
 in
 {
-  home.packages = [ powerMenu ];
-
   programs.waybar = mkIf enabled {
     enable = true;
     systemd.enable = true;
@@ -152,8 +153,8 @@ in
               ""
             ];
           };
-          on-scroll-up = "${pkgs.local.dunst-scripts}/bin/volume-up";
-          on-scroll-down = "${pkgs.local.dunst-scripts}/bin/volume-down";
+          on-scroll-up = "${volume-up}";
+          on-scroll-down = "${volume-down}";
           tooltip = false;
         };
 
