@@ -2,10 +2,13 @@
   config,
   lib,
   osConfig,
+  pkgs,
   ...
 }:
 let
-  inherit (lib) mkIf;
+  inherit (lib) getExe' mkIf;
+
+  gpgConnectAgent = getExe' pkgs.gnupg "gpg-connect-agent";
 
   enabled = osConfig.hostSpec.shells.fish.enable or false;
   impermanenceEnabled = osConfig.hostSpec.impermanence.enable;
@@ -20,7 +23,7 @@ in
         set fish_greeting
       '';
       shellAbbrs = {
-        gpgkick = ''gpg-connect-agent "scd serialno" "learn --force" /bye'';
+        gpgkick = ''${gpgConnectAgent} "scd serialno" "learn --force" /bye'';
       };
     };
 
