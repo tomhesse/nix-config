@@ -161,7 +161,7 @@ symlinkJoin {
   ];
 
   meta = {
-    homepage = "https://github.com/tomhess/nix-config";
+    homepage = "https://github.com/tomhesse/nix-config";
     description = "Scripts to change volume and brightness with a fancy progress bar using dunst.";
     license = lib.licenses.mit;
     maintainers = with lib.maintainers; [ tomhesse ];
