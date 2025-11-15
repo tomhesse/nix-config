@@ -5,49 +5,11 @@
   ...
 }:
 let
-  inherit (lib) getExe' mkIf;
+  inherit (lib) getExe getExe' mkIf;
 
   enabled = osConfig.hostSpec.desktop.window-manager.hyprland.enable;
 
-  powerMenu = pkgs.writeShellApplication {
-    name = "power-menu";
-    runtimeInputs = builtins.attrValues {
-      inherit (pkgs)
-        coreutils
-        gawk
-        hyprlock
-        systemd
-        uwsm
-        rofi-wayland # TODO: Change to rofi when rofi 2.0.0 is available
-        ;
-    };
-    text = ''
-      choice="$(
-        printf '%s\n' \
-          '  Shutdown' \
-          '  Reboot' \
-          '  Suspend' \
-          '  Logout' \
-          '  Lock' \
-        | rofi -dmenu -i -p 'Power Menu' | awk '{print $2}'
-      )"
-
-      case "$choice" in
-        Shutdown)
-          exec systemctl poweroff ;;
-        Reboot)
-          exec systemctl reboot ;;
-        Suspend)
-          exec systemctl suspend ;;
-        Lock)
-          exec hyprlock ;;
-        Logout)
-          exec uwsm stop ;;
-        *)
-          exit 0 ;;
-      esac
-    '';
-  };
+  power-menu = getExe pkgs.local.power-menu;
 
   volume-up = getExe' pkgs.local.dunst-scripts "volume-up";
   volume-down = getExe' pkgs.local.dunst-scripts "volume-down";
@@ -100,7 +62,7 @@ in
         "custom/power-menu" = {
           format = " ";
           tooltip = false;
-          on-click = "${powerMenu}/bin/power-menu";
+          on-click = "${power-menu}";
         };
 
         memory = {
