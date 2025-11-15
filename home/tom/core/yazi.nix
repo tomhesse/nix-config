@@ -37,10 +37,12 @@ in
       ];
     };
     plugins = {
-      inherit (pkgs.yaziPlugins) git;
-      inherit (pkgs.yaziPlugins) mount;
-      inherit (pkgs.yaziPlugins) smart-enter;
-      inherit (pkgs.yaziPlugins) smart-paste;
+      inherit (pkgs.yaziPlugins)
+        git
+        mount
+        smart-enter
+        smart-paste
+        ;
     };
     settings = {
       plugin.prepend_fetchers = [
