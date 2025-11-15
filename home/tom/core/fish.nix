@@ -6,9 +6,10 @@
   ...
 }:
 let
-  inherit (lib) getExe' mkIf;
+  inherit (lib) getExe getExe' mkIf;
 
   gpgConnectAgent = getExe' pkgs.gnupg "gpg-connect-agent";
+  bat = getExe pkgs.bat;
 
   enabled = osConfig.hostSpec.shells.fish.enable or false;
   impermanenceEnabled = osConfig.hostSpec.impermanence.enable;
@@ -24,6 +25,14 @@ in
       '';
       shellAbbrs = {
         gpgkick = ''${gpgConnectAgent} "scd serialno" "learn --force" /bye'';
+        "--help" = {
+          position = "anywhere";
+          expansion = "--help | ${bat} -plhelp";
+        };
+        "-h" = {
+          position = "anywhere";
+          expansion = "-h | ${bat} -plhelp";
+        };
       };
     };
 
