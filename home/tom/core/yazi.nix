@@ -15,6 +15,9 @@ in
 {
   programs.yazi = {
     enable = true;
+    initLua = ''
+      require("git"):setup()
+    '';
     keymap = {
       mgr.prepend_keymap = [
         {
@@ -34,9 +37,24 @@ in
       ];
     };
     plugins = {
+      inherit (pkgs.yaziPlugins) git;
       inherit (pkgs.yaziPlugins) mount;
       inherit (pkgs.yaziPlugins) smart-enter;
       inherit (pkgs.yaziPlugins) smart-paste;
+    };
+    settings = {
+      plugin.prepend_fetchers = [
+        {
+          id = "git";
+          name = "*";
+          run = "git";
+        }
+        {
+          id = "git";
+          name = "*/";
+          run = "git";
+        }
+      ];
     };
   };
 
