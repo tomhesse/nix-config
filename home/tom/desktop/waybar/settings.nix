@@ -11,6 +11,7 @@ let
 
   power-menu = getExe pkgs.local.power-menu;
 
+  pavucontrol = getExe pkgs.pavucontrol;
   volume-up = getExe' pkgs.local.dunst-scripts "volume-up";
   volume-down = getExe' pkgs.local.dunst-scripts "volume-down";
 in
@@ -117,6 +118,7 @@ in
               ""
             ];
           };
+          on-click = "${pavucontrol}";
           on-scroll-up = "${volume-up}";
           on-scroll-down = "${volume-down}";
           tooltip = false;
