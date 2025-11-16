@@ -33,6 +33,10 @@ in
       "users/tom/password" = {
         neededForUsers = true;
       };
+      "users/tom/age-key" = {
+        owner = "${config.users.users.tom.name}";
+        group = "${config.users.users.tom.group}";
+      };
     };
 
     users.users.tom = {
