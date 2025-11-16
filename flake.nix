@@ -35,6 +35,11 @@
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
+    nixvim = {
+      url = "github:nix-community/nixvim/nixos-25.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     pkgs-by-name-for-flake-parts.url = "github:drupol/pkgs-by-name-for-flake-parts";
 
     sops-nix = {
