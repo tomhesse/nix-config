@@ -14,7 +14,7 @@ let
 
   enabled = osConfig.hostSpec.desktop.window-manager.hyprland.enable;
 
-  uwsmApp = cmd: args: "uwsm app -- ${cmd} ${escapeShellArgs args}";
+  uwsmApp = cmd: args: "${getExe pkgs.uwsm} app -- ${cmd} ${escapeShellArgs args}";
 
   cliphist = getExe pkgs.cliphist;
   hyprlock = getExe pkgs.hyprlock;
