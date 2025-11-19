@@ -9,6 +9,8 @@ let
 
   enabled = osConfig.hostSpec.desktop.window-manager.hyprland.enable;
 
+  uwsm = getExe pkgs.uwsm;
+
   power-menu = getExe pkgs.local.power-menu;
 
   pavucontrol = getExe pkgs.pavucontrol;
@@ -63,7 +65,7 @@ in
         "custom/power-menu" = {
           format = " ";
           tooltip = false;
-          on-click = "${power-menu}";
+          on-click = "${uwsm} app -- ${power-menu}";
         };
 
         memory = {
@@ -118,9 +120,9 @@ in
               ""
             ];
           };
-          on-click = "${pavucontrol}";
-          on-scroll-up = "${volume-up}";
-          on-scroll-down = "${volume-down}";
+          on-click = "${uwsm} app -- ${pavucontrol}";
+          on-scroll-up = "${uwsm} app -- ${volume-up}";
+          on-scroll-down = "${uwsm} app -- ${volume-down}";
           tooltip = false;
         };
 
