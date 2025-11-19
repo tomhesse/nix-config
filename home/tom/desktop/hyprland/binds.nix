@@ -96,11 +96,11 @@ in
           "$mainMod SHIFT, period, movewindow, mon:+1"
         ];
         bindl = [
-          ",XF86AudioMute, exec, ${volume-mute}"
-          ",XF86AudioRaiseVolume, exec, ${volume-up}"
-          ",XF86AudioLowerVolume, exec, ${volume-down}"
-          ",XF86MonBrightnessUp, exec, ${brightness-up}"
-          ",XF86MonBrightnessDown, exec, ${brightness-down}"
+          ",XF86AudioMute, exec, ${uwsmApp volume-mute [ ]}"
+          ",XF86AudioRaiseVolume, exec, ${uwsmApp volume-up [ ]}"
+          ",XF86AudioLowerVolume, exec, ${uwsmApp volume-down [ ]}"
+          ",XF86MonBrightnessUp, exec, ${uwsmApp brightness-up [ ]}"
+          ",XF86MonBrightnessDown, exec, ${uwsmApp brightness-down [ ]}"
         ];
         bindm = [
           "$mainMod, mouse:272, movewindow"
