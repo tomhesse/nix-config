@@ -25,6 +25,7 @@ in
       '';
       shellAbbrs = {
         gpgkick = ''${gpgConnectAgent} "scd serialno" "learn --force" /bye'';
+        lg = "lazygit";
         "--help" = {
           position = "anywhere";
           expansion = "--help | ${bat} -plhelp";
