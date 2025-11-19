@@ -13,6 +13,7 @@ let
     mapAttrsToList
     mkIf
     ;
+  inherit (osConfig.hostSpec) hostName;
 
   impermanenceEnabled = osConfig.hostSpec.impermanence.enable;
 
@@ -27,6 +28,7 @@ in
   programs.nixvim = {
     enable = true;
     defaultEditor = true;
+    globals.hostName = hostName;
     imports = mapAttrsToList (name: _: ./. + "/${name}") (
       filterAttrs (
         name: type:
