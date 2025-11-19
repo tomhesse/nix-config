@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ config, lib, ... }:
 let
   inherit (lib.nixvim) mkRaw;
 in
@@ -83,7 +83,34 @@ in
       }
     ];
     servers = {
-      nixd.enable = true;
+      nixd = {
+        enable = true;
+        settings.settings.nixd =
+          let
+            inherit (config.globals) hostName;
+
+            flake = "(builtins.getFlake (builtins.toString ./.))";
+          in
+          {
+            nixpkgs = {
+              expr = "import ${flake}.inputs.nixpkgs { }";
+            };
+            options = {
+              nixos = {
+                expr = "${flake}.nixosConfigurations.${hostName}.options";
+              };
+              home-manager = {
+                expr = "${flake}.nixosConfigurations.${hostName}.options.home-manager.users.type.getSubOptions []";
+              };
+              nixvim = {
+                expr = "(${flake}.inputs.nixvim.lib.evalNixvim { system = builtins.currentSystem; }).options";
+              };
+              flake-parts = {
+                expr = "${flake}.debug.options // ${flake}.currentSystem.options";
+              };
+            };
+          };
+      };
     };
   };
 }
