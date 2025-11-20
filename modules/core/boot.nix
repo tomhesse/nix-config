@@ -1,10 +1,10 @@
 {
   boot = {
     loader = {
-      systemd-boot = {
+      limine = {
         enable = true;
-        configurationLimit = 10;
-        editor = false;
+        enableEditor = false;
+        maxGenerations = 10;
       };
       efi.canTouchEfiVariables = true;
     };
