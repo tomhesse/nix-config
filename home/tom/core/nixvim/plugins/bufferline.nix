@@ -11,6 +11,7 @@
             return " " .. icon .. count
           end
         '';
+        show_buffer_close_icons = false;
       };
     };
   };
