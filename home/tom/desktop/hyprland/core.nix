@@ -5,7 +5,7 @@
   ...
 }:
 let
-  inherit (lib) mkIf optionalAttrs;
+  inherit (lib) filter mkIf optionalAttrs;
 
   enabled = osConfig.hostSpec.desktop.window-manager.hyprland.enable;
 in
@@ -38,11 +38,23 @@ in
       master = {
         new_status = "master";
       };
+      monitor = map (
+        monitor:
+        "${monitor.name},${
+          if monitor.enabled then
+            "${toString monitor.width}x${toString monitor.height}@${toString monitor.refreshRate},${monitor.position},${toString monitor.scale}"
+          else
+            "disable"
+        }"
+      ) config.homeSpec.monitors;
       misc = {
         disable_hyprland_logo = true; # Default wallpapers
         disable_splash_rendering = true; # Funny bottom text
         font_family = "Fira Sans";
       };
+      workspace = map (monitor: "${monitor.workspace},monitor:${monitor.name}") (
+        filter (monitor: monitor.enabled && monitor.workspace != null) config.homeSpec.monitors
+      );
     };
   };
 }
