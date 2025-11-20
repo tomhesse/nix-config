@@ -89,6 +89,7 @@
                   ./modules/core
                   ./modules/desktop
                   ./modules/disko
+                  ./modules/gaming
                   (hostsDir + "/${name}")
                   { nixpkgs.overlays = builtins.attrValues self.overlays; }
                 ];
