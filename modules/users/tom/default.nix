@@ -24,6 +24,9 @@ let
   desktopModulePath = ../../../home/tom/desktop;
   desktopModule = optional config.hostSpec.desktop.enable desktopModulePath;
 
+  gamingModulePath = ../../../home/tom/gaming;
+  gamingModule = optional config.hostSpec.gaming.enable gamingModulePath;
+
   hostModulePath = ../../../home/tom/hosts + "/${hostName}";
   hostModule = optional (pathExists hostModulePath) hostModulePath;
 in
@@ -54,6 +57,7 @@ in
         ../../../home/tom/core
       ]
       ++ desktopModule
+      ++ gamingModule
       ++ hostModule;
     };
   };
