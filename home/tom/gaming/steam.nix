@@ -6,10 +6,12 @@
   ...
 }:
 let
-  inherit (lib) mkIf;
+  inherit (lib) mkEnableOption mkIf;
 
   enabled = osConfig.hostSpec.gaming.steam.enable;
   impermanenceEnabled = osConfig.hostSpec.impermanence.enable;
+
+  cfg = config.homeSpec.gaming.steam;
 
   relativeDataHome = lib.removePrefix "${config.home.homeDirectory}/" config.xdg.dataHome;
 
@@ -24,8 +26,10 @@ let
   };
 in
 {
+  options.homeSpec.gaming.steam.autostart = mkEnableOption "Autostart steam on login.";
+
   config = mkIf enabled {
-    xdg.autostart.entries = [
+    xdg.autostart.entries = mkIf cfg.autostart [
       "${steamDesktop}/share/applications/steam.desktop"
     ];
 
