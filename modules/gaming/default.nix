@@ -21,6 +21,7 @@ in
   config.hostSpec.allowedUnfree = [
     "steam"
     "steam-unwrapped"
+    "osu-lazer-bin"
   ];
 
 }
