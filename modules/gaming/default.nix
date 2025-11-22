@@ -17,4 +17,10 @@ in
   );
 
   options.hostSpec.gaming.enable = mkEnableOption "Enable gaming configuration on this system.";
+
+  config.hostSpec.allowedUnfree = [
+    "steam"
+    "steam-unwrapped"
+  ];
+
 }

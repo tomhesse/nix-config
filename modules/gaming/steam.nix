@@ -10,11 +10,6 @@ in
   };
 
   config = mkIf (cfg.enable && cfg.steam.enable) {
-    hostSpec.allowedUnfree = [
-      "steam"
-      "steam-unwrapped"
-    ];
-
     programs.steam.enable = true;
   };
 }
