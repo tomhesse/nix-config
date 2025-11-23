@@ -26,6 +26,8 @@ in
       '';
     };
 
+    mpd-discord-rpc.enable = true;
+
     mpdris2.enable = true;
 
     mpdscribble = {
