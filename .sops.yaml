@@ -12,6 +12,12 @@ creation_rules:
         - *tom_age
         pgp:
         - *tom_pgp
+  - path_regex: home/tom/hosts/secrets\.ya?ml$
+    key_groups:
+      - age:
+        - *tom_age
+        pgp:
+        - *tom_pgp
   - path_regex: hosts/thor/secrets\.ya?ml$
     key_groups:
       - age:
