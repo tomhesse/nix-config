@@ -12,6 +12,8 @@ let
   relativeDataHome = lib.removePrefix "${config.home.homeDirectory}/" config.xdg.dataHome;
 in
 {
+  sops.secrets."services/lastfm/password".sopsFile = ../hosts/secrets.yaml;
+
   services = {
     mpd = {
       enable = true;
@@ -25,6 +27,14 @@ in
     };
 
     mpdris2.enable = true;
+
+    mpdscribble = {
+      enable = true;
+      endpoints."last.fm" = {
+        username = "tomhesse";
+        passwordFile = config.sops.secrets."services/lastfm/password".path;
+      };
+    };
   };
 
   home.persistence = mkIf impermanenceEnabled {
