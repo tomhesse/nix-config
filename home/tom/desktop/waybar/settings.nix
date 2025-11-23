@@ -78,7 +78,8 @@ in
           format-paused = "{status_icon} {title} - {artist}";
 
           player-icons = {
-            default = "󰝚";
+            default = "▶";
+            mpd = "󰝚";
           };
           status-icons = {
             paused = "󰏤";
