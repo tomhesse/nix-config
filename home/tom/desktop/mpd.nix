@@ -12,15 +12,19 @@ let
   relativeDataHome = lib.removePrefix "${config.home.homeDirectory}/" config.xdg.dataHome;
 in
 {
-  services.mpd = {
-    enable = true;
-    extraConfig = ''
-      audio_output {
-        type "pipewire"
-        name "PipeWire Sound Server"
-      }
-      restore_paused "yes"
-    '';
+  services = {
+    mpd = {
+      enable = true;
+      extraConfig = ''
+        audio_output {
+          type "pipewire"
+          name "PipeWire Sound Server"
+        }
+        restore_paused "yes"
+      '';
+    };
+
+    mpdris2.enable = true;
   };
 
   home.persistence = mkIf impermanenceEnabled {
