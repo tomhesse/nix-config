@@ -1,5 +1,6 @@
 {
   nix = {
+    channel.enable = false;
     gc = {
       automatic = true;
       options = "--delete-older-than 14d";
