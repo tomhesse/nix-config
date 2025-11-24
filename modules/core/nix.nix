@@ -1,5 +1,10 @@
 {
   nix = {
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 14d";
+      persistent = true;
+    };
     settings = {
       connect-timeout = 5;
       min-free = "${toString (100 * 1024 * 1024)}";
