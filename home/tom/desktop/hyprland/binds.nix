@@ -6,7 +6,6 @@
 }:
 let
   inherit (lib)
-    escapeShellArgs
     getExe
     getExe'
     mkIf
@@ -14,7 +13,7 @@ let
 
   enabled = osConfig.hostSpec.desktop.window-manager.hyprland.enable;
 
-  uwsmApp = cmd: args: "${getExe pkgs.uwsm} app -- ${cmd} ${escapeShellArgs args}";
+  uwsm = getExe pkgs.uwsm;
 
   cliphist = getExe pkgs.cliphist;
   hyprlock = getExe pkgs.hyprlock;
@@ -34,23 +33,10 @@ in
       settings = {
         "$mainMod" = "SUPER";
         bind = [
-          "$mainMod, V, exec, ${cliphist} list | ${
-            uwsmApp rofi [
-              "-dmenu"
-              "-display-columns"
-              "2"
-              "-p"
-              "Clipboard"
-            ]
-          } ${cliphist} decode | ${wl-copy}"
-          "$mainMod SHIFT, L, exec, ${uwsmApp hyprlock [ ]}"
-          "$mainMod, P, exec, ${
-            uwsmApp rofi [
-              "-show"
-              "drun"
-            ]
-          }"
-          "$mainMod SHIFT, RETURN, exec, ${uwsmApp kitty [ ]}"
+          "$mainMod, V, exec, ${cliphist} list | ${uwsm} app -- ${rofi} -dmenu -display-columns 2 | ${cliphist} decode | ${wl-copy}"
+          "$mainMod SHIFT, L, exec, ${uwsm} app -- ${hyprlock}"
+          "$mainMod, P, exec, ${uwsm} app -- ${rofi} -show drun"
+          "$mainMod SHIFT, RETURN, exec, ${uwsm} app -- ${kitty}"
 
           "$mainMod, j, layoutmsg, cyclenext"
           "$mainMod, k, layoutmsg, cycleprev"
@@ -96,11 +82,11 @@ in
           "$mainMod SHIFT, period, movewindow, mon:+1"
         ];
         bindl = [
-          ",XF86AudioMute, exec, ${uwsmApp volume-mute [ ]}"
-          ",XF86AudioRaiseVolume, exec, ${uwsmApp volume-up [ ]}"
-          ",XF86AudioLowerVolume, exec, ${uwsmApp volume-down [ ]}"
-          ",XF86MonBrightnessUp, exec, ${uwsmApp brightness-up [ ]}"
-          ",XF86MonBrightnessDown, exec, ${uwsmApp brightness-down [ ]}"
+          ",XF86AudioMute, exec, ${uwsm} app -- ${volume-mute}"
+          ",XF86AudioRaiseVolume, exec, ${uwsm} app -- ${volume-up}"
+          ",XF86AudioLowerVolume, exec, ${uwsm} app -- ${volume-down}"
+          ",XF86MonBrightnessUp, exec, ${uwsm} app -- ${brightness-up}"
+          ",XF86MonBrightnessDown, exec, ${uwsm} app -- ${brightness-down}"
         ];
         bindm = [
           "$mainMod, mouse:272, movewindow"
