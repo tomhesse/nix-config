@@ -6,14 +6,10 @@
   ...
 }:
 let
-  inherit (lib)
-    filterAttrs
-    hasPrefix
-    hasSuffix
-    mapAttrsToList
-    mkIf
-    ;
+  inherit (lib) mkIf;
   inherit (osConfig.hostSpec) hostName;
+
+  importAll = import ../../../../lib/importAll.nix { inherit lib; };
 
   impermanenceEnabled = osConfig.hostSpec.impermanence.enable;
 
@@ -29,12 +25,7 @@ in
     enable = true;
     defaultEditor = true;
     globals.hostName = hostName;
-    imports = mapAttrsToList (name: _: ./. + "/${name}") (
-      filterAttrs (
-        name: type:
-        (type == "directory" || (hasSuffix ".nix" name && name != "default.nix")) && !(hasPrefix "." name)
-      ) (builtins.readDir ./.)
-    );
+    imports = importAll ./.;
   };
 
   home.persistence = mkIf impermanenceEnabled {

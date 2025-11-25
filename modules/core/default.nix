@@ -1,17 +1,7 @@
 { lib, ... }:
 let
-  inherit (lib)
-    filterAttrs
-    hasPrefix
-    hasSuffix
-    mapAttrsToList
-    ;
+  importAll = import ../../lib/importAll.nix { inherit lib; };
 in
 {
-  imports = mapAttrsToList (name: _: ./. + "/${name}") (
-    filterAttrs (
-      name: type:
-      (type == "directory" || (hasSuffix ".nix" name && name != "default.nix")) && !(hasPrefix "." name)
-    ) (builtins.readDir ./.)
-  );
+  imports = importAll ./.;
 }

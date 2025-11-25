@@ -1,20 +1,11 @@
 { lib, ... }:
 let
-  inherit (lib)
-    filterAttrs
-    hasPrefix
-    hasSuffix
-    mapAttrsToList
-    mkEnableOption
-    ;
+  inherit (lib) mkEnableOption;
+
+  importAll = import ../../lib/importAll.nix { inherit lib; };
 in
 {
-  imports = mapAttrsToList (name: _: ./. + "/${name}") (
-    filterAttrs (
-      name: type:
-      (type == "directory" || (hasSuffix ".nix" name && name != "default.nix")) && !(hasPrefix "." name)
-    ) (builtins.readDir ./.)
-  );
+  imports = importAll ./.;
 
   options.hostSpec.gaming.enable = mkEnableOption "Enable gaming configuration on this system.";
 
