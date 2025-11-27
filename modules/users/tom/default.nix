@@ -6,7 +6,7 @@
 }:
 let
   inherit (config.hostSpec) hostName;
-  inherit (lib) mkIf optional pathExists;
+  inherit (lib) mkIf;
 
   enabled = config.hostSpec.users.tom.enable or false;
 
@@ -21,14 +21,13 @@ let
     )
   );
 
-  desktopModulePath = ../../../home/tom/desktop;
-  desktopModule = optional config.hostSpec.desktop.enable desktopModulePath;
-
-  gamingModulePath = ../../../home/tom/gaming;
-  gamingModule = optional config.hostSpec.gaming.enable gamingModulePath;
-
-  hostModulePath = ../../../home/tom/hosts + "/${hostName}";
-  hostModule = optional (pathExists hostModulePath) hostModulePath;
+  importOptionalHomeModules = import ../../../lib/importOptionalHomeModules.nix { inherit lib; };
+  homeModulesBasePath = ../../../home/tom;
+  optionalHomeModules = importOptionalHomeModules {
+    basePath = homeModulesBasePath;
+    inherit (config) hostSpec;
+    inherit hostName;
+  };
 in
 {
   config = mkIf enabled {
@@ -56,9 +55,7 @@ in
       imports = [
         ../../../home/tom/core
       ]
-      ++ desktopModule
-      ++ gamingModule
-      ++ hostModule;
+      ++ optionalHomeModules;
     };
   };
 }
