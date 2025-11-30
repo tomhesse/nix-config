@@ -25,6 +25,10 @@ in
       '';
       plugins = [
         {
+          name = "autopair";
+          inherit (pkgs.fishPlugins.autopair) src;
+        }
+        {
           name = "git-abbr";
           inherit (pkgs.fishPlugins.git-abbr) src;
         }
