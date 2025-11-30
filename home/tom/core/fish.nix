@@ -25,6 +25,10 @@ in
       '';
       plugins = [
         {
+          name = "git-abbr";
+          inherit (pkgs.fishPlugins.git-abbr) src;
+        }
+        {
           name = "sudope";
           inherit (pkgs.fishPlugins.plugin-sudope) src;
         }
