@@ -23,6 +23,12 @@ in
       interactiveShellInit = ''
         set fish_greeting
       '';
+      plugins = [
+        {
+          name = "sudope";
+          inherit (pkgs.fishPlugins.plugin-sudope) src;
+        }
+      ];
       shellAbbrs = {
         gpgkick = ''${gpgConnectAgent} "scd serialno" "learn --force" /bye'';
         lg = "lazygit";
