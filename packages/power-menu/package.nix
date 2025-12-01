@@ -3,7 +3,7 @@
   gawk,
   hyprlock,
   lib,
-  rofi-wayland,
+  rofi,
   systemd,
   uwsm,
   writeShellApplication,
@@ -14,7 +14,7 @@ writeShellApplication {
     coreutils
     gawk
     hyprlock
-    rofi-wayland # TODO: Change to rofi when rofi 2.0.0 is available
+    rofi
     systemd
     uwsm
   ];
