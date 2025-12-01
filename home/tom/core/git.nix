@@ -1,11 +1,13 @@
 {
   programs.git = {
     enable = true;
-    userName = "Tom Hesse";
-    userEmail = "contact@tomhesse.xyz";
-    extraConfig = {
+    settings = {
       init = {
         defaultBranch = "main";
+      };
+      user = {
+        email = "contact@tomhesse.xyz";
+        name = "Tom Hesse";
       };
     };
     signing = {
