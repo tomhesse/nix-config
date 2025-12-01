@@ -7,52 +7,29 @@ in
 {
   services.hyprsunset = mkIf enabled {
     enable = true;
-    transitions = {
-      morning = {
-        calendar = "*-*-* 07:30:00";
-        requests = [
-          [
-            "temperature"
-            "5800"
-          ]
-        ];
-      };
-      noon = {
-        calendar = "*-*-* 12:00:00";
-        requests = [
-          [
-            "temperature"
-            "6500"
-          ]
-        ];
-      };
-      evening = {
-        calendar = "*-*-* 18:30:00";
-        requests = [
-          [
-            "temperature"
-            "5200"
-          ]
-        ];
-      };
-      late = {
-        calendar = "*-*-* 21:30:00";
-        requests = [
-          [
-            "temperature"
-            "4100"
-          ]
-        ];
-      };
-      night = {
-        calendar = "*-*-* 23:30:00";
-        requests = [
-          [
-            "temperature"
-            "3500"
-          ]
-        ];
-      };
+    settings = {
+      profile = [
+        {
+          time = "7:30";
+          temperature = 5800;
+        }
+        {
+          time = "12:00";
+          temperature = 6500;
+        }
+        {
+          time = "18:30";
+          temperature = 5200;
+        }
+        {
+          time = "21:30";
+          temperature = 4100;
+        }
+        {
+          time = "23:30";
+          temperature = 3500;
+        }
+      ];
     };
   };
 }
