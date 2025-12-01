@@ -85,7 +85,7 @@ in
     servers = {
       nixd = {
         enable = true;
-        settings.settings.nixd =
+        config.settings.nixd =
           let
             inherit (config.globals) hostName;
 
