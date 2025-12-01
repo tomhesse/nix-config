@@ -12,9 +12,7 @@ let
 
   pinentryPkgs = {
     curses = pkgs.pinentry-curses;
-    rofi = pkgs.pinentry-rofi.override {
-      rofi = pkgs.rofi-wayland;
-    };
+    rofi = pkgs.pinentry-rofi;
   };
 
   hyprlandEnabled = osConfig.hostSpec.desktop.window-manager.hyprland.enable;
