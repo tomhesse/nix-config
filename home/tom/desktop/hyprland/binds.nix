@@ -18,7 +18,7 @@ let
   cliphist = getExe pkgs.cliphist;
   hyprlock = getExe pkgs.hyprlock;
   kitty = getExe pkgs.kitty;
-  rofi = getExe pkgs.rofi-wayland; # TODO: use rofi when 2.0.0 is available
+  rofi = getExe pkgs.rofi;
   wl-copy = getExe' pkgs.wl-clipboard "wl-copy";
 
   volume-mute = getExe' pkgs.local.dunst-scripts "volume-mute";
