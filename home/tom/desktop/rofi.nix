@@ -1,9 +1,4 @@
-{
-  lib,
-  osConfig,
-  pkgs,
-  ...
-}:
+{ lib, osConfig, ... }:
 let
   inherit (lib) mkIf;
 
@@ -12,7 +7,6 @@ in
 {
   programs.rofi = mkIf enabled {
     enable = true;
-    package = pkgs.rofi-wayland; # TODO: Remove when rofi 2.0.0 is available
     font = "Fira Sans 12";
     extraConfig = {
       run-command = "uwsm app -- {cmd}";
