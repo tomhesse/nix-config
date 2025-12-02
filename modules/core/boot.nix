@@ -1,8 +1,10 @@
 { config, lib, ... }:
 let
-  inherit (lib) mkEnableOption;
+  inherit (lib) mkEnableOption mkIf;
 
   cfg = config.hostSpec.boot;
+
+  impermanenceEnabled = config.hostSpec.impermanence.enable;
 in
 {
   options.hostSpec.boot.secureBoot.enable =
@@ -22,8 +24,10 @@ in
       initrd.systemd.enable = true;
     };
 
-    environment.persistence."/persist".directories = [
-      "/var/lib/sbctl"
-    ];
+    environment.persistence = mkIf impermanenceEnabled {
+      "/persist".directories = [
+        "/var/lib/sbctl"
+      ];
+    };
   };
 }
