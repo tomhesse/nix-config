@@ -26,15 +26,17 @@ in
       package = pkgs.kdePackages.sddm;
     };
 
-    environment.persistence."/persist".files = [
-      {
-        file = "/var/lib/sddm/state.conf";
-        parentDirectory = {
-          user = "sddm";
-          group = "sddm";
-          mode = "0750";
-        };
-      }
-    ];
+    environment.persistence = mkIf cfg.impermanence.enable {
+      "/persist".files = [
+        {
+          file = "/var/lib/sddm/state.conf";
+          parentDirectory = {
+            user = "sddm";
+            group = "sddm";
+            mode = "0750";
+          };
+        }
+      ];
+    };
   };
 }
