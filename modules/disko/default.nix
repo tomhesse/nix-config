@@ -14,12 +14,16 @@ in
   imports = [ inputs.disko.nixosModules.disko ];
 
   options.hostSpec.disko = {
+    enable = lib.mkEnableOption "Enable declarative partition layout.";
     systemDevice = lib.mkOption {
-      type = lib.types.str;
+      type = lib.types.nullOr lib.types.str;
+      default = null;
       example = "/dev/nvme0n1";
       apply =
         value:
-        if lib.hasPrefix "/dev/" value then
+        if value == null then
+          null
+        else if lib.hasPrefix "/dev/" value then
           value
         else
           throw "Invalid device path: ${value}. Must start with /dev/";
@@ -36,7 +40,7 @@ in
     };
   };
 
-  config =
+  config = lib.mkIf cfg.disko.enable (
     let
       layoutConfig =
         if cfg.disko.layout == "btrfs" then
@@ -59,10 +63,17 @@ in
     {
       assertions = [
         {
+          assertion = cfg.disko.systemDevice != null;
+          message = "hostSpec.disko.systemDevice must be set when disko is enabled.";
+        }
+      ]
+      ++ lib.optionals (cfg.disko.systemDevice != null) [
+        {
           assertion = lib.hasPrefix "/dev/" cfg.disko.systemDevice;
-          message = "disko.systemDevice must be a /dev/* device.";
+          message = "hostSpec.disko.systemDevice must be an absolute /dev/* path when disko is enabled.";
         }
       ];
       disko.devices = layoutConfig;
-    };
+    }
+  );
 }
