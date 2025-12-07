@@ -6,13 +6,23 @@
   ];
 
   hostSpec = {
+    boot.secureBoot.enable = true;
+    desktop = {
+      enable = true;
+      wifi.enable = true;
+      window-manager.hyprland.enable = true;
+    };
     disko = {
+      enable = true;
       systemDevice = "/dev/nvme0n1";
       layout = "btrfs-luks";
     };
     impermanence.enable = true;
     shells.fish.enable = true;
-    theme.catppuccin.enable = true;
+    theme.catppuccin = {
+      enable = true;
+      fontSize = "24";
+    };
     timeZone = "Europe/Berlin";
     users = {
       tom.enable = true;
