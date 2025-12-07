@@ -22,6 +22,7 @@ in
       enable = true;
       interactiveShellInit = ''
         set fish_greeting
+        set fish_tmux_autostart true
       '';
       plugins = [
         {
