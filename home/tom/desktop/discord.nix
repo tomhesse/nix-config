@@ -17,7 +17,7 @@ let
   relativeConfigHome = lib.removePrefix "${config.home.homeDirectory}/" config.xdg.configHome;
 in
 {
-  options.homeSpec.desktop.discord.autostart = mkEnableOption "Autostart discord on loin.";
+  options.homeSpec.desktop.discord.autostart = mkEnableOption "Autostart discord on login.";
 
   config = {
     programs.vesktop = {
