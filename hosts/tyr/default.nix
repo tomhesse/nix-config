@@ -25,6 +25,10 @@
       systemDevice = "/dev/nvme0n1";
       layout = "btrfs-luks";
     };
+    gaming = {
+      enable = true;
+      steam.enable = true;
+    };
     impermanence.enable = true;
     shells.fish.enable = true;
     theme.catppuccin = {
