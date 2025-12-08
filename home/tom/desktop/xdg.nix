@@ -5,9 +5,11 @@
   ...
 }:
 let
-  inherit (lib) mkIf;
+  inherit (lib) mkIf optionals optionalAttrs;
 
   impermanenceEnabled = osConfig.hostSpec.impermanence.enable;
+
+  gamingEnabled = osConfig.hostSpec.gaming.enable;
 
   relativeUserDir = dir: lib.removePrefix "${config.home.homeDirectory}/" dir;
 in
@@ -29,6 +31,9 @@ in
       videos = "${config.home.homeDirectory}/videos";
       extraConfig = {
         XDG_PROJECTS_DIR = "${config.home.homeDirectory}/projects";
+      }
+      // optionalAttrs gamingEnabled {
+        XDG_GAMES_DIR = "${config.home.homeDirectory}/games";
       };
     };
   };
@@ -42,6 +47,9 @@ in
         (relativeUserDir config.xdg.userDirs.pictures)
         (relativeUserDir config.xdg.userDirs.videos)
         (relativeUserDir config.xdg.userDirs.extraConfig.XDG_PROJECTS_DIR)
+      ]
+      ++ optionals gamingEnabled [
+        (relativeUserDir config.xdg.userDirs.extraConfig.XDG_GAMES_DIR)
       ];
     };
   };
