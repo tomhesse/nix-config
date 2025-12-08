@@ -14,7 +14,7 @@
       "nvidia-settings"
       "nvidia-x11"
     ];
-    boot.secureBoot.enable = false;
+    boot.secureBoot.enable = true;
     desktop = {
       enable = true;
       wifi.enable = true;
