@@ -5,7 +5,7 @@ let
   cfg = config.hostSpec.desktop;
 in
 {
-  services.pcscd = mkIf cfg.enable {
+  programs.yubikey-manager = mkIf cfg.enable {
     enable = true;
   };
 }
