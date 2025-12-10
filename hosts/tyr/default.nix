@@ -17,6 +17,7 @@
     boot.secureBoot.enable = true;
     desktop = {
       enable = true;
+      bluetooth.enable = true;
       wifi.enable = true;
       window-manager.hyprland.enable = true;
     };
