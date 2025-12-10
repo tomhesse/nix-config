@@ -50,6 +50,7 @@ in
 
       /* Base modules */
       #battery,
+      #bluetooth,
       #clock,
       #cpu,
       #custom-power-menu,
@@ -70,6 +71,7 @@ in
 
       /* Shared strip borders */
       #battery,
+      #bluetooth,
       #cpu,
       #custom-power-menu,
       #memory,
@@ -85,6 +87,7 @@ in
 
       /* Zero side margins for connected modules */
       #battery,
+      #bluetooth,
       #cpu,
       #custom-power-menu,
       #memory,
@@ -98,6 +101,7 @@ in
 
       /* Square-corner modules */
       #battery,
+      #bluetooth,
       #memory,
       #network,
       #power-profiles-daemon,
@@ -126,6 +130,11 @@ in
       #battery {
         ${optionalString catppuccinEnabled "color: @green;"}
         ${optionalString (!catppuccinEnabled) "color: #8ae98a;"}
+      }
+
+      #bluetooth {
+        ${optionalString catppuccinEnabled "color: @blue;"}
+        ${optionalString (!catppuccinEnabled) "color: #5c7aff;"}
       }
 
       #clock {

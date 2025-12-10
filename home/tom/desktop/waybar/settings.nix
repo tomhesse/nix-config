@@ -13,6 +13,8 @@ let
 
   power-menu = getExe pkgs.local.power-menu;
 
+  rofi-bluetooth = getExe pkgs.rofi-bluetooth;
+
   pavucontrol = getExe pkgs.pavucontrol;
   volume-up = getExe' pkgs.local.dunst-scripts "volume-up";
   volume-down = getExe' pkgs.local.dunst-scripts "volume-down";
@@ -36,6 +38,7 @@ in
           "memory"
           "pulseaudio"
           "battery"
+          "bluetooth"
           "network"
           "power-profiles-daemon"
           "tray"
@@ -51,6 +54,19 @@ in
             ""
             ""
           ];
+        };
+
+        bluetooth = {
+          format-on = "󰂯";
+          format-off = "󰂲";
+          format-disabled = "";
+          format-connected = "󰂱 {num_connections}";
+          format-no-controller = "";
+          tooltip-format = "{controller_alias}\t{controller_address}";
+          tooltip-format-connected = "{device_enumerate}";
+          tooltip-format-enumerate-connected = "{device_alias}";
+          tooltip-format-enumerate-connected-battery = "{device_alias} {device_battery_percentage}% ";
+          on-click = "${uwsm} app -- ${rofi-bluetooth}";
         };
 
         clock = {
