@@ -22,24 +22,16 @@
         height = 1080;
         position = "auto-left";
         rotation = 1;
-        defaultWorkspace = "4";
-        workspaces = [
-          "4"
-          "5"
-          "6"
-        ];
+        defaultWorkspace = "5";
+        workspaces = [ "5" ];
       }
       {
         name = "DP-2";
         width = 1920;
         height = 1080;
         position = "auto-right";
-        defaultWorkspace = "7";
-        workspaces = [
-          "7"
-          "8"
-          "9"
-        ];
+        defaultWorkspace = "4";
+        workspaces = [ "4" ];
       }
     ];
   };
