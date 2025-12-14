@@ -167,6 +167,7 @@ in
             "(.*)Discord(.*)" = " $1Discord$2";
             "vesktop" = " Discord";
           };
+          separate-outputs = true;
           tooltip = false;
         };
 
