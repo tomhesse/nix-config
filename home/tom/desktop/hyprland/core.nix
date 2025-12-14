@@ -38,7 +38,7 @@ in
         "col.inactive_border" = "$surface0";
       };
       input = {
-        follow_mouse = 0;
+        follow_mouse = 1;
       };
       master = {
         new_status = "master";
