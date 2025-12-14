@@ -42,7 +42,7 @@ in
         monitor:
         "${monitor.name},${
           if monitor.enabled then
-            "${toString monitor.width}x${toString monitor.height}@${toString monitor.refreshRate},${monitor.position},${toString monitor.scale}"
+            "${toString monitor.width}x${toString monitor.height}@${toString monitor.refreshRate},${monitor.position},${toString monitor.scale},transform,${toString monitor.rotation}"
           else
             "disable"
         }"

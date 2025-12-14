@@ -47,6 +47,11 @@ in
             default = 1.0;
             description = "Scaling factor for HiDPI displays.";
           };
+          rotation = mkOption {
+            type = types.int;
+            default = 0;
+            description = "Rotation of the display.";
+          };
           enabled = mkOption {
             type = types.bool;
             default = true;
