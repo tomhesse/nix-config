@@ -5,7 +5,12 @@
   ...
 }:
 let
-  inherit (lib) filter mkIf optionalAttrs;
+  inherit (lib)
+    concatMap
+    filter
+    mkIf
+    optionalAttrs
+    ;
 
   enabled = osConfig.hostSpec.desktop.window-manager.hyprland.enable;
 in
@@ -52,9 +57,9 @@ in
         disable_splash_rendering = true; # Funny bottom text
         font_family = "Fira Sans";
       };
-      workspace = map (monitor: "${monitor.workspace},monitor:${monitor.name}") (
-        filter (monitor: monitor.enabled && monitor.workspace != null) config.homeSpec.monitors
-      );
+      workspace = concatMap (
+        monitor: map (workspace: "${workspace},monitor:${monitor.name}") monitor.workspaces
+      ) (filter (monitor: monitor.enabled && monitor.workspaces != [ ]) config.homeSpec.monitors);
     };
   };
 }

@@ -57,10 +57,10 @@ in
             default = true;
             description = "Whether the monitor is enabled.";
           };
-          workspace = mkOption {
-            type = types.nullOr types.str;
-            default = null;
-            description = "Assigned workspace.";
+          workspaces = mkOption {
+            type = types.listOf types.str;
+            default = [ ];
+            description = "Assigned workspace(s).";
           };
         };
       }
