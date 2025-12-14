@@ -58,7 +58,13 @@ in
         font_family = "Fira Sans";
       };
       workspace = concatMap (
-        monitor: map (workspace: "${workspace},monitor:${monitor.name}") monitor.workspaces
+        monitor:
+        map (
+          workspace:
+          "${workspace},monitor:${monitor.name}${
+            if monitor.defaultWorkspace == workspace then ",default:true" else ""
+          }"
+        ) monitor.workspaces
       ) (filter (monitor: monitor.enabled && monitor.workspaces != [ ]) config.homeSpec.monitors);
     };
   };

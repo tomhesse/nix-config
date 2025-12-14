@@ -9,6 +9,7 @@
         width = 2560;
         height = 1440;
         refreshRate = 144;
+        defaultWorkspace = "1";
         workspaces = [
           "1"
           "2"
@@ -21,6 +22,7 @@
         height = 1080;
         position = "auto-left";
         rotation = 1;
+        defaultWorkspace = "4";
         workspaces = [
           "4"
           "5"
@@ -32,6 +34,7 @@
         width = 1920;
         height = 1080;
         position = "auto-right";
+        defaultWorkspace = "7";
         workspaces = [
           "7"
           "8"

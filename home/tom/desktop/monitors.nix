@@ -1,6 +1,7 @@
 { config, lib, ... }:
 let
   inherit (lib)
+    any
     filter
     length
     mkEnableOption
@@ -57,6 +58,11 @@ in
             default = true;
             description = "Whether the monitor is enabled.";
           };
+          defaultWorkspace = mkOption {
+            type = types.nullOr types.str;
+            default = null;
+            description = "Default workspace for the monitor.";
+          };
           workspaces = mkOption {
             type = types.listOf types.str;
             default = [ ];
@@ -74,6 +80,10 @@ in
         assertion = ((length cfg) != 0) -> ((length (filter (monitor: monitor.primary) cfg)) == 1);
         message = "There must be exactly one primary monitor.";
       }
-    ];
+    ]
+    ++ map (monitor: {
+      assertion = any (workspace: workspace == monitor.defaultWorkspace) monitor.workspaces;
+      message = "Monitor ${monitor.name} default workspace must be included in its workspace list.";
+    }) (filter (monitor: monitor.defaultWorkspace != null) cfg);
   };
 }
