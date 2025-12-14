@@ -180,9 +180,6 @@ in
             "5" = "󰊴";
             "6" = "";
           };
-          persistent-workspaces = {
-            "*" = 5;
-          };
           show-special = true;
         };
       };
