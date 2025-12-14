@@ -177,8 +177,6 @@ in
             default = "";
             special = "";
             urgent = "";
-            "5" = "󰊴";
-            "6" = "";
           };
           show-special = true;
         };
