@@ -28,6 +28,7 @@
     };
     gaming = {
       enable = true;
+      gamescope.enable = true;
       steam.enable = true;
     };
     impermanence.enable = true;
