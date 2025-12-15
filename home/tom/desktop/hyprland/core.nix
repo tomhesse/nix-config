@@ -57,15 +57,17 @@ in
         disable_splash_rendering = true; # Funny bottom text
         font_family = "Fira Sans";
       };
-      workspace = concatMap (
-        monitor:
-        map (
-          workspace:
-          "${workspace},monitor:${monitor.name}${
-            if monitor.defaultWorkspace == workspace then ",default:true" else ""
-          }"
-        ) monitor.workspaces
-      ) (filter (monitor: monitor.enabled && monitor.workspaces != [ ]) config.homeSpec.monitors);
+      workspace =
+        concatMap (
+          monitor:
+          map (
+            workspace:
+            "${workspace},monitor:${monitor.name}${
+              if monitor.defaultWorkspace == workspace then ",default:true" else ""
+            }"
+          ) monitor.workspaces
+        ) (filter (monitor: monitor.enabled && monitor.workspaces != [ ]) config.homeSpec.monitors)
+        ++ [ "10, border:false, rounding:false" ];
     };
   };
 }
