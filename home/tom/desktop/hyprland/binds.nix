@@ -62,6 +62,7 @@ in
           "$mainMod, 7, workspace, 7"
           "$mainMod, 8, workspace, 8"
           "$mainMod, 9, workspace, 9"
+          "$mainMod, 0, workspace, 10"
           "$mainMod, TAB, workspace, previous"
 
           # Move active window to a workspace with mainMod + SHIFT + [0-9]
@@ -74,6 +75,7 @@ in
           "$mainMod SHIFT, 7, movetoworkspace, 7"
           "$mainMod SHIFT, 8, movetoworkspace, 8"
           "$mainMod SHIFT, 9, movetoworkspace, 9"
+          "$mainMod SHIFT, 10, movetoworkspace, 0"
 
           # Focus monitor and move window to monitor
           "$mainMod, comma, focusmonitor, -1"
