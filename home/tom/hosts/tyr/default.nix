@@ -1,6 +1,7 @@
 {
   homeSpec = {
     browser.firefox.enable = true;
+    desktop.discord.autostart = true;
     gaming.steam.autostart = true;
     monitors = [
       {
