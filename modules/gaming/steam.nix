@@ -10,6 +10,9 @@ in
   };
 
   config = mkIf (cfg.enable && cfg.steam.enable) {
-    programs.steam.enable = true;
+    programs.steam = {
+      enable = true;
+      localNetworkGameTransfers.openFirewall = true;
+    };
   };
 }
