@@ -54,10 +54,6 @@ in
       DisablePocket = true;
       DisableProfileImport = true;
       DisableProfileRefresh = true;
-      DisableSecurityBypass = {
-        InvalidCertificate = true;
-        SafeBrowsing = true;
-      };
       DisableSetDesktopBackground = true;
       DisableTelemetry = true;
       DNSOverHTTPS = {
