@@ -31,6 +31,7 @@ in
       videos = "${config.home.homeDirectory}/videos";
       extraConfig = {
         XDG_PROJECTS_DIR = "${config.home.homeDirectory}/projects";
+        XDG_TEMP_DIR = "${config.home.homeDirectory}/temp";
       }
       // optionalAttrs gamingEnabled {
         XDG_GAMES_DIR = "${config.home.homeDirectory}/games";
@@ -47,6 +48,7 @@ in
         (relativeUserDir config.xdg.userDirs.pictures)
         (relativeUserDir config.xdg.userDirs.videos)
         (relativeUserDir config.xdg.userDirs.extraConfig.XDG_PROJECTS_DIR)
+        (relativeUserDir config.xdg.userDirs.extraConfig.XDG_TEMP_DIR)
       ]
       ++ optionals gamingEnabled [
         (relativeUserDir config.xdg.userDirs.extraConfig.XDG_GAMES_DIR)
