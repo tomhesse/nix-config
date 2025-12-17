@@ -9,6 +9,14 @@
         height = 1920;
         refreshRate = 120;
         scale = 2.0;
+        defaultWorkspace = "1";
+        workspaces = [
+          "1"
+          "2"
+          "3"
+          "4"
+          "5"
+        ];
       }
     ];
   };
