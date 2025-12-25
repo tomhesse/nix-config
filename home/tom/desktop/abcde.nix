@@ -1,11 +1,7 @@
 { config, pkgs, ... }:
 let
-  outputFormat = "\${ARTISTFILE}/\${ALBUMFILE}/\${TRACKNUM}. \${TRACKFILE}";
-  vaOutputFormat = "Various-\${ALBUMFILE}/\${TRACKNUM}. \${ARTISTFILE}-\${TRACKFILE}";
-  oneTrackOutputFormat = "\${ARTISTFILE}-\${ALBUMFILE}/\${ALBUMFILE}";
-  vaOneTrackOutputFormat = "Various-\${ALBUMFILE}/\${ALBUMFILE}";
-  playlistFormat = "\${OUTPUT}/\${ARTISTFILE}-\${ALBUMFILE}/\${ALBUMFILE}.m3u";
-  vaPlaylistFormat = "\${OUTPUT}/Various-\${ALBUMFILE}/\${ALBUMFILE}.m3u";
+  outputFormat = "\${ARTISTFILE}/\${ALBUMFILE}/\${TRACKNUM} - \${TRACKFILE}";
+  vaOutputFormat = "Various Artists/\${ALBUMFILE}/\${TRACKNUM} - \${ARTISTFILE} - \${TRACKFILE}";
 
   abcdeConfig = ''
     ACTIONS=default,replaygain
@@ -15,17 +11,14 @@ let
 
     CDPARANOIAOPTS="--never-skip=40"
 
-    OUTPUTDIR="${config.xdg.userDirs.extraConfig.XDG_TEMP_DIR}/music"
+    OUTPUTDIR="${config.xdg.userDirs.extraConfig.XDG_TEMP_DIR}/rips"
     WAVOUTPUTDIR="/tmp"
 
     OUTPUTFORMAT='${outputFormat}'
     VAOUTPUTFORMAT='${vaOutputFormat}'
 
-    ONETRACKOUTPUTFORMAT='${oneTrackOutputFormat}'
-    VAONETRACKOUTPUTFORMAT='${vaOneTrackOutputFormat}'
-
-    PLAYLISTFORMAT='${playlistFormat}'
-    VAPLAYLISTFORMAT='${vaPlaylistFormat}'
+    ONETRACKOUTPUTFORMAT="$OUTPUTFORMAT"
+    VAONETRACKOUTPUTFORMAT="$VAOUTPUTFORMAT"
 
     mungefilename () {
       echo "$@" | sed -e 's/^\.*//' | tr -d ":><|*/\"'?[:cntrl:]"
