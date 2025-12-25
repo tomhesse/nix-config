@@ -33,7 +33,7 @@ in
     mpdscribble = {
       enable = true;
       endpoints."last.fm" = {
-        username = "tomhesse";
+        username = "anusbauer";
         passwordFile = config.sops.secrets."services/lastfm/password".path;
       };
     };
