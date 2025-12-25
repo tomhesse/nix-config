@@ -4,8 +4,6 @@ let
   vaOutputFormat = "Various Artists/\${ALBUMFILE}/\${TRACKNUM} - \${ARTISTFILE} - \${TRACKFILE}";
 
   abcdeConfig = ''
-    ACTIONS=default,replaygain
-
     OUTPUTTYPE="flac"
     FLACOPTS='--silent --exhaustive-model-search --verify --compression-level-8'
 
