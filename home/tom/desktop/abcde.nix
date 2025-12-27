@@ -1,5 +1,14 @@
-{ config, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
+  inherit (lib) mkEnableOption mkIf;
+
+  cfg = config.homeSpec.desktop.abcde;
+
   outputFormat = "\${ARTISTFILE}/\${ALBUMFILE}/\${TRACKNUM} - \${TRACKFILE}";
   vaOutputFormat = "Various Artists/\${ALBUMFILE}/\${TRACKNUM} - \${ARTISTFILE} - \${TRACKFILE}";
 
@@ -30,7 +39,11 @@ let
   '';
 in
 {
-  home.packages = [ pkgs.abcde ];
+  options.homeSpec.desktop.abcde.enable = mkEnableOption "Install and configure abcde.";
 
-  home.file.".abcde.conf".text = abcdeConfig;
+  config = mkIf cfg.enable {
+    home.packages = [ pkgs.abcde ];
+
+    home.file.".abcde.conf".text = abcdeConfig;
+  };
 }
