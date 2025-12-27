@@ -166,6 +166,8 @@ in
 
             "(.*)Discord(.*)" = " $1Discord$2";
             "vesktop" = " Discord";
+
+            "(.*) - Obsidian(.*)" = "󰠮 $1";
           };
           separate-outputs = true;
           tooltip = false;
