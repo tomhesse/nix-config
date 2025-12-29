@@ -89,6 +89,10 @@ in
           ",XF86AudioLowerVolume, exec, ${uwsm} app -- ${volume-down}"
           ",XF86MonBrightnessUp, exec, ${uwsm} app -- ${brightness-up}"
           ",XF86MonBrightnessDown, exec, ${uwsm} app -- ${brightness-down}"
+          ",XF86AudioPlay, exec, playerctl play-pause"
+          ",XF86AudioStop, exec, playerctl stop"
+          ",XF86AudioPrev, exec, playerctl previous"
+          ",XF86AudioNext, exec, playerctl next"
         ];
         bindm = [
           "$mainMod, mouse:272, movewindow"
