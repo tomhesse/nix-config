@@ -11,6 +11,23 @@
       cfg = config.hostSpec.impermanence;
       rootDevice = config.fileSystems."/".device;
       hasLuks = config.boot.initrd.luks.devices != { };
+
+      btrfs-diff = pkgs.writeShellApplication {
+        name = "btrfs-diff";
+        runtimeInputs = with pkgs; [
+          btrfs-progs
+          coreutils
+          eza
+          fd
+          findutils
+          util-linux
+        ];
+        bashOptions = [
+          "errexit"
+          "pipefail"
+        ];
+        text = builtins.readFile ./btrfs-diff.sh;
+      };
     in
     {
       imports = [ inputs.impermanence.nixosModules.impermanence ];
@@ -18,6 +35,8 @@
       options.hostSpec.impermanence.enable = lib.mkEnableOption "impermanence for the system";
 
       config = lib.mkIf cfg.enable {
+        environment.systemPackages = [ btrfs-diff ];
+
         fileSystems."/persistent".neededForBoot = true;
 
         environment.persistence."/persistent" = {
