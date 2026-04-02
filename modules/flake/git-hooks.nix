@@ -26,6 +26,12 @@
     ripsecrets.enable = true;
 
     # Spell checker
-    typos.enable = true;
+    typos = {
+      enable = true;
+      settings = {
+        ignored-words = [ "facter" ];
+        exclude = [ "facter.json" ];
+      };
+    };
   };
 }
