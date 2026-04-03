@@ -3,6 +3,7 @@
   flake.modules.nixos.base = {
     imports = [
       self.modules.nixos.boot
+      self.modules.nixos.disko
       self.modules.nixos.fish
       self.modules.nixos.home-manager
       self.modules.nixos.impermanence
