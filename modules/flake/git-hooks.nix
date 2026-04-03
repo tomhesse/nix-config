@@ -22,6 +22,9 @@
     nixfmt.enable = true;
     statix.enable = true;
 
+    # Shell
+    shellcheck.enable = true;
+
     # Secrets
     ripsecrets.enable = true;
 
