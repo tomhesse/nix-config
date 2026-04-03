@@ -30,7 +30,10 @@
       enable = true;
       settings = {
         ignored-words = [ "facter" ];
-        exclude = [ "facter.json" ];
+        exclude = [
+          "facter.json"
+          "secrets.yaml"
+        ];
       };
     };
   };
