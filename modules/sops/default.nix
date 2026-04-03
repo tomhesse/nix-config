@@ -9,7 +9,7 @@
     {
       imports = [ inputs.sops-nix.nixosModules.sops ];
 
-      config.sops = {
+      sops = {
         defaultSopsFile = ./secrets.yaml;
         age.sshKeyPaths = map (key: key.path) keys;
       };
