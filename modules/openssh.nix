@@ -10,11 +10,6 @@ in
 {
   flake.modules.nixos.openssh =
     { config, lib, ... }:
-    let
-      cfg = config.hostSpec.impermanence;
-      hostKeyPath =
-        if cfg.enable then "/persistent/etc/ssh/ssh_host_ed25519_key" else "/etc/ssh/ssh_host_ed25519_key";
-    in
     {
       services.openssh = {
         enable = true;
@@ -26,7 +21,7 @@ in
         };
         hostKeys = [
           {
-            path = hostKeyPath;
+            path = "/persistent/etc/ssh/ssh_host_ed25519_key";
             type = "ed25519";
           }
         ];

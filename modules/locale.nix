@@ -1,13 +1,7 @@
 {
   flake.modules.nixos.locale =
-    { config, lib, ... }:
+    { lib, ... }:
     {
-      options.hostSpec.locale = lib.mkOption {
-        type = lib.types.str;
-        default = "en_US.UTF-8";
-        description = "The system locale for the host.";
-      };
-
-      config.i18n.defaultLocale = config.hostSpec.locale;
+      i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
     };
 }
