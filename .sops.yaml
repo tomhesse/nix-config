@@ -1,0 +1,18 @@
+keys:
+  - &thesse_gpg 1663EC2E7C8C8E95BE959EB3ABF77DD0DF58CFF4
+  - &thor age1487rv2qkf62ee75uwqwf5k8377zyqgx9xq98huwfl3fpqf7g335qw2jehy
+
+creation_rules:
+  - path_regex: modules/sops/secrets\.yaml$
+    key_groups:
+      - pgp:
+          - *thesse_gpg
+        age:
+          - *thor
+
+  - path_regex: modules/hosts/thor/secrets\.yaml$
+    key_groups:
+      - pgp:
+          - *thesse_gpg
+        age:
+          - *thor
