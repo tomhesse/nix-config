@@ -21,6 +21,7 @@
   flake.modules.homeManager.base = {
     imports = [
       self.modules.homeManager.home-manager
+      self.modules.homeManager.theme
     ];
   };
 }
