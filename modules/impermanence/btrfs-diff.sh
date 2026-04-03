@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 red() {
   echo -e "\x1B[31m[!] $1 \x1B[0m"
   if [ -n "${2-}" ]; then
@@ -75,9 +76,9 @@ OLD_ROOTS_SUBVOL="${MOUNTDIR}/${OLD_ROOTS_LABEL}"
 
 if [ "${LIST_OLD}" -eq 1 ]; then
   green "Old roots:"
-  cd "${OLD_ROOTS_SUBVOL}"
+  cd "${OLD_ROOTS_SUBVOL}" || exit
   find . | tr ' ' '\n'
-  cd - >/dev/null
+  cd - >/dev/null || exit
 else
   ROOT_FILES=$(cd "${ROOT_SUBVOL}" && fd -I -H --type file --exclude '/tmp' | sort)
 
@@ -89,20 +90,20 @@ else
     fi
     SNAPSHOT_FILES=$(cd "${SNAPSHOT_SUBVOL}" && fd -I -H --type file --exclude '/tmp' | sort)
     green "${SNAPSHOT} has the following additional files missing from the current root:"
-    cd "${SNAPSHOT_SUBVOL}"
+    cd "${SNAPSHOT_SUBVOL}" || exit
 
     while IFS= read -r file; do
       if [[ ! ${ROOT_FILES} =~ ${file} ]]; then
         eza "${file}"
       fi
     done <<<"${SNAPSHOT_FILES}"
-    cd - >/dev/null
+    cd - >/dev/null || exit
   else
     green "Ephemeral files on the current root:"
-    cd "${ROOT_SUBVOL}"
+    cd "${ROOT_SUBVOL}" || exit
     while IFS= read -r file; do
       eza "/${file}"
     done <<<"${ROOT_FILES}"
-    cd - >/dev/null
+    cd - >/dev/null || exit
   fi
 fi
