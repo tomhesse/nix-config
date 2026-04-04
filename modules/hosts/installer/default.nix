@@ -1,5 +1,8 @@
-{ self, ... }:
+{ self, config, ... }:
 {
+  perSystem.packages.installer-iso =
+    config.flake.nixosConfigurations.installer.config.system.build.isoImage;
+
   configurations.nixos.installer.module =
     { pkgs, modulesPath, ... }:
     {
