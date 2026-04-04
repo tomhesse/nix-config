@@ -4,6 +4,8 @@
     imports = [ inputs.catppuccin.nixosModules.catppuccin ];
 
     catppuccin.enable = true;
+
+    console.earlySetup = true;
   };
 
   flake.modules.homeManager.theme = {
