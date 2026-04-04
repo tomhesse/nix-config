@@ -33,6 +33,13 @@
 
       environment.systemPackages = [ btrfs-diff ];
 
+      boot.initrd.systemd.initrdBin = with pkgs; [
+        btrfs-progs
+        coreutils
+        findutils
+        util-linux
+      ];
+
       fileSystems."/persistent".neededForBoot = true;
 
       environment.persistence."/persistent" = {
@@ -58,12 +65,6 @@
           ConditionPathExists = rootDevice;
         };
         serviceConfig.Type = "oneshot";
-        path = with pkgs; [
-          btrfs-progs
-          coreutils
-          findutils
-          util-linux
-        ];
         script = ''
           mkdir -p /btrfs_tmp
           mount -t btrfs -o subvol=/ ${rootDevice} /btrfs_tmp
