@@ -26,7 +26,10 @@
     shellcheck.enable = true;
 
     # Secrets
-    ripsecrets.enable = true;
+    ripsecrets = {
+      enable = true;
+      excludes = [ "\\.pub$" ];
+    };
 
     # Spell checker
     typos = {
