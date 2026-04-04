@@ -7,6 +7,7 @@
       self.modules.nixos.plymouth
       self.modules.nixos.sddm
       self.modules.nixos.wireless
+      self.modules.nixos.yubikey
       self.modules.nixos.zen-kernel
     ];
   };
