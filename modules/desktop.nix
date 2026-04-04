@@ -6,6 +6,7 @@
       self.modules.nixos.pipewire
       self.modules.nixos.sddm
       self.modules.nixos.wireless
+      self.modules.nixos.zen-kernel
     ];
   };
 }
