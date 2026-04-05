@@ -23,6 +23,7 @@
     imports = [
       self.modules.homeManager.home-manager
       self.modules.homeManager.theme
+      self.modules.homeManager.xdg
     ];
   };
 }
