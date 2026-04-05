@@ -12,9 +12,6 @@
       self.modules.nixos.zen-kernel
     ];
 
-    home-manager.sharedModules = [
-      self.modules.homeManager.desktop
-    ];
   };
 
   flake.modules.homeManager.desktop = {

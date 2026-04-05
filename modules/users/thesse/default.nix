@@ -1,4 +1,3 @@
-{ self, ... }:
 {
   flake.modules.nixos.user-thesse =
     { config, pkgs, ... }:
@@ -13,8 +12,5 @@
         openssh.authorizedKeys.keyFiles = [ ./thesse.pub ];
       };
 
-      home-manager.users.thesse = {
-        imports = [ self.modules.homeManager.base ];
-      };
     };
 }
