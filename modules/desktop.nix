@@ -19,6 +19,7 @@
       self.modules.homeManager.base
       self.modules.homeManager.fonts
       self.modules.homeManager.kitty
+      self.modules.homeManager.rofi
     ];
   };
 }
