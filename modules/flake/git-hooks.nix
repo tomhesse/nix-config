@@ -9,7 +9,10 @@
 
   perSystem.pre-commit.settings.hooks = {
     # Editorconfig
-    editorconfig-checker.enable = true;
+    editorconfig-checker = {
+      enable = true;
+      excludes = [ "facter\\.json$" ];
+    };
 
     # Misc
     check-added-large-files.enable = true;
