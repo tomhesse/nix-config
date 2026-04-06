@@ -2,6 +2,7 @@
 {
   flake.modules.nixos.base = {
     imports = [
+      self.modules.nixos.local-packages
       self.modules.nixos.boot
       self.modules.nixos.disko
       self.modules.nixos.fish
