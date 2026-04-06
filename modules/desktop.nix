@@ -4,6 +4,7 @@
     imports = [
       self.modules.nixos.base
       self.modules.nixos.hyprland
+      self.modules.nixos.monitors
       self.modules.nixos.pipewire
       self.modules.nixos.plymouth
       self.modules.nixos.sddm
