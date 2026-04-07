@@ -20,6 +20,7 @@
       self.modules.homeManager.base
       self.modules.homeManager.cliphist
       self.modules.homeManager.fonts
+      self.modules.homeManager.hyprlock
       self.modules.homeManager.kitty
       self.modules.homeManager.rofi
     ];
