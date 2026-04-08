@@ -30,6 +30,7 @@
       self.modules.homeManager.rofi
       self.modules.homeManager.wallpaper
       self.modules.homeManager.waybar
+      self.modules.homeManager.xdg-autostart
       self.modules.homeManager.xdg-user-dirs
       self.modules.homeManager.zed
     ];
