@@ -20,6 +20,7 @@
     imports = [
       self.modules.homeManager.base
       self.modules.homeManager.cliphist
+      self.modules.homeManager.dunst
       self.modules.homeManager.firefox
       self.modules.homeManager.fonts
       self.modules.homeManager.hyprland
