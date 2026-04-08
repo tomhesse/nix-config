@@ -23,6 +23,7 @@
   flake.modules.homeManager.base = {
     imports = [
       self.modules.homeManager.home-manager
+      self.modules.homeManager.starship
       self.modules.homeManager.theme
       self.modules.homeManager.xdg
     ];
