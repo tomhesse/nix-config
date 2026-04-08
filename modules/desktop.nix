@@ -3,6 +3,7 @@
   flake.modules.nixos.desktop = {
     imports = [
       self.modules.nixos.base
+      self.modules.nixos.firefox
       self.modules.nixos.hyprland
       self.modules.nixos.monitors
       self.modules.nixos.pipewire
@@ -19,6 +20,7 @@
     imports = [
       self.modules.homeManager.base
       self.modules.homeManager.cliphist
+      self.modules.homeManager.firefox
       self.modules.homeManager.fonts
       self.modules.homeManager.hyprland
       self.modules.homeManager.hyprlock
