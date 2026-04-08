@@ -27,6 +27,7 @@
       self.modules.homeManager.rofi
       self.modules.homeManager.wallpaper
       self.modules.homeManager.waybar
+      self.modules.homeManager.zed
     ];
   };
 }
