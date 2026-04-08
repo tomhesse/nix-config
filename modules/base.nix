@@ -22,6 +22,7 @@
 
   flake.modules.homeManager.base = {
     imports = [
+      self.modules.homeManager.fish
       self.modules.homeManager.home-manager
       self.modules.homeManager.starship
       self.modules.homeManager.theme
