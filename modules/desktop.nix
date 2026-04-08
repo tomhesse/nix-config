@@ -27,6 +27,7 @@
       self.modules.homeManager.hyprlock
       self.modules.homeManager.hyprpaper
       self.modules.homeManager.kitty
+      self.modules.homeManager.playerctld
       self.modules.homeManager.rofi
       self.modules.homeManager.wallpaper
       self.modules.homeManager.waybar
