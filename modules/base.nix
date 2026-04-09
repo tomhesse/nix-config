@@ -28,6 +28,8 @@
       self.modules.homeManager.fd
       self.modules.homeManager.fish
       self.modules.homeManager.fzf
+      self.modules.homeManager.git
+      self.modules.homeManager.gpg
       self.modules.homeManager.home-manager
       self.modules.homeManager.starship
       self.modules.homeManager.theme
