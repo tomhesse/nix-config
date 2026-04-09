@@ -21,6 +21,8 @@
       nixIcon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
     in
     {
+      catppuccin.firefox.enable = false;
+
       home.persistence."/persistent".directories = [ ".mozilla" ];
 
       programs.firefox = {
