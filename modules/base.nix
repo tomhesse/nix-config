@@ -24,6 +24,7 @@
     imports = [
       self.modules.homeManager.bat
       self.modules.homeManager.btop
+      self.modules.homeManager.eza
       self.modules.homeManager.fish
       self.modules.homeManager.home-manager
       self.modules.homeManager.starship
