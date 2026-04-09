@@ -18,12 +18,12 @@ writeShellApplication {
   text = ''
     choice="$(
       printf '%s\n' \
-        '  Shutdown' \
-        '  Reboot' \
-        '  Suspend' \
-        '  Logout' \
-        '  Lock' \
-      | rofi -dmenu -i -p 'Power Menu' | cut -d' ' -f2
+        '  Shutdown' \
+        '  Reboot' \
+        '  Suspend' \
+        '  Logout' \
+        '  Lock' \
+      | rofi -dmenu -i -p 'Power Menu' | cut -d' ' -f3
     )"
 
     case "$choice" in
