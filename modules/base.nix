@@ -32,6 +32,7 @@
       self.modules.homeManager.gpg
       self.modules.homeManager.home-manager
       self.modules.homeManager.lazygit
+      self.modules.homeManager.locale
       self.modules.homeManager.starship
       self.modules.homeManager.theme
       self.modules.homeManager.xdg
