@@ -37,6 +37,7 @@
     # Spell checker
     typos = {
       enable = true;
+      excludes = [ "\\.asc$" ];
       settings = {
         ignored-words = [ "facter" ];
         exclude = [
