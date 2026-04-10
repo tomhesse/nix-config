@@ -13,6 +13,11 @@ gen-host-key host:
     ssh-keygen -t ed25519 -f /tmp/extra-files/persistent/etc/ssh/ssh_host_ed25519_key -N "" -C "root@{{host}}"
     cp /tmp/extra-files/persistent/etc/ssh/ssh_host_ed25519_key.pub modules/hosts/{{host}}/
 
+# Generate secure boot signing keys
+gen-sbctl-keys:
+    mkdir -p /tmp/extra-files/persistent/var/lib/sbctl
+    sbctl create-keys --export /tmp/extra-files/persistent/var/lib/sbctl/keys --database-path /tmp/extra-files/persistent/var/lib/sbctl
+
 # Show age key derived from host SSH key
 age-key host:
     cat modules/hosts/{{host}}/ssh_host_ed25519_key.pub | nix run nixpkgs#ssh-to-age
