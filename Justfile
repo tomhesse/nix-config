@@ -1,6 +1,6 @@
 # List disk IDs on remote target
 disk-id target:
-    ssh nixos@{{target}} -- ls /dev/disk/by-id/
+    ssh {{target}} -- ls /dev/disk/by-id/
 
 # Generate SSH host key for a new host
 gen-host-key host:
@@ -23,7 +23,7 @@ sops-rekey:
 
 # Deploy a host using nixos-anywhere
 deploy host target:
-    nix run github:nix-community/nixos-anywhere -- --generate-hardware-config nixos-facter modules/hosts/{{host}}/facter.json --flake .#{{host}} --extra-files /tmp/extra-files nixos@{{target}}
+    nix run github:nix-community/nixos-anywhere -- --generate-hardware-config nixos-facter modules/hosts/{{host}}/facter.json --flake .#{{host}} --extra-files /tmp/extra-files {{target}}
 
 # Clean up temporary key material
 clean-keys:
