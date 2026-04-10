@@ -29,6 +29,7 @@
       self.modules.homeManager.kitty
       self.modules.homeManager.playerctld
       self.modules.homeManager.rofi
+      self.modules.homeManager.trash
       self.modules.homeManager.wallpaper
       self.modules.homeManager.waybar
       self.modules.homeManager.xdg-autostart
