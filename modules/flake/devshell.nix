@@ -11,6 +11,7 @@
           nix-tree
           sbctl
           sops
+          ssh-to-age
         ];
       };
     };

@@ -20,7 +20,7 @@ gen-sbctl-keys:
 
 # Show age key derived from host SSH key
 age-key host:
-    cat modules/hosts/{{host}}/ssh_host_ed25519_key.pub | nix run nixpkgs#ssh-to-age
+    cat modules/hosts/{{host}}/ssh_host_ed25519_key.pub | ssh-to-age
 
 # Re-encrypt all sops secrets after updating .sops.yaml
 sops-rekey:
