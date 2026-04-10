@@ -2,11 +2,6 @@
 disk-id target:
     ssh nixos@{{target}} -- ls /dev/disk/by-id/
 
-# Generate facter report from remote target
-facter host target:
-    ssh nixos@{{target}} -- "sudo nix run nixpkgs#nixos-facter -- -o /tmp/facter.json && sudo chmod 644 /tmp/facter.json"
-    scp nixos@{{target}}:/tmp/facter.json modules/hosts/{{host}}/facter.json
-
 # Generate SSH host key for a new host
 gen-host-key host:
     mkdir -p /tmp/extra-files/persistent/etc/ssh
@@ -28,7 +23,7 @@ sops-rekey:
 
 # Deploy a host using nixos-anywhere
 deploy host target:
-    nix run github:nix-community/nixos-anywhere -- --flake .#{{host}} --extra-files /tmp/extra-files nixos@{{target}}
+    nix run github:nix-community/nixos-anywhere -- --generate-hardware-config nixos-facter modules/hosts/{{host}}/facter.json --flake .#{{host}} --extra-files /tmp/extra-files nixos@{{target}}
 
 # Clean up temporary key material
 clean-keys:
