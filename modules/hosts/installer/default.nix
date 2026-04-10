@@ -16,7 +16,10 @@
       nixpkgs.hostPlatform = "x86_64-linux";
 
       users.users.nixos.openssh.authorizedKeys.keyFiles = [
-        ../../users/thesse/thesse.pub
+        (pkgs.fetchurl {
+          url = "https://codeberg.org/tomhesse.keys";
+          hash = "sha256-qJO8bEW8fdtOSaWmu7BoYxNDUv8x1dA5rH/B2D2UEDk=";
+        })
       ];
 
       services.openssh = {
