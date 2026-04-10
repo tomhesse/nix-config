@@ -88,5 +88,5 @@ nix build .#installer-iso
 ### Updating a deployed host
 
 ```bash
-just update <hostname> <user> <target>
+just update <hostname> <user@target>
 ```

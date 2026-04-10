@@ -34,5 +34,5 @@ clean-keys:
     rm -rf /tmp/extra-files
 
 # Update a deployed host remotely
-update host user target:
-    nixos-rebuild switch --flake .#{{host}} --build-host {{user}}@{{target}} --target-host {{user}}@{{target}} --ask-sudo-password
+update host target:
+    nixos-rebuild switch --flake .#{{host}} --build-host {{target}} --target-host {{target}} --ask-sudo-password
