@@ -36,6 +36,7 @@
       self.modules.homeManager.starship
       self.modules.homeManager.theme
       self.modules.homeManager.xdg
+      self.modules.homeManager.zoxide
     ];
   };
 }
