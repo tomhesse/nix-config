@@ -16,7 +16,7 @@ gen-host-key host:
 # Generate secure boot signing keys
 gen-sbctl-keys:
     mkdir -p /tmp/extra-files/persistent/var/lib/sbctl
-    sbctl create-keys --export /tmp/extra-files/persistent/var/lib/sbctl/keys --database-path /tmp/extra-files/persistent/var/lib/sbctl
+    sbctl create-keys --disable-landlock --export /tmp/extra-files/persistent/var/lib/sbctl/keys --database-path /tmp/extra-files/persistent/var/lib/sbctl/GUID
 
 # Show age key derived from host SSH key
 age-key host:
