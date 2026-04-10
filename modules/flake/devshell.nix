@@ -9,6 +9,7 @@
           nix-diff
           nix-output-monitor
           nix-tree
+          sbctl
           sops
         ];
       };
