@@ -2,6 +2,10 @@
 disk-id target:
     ssh {{target}} -- ls /dev/disk/by-id/
 
+# Create host directory
+init-host host:
+    mkdir -p modules/hosts/{{host}}
+
 # Generate SSH host key for a new host
 gen-host-key host:
     mkdir -p /tmp/extra-files/persistent/etc/ssh
