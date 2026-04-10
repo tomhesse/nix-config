@@ -8,14 +8,14 @@ init-host host:
 
 # Generate SSH host key for a new host
 gen-host-key host:
-    mkdir -p /tmp/extra-files/persistent/etc/ssh
-    ssh-keygen -t ed25519 -f /tmp/extra-files/persistent/etc/ssh/ssh_host_ed25519_key -N "" -C "root@{{host}}"
-    cp /tmp/extra-files/persistent/etc/ssh/ssh_host_ed25519_key.pub modules/hosts/{{host}}/
+    mkdir -p /tmp/extra-files/{{host}}/persistent/etc/ssh
+    ssh-keygen -t ed25519 -f /tmp/extra-files/{{host}}/persistent/etc/ssh/ssh_host_ed25519_key -N "" -C "root@{{host}}"
+    cp /tmp/extra-files/{{host}}/persistent/etc/ssh/ssh_host_ed25519_key.pub modules/hosts/{{host}}/
 
 # Generate secure boot signing keys
-gen-sbctl-keys:
-    mkdir -p /tmp/extra-files/persistent/var/lib/sbctl
-    sbctl create-keys --disable-landlock --export /tmp/extra-files/persistent/var/lib/sbctl/keys --database-path /tmp/extra-files/persistent/var/lib/sbctl/GUID
+gen-sbctl-keys host:
+    mkdir -p /tmp/extra-files/{{host}}/persistent/var/lib/sbctl
+    sbctl create-keys --disable-landlock --export /tmp/extra-files/{{host}}/persistent/var/lib/sbctl/keys --database-path /tmp/extra-files/{{host}}/persistent/var/lib/sbctl/GUID
 
 # Show age key derived from host SSH key
 age-key host:
@@ -27,7 +27,7 @@ sops-rekey:
 
 # Deploy a host using nixos-anywhere
 deploy host target:
-    nix run github:nix-community/nixos-anywhere -- --generate-hardware-config nixos-facter modules/hosts/{{host}}/facter.json --flake .#{{host}} --extra-files /tmp/extra-files {{target}}
+    nix run github:nix-community/nixos-anywhere -- --generate-hardware-config nixos-facter modules/hosts/{{host}}/facter.json --flake .#{{host}} --extra-files /tmp/extra-files/{{host}} {{target}}
 
 # Clean up temporary key material
 clean-keys:

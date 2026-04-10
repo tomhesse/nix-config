@@ -58,7 +58,7 @@ nix build .#installer-iso
 6. Generate secure boot signing keys (optional):
 
    ```bash
-   just gen-sbctl-keys
+   just gen-sbctl-keys <hostname>
    ```
 
 7. Create the host configuration in `modules/hosts/<hostname>/default.nix`.
