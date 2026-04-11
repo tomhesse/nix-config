@@ -117,3 +117,11 @@ sudo cryptenroll --wipe-slot=tpm2 /dev/<luks-device>
 ```bash
 just update <hostname> <user@target>
 ```
+
+### Rebuilding locally
+
+To apply configuration changes on the local system:
+
+```bash
+nixos-rebuild switch --flake . --sudo
+```
