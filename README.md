@@ -79,7 +79,13 @@ nix build .#installer-iso
 
     After enrollment, enable Secure Boot in the UEFI firmware settings.
 
-10. Clean up temporary key material:
+10. Rebuild once for limine to sign the boot files (optional, secure boot only):
+
+    ```bash
+    just update <hostname> <user@target>
+    ```
+
+11. Clean up temporary key material:
 
     ```bash
     just clean-keys
