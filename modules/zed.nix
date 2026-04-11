@@ -28,6 +28,7 @@
             metrics = false;
             diagnostics = false;
           };
+          title_bar.show_sign_in = false;
           vim_mode = true;
 
           ui_font_family = "FiraCode Nerd Font";
