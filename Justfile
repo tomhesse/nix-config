@@ -1,6 +1,6 @@
 # List disk IDs on remote target
 disk-id target:
-    ssh {{target}} -- ls /dev/disk/by-id/
+    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no {{target}} -- ls /dev/disk/by-id/
 
 # Create host directory
 init-host host:
