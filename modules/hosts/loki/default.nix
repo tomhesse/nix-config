@@ -21,6 +21,8 @@
       };
     };
 
+    time.timeZone = "Europe/Berlin";
+
     networking.hostName = "loki";
 
     system.stateVersion = "25.11";
