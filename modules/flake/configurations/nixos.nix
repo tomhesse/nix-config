@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  self,
+  config,
+  lib,
+  ...
+}:
 {
   options.configurations.nixos = lib.mkOption {
     type = lib.types.lazyAttrsOf (
@@ -12,7 +17,14 @@
 
   config.flake = {
     nixosConfigurations = lib.mapAttrs (
-      _name: { module }: lib.nixosSystem { modules = [ module ]; }
+      _name:
+      { module }:
+      lib.nixosSystem {
+        modules = [
+          { system.configurationRevision = self.rev or self.dirtyRev or null; }
+          module
+        ];
+      }
     ) config.configurations.nixos;
 
     checks = lib.mkMerge (
