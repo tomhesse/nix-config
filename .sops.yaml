@@ -1,5 +1,6 @@
 keys:
   - &thesse_gpg 1663EC2E7C8C8E95BE959EB3ABF77DD0DF58CFF4
+  - &loki age1kw55zekl8ynz95vdpd6fuzknja4zagaykejfqd2rv7qjma977glsexj09h
   - &tyr age16qpsxrlwttw7l3nhs3vdcvasun3xj2w43xhn9jxx0nmn2cfg6yds285rwn
 
 creation_rules:
@@ -8,7 +9,15 @@ creation_rules:
       - pgp:
           - *thesse_gpg
         age:
+          - *loki
           - *tyr
+
+  - path_regex: modules/hosts/loki/secrets\.yaml$
+    key_groups:
+      - pgp:
+          - *thesse_gpg
+        age:
+          - *loki
 
   - path_regex: modules/hosts/tyr/secrets\.yaml$
     key_groups:
