@@ -41,7 +41,10 @@
             "!nil"
           ];
 
-          lsp.nixd.binary.path = lib.getExe pkgs.nixd;
+          lsp.nixd = {
+            binary.path = lib.getExe pkgs.nixd;
+            settings.formatting.command = [ (lib.getExe pkgs.nixfmt) ];
+          };
         };
       };
     };
