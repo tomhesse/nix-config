@@ -38,6 +38,8 @@
       };
     };
 
+    time.timeZone = "Europe/Berlin";
+
     networking.hostName = "tyr";
 
     system.stateVersion = "25.11";
