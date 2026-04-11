@@ -13,5 +13,9 @@
 
     catppuccin.enable = true;
     catppuccin.cursors.enable = true;
+    catppuccin.tmux.extraConfig = ''
+      set -g @catppuccin_window_status_style "rounded"
+      set -g @catppuccin_date_time_text " %H:%M"
+    '';
   };
 }
