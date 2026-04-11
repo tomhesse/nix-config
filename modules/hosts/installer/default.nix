@@ -4,7 +4,12 @@
     config.flake.nixosConfigurations.installer.config.system.build.isoImage;
 
   configurations.nixos.installer.module =
-    { pkgs, modulesPath, ... }:
+    {
+      lib,
+      pkgs,
+      modulesPath,
+      ...
+    }:
     {
       imports = [
         "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
@@ -14,6 +19,8 @@
       ];
 
       nixpkgs.hostPlatform = "x86_64-linux";
+
+      image.baseName = lib.mkForce "nixos-installer";
 
       users.users.nixos.openssh.authorizedKeys.keyFiles = [
         (pkgs.fetchurl {
