@@ -36,6 +36,7 @@
       self.modules.homeManager.ripgrep
       self.modules.homeManager.starship
       self.modules.homeManager.theme
+      self.modules.homeManager.tmux
       self.modules.homeManager.xdg
       self.modules.homeManager.yazi
       self.modules.homeManager.zoxide
