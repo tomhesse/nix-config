@@ -7,6 +7,7 @@ NixOS configuration using the dendritic flake pattern
 | Host | Type | Description |
 |------|------|-------------|
 | installer | ISO | Minimal installer with SSH access |
+| tyr | Desktop | Workstation |
 
 ## Deployment
 
