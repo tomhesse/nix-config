@@ -4,8 +4,17 @@
   };
 
   flake.modules.homeManager.fish =
-    { lib, pkgs, ... }:
     {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
+    {
+      home.persistence."/persistent".directories = [
+        "${config.xdg.relativeDataHome}/fish"
+      ];
+
       programs.fish = {
         enable = true;
 
