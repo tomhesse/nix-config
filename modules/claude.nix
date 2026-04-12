@@ -1,9 +1,6 @@
 {
   flake.modules.homeManager.claude = {
-    home.persistence."/persistent" = {
-      directories = [ ".claude/projects" ];
-      files = [ ".claude/.credentials.json" ];
-    };
+    home.persistence."/persistent".directories = [ ".claude" ];
 
     programs.claude-code = {
       enable = true;
