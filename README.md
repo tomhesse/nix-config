@@ -114,6 +114,20 @@ To re-enroll after a firmware or bootloader change (e.g. secure boot key rotatio
 sudo cryptenroll --wipe-slot=tpm2 /dev/<luks-device>
 ```
 
+### Updating flake inputs
+
+To update all flake inputs:
+
+```bash
+nix flake update
+```
+
+To update a specific input:
+
+```bash
+nix flake update <input>
+```
+
 ### Updating a deployed host
 
 ```bash
