@@ -18,9 +18,21 @@
       programs.fish = {
         enable = true;
 
-        shellAbbrs = {
-          gpg-reload = "${lib.getExe' pkgs.gnupg "gpg-connect-agent"} \"scd serialno\" \"learn --force\" /bye";
-        };
+        shellAbbrs =
+          let
+            bat = lib.getExe pkgs.bat;
+          in
+          {
+            gpg-reload = "${lib.getExe' pkgs.gnupg "gpg-connect-agent"} \"scd serialno\" \"learn --force\" /bye";
+            "--help" = {
+              position = "anywhere";
+              expansion = "--help | ${bat} -plhelp";
+            };
+            "-h" = {
+              position = "anywhere";
+              expansion = "-h | ${bat} -plhelp";
+            };
+          };
 
         interactiveShellInit = ''
           set -g fish_greeting
