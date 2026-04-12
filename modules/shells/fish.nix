@@ -24,6 +24,7 @@
           in
           {
             gpg-reload = "${lib.getExe' pkgs.gnupg "gpg-connect-agent"} \"scd serialno\" \"learn --force\" /bye";
+            lg = lib.getExe pkgs.lazygit;
             "--help" = {
               position = "anywhere";
               expansion = "--help | ${bat} -plhelp";
