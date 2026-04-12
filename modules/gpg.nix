@@ -1,6 +1,12 @@
 {
   flake.modules.homeManager.gpg =
     { config, pkgs, ... }:
+    let
+      publicKey = pkgs.fetchurl {
+        url = "https://keys.openpgp.org/vks/v1/by-fingerprint/1663EC2E7C8C8E95BE959EB3ABF77DD0DF58CFF4";
+        sha256 = "19inl9rhc6hs7irx867ihv8zxz753fghlyy96d8cy4mm9nyj4xag";
+      };
+    in
     {
       programs.gpg = {
         enable = true;
@@ -9,7 +15,7 @@
         mutableTrust = false;
         publicKeys = [
           {
-            source = ./public.asc;
+            source = publicKey;
             trust = "ultimate";
           }
         ];
