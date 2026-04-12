@@ -50,6 +50,15 @@
             (plugin "autopair")
             (plugin "git-abbr")
             (plugin "plugin-sudope")
+            {
+              name = "tmux";
+              src = pkgs.fetchFromGitHub {
+                owner = "budimanjojo";
+                repo = "tmux.fish";
+                rev = "db0030b7f4f78af4053dc5c032c7512406961ea5";
+                sha256 = "sha256-rRibn+FN8VNTSC1HmV05DXEa6+3uOHNx03tprkcjjs8=";
+              };
+            }
           ];
       };
     };
