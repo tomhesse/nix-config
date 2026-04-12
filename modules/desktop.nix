@@ -29,6 +29,7 @@
       self.modules.homeManager.hypridle
       self.modules.homeManager.hyprlock
       self.modules.homeManager.hyprpaper
+      self.modules.homeManager.hyprsunset
       self.modules.homeManager.kitty
       self.modules.homeManager.playerctld
       self.modules.homeManager.rofi
