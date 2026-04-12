@@ -26,6 +26,7 @@
       self.modules.homeManager.firefox
       self.modules.homeManager.fonts
       self.modules.homeManager.hyprland
+      self.modules.homeManager.hypridle
       self.modules.homeManager.hyprlock
       self.modules.homeManager.hyprpaper
       self.modules.homeManager.kitty
