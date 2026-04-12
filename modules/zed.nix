@@ -14,6 +14,7 @@
 
         extensions = [
           "catppuccin-icons"
+          "comment"
           "nix"
         ];
 
@@ -29,7 +30,8 @@
             diagnostics = false;
           };
           title_bar.show_sign_in = false;
-          vim_mode = true;
+          autosave = "on_focus_change";
+          vim_mode = false;
 
           ui_font_family = "FiraCode Nerd Font";
           buffer_font_family = "FiraCode Nerd Font";
