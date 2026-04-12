@@ -148,25 +148,27 @@
             };
 
             "hyprland/window" = {
-              format = "{}";
+              format = "{class}: {title}";
               rewrite = {
-                "" = " Hyprland";
-                "~" = " Terminal";
-                "fish" = " Terminal";
-                "kitty" = " Terminal";
+                ": " = " Hyprland";
+                ".*: ~" = " Terminal";
+                ".*: fish" = " Terminal";
+                "kitty: .*" = " Terminal";
 
-                "tmux(.*)" = " Tmux";
+                ".*: tmux(.*)" = " Tmux";
 
-                "nvim" = " Neovim";
-                "nvim (.*)" = " $1";
+                ".*: nvim" = " Neovim";
+                ".*: nvim (.*)" = " $1";
 
-                "(.*)Mozilla Firefox" = "󰈹 Firefox";
-                "(.*) — Mozilla Firefox" = "󰈹 $1";
+                ".*: (.*)Mozilla Firefox" = "󰈹 Firefox";
+                ".*: (.*) — Mozilla Firefox" = "󰈹 $1";
 
-                "(.*)Discord(.*)" = " $1Discord$2";
-                "vesktop" = " Discord";
+                ".*: (.*)Discord(.*)" = " $1Discord$2";
+                "vesktop: .*" = " Discord";
 
-                "(.*) - Obsidian(.*)" = "󰠮 $1";
+                ".*: (.*) - Obsidian(.*)" = "󰠮 $1";
+
+                "dev\.zed\.Zed: (.*)" = "Zed: $1"; # TODO: Add nerd font icon
               };
               separate-outputs = true;
               tooltip = false;
