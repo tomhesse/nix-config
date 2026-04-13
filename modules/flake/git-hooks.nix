@@ -42,7 +42,7 @@
         ignored-words = [ "facter" ];
         exclude = [
           "facter.json"
-          "secrets.yaml"
+          "secrets/"
         ];
       };
     };

@@ -4,7 +4,7 @@ keys:
   - &tyr age16qpsxrlwttw7l3nhs3vdcvasun3xj2w43xhn9jxx0nmn2cfg6yds285rwn
 
 creation_rules:
-  - path_regex: modules/sops/secrets\.yaml$
+  - path_regex: modules/sops/secrets/nixos\.yaml$
     key_groups:
       - pgp:
           - *thesse_gpg
@@ -12,14 +12,14 @@ creation_rules:
           - *loki
           - *tyr
 
-  - path_regex: modules/hosts/loki/secrets\.yaml$
+  - path_regex: modules/hosts/loki/secrets/nixos\.yaml$
     key_groups:
       - pgp:
           - *thesse_gpg
         age:
           - *loki
 
-  - path_regex: modules/hosts/tyr/secrets\.yaml$
+  - path_regex: modules/hosts/tyr/secrets/nixos\.yaml$
     key_groups:
       - pgp:
           - *thesse_gpg
