@@ -31,6 +31,7 @@
       self.modules.homeManager.git
       self.modules.homeManager.gpg
       self.modules.homeManager.home-manager
+      self.modules.homeManager.sops
       self.modules.homeManager.lazygit
       self.modules.homeManager.locale
       self.modules.homeManager.ripgrep

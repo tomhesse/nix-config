@@ -3,6 +3,7 @@
     { config, pkgs, ... }:
     {
       sops.secrets."users/thesse/password".neededForUsers = true;
+      sops.secrets."users/thesse/age-key".owner = "thesse";
 
       users.users.thesse = {
         isNormalUser = true;

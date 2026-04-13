@@ -14,4 +14,23 @@
         age.sshKeyPaths = map (key: key.path) keys;
       };
     };
+
+  flake.modules.homeManager.sops =
+    {
+      config,
+      osConfig ? null,
+      ...
+    }:
+    {
+      imports = [ inputs.sops-nix.homeManagerModules.sops ];
+
+      sops = {
+        defaultSopsFile = ./secrets + "/${config.home.username}.yaml";
+        age.keyFile =
+          if osConfig != null then
+            osConfig.sops.secrets."users/${config.home.username}/age-key".path
+          else
+            "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+      };
+    };
 }
