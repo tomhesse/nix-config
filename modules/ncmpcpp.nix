@@ -16,6 +16,7 @@
           mpd_port = toString config.services.mpd.network.port;
           startup_screen = "media_library";
           mouse_support = "no";
+          user_interface = "alternative";
         };
       };
     };
