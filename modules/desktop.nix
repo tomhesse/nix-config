@@ -32,6 +32,7 @@
       self.modules.homeManager.hyprpaper
       self.modules.homeManager.hyprsunset
       self.modules.homeManager.kitty
+      self.modules.homeManager.mpd
       self.modules.homeManager.playerctld
       self.modules.homeManager.rofi
       self.modules.homeManager.trash
