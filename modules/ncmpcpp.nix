@@ -17,6 +17,7 @@
           startup_screen = "media_library";
           mouse_support = "no";
           user_interface = "alternative";
+          external_editor = "nvim";
         };
       };
     };
