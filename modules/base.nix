@@ -34,6 +34,7 @@
       self.modules.homeManager.sops
       self.modules.homeManager.lazygit
       self.modules.homeManager.neovim
+      self.modules.homeManager.nh
       self.modules.homeManager.locale
       self.modules.homeManager.ripgrep
       self.modules.homeManager.starship
