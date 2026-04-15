@@ -39,7 +39,10 @@
       enable = true;
       excludes = [ "\\.asc$" ];
       settings = {
-        ignored-words = [ "facter" ];
+        ignored-words = [
+          "facter"
+          "iy"
+        ];
         exclude = [
           "facter.json"
           "secrets/"
