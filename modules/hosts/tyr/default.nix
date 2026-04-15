@@ -3,12 +3,17 @@
   configurations.nixos.tyr.module = {
     imports = [
       self.diskoConfigurations.tyr
+      self.modules.nixos.common-cpu-intel
+      self.modules.nixos.common-gpu-nvidia
+      self.modules.nixos.common-pc-ssd
       self.modules.nixos.desktop
       self.modules.nixos.secure-boot
       self.modules.nixos.user-thesse
     ];
 
     home-manager.users.thesse.imports = [ self.modules.homeManager.desktop ];
+
+    hardware.nvidia.open = false;
 
     hardware.facter.reportPath = ./facter.json;
 
