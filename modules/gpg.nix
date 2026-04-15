@@ -4,7 +4,7 @@
     let
       publicKey = pkgs.fetchurl {
         url = "https://keys.openpgp.org/vks/v1/by-fingerprint/1663EC2E7C8C8E95BE959EB3ABF77DD0DF58CFF4";
-        sha256 = "19inl9rhc6hs7irx867ihv8zxz753fghlyy96d8cy4mm9nyj4xag";
+        sha256 = "0iy0lp7l3i1l5vppfxm7i97hck6sz1yr1hhrkxwj03a73vpssd46";
       };
     in
     {
