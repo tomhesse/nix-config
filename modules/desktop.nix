@@ -21,6 +21,7 @@
     imports = [
       self.modules.homeManager.abcde
       self.modules.homeManager.aerc
+      self.modules.homeManager.beets
       self.modules.homeManager.base
       self.modules.homeManager.claude
       self.modules.homeManager.cliphist
