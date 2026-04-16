@@ -8,6 +8,7 @@
           "claude-code"
           "nvidia-settings"
           "nvidia-x11"
+          "obsidian"
         ];
     };
 }

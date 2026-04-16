@@ -38,6 +38,7 @@
       self.modules.homeManager.mpd
       self.modules.homeManager.mpv
       self.modules.homeManager.ncmpcpp
+      self.modules.homeManager.obsidian
       self.modules.homeManager.playerctld
       self.modules.homeManager.rofi
       self.modules.homeManager.trash
