@@ -35,7 +35,12 @@
       ) monitors;
       workspaceLines = lib.concatLists (
         lib.mapAttrsToList (
-          name: m: map (ws: "${toString ws}, monitor:${monitorId name m}") m.workspaces
+          name: m:
+          map (
+            ws:
+            "${toString ws}, monitor:${monitorId name m}"
+            + lib.optionalString (m.defaultWorkspace == ws) ", default:true"
+          ) m.workspaces
         ) monitors
       );
 

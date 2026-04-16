@@ -10,7 +10,11 @@
           assertion = primaryCount <= 1;
           message = "At most one monitor may be set as primary, but ${toString primaryCount} are.";
         }
-      ];
+      ]
+      ++ lib.mapAttrsToList (name: m: {
+        assertion = m.defaultWorkspace == null || lib.elem m.defaultWorkspace m.workspaces;
+        message = "Monitor ${name}: defaultWorkspace ${toString m.defaultWorkspace} must be in its workspaces list.";
+      }) config.monitors;
 
       options.monitors = lib.mkOption {
         type = lib.types.attrsOf (
@@ -65,6 +69,12 @@
                   3
                 ];
                 description = "Workspaces to pin to this monitor.";
+              };
+              defaultWorkspace = lib.mkOption {
+                type = lib.types.nullOr lib.types.int;
+                default = null;
+                example = 1;
+                description = "Default workspace to open on this monitor.";
               };
             };
           }
