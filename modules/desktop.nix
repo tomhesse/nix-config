@@ -36,6 +36,7 @@
       self.modules.homeManager.hyprsunset
       self.modules.homeManager.kitty
       self.modules.homeManager.mpd
+      self.modules.homeManager.mpv
       self.modules.homeManager.ncmpcpp
       self.modules.homeManager.playerctld
       self.modules.homeManager.rofi
