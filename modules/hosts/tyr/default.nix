@@ -30,6 +30,7 @@
           2
           3
         ];
+        defaultWorkspace = 1;
       };
       DP-2 = {
         description = "AOC 2490W1 APGL89A001738";
@@ -38,6 +39,7 @@
         position.x = 2560;
         position.y = 320;
         workspaces = [ 4 ];
+        defaultWorkspace = 4;
       };
       HDMI-A-1 = {
         description = "AOC 2490W1 APGL89A001447";
@@ -47,6 +49,7 @@
         position.y = -240;
         rotation = "90";
         workspaces = [ 5 ];
+        defaultWorkspace = 5;
       };
     };
 
