@@ -4,7 +4,7 @@
     imports = [
       self.diskoConfigurations.tyr
       self.modules.nixos.common-cpu-intel
-      self.modules.nixos.common-gpu-nvidia
+      self.modules.nixos.common-gpu-nvidia-nonprime
       self.modules.nixos.common-pc-ssd
       self.modules.nixos.desktop
       self.modules.nixos.secure-boot
