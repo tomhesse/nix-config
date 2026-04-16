@@ -40,6 +40,7 @@
       self.modules.homeManager.ncmpcpp
       self.modules.homeManager.obsidian
       self.modules.homeManager.playerctld
+      self.modules.homeManager.utilities
       self.modules.homeManager.rofi
       self.modules.homeManager.trash
       self.modules.homeManager.vesktop
