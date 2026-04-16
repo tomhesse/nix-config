@@ -33,6 +33,11 @@
         name: m:
         "${monitorId name m}, ${m.resolution}@${toString m.refreshRate}, ${toString m.position.x}x${toString m.position.y}, ${toString m.scale}, transform, ${transform m}"
       ) monitors;
+      workspaceLines = lib.concatLists (
+        lib.mapAttrsToList (
+          name: m: map (ws: "${toString ws}, monitor:${monitorId name m}") m.workspaces
+        ) monitors
+      );
 
       uwsm = getExe pkgs.uwsm;
 
@@ -73,6 +78,7 @@
             new_status = "master";
           };
           monitor = monitorLines ++ [ ", preferred, auto, 1" ];
+          workspace = workspaceLines;
           misc = {
             disable_hyprland_logo = true;
             disable_splash_rendering = true;

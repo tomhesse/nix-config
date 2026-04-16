@@ -56,6 +56,16 @@
                 type = lib.types.bool;
                 default = false;
               };
+              workspaces = lib.mkOption {
+                type = lib.types.listOf lib.types.int;
+                default = [ ];
+                example = [
+                  1
+                  2
+                  3
+                ];
+                description = "Workspaces to pin to this monitor.";
+              };
             };
           }
         );
