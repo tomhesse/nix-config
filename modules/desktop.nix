@@ -49,6 +49,7 @@
       self.modules.homeManager.waybar
       self.modules.homeManager.xdg-autostart
       self.modules.homeManager.xdg-user-dirs
+      self.modules.homeManager.zathura
       self.modules.homeManager.zed
     ];
   };
