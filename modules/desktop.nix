@@ -28,6 +28,7 @@
       self.modules.homeManager.dunst
       self.modules.homeManager.firefox
       self.modules.homeManager.fonts
+      self.modules.homeManager.imv
       self.modules.homeManager.hyprland
       self.modules.homeManager.hypridle
       self.modules.homeManager.hyprlock
