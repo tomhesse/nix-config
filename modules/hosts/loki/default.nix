@@ -26,6 +26,7 @@
           4
           5
         ];
+        defaultWorkspace = 1;
       };
     };
 
