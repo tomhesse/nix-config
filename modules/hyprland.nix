@@ -96,6 +96,7 @@
             "workspace 1 silent, class:^(kitty)$"
             "workspace 2 silent, class:^(firefox)$"
             "workspace 3 silent, class:^(dev\.zed\.Zed)$"
+            "workspace 5 silent, class:^(vesktop)$"
           ];
           bind = [
             "$mainMod, V, exec, ${cliphist} list | ${uwsm} app -- ${rofi} -dmenu -display-columns 2 | ${cliphist} decode | ${wl-copy}"
