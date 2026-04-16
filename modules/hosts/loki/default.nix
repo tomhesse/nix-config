@@ -19,6 +19,13 @@
         refreshRate = 120;
         scale = 2;
         primary = true;
+        workspaces = [
+          1
+          2
+          3
+          4
+          5
+        ];
       };
     };
 
