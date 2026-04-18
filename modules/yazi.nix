@@ -5,17 +5,21 @@
       programs.yazi = {
         enable = true;
 
+        extraPackages = with pkgs; [ trash-cli ];
+
         plugins = {
           inherit (pkgs.yaziPlugins)
             smart-enter
             smart-paste
             mount
+            recycle-bin
             git
             ;
         };
 
         initLua = ''
           require("git"):setup()
+          require("recycle-bin"):setup()
         '';
 
         settings.plugin.prepend_fetchers = [
@@ -46,6 +50,14 @@
             on = "M";
             run = "plugin mount";
             desc = "Mount manager";
+          }
+          {
+            on = [
+              "R"
+              "b"
+            ];
+            run = "plugin recycle-bin";
+            desc = "Open Recycle Bin menu";
           }
         ];
       };
