@@ -77,6 +77,7 @@
             "col.inactive_border" = "$surface0";
           };
           input = {
+            kb_layout = "eu";
             follow_mouse = 1;
           };
           master = {
