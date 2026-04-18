@@ -98,6 +98,10 @@
             "workspace 2 silent, class:^(firefox)$"
             "workspace 3 silent, class:^(dev\.zed\.Zed)$"
             "workspace 5 silent, class:^(vesktop)$"
+
+            "float, class:^(firefox)$, title:^(File Upload)"
+            "size 50% 50%, class:^(firefox)$, title:^(File Upload)"
+            "center, class:^(firefox)$, title:^(File Upload)"
           ];
           bind = [
             "$mainMod, V, exec, ${cliphist} list | ${uwsm} app -- ${rofi} -dmenu -display-columns 2 | ${cliphist} decode | ${wl-copy}"
