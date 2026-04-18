@@ -4,6 +4,7 @@
     imports = [
       self.modules.nixos.local-packages
       self.modules.nixos.boot
+      self.modules.nixos.catppuccin
       self.modules.nixos.disko
       self.modules.nixos.fish
       self.modules.nixos.home-manager
@@ -13,7 +14,6 @@
       self.modules.nixos.openssh
       self.modules.nixos.sops
       self.modules.nixos.sudo
-      self.modules.nixos.theme
       self.modules.nixos.time
       self.modules.nixos.users
       self.modules.nixos.zram
@@ -24,6 +24,7 @@
     imports = [
       self.modules.homeManager.bat
       self.modules.homeManager.btop
+      self.modules.homeManager.catppuccin
       self.modules.homeManager.eza
       self.modules.homeManager.fd
       self.modules.homeManager.fish
@@ -38,7 +39,6 @@
       self.modules.homeManager.locale
       self.modules.homeManager.ripgrep
       self.modules.homeManager.starship
-      self.modules.homeManager.theme
       self.modules.homeManager.tmux
       self.modules.homeManager.xdg
       self.modules.homeManager.yazi

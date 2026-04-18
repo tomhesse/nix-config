@@ -4,7 +4,7 @@
     url = "github:catppuccin/nix/release-25.11";
   };
 
-  flake.modules.nixos.theme = {
+  flake.modules.nixos.catppuccin = {
     imports = [ inputs.catppuccin.nixosModules.catppuccin ];
 
     catppuccin.enable = true;
@@ -12,7 +12,7 @@
     console.earlySetup = true;
   };
 
-  flake.modules.homeManager.theme = {
+  flake.modules.homeManager.catppuccin = {
     imports = [ inputs.catppuccin.homeModules.catppuccin ];
 
     catppuccin = {
