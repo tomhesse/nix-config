@@ -2,13 +2,13 @@
 {
   flake.modules.nixos.base = {
     imports = [
-      self.modules.nixos.local-packages
       self.modules.nixos.boot
       self.modules.nixos.catppuccin
       self.modules.nixos.disko
       self.modules.nixos.fish
       self.modules.nixos.home-manager
       self.modules.nixos.impermanence
+      self.modules.nixos.local-packages
       self.modules.nixos.locale
       self.modules.nixos.nix
       self.modules.nixos.openssh
@@ -32,12 +32,12 @@
       self.modules.homeManager.git
       self.modules.homeManager.gpg
       self.modules.homeManager.home-manager
-      self.modules.homeManager.sops
       self.modules.homeManager.lazygit
+      self.modules.homeManager.locale
       self.modules.homeManager.neovim
       self.modules.homeManager.nh
-      self.modules.homeManager.locale
       self.modules.homeManager.ripgrep
+      self.modules.homeManager.sops
       self.modules.homeManager.starship
       self.modules.homeManager.tmux
       self.modules.homeManager.xdg
