@@ -6,7 +6,7 @@
       settings.global = {
         font = "Fira Sans 12";
         corner_radius = 8;
-        origin = "top-center";
+        origin = "bottom-center";
         offset = "0x50";
       };
     };
