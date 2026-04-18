@@ -32,6 +32,7 @@
             "Read(./**/secrets.yaml)"
           ];
         };
+        includeCoAuthoredBy = false;
         theme = "dark";
       };
     };
