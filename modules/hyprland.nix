@@ -101,6 +101,7 @@
 
             "float, class:^(firefox)$, title:^(File Upload)"
             "size 50% 50%, class:^(firefox)$, title:^(File Upload)"
+            "maxsize 50% 50%, class:^(firefox)$, title:^(File Upload)"
             "center, class:^(firefox)$, title:^(File Upload)"
           ];
           bind = [
