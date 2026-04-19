@@ -98,6 +98,8 @@
             "workspace 2 silent, class:^(firefox)$"
             "workspace 3 silent, class:^(dev\.zed\.Zed)$"
             "workspace 5 silent, class:^(vesktop)$"
+            "workspace special:music, class:^(ncmpcpp)$"
+            "workspace special:notes silent, class:^(electron)$"
 
             "float, class:^(firefox)$, title:^(File Upload)"
             "size 50% 50%, class:^(firefox)$, title:^(File Upload)"
@@ -109,6 +111,9 @@
             "$mainMod SHIFT, L, exec, ${uwsm} app -- ${hyprlock}"
             "$mainMod, P, exec, ${uwsm} app -- ${rofi} -show drun"
             "$mainMod SHIFT, RETURN, exec, ${uwsm} app -- ${kitty}"
+
+            "$mainMod SHIFT, m, togglespecialworkspace, music"
+            "$mainMod SHIFT, o, togglespecialworkspace, notes"
 
             "$mainMod, j, layoutmsg, cyclenext"
             "$mainMod, k, layoutmsg, cycleprev"
