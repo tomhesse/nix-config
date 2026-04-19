@@ -182,9 +182,10 @@
                 "3" = "";
                 "4" = "󰝚";
                 "5" = "";
+                "music" = "󰝚";
+                "notes" = "󰠮";
                 active = "";
                 default = "";
-                special = "";
                 urgent = "";
               };
               show-special = true;
