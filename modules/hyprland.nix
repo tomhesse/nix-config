@@ -51,6 +51,7 @@
       kitty = getExe pkgs.kitty;
       media-ctl = getExe pkgs.local.media-ctl;
       playerctl = getExe pkgs.playerctl;
+      power-menu = getExe pkgs.local.power-menu;
       rofi = getExe pkgs.rofi;
       wl-copy = getExe' pkgs.wl-clipboard "wl-copy";
     in
@@ -110,6 +111,7 @@
             "$mainMod, V, exec, ${cliphist} list | ${uwsm} app -- ${rofi} -dmenu -display-columns 2 | ${cliphist} decode | ${wl-copy}"
             "$mainMod SHIFT, L, exec, ${uwsm} app -- ${hyprlock}"
             "$mainMod, P, exec, ${uwsm} app -- ${rofi} -show drun"
+            "$mainMod SHIFT, P, exec, ${uwsm} app -- ${power-menu}"
             "$mainMod SHIFT, RETURN, exec, ${uwsm} app -- ${kitty}"
 
             "$mainMod SHIFT, m, togglespecialworkspace, music"
