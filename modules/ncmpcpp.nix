@@ -1,11 +1,31 @@
 {
   flake.modules.homeManager.ncmpcpp =
-    { config, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
+    let
+      inherit (lib) getExe;
+      ncmpcpp = getExe pkgs.ncmpcpp;
+      kitty = getExe pkgs.kitty;
+    in
     {
       home.persistence."/persistent".directories = [
         "${config.xdg.relativeDataHome}/ncmpcpp"
         "${config.xdg.relativeDataHome}/lyrics"
       ];
+
+      xdg.desktopEntries.ncmpcpp = {
+        name = "ncmpcpp";
+        exec = "${kitty} --class ncmpcpp ${ncmpcpp}";
+        terminal = false;
+        categories = [
+          "Audio"
+          "Music"
+        ];
+      };
 
       programs.ncmpcpp = {
         enable = true;
