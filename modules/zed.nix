@@ -17,6 +17,12 @@
           "catppuccin-icons"
           "comment"
           "nix"
+          "opentofu"
+        ];
+
+        extraPackages = [
+          pkgs.opentofu
+          pkgs.tofu-ls
         ];
 
         mutableUserSettings = false;
