@@ -38,7 +38,9 @@
         interactiveShellInit = ''
           set -g fish_greeting
           set -g fish_tmux_default_session_name Main
-          set -g fish_tmux_autostart true
+          if not set -q ZED_TERM; and isatty stdout
+            set -g fish_tmux_autostart true
+          end
         '';
 
         plugins =
