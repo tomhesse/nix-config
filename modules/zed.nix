@@ -2,7 +2,6 @@
   flake.modules.homeManager.zed =
     {
       config,
-      lib,
       osConfig,
       pkgs,
       ...
@@ -21,6 +20,8 @@
         ];
 
         extraPackages = [
+          pkgs.nixd
+          pkgs.nixfmt
           pkgs.opentofu
           pkgs.tofu-ls
         ];
@@ -50,22 +51,19 @@
             "!nil"
           ];
 
-          lsp.nixd = {
-            binary.path = lib.getExe pkgs.nixd;
-            settings =
-              let
-                host = osConfig.networking.hostName;
-                flake = "(builtins.getFlake (builtins.toString ./.))";
-              in
-              {
-                formatting.command = [ (lib.getExe pkgs.nixfmt) ];
-                nixpkgs.expr = "import ${flake}.inputs.nixpkgs { }";
-                options = {
-                  nixos.expr = "${flake}.nixosConfigurations.${host}.options";
-                  home-manager.expr = "${flake}.nixosConfigurations.${host}.options.home-manager.users.type.getSubOptions []";
-                };
+          lsp.nixd.settings =
+            let
+              host = osConfig.networking.hostName;
+              flake = "(builtins.getFlake (builtins.toString ./.))";
+            in
+            {
+              formatting.command = [ "nixfmt" ];
+              nixpkgs.expr = "import ${flake}.inputs.nixpkgs { }";
+              options = {
+                nixos.expr = "${flake}.nixosConfigurations.${host}.options";
+                home-manager.expr = "${flake}.nixosConfigurations.${host}.options.home-manager.users.type.getSubOptions []";
               };
-          };
+            };
         };
       };
     };
