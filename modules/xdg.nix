@@ -2,11 +2,12 @@
   flake.modules.homeManager.xdg =
     { config, lib, ... }:
     let
-      mkRelative = path: lib.removePrefix "${config.home.homeDirectory}/" path;
+      inherit (lib) mkOption removePrefix types;
+      mkRelative = path: removePrefix "${config.home.homeDirectory}/" path;
       mkOpt =
         description:
-        lib.mkOption {
-          type = lib.types.str;
+        mkOption {
+          type = types.str;
           readOnly = true;
           inherit description;
         };

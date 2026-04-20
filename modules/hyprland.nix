@@ -16,7 +16,14 @@
       ...
     }:
     let
-      inherit (lib) getExe getExe' optionalAttrs;
+      inherit (lib)
+        concatLists
+        getExe
+        getExe'
+        mapAttrsToList
+        optionalAttrs
+        optionalString
+        ;
       inherit (osConfig) monitors;
 
       monitorId = name: m: if m.description != "" then "desc:${m.description}" else name;
@@ -29,17 +36,17 @@
           "270" = "3";
         }
         .${m.rotation};
-      monitorLines = lib.mapAttrsToList (
+      monitorLines = mapAttrsToList (
         name: m:
         "${monitorId name m}, ${m.resolution}@${toString m.refreshRate}, ${toString m.position.x}x${toString m.position.y}, ${toString m.scale}, transform, ${transform m}"
       ) monitors;
-      workspaceLines = lib.concatLists (
-        lib.mapAttrsToList (
+      workspaceLines = concatLists (
+        mapAttrsToList (
           name: m:
           map (
             ws:
             "${toString ws}, monitor:${monitorId name m}"
-            + lib.optionalString (m.defaultWorkspace == ws) ", default:true"
+            + optionalString (m.defaultWorkspace == ws) ", default:true"
           ) m.workspaces
         ) monitors
       );

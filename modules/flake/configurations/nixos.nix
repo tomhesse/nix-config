@@ -4,22 +4,32 @@
   lib,
   ...
 }:
+let
+  inherit (lib)
+    mapAttrs
+    mapAttrsToList
+    mkMerge
+    mkOption
+    nixosSystem
+    types
+    ;
+in
 {
-  options.configurations.nixos = lib.mkOption {
-    type = lib.types.lazyAttrsOf (
-      lib.types.submodule {
-        options.module = lib.mkOption {
-          type = lib.types.deferredModule;
+  options.configurations.nixos = mkOption {
+    type = types.lazyAttrsOf (
+      types.submodule {
+        options.module = mkOption {
+          type = types.deferredModule;
         };
       }
     );
   };
 
   config.flake = {
-    nixosConfigurations = lib.mapAttrs (
+    nixosConfigurations = mapAttrs (
       _name:
       { module }:
-      lib.nixosSystem {
+      nixosSystem {
         modules = [
           { system.configurationRevision = self.rev or self.dirtyRev or null; }
           module
@@ -27,8 +37,8 @@
       }
     ) config.configurations.nixos;
 
-    checks = lib.mkMerge (
-      lib.mapAttrsToList (name: nixos: {
+    checks = mkMerge (
+      mapAttrsToList (name: nixos: {
         ${nixos.config.nixpkgs.hostPlatform.system} = {
           "configurations/nixos/${name}" = nixos.config.system.build.toplevel;
         };
