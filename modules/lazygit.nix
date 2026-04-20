@@ -8,7 +8,10 @@
 
       programs.lazygit = {
         enable = true;
-        settings.gui.mouseEvents = false;
+        settings = {
+          git.autoFetch = false;
+          gui.mouseEvents = false;
+        };
       };
     };
 }
