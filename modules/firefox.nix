@@ -72,7 +72,7 @@
                   params = [
                     {
                       name = "channel";
-                      value = "${stateVersion}";
+                      value = stateVersion;
                     }
                     {
                       name = "query";
@@ -92,7 +92,7 @@
                   params = [
                     {
                       name = "channel";
-                      value = "${stateVersion}";
+                      value = stateVersion;
                     }
                     {
                       name = "query";
