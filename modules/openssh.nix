@@ -25,7 +25,7 @@ in
       githubHostKeys = pkgs.fetchurl {
         url = "https://api.github.com/meta";
         name = "github-host-keys";
-        sha256 = "c73ac5d045cd2a359d2202b79b551fb22a638463d5ddbe5ed59b1b3998869c88";
+        hash = "sha256-xzrF0EXNKjWdIgK3m1UfsipjhGPV3b5e1ZsbOZiGnIg=";
         downloadToTemp = true;
         postFetch = ''
           ${pkgs.jq}/bin/jq -r '.ssh_keys[] | "github.com " + .' $downloadedFile > $out

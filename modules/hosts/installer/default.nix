@@ -25,6 +25,7 @@
       users.users.nixos.openssh.authorizedKeys.keyFiles = [
         (pkgs.fetchurl {
           url = "https://codeberg.org/tomhesse.keys";
+          name = "tomhesse-authorized-keys";
           hash = "sha256-qJO8bEW8fdtOSaWmu7BoYxNDUv8x1dA5rH/B2D2UEDk=";
         })
       ];

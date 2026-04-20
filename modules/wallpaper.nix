@@ -6,7 +6,7 @@
         type = lib.types.path;
         default = builtins.fetchurl {
           url = "https://w.wallhaven.cc/full/x6/wallhaven-x6x3gz.png";
-          sha256 = "1cwr17505kfllz39bp1gzm0jkh1mamfjil25ablqbngpm32ngyv2";
+          sha256 = "sha256-Yvtnxaj32YXpUkXQKF1VNcApQf0v3JXGp9TNAsoJmbM=";
         };
         description = "Path to the wallpaper";
       };
