@@ -49,6 +49,7 @@
       environment.persistence."/persistent" = {
         directories = [
           "/var/lib/nixos"
+          "/var/lib/systemd/backlight"
           "/var/lib/systemd/coredump"
           "/var/lib/systemd/timers"
           "/var/log"
