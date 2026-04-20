@@ -19,11 +19,11 @@
           "opentofu"
         ];
 
-        extraPackages = [
-          pkgs.nixd
-          pkgs.nixfmt
-          pkgs.opentofu
-          pkgs.tofu-ls
+        extraPackages = with pkgs; [
+          nixd
+          nixfmt
+          opentofu
+          tofu-ls
         ];
 
         mutableUserSettings = false;
