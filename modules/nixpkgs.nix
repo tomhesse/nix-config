@@ -9,6 +9,8 @@
           "nvidia-settings"
           "nvidia-x11"
           "obsidian"
+          "steam"
+          "steam-unwrapped"
         ];
     };
 }
