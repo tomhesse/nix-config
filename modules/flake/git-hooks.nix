@@ -42,6 +42,7 @@
         ignored-words = [
           "facter"
           "iy"
+          "lazer"
         ];
         exclude = [
           "facter.json"

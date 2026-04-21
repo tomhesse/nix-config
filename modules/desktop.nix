@@ -41,6 +41,7 @@
       self.modules.homeManager.mpv
       self.modules.homeManager.ncmpcpp
       self.modules.homeManager.obsidian
+      self.modules.homeManager.osu
       self.modules.homeManager.pipewire
       self.modules.homeManager.playerctld
       self.modules.homeManager.rofi

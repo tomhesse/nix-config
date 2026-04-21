@@ -9,6 +9,7 @@
           "nvidia-settings"
           "nvidia-x11"
           "obsidian"
+          "osu-lazer-bin"
           "steam"
           "steam-unwrapped"
         ];
