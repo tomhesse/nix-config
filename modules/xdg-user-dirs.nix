@@ -29,6 +29,7 @@
         videos = "${config.home.homeDirectory}/videos";
 
         extraConfig = {
+          XDG_GAMES_DIR = "${config.home.homeDirectory}/games";
           XDG_PROJECTS_DIR = "${config.home.homeDirectory}/projects";
           XDG_TEMP_DIR = "${config.home.homeDirectory}/temp";
         };
