@@ -4,6 +4,7 @@
     imports = [
       self.modules.nixos.base
       self.modules.nixos.firefox
+      self.modules.nixos.gamescope
       self.modules.nixos.hyprland
       self.modules.nixos.monitors
       self.modules.nixos.nixpkgs
