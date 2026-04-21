@@ -106,6 +106,7 @@
             "workspace 2 silent, class:^(firefox)$"
             "workspace 3 silent, class:^(dev\.zed\.Zed)$"
             "workspace 5 silent, class:^(vesktop)$"
+            "workspace name:gaming, class:^(steam)$"
             "workspace special:music, class:^(ncmpcpp)$"
             "workspace special:notes silent, class:^(electron)$"
 
@@ -113,6 +114,12 @@
             "size 50% 50%, class:^(firefox)$, title:^(File Upload)"
             "maxsize 50% 50%, class:^(firefox)$, title:^(File Upload)"
             "center, class:^(firefox)$, title:^(File Upload)"
+
+            "float, class:^(steam)$, title:^(Friends List)$"
+            "center, class:^(steam)$, title:^(Friends List)$"
+
+            "float, class:^(steam)$, title:^(Steam Settings)$"
+            "center, class:^(steam)$, title:^(Steam Settings)$"
           ];
           bind = [
             "$mainMod, V, exec, ${cliphist} list | ${uwsm} app -- ${rofi} -dmenu -display-columns 2 | ${cliphist} decode | ${wl-copy}"
@@ -121,6 +128,7 @@
             "$mainMod SHIFT, P, exec, ${uwsm} app -- ${power-menu}"
             "$mainMod SHIFT, RETURN, exec, ${uwsm} app -- ${kitty}"
 
+            "$mainMod, g, workspace, name:gaming"
             "$mainMod SHIFT, m, togglespecialworkspace, music"
             "$mainMod SHIFT, o, togglespecialworkspace, notes"
 

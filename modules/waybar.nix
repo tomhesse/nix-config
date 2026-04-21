@@ -168,6 +168,8 @@
 
                 ".*: (.*) - Obsidian(.*)" = "󰠮 $1";
 
+                "steam: (.*)" = "󰓓 $1";
+
                 "dev\.zed\.Zed: (.*)" = "Zed: $1"; # TODO: Add nerd font icon
               };
               separate-outputs = true;
@@ -181,6 +183,7 @@
                 "2" = "󰈹";
                 "3" = "";
                 "5" = "";
+                "gaming" = "";
                 "music" = "󰝚";
                 "notes" = "󰠮";
                 active = "";
