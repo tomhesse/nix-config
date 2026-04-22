@@ -122,6 +122,9 @@
             "float, class:^(steam)$, title:^(Friends List)$"
             "center, class:^(steam)$, title:^(Friends List)$"
 
+            "float, class:^(steam)$, title:^(Sign in to Steam)$"
+            "center, class:^(steam)$, title:^(Sign in to Steam)$"
+
             "float, class:^(steam)$, title:^(Steam Settings)$"
             "center, class:^(steam)$, title:^(Steam Settings)$"
           ];
