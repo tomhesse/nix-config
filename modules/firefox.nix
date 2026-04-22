@@ -65,6 +65,22 @@
               definedAliases = [ "@kagi" ];
             };
 
+            "ProtonDB" = {
+              urls = [
+                {
+                  template = "https://www.protondb.com/search";
+                  params = [
+                    {
+                      name = "q";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+              icon = "https://www.protondb.com/favicon.ico";
+              definedAliases = [ "@pdb" ];
+            };
+
             "Nix Packages" = {
               urls = [
                 {
