@@ -11,7 +11,14 @@
       self.modules.nixos.user-thesse
     ];
 
-    home-manager.users.thesse.imports = [ self.modules.homeManager.desktop ];
+    home-manager.users.thesse = {
+      imports = [ self.modules.homeManager.desktop ];
+
+      wallpaper = builtins.fetchurl {
+        url = "https://w.wallhaven.cc/full/ly/wallhaven-lyqjly.png";
+        sha256 = "sha256-/X64eC0yvoIq92ib084qpR5T/CDYl+EFMdFd/cjDRSk=";
+      };
+    };
 
     hardware.nvidia.open = false;
 
