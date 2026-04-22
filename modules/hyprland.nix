@@ -132,16 +132,16 @@
             "$mainMod SHIFT, P, exec, ${uwsm} app -- ${power-menu}"
             "$mainMod SHIFT, RETURN, exec, ${uwsm} app -- ${kitty}"
 
-            "$mainMod, g, workspace, name:gaming"
-            "$mainMod SHIFT, m, togglespecialworkspace, music"
-            "$mainMod SHIFT, o, togglespecialworkspace, notes"
+            "$mainMod, G, workspace, name:gaming"
+            "$mainMod SHIFT, M, togglespecialworkspace, music"
+            "$mainMod SHIFT, O, togglespecialworkspace, notes"
 
-            "$mainMod, j, layoutmsg, cyclenext"
-            "$mainMod, k, layoutmsg, cycleprev"
-            "$mainMod, i, layoutmsg, addmaster"
-            "$mainMod, d, layoutmsg, removemaster"
-            "$mainMod, h, layoutmsg, mfact -0.05"
-            "$mainMod, l, layoutmsg, mfact +0.05"
+            "$mainMod, J, layoutmsg, cyclenext"
+            "$mainMod, K, layoutmsg, cycleprev"
+            "$mainMod, I, layoutmsg, addmaster"
+            "$mainMod, D, layoutmsg, removemaster"
+            "$mainMod, H, layoutmsg, mfact -0.05"
+            "$mainMod, L, layoutmsg, mfact +0.05"
 
             "$mainMod, RETURN, layoutmsg, swapwithmaster"
 
@@ -173,10 +173,10 @@
             "$mainMod SHIFT, 9, movetoworkspace, 9"
             "$mainMod SHIFT, 0, movetoworkspace, 10"
 
-            "$mainMod, comma, focusmonitor, -1"
-            "$mainMod, period, focusmonitor, +1"
-            "$mainMod SHIFT, comma, movewindow, mon:-1"
-            "$mainMod SHIFT, period, movewindow, mon:+1"
+            "$mainMod, COMMA, focusmonitor, -1"
+            "$mainMod, PERIOD, focusmonitor, +1"
+            "$mainMod SHIFT, COMMA, movewindow, mon:-1"
+            "$mainMod SHIFT, PERIOD, movewindow, mon:+1"
           ];
           bindl = [
             ", XF86AudioMute, exec, ${uwsm} app -- ${media-ctl} volume mute"
