@@ -6,6 +6,7 @@
       policies = {
         DisableTelemetry = true;
         OverrideFirstRunPage = "";
+        PasswordManagerEnabled = false;
       };
     };
   };
