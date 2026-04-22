@@ -3,6 +3,7 @@
     { pkgs, ... }:
     {
       home.packages = with pkgs; [
+        bluetui
         opentofu
         wl-clipboard
       ];
