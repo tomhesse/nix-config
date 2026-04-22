@@ -3,6 +3,7 @@
   flake.modules.nixos.desktop = {
     imports = [
       self.modules.nixos.base
+      self.modules.nixos.bluetooth
       self.modules.nixos.firefox
       self.modules.nixos.gamescope
       self.modules.nixos.hyprland
