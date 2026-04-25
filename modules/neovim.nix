@@ -12,6 +12,7 @@
         defaultEditor = true;
         plugins = with pkgs.vimPlugins; [
           nvim-web-devicons
+          vim-tmux-navigator
           {
             plugin = lualine-nvim;
             type = "lua";
