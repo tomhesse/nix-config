@@ -32,6 +32,7 @@
         keyMode = "vi";
         mouse = true;
         plugins = [
+          pkgs.tmuxPlugins.vim-tmux-navigator
           {
             plugin = pkgs.tmuxPlugins.resurrect;
             extraConfig = ''
