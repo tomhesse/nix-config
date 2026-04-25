@@ -23,7 +23,7 @@ age-key host:
 
 # Re-encrypt all sops secrets after updating .sops.yaml
 sops-rekey:
-    find modules -name 'secrets.yaml' -exec sops updatekeys {} \;
+    find modules -path '*/secrets/*.yaml' -exec sops updatekeys {} \;
 
 # Deploy a host using nixos-anywhere
 deploy host target:
