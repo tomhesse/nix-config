@@ -27,7 +27,13 @@ sops-rekey:
 
 # Deploy a host using nixos-anywhere
 deploy host target:
-    nix run github:nix-community/nixos-anywhere -- --generate-hardware-config nixos-facter modules/hosts/{{host}}/facter.json --flake .#{{host}} --extra-files /tmp/extra-files/{{host}} {{target}}
+    #!/usr/bin/env bash
+    args=(--generate-hardware-config nixos-facter modules/hosts/{{host}}/facter.json --flake .#{{host}} --extra-files /tmp/extra-files/{{host}})
+    for key in /tmp/extra-files/{{host}}/persistent/secrets/zfs/*.key; do
+        [ -f "$key" ] && args+=(--disk-encryption-keys "${key#/tmp/extra-files/{{host}}}" "$key")
+    done
+    args+=({{target}})
+    nix run github:nix-community/nixos-anywhere -- "${args[@]}"
 
 # Clean up temporary key material
 clean-keys:
