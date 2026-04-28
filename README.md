@@ -114,6 +114,44 @@ To re-enroll after a firmware or bootloader change (e.g. secure boot key rotatio
 sudo cryptenroll --wipe-slot=tpm2 /dev/<luks-device>
 ```
 
+### Clevis Tang unlock
+
+Hosts with the `clevis` module use network-bound disk encryption (NBDE) to
+unlock the LUKS boot partition at boot via a Tang server. The Tang server runs
+on a host with the `tang` module.
+
+#### Tang server setup
+
+The `tang` module handles everything. On first boot, tang auto-generates its
+keys in `/var/lib/private/tang` (persisted via impermanence). Retrieve the
+server advertisement for clevis binding:
+
+```bash
+curl http://<tang-host>:7654/adv
+```
+
+#### Binding a device with clevis
+
+On the client host, create a JWE file for the LUKS device and store it in the
+host's secrets directory:
+
+```bash
+echo -n '<passphrase>' | clevis encrypt tang '{"url": "http://<tang-host>:7654"}' > modules/hosts/<hostname>/secrets/<device>.jwe
+```
+
+Then reference it in the host config:
+
+```nix
+boot.initrd.clevis.devices."<device>".secretFile = ./secrets/<device>.jwe;
+```
+
+#### Verifying
+
+After deployment, reboot the client. It should obtain a network address in
+initrd via DHCP and contact the Tang server to unlock the device automatically.
+If the Tang server is unreachable, the boot process falls back to interactive
+passphrase entry.
+
 ### Updating flake inputs
 
 To update all flake inputs:
