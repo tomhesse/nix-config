@@ -130,19 +130,32 @@ server advertisement for clevis binding:
 curl http://<tang-host>:7654/adv
 ```
 
-#### Binding a device with clevis
+#### ZFS encryption keys
 
-On the client host, create a JWE file for the LUKS device and store it in the
-host's secrets directory:
+Generate raw encryption keys for ZFS pools:
 
 ```bash
-echo -n '<passphrase>' | clevis encrypt tang '{"url": "http://<tang-host>:7654"}' > modules/hosts/<hostname>/secrets/<device>.jwe
+just gen-zfs-keys <hostname> <pool1> [pool2] ...
 ```
 
-Then reference it in the host config:
+Keys are placed in `/tmp/extra-files/<hostname>/persistent/secrets/zfs/` for
+deployment with nixos-anywhere.
+
+#### Binding a device with clevis
+
+Generate a JWE file for the LUKS device:
+
+```bash
+just gen-clevis-jwe <hostname> <tang-ip>
+```
+
+**Important:** Use the Tang server's IP address, not its hostname. DNS is not available in the initrd during early boot.
+
+The JWE file is placed in `/tmp/extra-files/<hostname>/persistent/secrets/clevis/`
+for deployment with nixos-anywhere. Then reference it in the host config:
 
 ```nix
-boot.initrd.clevis.devices."<device>".secretFile = ./secrets/<device>.jwe;
+boot.initrd.clevis.devices."<device>".secretFile = "/persistent/secrets/clevis/<device>.jwe";
 ```
 
 #### Verifying
