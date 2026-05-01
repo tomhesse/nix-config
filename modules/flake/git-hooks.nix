@@ -11,7 +11,10 @@
     # Editorconfig
     editorconfig-checker = {
       enable = true;
-      excludes = [ "facter\\.json$" ];
+      excludes = [
+        "\\.jwe$"
+        "facter\\.json$"
+      ];
     };
 
     # Misc
@@ -45,6 +48,7 @@
           "lazer"
         ];
         exclude = [
+          "*.jwe"
           "facter.json"
           "secrets/"
         ];
