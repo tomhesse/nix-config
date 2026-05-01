@@ -13,7 +13,10 @@
     {
       services.tang = {
         enable = true;
-        ipAddressAllow = [ "10.0.20.0/24" ];
+        ipAddressAllow = [
+          "10.0.10.0/24"
+          "10.0.20.0/24"
+        ];
       };
 
       networking.firewall.allowedTCPPorts = map extractPort config.services.tang.listenStream;
