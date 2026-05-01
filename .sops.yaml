@@ -2,6 +2,7 @@ keys:
   - &thesse_gpg 1663EC2E7C8C8E95BE959EB3ABF77DD0DF58CFF4
   - &thesse_age age14cf9qyvwvwhsfewv6wke4ms6xvws4jywv9vu68tlgfwqd9hxua6q0mre5r
   - &loki age1kw55zekl8ynz95vdpd6fuzknja4zagaykejfqd2rv7qjma977glsexj09h
+  - &mimir age1mpcyfmuyqma2kp333k5p498eq64vvczl5247h3yecdn45yq22p7sa2qdpg
   - &tyr age16qpsxrlwttw7l3nhs3vdcvasun3xj2w43xhn9jxx0nmn2cfg6yds285rwn
 
 creation_rules:
@@ -11,6 +12,7 @@ creation_rules:
           - *thesse_gpg
         age:
           - *loki
+          - *mimir
           - *tyr
 
   - path_regex: modules/sops/secrets/thesse\.yaml$
@@ -26,6 +28,13 @@ creation_rules:
           - *thesse_gpg
         age:
           - *loki
+
+  - path_regex: modules/hosts/mimir/secrets/nixos\.yaml$
+    key_groups:
+      - pgp:
+          - *thesse_gpg
+        age:
+          - *mimir
 
   - path_regex: modules/hosts/tyr/secrets/nixos\.yaml$
     key_groups:
