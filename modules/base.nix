@@ -5,6 +5,7 @@
       self.modules.nixos.boot
       self.modules.nixos.catppuccin
       self.modules.nixos.disko
+      self.modules.nixos.bash
       self.modules.nixos.fish
       self.modules.nixos.home-manager
       self.modules.nixos.impermanence
@@ -22,6 +23,7 @@
 
   flake.modules.homeManager.base = {
     imports = [
+      self.modules.homeManager.bash
       self.modules.homeManager.bat
       self.modules.homeManager.btop
       self.modules.homeManager.catppuccin
