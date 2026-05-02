@@ -7,4 +7,10 @@
       self.modules.nixos.zfs
     ];
   };
+
+  flake.modules.homeManager.server = {
+    imports = [
+      self.modules.homeManager.base
+    ];
+  };
 }
