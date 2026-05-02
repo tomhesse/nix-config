@@ -16,6 +16,8 @@
 
     hardware.facter.reportPath = ./facter.json;
 
+    disko.zfs.enable = true;
+
     networking.hostId = "700e144e";
     networking.hostName = "mimir";
 
