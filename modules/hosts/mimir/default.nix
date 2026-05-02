@@ -1,28 +1,36 @@
 { self, ... }:
 {
-  configurations.nixos.mimir.module = {
-    imports = [
-      self.diskoConfigurations.mimir
-      self.modules.nixos.clevis
-      self.modules.nixos.common-cpu-intel
-      self.modules.nixos.common-pc-ssd
-      self.modules.nixos.secure-boot
-      self.modules.nixos.server
-      self.modules.nixos.user-thesse
-    ];
+  configurations.nixos.mimir.module =
+    { lib, pkgs, ... }:
+    {
+      imports = [
+        self.diskoConfigurations.mimir
+        self.modules.nixos.clevis
+        self.modules.nixos.common-cpu-intel
+        self.modules.nixos.common-pc-ssd
+        self.modules.nixos.secure-boot
+        self.modules.nixos.server
+        self.modules.nixos.user-thesse
+      ];
 
-    boot.initrd.availableKernelModules = [ "i40e" ];
-    boot.initrd.clevis.devices."mimir".secretFile = /persistent/secrets/clevis/mimir.jwe;
+      users.users.thesse.shell = lib.mkForce pkgs.bash;
 
-    hardware.facter.reportPath = ./facter.json;
+      home-manager.users.thesse.imports = [
+        self.modules.homeManager.server
+      ];
 
-    disko.zfs.enable = true;
+      boot.initrd.availableKernelModules = [ "i40e" ];
+      boot.initrd.clevis.devices."mimir".secretFile = /persistent/secrets/clevis/mimir.jwe;
 
-    networking.hostId = "700e144e";
-    networking.hostName = "mimir";
+      hardware.facter.reportPath = ./facter.json;
 
-    system.stateVersion = "25.11";
+      disko.zfs.enable = true;
 
-    time.timeZone = "Europe/Berlin";
-  };
+      networking.hostId = "700e144e";
+      networking.hostName = "mimir";
+
+      system.stateVersion = "25.11";
+
+      time.timeZone = "Europe/Berlin";
+    };
 }
