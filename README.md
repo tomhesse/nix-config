@@ -96,8 +96,9 @@ nix build .#installer-iso
 ### TPM LUKS unlock
 
 Hosts with the `secure-boot` module include the `cryptenroll` helper script
-for enrolling a TPM2 key slot on LUKS volumes. This allows the disk to unlock
-automatically when the TPM PCR state matches (PCRs 0, 2, 7).
+for enrolling a TPM2+PIN key slot on LUKS volumes. This allows the disk to
+unlock when the TPM PCR state matches (PCRs 0, 2, 7) and the correct PIN is
+entered at boot.
 
 On the target host:
 
@@ -105,8 +106,8 @@ On the target host:
 sudo cryptenroll /dev/<luks-device>
 ```
 
-The script wraps `systemd-cryptenroll` with `--tpm2-device=auto --tpm2-pcrs=0,2,7`.
-You will be prompted for the existing LUKS passphrase.
+The script wraps `systemd-cryptenroll` with `--tpm2-device=auto --tpm2-pcrs=0,2,7 --tpm2-with-pin=yes`.
+You will be prompted for the existing LUKS passphrase and a new TPM2 PIN.
 
 To re-enroll after a firmware or bootloader change (e.g. secure boot key rotation):
 
