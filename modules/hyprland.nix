@@ -112,7 +112,7 @@
             "fullscreen, class:^(steam_app_)"
             "workspace name:gaming, class:^(steam)$"
             "workspace special:music, class:^(ncmpcpp)$"
-            "workspace special:notes silent, class:^(electron)$"
+            "workspace special:notes silent, class:^(obsidian)$"
 
             "float, class:^(firefox)$, title:^(File Upload)"
             "size 50% 50%, class:^(firefox)$, title:^(File Upload)"
