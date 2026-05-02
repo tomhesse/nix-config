@@ -214,6 +214,20 @@
             keylocation = "file:///persistent/secrets/zfs/rocket.key";
             mountpoint = "none";
           };
+          datasets = {
+            "services" = {
+              type = "zfs_fs";
+              options.mountpoint = "none";
+            };
+            "services/kanidm" = {
+              type = "zfs_fs";
+              options = {
+                mountpoint = "legacy";
+                recordsize = "64k";
+              };
+              mountpoint = "/var/lib/kanidm";
+            };
+          };
         };
 
         tank = {
