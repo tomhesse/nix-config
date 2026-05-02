@@ -27,22 +27,14 @@
       self.modules.homeManager.catppuccin
       self.modules.homeManager.eza
       self.modules.homeManager.fd
-      self.modules.homeManager.fish
       self.modules.homeManager.fzf
-      self.modules.homeManager.git
-      self.modules.homeManager.gpg
       self.modules.homeManager.home-manager
-      self.modules.homeManager.lazygit
       self.modules.homeManager.locale
       self.modules.homeManager.neovim
-      self.modules.homeManager.nh
       self.modules.homeManager.ripgrep
       self.modules.homeManager.sops
-      self.modules.homeManager.starship
       self.modules.homeManager.tmux
       self.modules.homeManager.xdg
-      self.modules.homeManager.yazi
-      self.modules.homeManager.zoxide
     ];
   };
 }
