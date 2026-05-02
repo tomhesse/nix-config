@@ -8,6 +8,7 @@
         self.modules.nixos.clevis
         self.modules.nixos.common-cpu-intel
         self.modules.nixos.common-pc-ssd
+        self.modules.nixos.kanidm
         self.modules.nixos.secure-boot
         self.modules.nixos.server
         self.modules.nixos.user-thesse

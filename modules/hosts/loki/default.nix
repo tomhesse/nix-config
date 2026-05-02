@@ -5,6 +5,7 @@
       self.diskoConfigurations.loki
       self.modules.nixos.desktop
       self.modules.nixos.framework-13-7040-amd
+      self.modules.nixos.kanidm-client
       self.modules.nixos.secure-boot
       self.modules.nixos.user-thesse
     ];
