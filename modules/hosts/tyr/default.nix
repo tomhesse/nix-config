@@ -62,6 +62,16 @@
       };
     };
 
+    fileSystems."/mnt/music" = {
+      device = "mimir:/srv/media/music";
+      fsType = "nfs4";
+      options = [
+        "noauto"
+        "x-systemd.automount"
+        "x-systemd.idle-timeout=600"
+      ];
+    };
+
     time.timeZone = "Europe/Berlin";
 
     networking.hostName = "tyr";
