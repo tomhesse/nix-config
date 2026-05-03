@@ -1,6 +1,6 @@
 {
   flake.modules.nixos.navidrome =
-    { lib, ... }:
+    { config, lib, ... }:
     {
       services = {
         navidrome = {
@@ -9,8 +9,12 @@
             Address = "127.0.0.1";
             Port = 4533;
             MusicFolder = "/srv/media/music";
+            EnableUserEditing = false;
             ExtAuth.TrustedSources = "127.0.0.1/32";
+            ExtAuth.LogoutURL = "https://idm.shrimphouse.xyz/ui/logout";
+            Plugins.Enabled = false;
           };
+          environmentFile = config.sops.templates."navidrome-env".path;
         };
 
         oauth2-proxy.nginx.virtualHosts."music.shrimphouse.xyz" = { };
@@ -33,6 +37,23 @@
               '';
             };
           };
+        };
+      };
+
+      sops = {
+        secrets."services/navidrome/lastfm-api-key" = {
+          sopsFile = ./hosts/${config.networking.hostName}/secrets/nixos.yaml;
+        };
+        secrets."services/navidrome/lastfm-api-secret" = {
+          sopsFile = ./hosts/${config.networking.hostName}/secrets/nixos.yaml;
+        };
+
+        templates."navidrome-env" = {
+          content = ''
+            ND_LASTFM_APIKEY=${config.sops.placeholder."services/navidrome/lastfm-api-key"}
+            ND_LASTFM_SECRET=${config.sops.placeholder."services/navidrome/lastfm-api-secret"}
+          '';
+          restartUnits = [ "navidrome.service" ];
         };
       };
 
