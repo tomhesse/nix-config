@@ -230,6 +230,11 @@
               };
               mountpoint = "/var/lib/kanidm";
             };
+            "services/navidrome" = {
+              type = "zfs_fs";
+              options.mountpoint = "legacy";
+              mountpoint = "/var/lib/navidrome";
+            };
           };
         };
 
