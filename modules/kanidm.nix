@@ -19,6 +19,11 @@
         };
       };
 
+      systemd.services.kanidm = {
+        after = [ "acme-idm.shrimphouse.xyz.service" ];
+        requires = [ "acme-idm.shrimphouse.xyz.service" ];
+      };
+
       security.acme.certs."idm.shrimphouse.xyz" = {
         group = "kanidm";
         postRun = "systemctl reload-or-restart kanidm.service";
