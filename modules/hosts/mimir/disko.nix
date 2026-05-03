@@ -270,6 +270,20 @@
             keylocation = "file:///persistent/secrets/zfs/tank.key";
             mountpoint = "none";
           };
+          datasets = {
+            "media" = {
+              type = "zfs_fs";
+              options = {
+                canmount = "off";
+                mountpoint = "none";
+              };
+            };
+            "media/music" = {
+              type = "zfs_fs";
+              options.mountpoint = "legacy";
+              mountpoint = "/srv/media/music";
+            };
+          };
         };
       };
     };
