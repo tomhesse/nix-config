@@ -9,6 +9,7 @@
         self.modules.nixos.common-cpu-intel
         self.modules.nixos.common-pc-ssd
         self.modules.nixos.kanidm
+        self.modules.nixos.nfs-server
         self.modules.nixos.secure-boot
         self.modules.nixos.server
         self.modules.nixos.smartd
@@ -28,6 +29,11 @@
       hardware.facter.reportPath = ./facter.json;
 
       disko.zfs.enable = true;
+
+      services.nfs.server.exports = ''
+        /srv 10.0.10.0/24(ro,fsid=root)
+        /srv/media/music tyr(rw,sync,no_subtree_check)
+      '';
 
       networking.hostId = "700e144e";
       networking.hostName = "mimir";

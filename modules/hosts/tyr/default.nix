@@ -7,6 +7,7 @@
       self.modules.nixos.common-gpu-nvidia-nonprime
       self.modules.nixos.common-pc-ssd
       self.modules.nixos.desktop
+      self.modules.nixos.nfs-client
       self.modules.nixos.secure-boot
       self.modules.nixos.tang
       self.modules.nixos.user-thesse
