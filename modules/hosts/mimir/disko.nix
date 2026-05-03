@@ -226,7 +226,7 @@
               type = "zfs_fs";
               options = {
                 mountpoint = "legacy";
-                recordsize = "64k";
+                recordsize = "64K";
               };
               mountpoint = "/var/lib/kanidm";
             };
