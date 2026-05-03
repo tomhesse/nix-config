@@ -217,7 +217,10 @@
           datasets = {
             "services" = {
               type = "zfs_fs";
-              options.mountpoint = "none";
+              options = {
+                canmount = "off";
+                mountpoint = "none";
+              };
             };
             "services/kanidm" = {
               type = "zfs_fs";
