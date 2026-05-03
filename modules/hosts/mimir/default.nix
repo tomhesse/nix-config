@@ -11,6 +11,7 @@
         self.modules.nixos.kanidm
         self.modules.nixos.secure-boot
         self.modules.nixos.server
+        self.modules.nixos.smartd
         self.modules.nixos.user-thesse
       ];
 
