@@ -13,6 +13,7 @@
         self.modules.nixos.server
         self.modules.nixos.smartd
         self.modules.nixos.user-thesse
+        self.modules.nixos.zfs
       ];
 
       users.users.thesse.shell = lib.mkForce pkgs.bash;
