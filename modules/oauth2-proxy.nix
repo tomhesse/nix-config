@@ -8,7 +8,6 @@
           provider = "oidc";
           clientID = "oauth2-proxy";
           redirectURL = "https://auth.shrimphouse.xyz/oauth2/callback";
-          reverseProxy = true;
           setXauthrequest = true;
           httpAddress = "http://127.0.0.1:4180";
           email.domains = [ "*" ];
@@ -18,6 +17,7 @@
 
           extraConfig = {
             code-challenge-method = "S256";
+            trusted-ip = "127.0.0.1/32";
             oidc-issuer-url = "https://idm.shrimphouse.xyz/oauth2/openid/oauth2-proxy";
             whitelist-domain = ".shrimphouse.xyz";
             skip-provider-button = true;
