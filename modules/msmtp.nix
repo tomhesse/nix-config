@@ -15,7 +15,9 @@
           port = 465;
           from = "${config.networking.hostName}@mail.shrimphouse.xyz";
           user = "608deeb4-b226-44f7-bb38-4354d8029c7e";
-          passwordeval = "cat ${config.sops.secrets."services/msmtp/password".path}";
+          passwordeval = "/run/current-system/sw/bin/cat ${
+            config.sops.secrets."services/msmtp/password".path
+          }";
         };
       };
 
