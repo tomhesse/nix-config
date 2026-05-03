@@ -1,5 +1,20 @@
 # Kanidm
 
+## People
+
+```sh
+# Create a person account
+kanidm person create <username> "<Display Name>"
+
+# Set email and legal name
+kanidm person update <username> --mail "<email>" --legalname "<Legal Name>"
+
+# Have the user set up credentials (generates an enrollment link)
+kanidm person credential create-reset-token <username>
+```
+
+Requires membership in `idm_people_admins` (which `idm_admin` has by default).
+
 ## OAuth2 Clients
 
 ### oauth2-proxy
