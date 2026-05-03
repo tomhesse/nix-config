@@ -9,7 +9,9 @@
         self.modules.nixos.common-cpu-intel
         self.modules.nixos.common-pc-ssd
         self.modules.nixos.kanidm
+        self.modules.nixos.navidrome
         self.modules.nixos.nfs-server
+        self.modules.nixos.oauth2-proxy
         self.modules.nixos.secure-boot
         self.modules.nixos.server
         self.modules.nixos.smartd
