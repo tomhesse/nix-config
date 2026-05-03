@@ -49,6 +49,11 @@
         };
       };
 
+      systemd.services.oauth2-proxy = {
+        after = [ "kanidm.service" ];
+        requires = [ "kanidm.service" ];
+      };
+
       security.acme.certs."auth.shrimphouse.xyz".group = "nginx";
     };
 }
