@@ -52,7 +52,10 @@ in
       programs.ssh.knownHosts =
         lib.genAttrs hostsWithKeys (host: {
           publicKey = builtins.readFile (keyPathFor host);
-          extraHostNames = lib.optional (host == config.networking.hostName) "localhost";
+          extraHostNames = [
+            "${host}.shrimphouse.xyz"
+          ]
+          ++ lib.optional (host == config.networking.hostName) "localhost";
         })
         // {
           "codeberg.org".publicKeyFile = codebergHostKeys;
