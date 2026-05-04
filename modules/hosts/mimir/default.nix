@@ -32,6 +32,10 @@
 
       disko.zfs.enable = true;
 
+      systemd.tmpfiles.rules = [
+        "Z /srv/media/music 0755 thesse users -"
+      ];
+
       services.nfs.server.exports = ''
         /srv 10.0.10.0/24(ro,fsid=root)
         /srv/media/music tyr(rw,sync,no_subtree_check)
