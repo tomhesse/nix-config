@@ -23,10 +23,8 @@
 
   flake.modules.homeManager.desktop = {
     imports = [
-      self.modules.homeManager.abcde
       self.modules.homeManager.aerc
       self.modules.homeManager.cli
-      self.modules.homeManager.beets
       self.modules.homeManager.claude
       self.modules.homeManager.cliphist
       self.modules.homeManager.dunst
@@ -39,11 +37,8 @@
       self.modules.homeManager.hyprsunset
       self.modules.homeManager.imv
       self.modules.homeManager.kitty
-      self.modules.homeManager.mpd
       self.modules.homeManager.mpv
-      self.modules.homeManager.ncmpcpp
       self.modules.homeManager.obsidian
-      self.modules.homeManager.osu
       self.modules.homeManager.pipewire
       self.modules.homeManager.playerctld
       self.modules.homeManager.rofi

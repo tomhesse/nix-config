@@ -14,7 +14,12 @@
     ];
 
     home-manager.users.thesse = {
-      imports = [ self.modules.homeManager.desktop ];
+      imports = [
+        self.modules.homeManager.abcde
+        self.modules.homeManager.beets
+        self.modules.homeManager.desktop
+        self.modules.homeManager.osu
+      ];
 
       wallpaper = builtins.fetchurl {
         url = "https://w.wallhaven.cc/full/ly/wallhaven-lyqjly.png";
