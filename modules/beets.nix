@@ -36,7 +36,7 @@
         };
         settings = {
           library = "${config.xdg.dataHome}/beets/musiclibrary.db";
-          directory = config.xdg.userDirs.music;
+          directory = "/mnt/music";
           plugins = [
             "autobpm"
             "convert"
