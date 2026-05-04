@@ -5,7 +5,6 @@
       self.modules.nixos.base
       self.modules.nixos.bluetooth
       self.modules.nixos.firefox
-      self.modules.nixos.gamescope
       self.modules.nixos.hyprland
       self.modules.nixos.monitors
       self.modules.nixos.nixpkgs
@@ -14,7 +13,6 @@
       self.modules.nixos.sddm
       self.modules.nixos.steam
       self.modules.nixos.wireless
-      self.modules.nixos.xpadneo
       self.modules.nixos.yubikey
       self.modules.nixos.zen-kernel
     ];
