@@ -285,7 +285,10 @@
             };
             "media/music" = {
               type = "zfs_fs";
-              options.mountpoint = "legacy";
+              options = {
+                mountpoint = "legacy";
+                acltype = "posixacl";
+              };
               mountpoint = "/srv/media/music";
             };
           };
