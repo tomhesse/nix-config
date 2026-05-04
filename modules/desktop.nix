@@ -49,7 +49,7 @@
       self.modules.homeManager.xdg-autostart
       self.modules.homeManager.xdg-user-dirs
       self.modules.homeManager.zathura
-      self.modules.homeManager.zed
+      self.modules.homeManager.zed-editor
     ];
   };
 }

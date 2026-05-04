@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.zed =
+  flake.modules.homeManager.zed-editor =
     {
       config,
       osConfig,
