@@ -33,7 +33,8 @@
       disko.zfs.enable = true;
 
       systemd.tmpfiles.rules = [
-        "Z /srv/media/music 0755 thesse users -"
+        "z /srv/media/music 0755 thesse users -"
+        "a+ /srv/media/music - - - - default:user:navidrome:rX"
       ];
 
       services.nfs.server.exports = ''
