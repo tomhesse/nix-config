@@ -11,6 +11,11 @@
         restartUnits = [ "wpa_supplicant.service" ];
       };
 
+      systemd.network.networks."20-wireless" = {
+        matchConfig.Type = "wlan";
+        networkConfig.DHCP = "yes";
+      };
+
       networking.wireless = {
         enable = true;
         fallbackToWPA2 = false;

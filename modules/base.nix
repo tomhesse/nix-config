@@ -11,6 +11,7 @@
       self.modules.nixos.impermanence
       self.modules.nixos.local-packages
       self.modules.nixos.locale
+      self.modules.nixos.networkd
       self.modules.nixos.nix
       self.modules.nixos.openssh
       self.modules.nixos.sops
