@@ -1,7 +1,6 @@
 {
   flake.modules.nixos.networkd = {
-    hardware.facter.detected.dhcp.enable = false;
-    networking.dhcpcd.enable = false;
+    networking.useNetworkd = true;
 
     systemd.network = {
       enable = true;
