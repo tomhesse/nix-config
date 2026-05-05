@@ -235,6 +235,11 @@
               options.mountpoint = "legacy";
               mountpoint = "/var/lib/navidrome";
             };
+            "services/paperless" = {
+              type = "zfs_fs";
+              options.mountpoint = "legacy";
+              mountpoint = "/var/lib/paperless";
+            };
             "services/postgresql" = {
               type = "zfs_fs";
               options = {
