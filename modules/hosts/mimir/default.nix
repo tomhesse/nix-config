@@ -39,7 +39,7 @@
 
       services.nfs.server.exports = ''
         /srv 10.0.10.0/24(ro,fsid=root)
-        /srv/media/music tyr(rw,sync,no_subtree_check)
+        /srv/media/music tyr.shrimphouse.xyz(rw,sync,no_subtree_check)
       '';
 
       networking.hostId = "700e144e";
