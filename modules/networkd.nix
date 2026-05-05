@@ -1,11 +1,15 @@
 {
   flake.modules.nixos.networkd = {
-    systemd.network.enable = true;
+    hardware.facter.detected.dhcp.enable = false;
     networking.dhcpcd.enable = false;
 
-    systemd.network.networks."10-dhcp" = {
-      matchConfig.Type = "ether";
-      networkConfig.DHCP = "yes";
+    systemd.network = {
+      enable = true;
+
+      networks."10-dhcp" = {
+        matchConfig.Type = "ether";
+        networkConfig.DHCP = "yes";
+      };
     };
   };
 }
