@@ -235,6 +235,14 @@
               options.mountpoint = "legacy";
               mountpoint = "/var/lib/navidrome";
             };
+            "services/postgresql" = {
+              type = "zfs_fs";
+              options = {
+                mountpoint = "legacy";
+                recordsize = "8K";
+              };
+              mountpoint = "/var/lib/postgresql";
+            };
           };
         };
 
