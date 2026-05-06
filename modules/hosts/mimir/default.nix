@@ -13,6 +13,7 @@
         self.modules.nixos.nfs-server
         self.modules.nixos.oauth2-proxy
         self.modules.nixos.paperless
+        self.modules.nixos.sanoid
         self.modules.nixos.secure-boot
         self.modules.nixos.server
         self.modules.nixos.smartd
@@ -42,6 +43,14 @@
         /srv 10.0.10.0/24(ro,fsid=root)
         /srv/media/music tyr.shrimphouse.xyz(rw,sync,no_subtree_check)
       '';
+
+      services.sanoid.datasets = {
+        "rocket/services/kanidm".useTemplate = [ "frequent" ];
+        "rocket/services/navidrome".useTemplate = [ "frequent" ];
+        "rocket/services/paperless".useTemplate = [ "frequent" ];
+        "rocket/services/postgresql".useTemplate = [ "frequent" ];
+        "tank/media/music".useTemplate = [ "media" ];
+      };
 
       networking.hostId = "700e144e";
       networking.hostName = "mimir";
