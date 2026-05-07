@@ -51,6 +51,7 @@
         "rocket/services/navidrome".useTemplate = [ "frequent" ];
         "rocket/services/paperless".useTemplate = [ "frequent" ];
         "rocket/services/postgresql".useTemplate = [ "frequent" ];
+        "tank/backups/restic/loki".useTemplate = [ "backups" ];
         "tank/media/music".useTemplate = [ "media" ];
       };
 

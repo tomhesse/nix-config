@@ -294,6 +294,28 @@
             mountpoint = "none";
           };
           datasets = {
+            "backups" = {
+              type = "zfs_fs";
+              options = {
+                canmount = "off";
+                mountpoint = "none";
+              };
+            };
+            "backups/restic" = {
+              type = "zfs_fs";
+              options = {
+                canmount = "off";
+                mountpoint = "none";
+              };
+            };
+            "backups/restic/loki" = {
+              type = "zfs_fs";
+              options = {
+                compression = "off";
+                mountpoint = "legacy";
+              };
+              mountpoint = "/srv/backups/restic/loki";
+            };
             "media" = {
               type = "zfs_fs";
               options = {
