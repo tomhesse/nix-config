@@ -4,6 +4,12 @@
       enable = true;
 
       templates = {
+        backups = {
+          daily = 2;
+          weekly = 1;
+          autosnap = true;
+          autoprune = true;
+        };
         frequent = {
           daily = 7;
           weekly = 4;
