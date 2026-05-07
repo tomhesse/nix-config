@@ -56,16 +56,29 @@
             bell = true;
             timid = true;
           };
-          match.preferred = {
-            countries = [
-              "DE"
-              "XE"
-              "XW"
+          match = {
+            ignored_media = [
+              "Data CD"
+              "DVD"
+              "DVD-Video"
+              "Blu-ray"
+              "HD-DVD"
+              "VCD"
+              "SVCD"
+              "UMD"
+              "VHS"
             ];
-            media = [
-              "CD"
-              "Digital Media|File"
-            ];
+            preferred = {
+              countries = [
+                "DE"
+                "XE"
+                "XW"
+              ];
+              media = [
+                "CD"
+                "Digital Media|File"
+              ];
+            };
           };
           paths = {
             default = "$albumartist/$year - $album%aunique{}/%if{$multidisc,Disc $disc/}$track - $title";
