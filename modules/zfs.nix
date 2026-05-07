@@ -5,6 +5,11 @@
       boot.supportedFilesystems = [ "zfs" ];
       boot.zfs.forceImportRoot = false;
 
+      services.zfs.autoScrub = {
+        enable = true;
+        interval = "monthly";
+      };
+
       services.zfs.zed = {
         enableMail = false;
         settings = {
