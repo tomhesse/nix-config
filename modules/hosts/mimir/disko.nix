@@ -222,6 +222,11 @@
                 mountpoint = "none";
               };
             };
+            "services/grocy" = {
+              type = "zfs_fs";
+              options.mountpoint = "legacy";
+              mountpoint = "/var/lib/grocy";
+            };
             "services/kanidm" = {
               type = "zfs_fs";
               options = {

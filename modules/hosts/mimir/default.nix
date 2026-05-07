@@ -8,6 +8,7 @@
         self.modules.nixos.clevis
         self.modules.nixos.common-cpu-intel
         self.modules.nixos.common-pc-ssd
+        self.modules.nixos.grocy
         self.modules.nixos.kanidm
         self.modules.nixos.navidrome
         self.modules.nixos.nfs-server
@@ -45,6 +46,7 @@
       '';
 
       services.sanoid.datasets = {
+        "rocket/services/grocy".useTemplate = [ "frequent" ];
         "rocket/services/kanidm".useTemplate = [ "frequent" ];
         "rocket/services/navidrome".useTemplate = [ "frequent" ];
         "rocket/services/paperless".useTemplate = [ "frequent" ];
