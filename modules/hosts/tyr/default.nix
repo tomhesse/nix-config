@@ -28,6 +28,11 @@
       };
     };
 
+    services.restic.backups.persistent.exclude = [
+      "**/steamapps/common"
+      "**/steamapps/shadercache"
+    ];
+
     hardware.nvidia.open = false;
 
     hardware.facter.reportPath = ./facter.json;
