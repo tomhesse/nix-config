@@ -14,6 +14,7 @@
         self.modules.nixos.nfs-server
         self.modules.nixos.oauth2-proxy
         self.modules.nixos.paperless
+        self.modules.nixos.restic-server
         self.modules.nixos.sanoid
         self.modules.nixos.secure-boot
         self.modules.nixos.server
