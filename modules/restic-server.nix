@@ -13,12 +13,14 @@
           shell = "${pkgs.bash}/bin/bash";
           openssh.authorizedKeys.keys = [
             (builtins.readFile ./hosts/loki/ssh_host_ed25519_key.pub)
+            (builtins.readFile ./hosts/tyr/ssh_host_ed25519_key.pub)
           ];
         };
       };
 
       systemd.tmpfiles.rules = [
         "d /srv/backups/restic/loki 0700 restic restic -"
+        "d /srv/backups/restic/tyr 0700 restic restic -"
       ];
 
       environment.persistence."/persistent".directories = [
