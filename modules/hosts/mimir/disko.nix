@@ -316,6 +316,14 @@
               };
               mountpoint = "/srv/backups/restic/loki";
             };
+            "backups/restic/tyr" = {
+              type = "zfs_fs";
+              options = {
+                compression = "off";
+                mountpoint = "legacy";
+              };
+              mountpoint = "/srv/backups/restic/tyr";
+            };
             "media" = {
               type = "zfs_fs";
               options = {
