@@ -1,6 +1,6 @@
 {
   flake.modules.nixos.restic-server =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
     {
       users = {
         groups.restic = { };
@@ -22,6 +22,35 @@
         "d /srv/backups/restic/loki 0700 restic restic -"
         "d /srv/backups/restic/tyr 0700 restic restic -"
       ];
+
+      services.restic.backups.restic-offsite = {
+        repository = "sftp:u591202-sub1@u591202-sub1.your-storagebox.de:restic";
+        passwordFile = config.sops.secrets."services/restic/offsite-password".path;
+        initialize = true;
+
+        paths = [ "/srv/backups/restic" ];
+
+        extraOptions = [
+          "sftp.command='ssh u591202-sub1@u591202-sub1.your-storagebox.de -i /persistent/etc/ssh/ssh_host_ed25519_key -p 23 -s sftp'"
+        ];
+
+        pruneOpts = [
+          "--keep-daily 7"
+          "--keep-weekly 4"
+          "--keep-monthly 12"
+          "--keep-yearly 2"
+        ];
+
+        timerConfig = {
+          OnCalendar = "03:00";
+          Persistent = true;
+          RandomizedDelaySec = "1h";
+        };
+      };
+
+      sops.secrets."services/restic/offsite-password" = {
+        sopsFile = ./hosts/${config.networking.hostName}/secrets/nixos.yaml;
+      };
 
       environment.persistence."/persistent".directories = [
         {
