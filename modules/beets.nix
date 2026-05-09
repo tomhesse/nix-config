@@ -23,6 +23,7 @@
         package = pkgs.python3.pkgs.beets.override {
           pluginOverrides = {
             autobpm.enable = true;
+            badfiles.enable = true;
             convert.enable = true;
             fetchart.enable = true;
             info.enable = true;
@@ -39,6 +40,7 @@
           directory = "/mnt/music";
           plugins = [
             "autobpm"
+            "badfiles"
             "convert"
             "fetchart"
             "info"
