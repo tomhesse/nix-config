@@ -135,6 +135,8 @@
             "$mainMod SHIFT, P, exec, ${uwsm} app -- ${power-menu}"
             "$mainMod SHIFT, RETURN, exec, ${uwsm} app -- ${kitty}"
 
+            ", Print, exec, hyprshot -m region"
+
             "$mainMod, G, workspace, name:gaming"
             "$mainMod SHIFT, M, togglespecialworkspace, music"
             "$mainMod SHIFT, O, togglespecialworkspace, notes"
