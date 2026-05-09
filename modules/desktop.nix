@@ -32,6 +32,7 @@
       self.modules.homeManager.hyprland
       self.modules.homeManager.hyprlock
       self.modules.homeManager.hyprpaper
+      self.modules.homeManager.hyprshot
       self.modules.homeManager.hyprsunset
       self.modules.homeManager.imv
       self.modules.homeManager.kitty
