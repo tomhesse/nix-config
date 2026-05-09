@@ -11,6 +11,7 @@
             MusicFolder = "/srv/media/music";
             EnableUserEditing = false;
             EnableDownloads = false;
+            EnableStarRating = false;
             ExtAuth.TrustedSources = "127.0.0.1/32";
             ExtAuth.LogoutURL = "https://idm.shrimphouse.xyz/ui/logout";
             Plugins.Enabled = false;
