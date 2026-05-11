@@ -308,21 +308,28 @@
                 mountpoint = "none";
               };
             };
-            "backups/restic/loki" = {
+            "backups/restic/hosts" = {
               type = "zfs_fs";
               options = {
-                compression = "off";
-                mountpoint = "legacy";
+                canmount = "off";
+                mountpoint = "none";
               };
-              mountpoint = "/srv/backups/restic/loki";
             };
-            "backups/restic/tyr" = {
+            "backups/restic/hosts/loki" = {
               type = "zfs_fs";
               options = {
                 compression = "off";
                 mountpoint = "legacy";
               };
-              mountpoint = "/srv/backups/restic/tyr";
+              mountpoint = "/srv/backups/restic/hosts/loki";
+            };
+            "backups/restic/hosts/tyr" = {
+              type = "zfs_fs";
+              options = {
+                compression = "off";
+                mountpoint = "legacy";
+              };
+              mountpoint = "/srv/backups/restic/hosts/tyr";
             };
             "media" = {
               type = "zfs_fs";

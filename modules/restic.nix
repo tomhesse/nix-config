@@ -6,7 +6,7 @@
     in
     {
       services.restic.backups.persistent = {
-        repository = "sftp:restic@mimir.shrimphouse.xyz:/srv/backups/restic/${hostname}";
+        repository = "sftp:restic@mimir.shrimphouse.xyz:/srv/backups/restic/hosts/${hostname}";
         passwordFile = config.sops.secrets."services/restic/password".path;
         initialize = true;
 

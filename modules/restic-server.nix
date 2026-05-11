@@ -19,8 +19,8 @@
       };
 
       systemd.tmpfiles.rules = [
-        "d /srv/backups/restic/loki 0700 restic restic -"
-        "d /srv/backups/restic/tyr 0700 restic restic -"
+        "d /srv/backups/restic/hosts/loki 0700 restic restic -"
+        "d /srv/backups/restic/hosts/tyr 0700 restic restic -"
       ];
 
       services.restic.backups.restic-offsite = {
