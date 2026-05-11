@@ -331,6 +331,14 @@
               };
               mountpoint = "/srv/backups/restic/hosts/tyr";
             };
+            "backups/restic/services" = {
+              type = "zfs_fs";
+              options = {
+                compression = "off";
+                mountpoint = "legacy";
+              };
+              mountpoint = "/srv/backups/restic/services";
+            };
             "media" = {
               type = "zfs_fs";
               options = {

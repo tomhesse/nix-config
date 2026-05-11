@@ -48,6 +48,36 @@
         };
       };
 
+      services.restic.backups.restic-local = {
+        repository = "/srv/backups/restic/services";
+        passwordFile = config.sops.secrets."services/restic/local-password".path;
+        initialize = true;
+
+        paths = [
+          "/var/lib/grocy"
+          "/var/lib/kanidm"
+          "/var/lib/navidrome"
+          "/var/lib/paperless"
+          "/var/lib/postgresql"
+        ];
+
+        pruneOpts = [
+          "--keep-daily 7"
+          "--keep-weekly 4"
+          "--keep-monthly 6"
+        ];
+
+        timerConfig = {
+          OnCalendar = "daily";
+          Persistent = true;
+          RandomizedDelaySec = "1h";
+        };
+      };
+
+      sops.secrets."services/restic/local-password" = {
+        sopsFile = ./hosts/${config.networking.hostName}/secrets/nixos.yaml;
+      };
+
       sops.secrets."services/restic/offsite-password" = {
         sopsFile = ./hosts/${config.networking.hostName}/secrets/nixos.yaml;
       };
