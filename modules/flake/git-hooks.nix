@@ -26,10 +26,16 @@
     # Nix
     deadnix.enable = true;
     nixfmt.enable = true;
-    statix.enable = true;
+    statix = {
+      enable = true;
+      excludes = [ "^.direnv/" ];
+    };
 
     # Shell
-    shellcheck.enable = true;
+    shellcheck = {
+      enable = true;
+      excludes = [ "^\\.envrc$" ];
+    };
 
     # Secrets
     ripsecrets = {
