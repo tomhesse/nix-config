@@ -25,6 +25,7 @@
       self.modules.homeManager.cli
       self.modules.homeManager.claude
       self.modules.homeManager.cliphist
+      self.modules.homeManager.direnv
       self.modules.homeManager.dunst
       self.modules.homeManager.firefox
       self.modules.homeManager.fonts
