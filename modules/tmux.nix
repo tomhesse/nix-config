@@ -27,6 +27,16 @@
           set -ag status-right "#{E:@catppuccin_status_user}"
           set -ag status-right "#{E:@catppuccin_status_host}"
           set -ag status-right "#{E:@catppuccin_status_date_time}"
+
+          bind -T root F12 \
+            set prefix None \;\
+            set key-table off \;\
+            refresh-client -S
+
+          bind -T off F12 \
+            set prefix C-Space \;\
+            set key-table root \;\
+            refresh-client -S
         '';
         focusEvents = true;
         historyLimit = 50000;
