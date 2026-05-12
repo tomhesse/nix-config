@@ -28,7 +28,10 @@
         passwordFile = config.sops.secrets."services/restic/offsite-password".path;
         initialize = true;
 
-        paths = [ "/srv/backups/restic" ];
+        paths = [
+          "/srv/backups/restic"
+          "/srv/media/music"
+        ];
 
         extraOptions = [
           "sftp.command='ssh u591202-sub1@u591202-sub1.your-storagebox.de -i /persistent/etc/ssh/ssh_host_ed25519_key -p 23 -s sftp'"
