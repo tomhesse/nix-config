@@ -14,6 +14,7 @@
       self.modules.nixos.networkd
       self.modules.nixos.nix
       self.modules.nixos.openssh
+      # self.modules.nixos.resolved
       self.modules.nixos.sops
       self.modules.nixos.sudo
       self.modules.nixos.time
