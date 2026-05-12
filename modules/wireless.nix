@@ -13,7 +13,10 @@
 
       systemd.network.networks."20-wireless" = {
         matchConfig.Type = "wlan";
-        networkConfig.DHCP = "yes";
+        networkConfig = {
+          DHCP = "yes";
+          UseDomains = "yes";
+        };
       };
 
       networking.wireless = {

@@ -7,7 +7,10 @@
 
       networks."10-dhcp" = {
         matchConfig.Type = "ether";
-        networkConfig.DHCP = "yes";
+        networkConfig = {
+          DHCP = "yes";
+          UseDomains = "yes";
+        };
       };
     };
   };
