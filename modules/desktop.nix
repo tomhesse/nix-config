@@ -13,6 +13,7 @@
       self.modules.nixos.sddm
       self.modules.nixos.steam
       self.modules.nixos.wireless
+      self.modules.nixos.xdg-desktop-portal
       self.modules.nixos.yubikey
       self.modules.nixos.zen-kernel
     ];
@@ -49,6 +50,7 @@
       self.modules.homeManager.wallpaper
       self.modules.homeManager.waybar
       self.modules.homeManager.xdg-autostart
+      self.modules.homeManager.xdg-desktop-portal
       self.modules.homeManager.xdg-user-dirs
       self.modules.homeManager.zathura
       self.modules.homeManager.zed-editor
