@@ -18,10 +18,11 @@
 
           extraConfig = {
             code-challenge-method = "S256";
-            trusted-proxy-ip = "127.0.0.1";
             oidc-issuer-url = "https://idm.shrimphouse.xyz/oauth2/openid/oauth2-proxy";
-            whitelist-domain = ".shrimphouse.xyz";
+            scope = "openid email profile groups";
             skip-provider-button = true;
+            trusted-proxy-ip = "127.0.0.1";
+            whitelist-domain = ".shrimphouse.xyz";
           };
 
           keyFile = config.sops.templates."oauth2-proxy-env".path;
