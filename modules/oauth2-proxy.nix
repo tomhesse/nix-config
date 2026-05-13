@@ -30,6 +30,7 @@
         nginx.virtualHosts."auth.shrimphouse.xyz" = {
           useACMEHost = "auth.shrimphouse.xyz";
           forceSSL = true;
+          locations."/".return = "302 https://idm.shrimphouse.xyz";
         };
       };
 
