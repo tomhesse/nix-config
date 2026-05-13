@@ -25,15 +25,12 @@
           useACMEHost = "grocy.shrimphouse.xyz";
           forceSSL = true;
 
-          locations."~ \\.php$".extraConfig = lib.mkAfter ''
-            auth_request /oauth2/auth;
-            error_page 401 = /oauth2/sign_in;
+          locations."= /logout".return =
+            "307 https://auth.shrimphouse.xyz/oauth2/sign_out?rd=https://idm.shrimphouse.xyz/ui/logout";
 
+          locations."~ \\.php$".extraConfig = lib.mkAfter ''
             auth_request_set $preferred_username $upstream_http_x_auth_request_preferred_username;
             fastcgi_param HTTP_REMOTE_USER $preferred_username;
-
-            auth_request_set $auth_cookie $upstream_http_set_cookie;
-            add_header Set-Cookie $auth_cookie;
           '';
         };
       };
