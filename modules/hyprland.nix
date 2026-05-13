@@ -102,7 +102,6 @@
             "opacity 0.95, focus:0"
             "opacity 1.00, focus:1"
 
-            "workspace 1 silent, class:^(kitty)$"
             "workspace 2 silent, class:^(firefox)$"
             "workspace 3 silent, class:^(dev\.zed\.Zed)$"
             "workspace 5 silent, class:^(vesktop)$"
@@ -118,6 +117,10 @@
             "size 50% 50%, class:^(firefox)$, title:^(File Upload)"
             "maxsize 50% 50%, class:^(firefox)$, title:^(File Upload)"
             "center, class:^(firefox)$, title:^(File Upload)"
+
+            "float, class:^(kitty)$, title:^(termfilechooser)$"
+            "size 70% 70%, class:^(kitty)$, title:^(termfilechooser)$"
+            "center, class:^(kitty)$, title:^(termfilechooser)$"
 
             "float, class:^(steam)$, title:^(Friends List)$"
             "center, class:^(steam)$, title:^(Friends List)$"
