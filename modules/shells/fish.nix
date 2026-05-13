@@ -24,7 +24,6 @@
           in
           {
             gpg-reload = "${lib.getExe' pkgs.gnupg "gpg-connect-agent"} \"scd serialno\" \"learn --force\" /bye";
-            lg = lib.getExe pkgs.lazygit;
             ssh-nohost = "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null";
             "--help" = {
               position = "anywhere";
