@@ -258,6 +258,11 @@
               };
               mountpoint = "/var/lib/postgresql";
             };
+            "services/radarr" = {
+              type = "zfs_fs";
+              options.mountpoint = "legacy";
+              mountpoint = "/var/lib/private/radarr";
+            };
           };
         };
 
