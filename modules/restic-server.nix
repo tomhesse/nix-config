@@ -61,6 +61,7 @@
           "/var/lib/kanidm"
           "/var/lib/navidrome"
           "/var/lib/paperless"
+          "/var/lib/private/prowlarr"
           "/var/lib/postgresql"
         ];
 

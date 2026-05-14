@@ -222,6 +222,11 @@
                 mountpoint = "none";
               };
             };
+            "services/prowlarr" = {
+              type = "zfs_fs";
+              options.mountpoint = "legacy";
+              mountpoint = "/var/lib/private/prowlarr";
+            };
             "services/grocy" = {
               type = "zfs_fs";
               options.mountpoint = "legacy";
