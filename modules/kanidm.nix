@@ -10,6 +10,7 @@
         package = pkgs.kanidm_1_9;
         serverSettings = {
           bindaddress = "[::1]:8443";
+          ldapbindaddress = "[::1]:636";
           db_fs_type = "zfs";
           domain = "shrimphouse.xyz";
           origin = "https://idm.shrimphouse.xyz";
