@@ -63,6 +63,7 @@
           "/var/lib/paperless"
           "/var/lib/private/prowlarr"
           "/var/lib/private/radarr"
+          "/var/lib/private/sonarr"
           "/var/lib/postgresql"
         ];
 

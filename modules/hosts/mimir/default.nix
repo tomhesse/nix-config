@@ -55,6 +55,7 @@
         "rocket/services/postgresql".useTemplate = [ "frequent" ];
         "rocket/services/prowlarr".useTemplate = [ "frequent" ];
         "rocket/services/radarr".useTemplate = [ "frequent" ];
+        "rocket/services/sonarr".useTemplate = [ "frequent" ];
         "tank/backups/restic/hosts/loki".useTemplate = [ "backups" ];
         "tank/backups/restic/hosts/tyr".useTemplate = [ "backups" ];
         "tank/backups/restic/services".useTemplate = [ "backups" ];
