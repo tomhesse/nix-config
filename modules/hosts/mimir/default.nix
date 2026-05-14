@@ -40,6 +40,10 @@
       systemd.tmpfiles.rules = [
         "z /srv/media/music 0755 thesse users -"
         "a+ /srv/media/music - - - - default:user:navidrome:rX"
+        "a+ /srv/media/video/anime/movies - - - - default:user:radarr:rwX,user:radarr:rwX"
+        "a+ /srv/media/video/anime/shows - - - - default:user:sonarr:rwX,user:sonarr:rwX"
+        "a+ /srv/media/video/movies - - - - default:user:radarr:rwX,user:radarr:rwX"
+        "a+ /srv/media/video/shows - - - - default:user:sonarr:rwX,user:sonarr:rwX"
       ];
 
       services.nfs.server.exports = ''

@@ -387,6 +387,7 @@
               type = "zfs_fs";
               options = {
                 mountpoint = "legacy";
+                acltype = "posixacl";
               };
               mountpoint = "/srv/media/video/anime/movies";
             };
@@ -394,6 +395,7 @@
               type = "zfs_fs";
               options = {
                 mountpoint = "legacy";
+                acltype = "posixacl";
               };
               mountpoint = "/srv/media/video/anime/shows";
             };
@@ -401,6 +403,7 @@
               type = "zfs_fs";
               options = {
                 mountpoint = "legacy";
+                acltype = "posixacl";
               };
               mountpoint = "/srv/media/video/movies";
             };
@@ -415,6 +418,7 @@
               type = "zfs_fs";
               options = {
                 mountpoint = "legacy";
+                acltype = "posixacl";
               };
               mountpoint = "/srv/media/video/shows";
             };
