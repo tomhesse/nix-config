@@ -7,7 +7,7 @@
       };
 
       oauth2-proxy.nginx.virtualHosts."prowlarr.shrimphouse.xyz".allowed_groups = [
-        "arr_access@shrimphouse.xyz"
+        "arr_users@shrimphouse.xyz"
       ];
 
       nginx.virtualHosts."prowlarr.shrimphouse.xyz" = {
