@@ -369,6 +369,55 @@
               };
               mountpoint = "/srv/media/music";
             };
+            "media/video" = {
+              type = "zfs_fs";
+              options = {
+                canmount = "off";
+                mountpoint = "none";
+              };
+            };
+            "media/video/anime" = {
+              type = "zfs_fs";
+              options = {
+                canmount = "off";
+                mountpoint = "none";
+              };
+            };
+            "media/video/anime/movies" = {
+              type = "zfs_fs";
+              options = {
+                mountpoint = "legacy";
+              };
+              mountpoint = "/srv/media/video/anime/movies";
+            };
+            "media/video/anime/shows" = {
+              type = "zfs_fs";
+              options = {
+                mountpoint = "legacy";
+              };
+              mountpoint = "/srv/media/video/anime/shows";
+            };
+            "media/video/movies" = {
+              type = "zfs_fs";
+              options = {
+                mountpoint = "legacy";
+              };
+              mountpoint = "/srv/media/video/movies";
+            };
+            "media/video/music" = {
+              type = "zfs_fs";
+              options = {
+                mountpoint = "legacy";
+              };
+              mountpoint = "/srv/media/video/music";
+            };
+            "media/video/shows" = {
+              type = "zfs_fs";
+              options = {
+                mountpoint = "legacy";
+              };
+              mountpoint = "/srv/media/video/shows";
+            };
           };
         };
       };

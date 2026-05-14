@@ -60,6 +60,11 @@
         "tank/backups/restic/hosts/tyr".useTemplate = [ "backups" ];
         "tank/backups/restic/services".useTemplate = [ "backups" ];
         "tank/media/music".useTemplate = [ "media" ];
+        "tank/media/video/anime/movies".useTemplate = [ "media" ];
+        "tank/media/video/anime/shows".useTemplate = [ "media" ];
+        "tank/media/video/movies".useTemplate = [ "media" ];
+        "tank/media/video/music".useTemplate = [ "media" ];
+        "tank/media/video/shows".useTemplate = [ "media" ];
       };
 
       networking.hostId = "700e144e";
