@@ -5,6 +5,7 @@
     {
       imports = [
         self.diskoConfigurations.mimir
+        self.modules.nixos.arr
         self.modules.nixos.clevis
         self.modules.nixos.common-cpu-intel
         self.modules.nixos.common-pc-ssd
