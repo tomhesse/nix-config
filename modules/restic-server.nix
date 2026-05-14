@@ -62,8 +62,8 @@
           "/var/lib/navidrome"
           "/var/lib/paperless"
           "/var/lib/private/prowlarr"
-          "/var/lib/private/radarr"
-          "/var/lib/private/sonarr"
+          "/var/lib/radarr"
+          "/var/lib/sonarr"
           "/var/lib/postgresql"
         ];
 

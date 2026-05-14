@@ -261,12 +261,12 @@
             "services/radarr" = {
               type = "zfs_fs";
               options.mountpoint = "legacy";
-              mountpoint = "/var/lib/private/radarr";
+              mountpoint = "/var/lib/radarr";
             };
             "services/sonarr" = {
               type = "zfs_fs";
               options.mountpoint = "legacy";
-              mountpoint = "/var/lib/private/sonarr";
+              mountpoint = "/var/lib/sonarr";
             };
           };
         };
