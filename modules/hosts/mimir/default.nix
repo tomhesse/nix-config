@@ -53,6 +53,7 @@
 
       services.sanoid.datasets = {
         "rocket/services/grocy".useTemplate = [ "frequent" ];
+        "rocket/services/jellyfin".useTemplate = [ "frequent" ];
         "rocket/services/kanidm".useTemplate = [ "frequent" ];
         "rocket/services/navidrome".useTemplate = [ "frequent" ];
         "rocket/services/paperless".useTemplate = [ "frequent" ];

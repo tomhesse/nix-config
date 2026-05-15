@@ -232,6 +232,11 @@
               options.mountpoint = "legacy";
               mountpoint = "/var/lib/grocy";
             };
+            "services/jellyfin" = {
+              type = "zfs_fs";
+              options.mountpoint = "legacy";
+              mountpoint = "/var/lib/jellyfin";
+            };
             "services/kanidm" = {
               type = "zfs_fs";
               options = {

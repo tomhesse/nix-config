@@ -58,6 +58,7 @@
 
         paths = [
           "/var/lib/grocy"
+          "/var/lib/jellyfin"
           "/var/lib/kanidm"
           "/var/lib/navidrome"
           "/var/lib/paperless"
