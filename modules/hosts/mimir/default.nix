@@ -10,6 +10,7 @@
         self.modules.nixos.common-cpu-intel
         self.modules.nixos.common-pc-ssd
         self.modules.nixos.grocy
+        self.modules.nixos.jellyfin
         self.modules.nixos.kanidm
         self.modules.nixos.navidrome
         self.modules.nixos.nfs-server
