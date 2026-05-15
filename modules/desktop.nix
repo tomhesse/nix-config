@@ -7,7 +7,6 @@
       self.modules.nixos.firefox
       self.modules.nixos.hyprland
       self.modules.nixos.monitors
-      self.modules.nixos.nixpkgs
       self.modules.nixos.pipewire
       self.modules.nixos.plymouth
       self.modules.nixos.sddm

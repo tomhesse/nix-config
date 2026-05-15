@@ -13,6 +13,7 @@
       self.modules.nixos.locale
       self.modules.nixos.networkd
       self.modules.nixos.nix
+      self.modules.nixos.nixpkgs
       self.modules.nixos.openssh
       # self.modules.nixos.resolved
       self.modules.nixos.sops
