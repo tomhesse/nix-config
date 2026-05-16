@@ -482,6 +482,36 @@
                   { name = "SDTV"; }
                 ];
               }
+              {
+                name = "WEB-1080p - Anime";
+                reset_unmatched_scores.enabled = true;
+                score_set = "anime-sonarr";
+                upgrade = {
+                  allowed = true;
+                  until_quality = "WEB 1080p";
+                  until_score = 10000;
+                };
+                min_format_score = 100;
+                quality_sort = "top";
+                qualities = [
+                  {
+                    name = "WEB 1080p";
+                    qualities = [
+                      "WEBDL-1080p"
+                      "WEBRip-1080p"
+                      "HDTV-1080p"
+                    ];
+                  }
+                  {
+                    name = "WEB 720p";
+                    qualities = [
+                      "WEBDL-720p"
+                      "WEBRip-720p"
+                      "HDTV-720p"
+                    ];
+                  }
+                ];
+              }
             ];
 
             custom_formats = [
@@ -646,6 +676,7 @@
                 ];
                 assign_scores_to = [
                   { name = "Remux-1080p - Anime"; }
+                  { name = "WEB-1080p - Anime"; }
                 ];
               }
               {
@@ -655,6 +686,10 @@
                 assign_scores_to = [
                   {
                     name = "Remux-1080p - Anime";
+                    score = 10;
+                  }
+                  {
+                    name = "WEB-1080p - Anime";
                     score = 10;
                   }
                 ];
