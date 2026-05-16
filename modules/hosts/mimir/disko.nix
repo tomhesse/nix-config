@@ -227,6 +227,11 @@
               options.mountpoint = "legacy";
               mountpoint = "/var/lib/private/prowlarr";
             };
+            "services/bazarr" = {
+              type = "zfs_fs";
+              options.mountpoint = "legacy";
+              mountpoint = "/var/lib/bazarr";
+            };
             "services/grocy" = {
               type = "zfs_fs";
               options.mountpoint = "legacy";

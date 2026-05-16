@@ -57,6 +57,7 @@
         initialize = true;
 
         paths = [
+          "/var/lib/bazarr"
           "/var/lib/grocy"
           "/var/lib/jellyfin"
           "/var/lib/kanidm"
