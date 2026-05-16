@@ -268,6 +268,11 @@
               options.mountpoint = "legacy";
               mountpoint = "/var/lib/radarr";
             };
+            "services/recyclarr" = {
+              type = "zfs_fs";
+              options.mountpoint = "legacy";
+              mountpoint = "/var/lib/recyclarr";
+            };
             "services/sabnzbd" = {
               type = "zfs_fs";
               options.mountpoint = "legacy";
