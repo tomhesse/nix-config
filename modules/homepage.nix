@@ -10,13 +10,19 @@
 
           settings = {
             title = "Shrimphouse Homepage";
-            layout."Download Clients" = {
-              style = "row";
-              columns = 2;
-            };
-            layout."Media Management" = {
-              style = "row";
-              columns = 4;
+            layout = {
+              "Download Clients" = {
+                style = "row";
+                columns = 2;
+              };
+              "Media Management" = {
+                style = "row";
+                columns = 4;
+              };
+              "Monitoring" = {
+                style = "row";
+                columns = 2;
+              };
             };
           };
 
@@ -103,6 +109,40 @@
                       type = "bazarr";
                       url = "http://127.0.0.1:6767";
                       key = "{{HOMEPAGE_VAR_BAZARR_API_KEY}}";
+                    };
+                  };
+                }
+              ];
+            }
+            {
+              "Monitoring" = [
+                {
+                  "Prometheus" = {
+                    href = "https://prometheus.shrimphouse.xyz";
+                    icon = "prometheus";
+                    widget = {
+                      type = "prometheus";
+                      url = "http://127.0.0.1:9090";
+                    };
+                  };
+                }
+                {
+                  "Grafana" = {
+                    href = "https://grafana.shrimphouse.xyz";
+                    icon = "grafana";
+                    widget = {
+                      type = "prometheusmetric";
+                      url = "http://127.0.0.1:9090";
+                      metrics = [
+                        {
+                          label = "Dashboards";
+                          query = "grafana_stat_totals_dashboard";
+                        }
+                        {
+                          label = "Data Sources";
+                          query = "grafana_stat_totals_datasource";
+                        }
+                      ];
                     };
                   };
                 }
