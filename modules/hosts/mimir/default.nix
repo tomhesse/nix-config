@@ -51,35 +51,45 @@
         "a+ /srv/media/video/shows - - - - default:user:bazarr:rwX,default:user:sonarr:rwX,user:bazarr:rwX,user:sonarr:rwX"
       ];
 
-      services.nfs.server.exports = ''
-        /srv 10.0.10.0/24(ro,fsid=root)
-        /srv/media/music tyr.shrimphouse.xyz(rw,sync,no_subtree_check)
-      '';
+      services = {
+        grafana.provision.datasources.settings.datasources = [
+          {
+            name = "Prometheus";
+            type = "prometheus";
+            url = "http://127.0.0.1:9090";
+          }
+        ];
 
-      services.sanoid.datasets = {
-        "rocket/services/bazarr".useTemplate = [ "frequent" ];
-        "rocket/services/grafana".useTemplate = [ "frequent" ];
-        "rocket/services/grocy".useTemplate = [ "frequent" ];
-        "rocket/services/jellyfin".useTemplate = [ "frequent" ];
-        "rocket/services/kanidm".useTemplate = [ "frequent" ];
-        "rocket/services/navidrome".useTemplate = [ "frequent" ];
-        "rocket/services/paperless".useTemplate = [ "frequent" ];
-        "rocket/services/postgresql".useTemplate = [ "frequent" ];
-        "rocket/services/prowlarr".useTemplate = [ "frequent" ];
-        "rocket/services/prometheus".useTemplate = [ "frequent" ];
-        "rocket/services/radarr".useTemplate = [ "frequent" ];
-        "rocket/services/recyclarr".useTemplate = [ "frequent" ];
-        "rocket/services/sabnzbd".useTemplate = [ "frequent" ];
-        "rocket/services/sonarr".useTemplate = [ "frequent" ];
-        "tank/backups/restic/hosts/loki".useTemplate = [ "backups" ];
-        "tank/backups/restic/hosts/tyr".useTemplate = [ "backups" ];
-        "tank/backups/restic/services".useTemplate = [ "backups" ];
-        "tank/media/music".useTemplate = [ "media" ];
-        "tank/media/video/anime/movies".useTemplate = [ "media" ];
-        "tank/media/video/anime/shows".useTemplate = [ "media" ];
-        "tank/media/video/movies".useTemplate = [ "media" ];
-        "tank/media/video/music".useTemplate = [ "media" ];
-        "tank/media/video/shows".useTemplate = [ "media" ];
+        nfs.server.exports = ''
+          /srv 10.0.10.0/24(ro,fsid=root)
+          /srv/media/music tyr.shrimphouse.xyz(rw,sync,no_subtree_check)
+        '';
+
+        sanoid.datasets = {
+          "rocket/services/bazarr".useTemplate = [ "frequent" ];
+          "rocket/services/grafana".useTemplate = [ "frequent" ];
+          "rocket/services/grocy".useTemplate = [ "frequent" ];
+          "rocket/services/jellyfin".useTemplate = [ "frequent" ];
+          "rocket/services/kanidm".useTemplate = [ "frequent" ];
+          "rocket/services/navidrome".useTemplate = [ "frequent" ];
+          "rocket/services/paperless".useTemplate = [ "frequent" ];
+          "rocket/services/postgresql".useTemplate = [ "frequent" ];
+          "rocket/services/prowlarr".useTemplate = [ "frequent" ];
+          "rocket/services/prometheus".useTemplate = [ "frequent" ];
+          "rocket/services/radarr".useTemplate = [ "frequent" ];
+          "rocket/services/recyclarr".useTemplate = [ "frequent" ];
+          "rocket/services/sabnzbd".useTemplate = [ "frequent" ];
+          "rocket/services/sonarr".useTemplate = [ "frequent" ];
+          "tank/backups/restic/hosts/loki".useTemplate = [ "backups" ];
+          "tank/backups/restic/hosts/tyr".useTemplate = [ "backups" ];
+          "tank/backups/restic/services".useTemplate = [ "backups" ];
+          "tank/media/music".useTemplate = [ "media" ];
+          "tank/media/video/anime/movies".useTemplate = [ "media" ];
+          "tank/media/video/anime/shows".useTemplate = [ "media" ];
+          "tank/media/video/movies".useTemplate = [ "media" ];
+          "tank/media/video/music".useTemplate = [ "media" ];
+          "tank/media/video/shows".useTemplate = [ "media" ];
+        };
       };
 
       networking.hostId = "700e144e";
