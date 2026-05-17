@@ -9,6 +9,7 @@
         self.modules.nixos.clevis
         self.modules.nixos.common-cpu-intel
         self.modules.nixos.common-pc-ssd
+        self.modules.nixos.grafana
         self.modules.nixos.grocy
         self.modules.nixos.homepage
         self.modules.nixos.jellyfin
