@@ -20,6 +20,12 @@
             ];
           }
           {
+            job_name = "grafana";
+            static_configs = [
+              { targets = [ "127.0.0.1:3001" ]; }
+            ];
+          }
+          {
             job_name = "smartctl";
             static_configs = [
               { targets = [ "127.0.0.1:9633" ]; }
