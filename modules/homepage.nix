@@ -10,6 +10,7 @@
 
           settings = {
             title = "Shrimphouse Homepage";
+            hideVersion = true;
             layout = {
               "Download Clients" = {
                 style = "row";
