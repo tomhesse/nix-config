@@ -4,7 +4,7 @@
       prometheus = {
         enable = true;
         listenAddress = "127.0.0.1";
-        webExternalUrl = "prometheus.shrimphouse.xyz";
+        webExternalUrl = "https://prometheus.shrimphouse.xyz";
 
         scrapeConfigs = [
           {
