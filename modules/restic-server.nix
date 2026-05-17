@@ -58,6 +58,7 @@
 
         paths = [
           "/var/lib/bazarr"
+          "/var/lib/grafana"
           "/var/lib/grocy"
           "/var/lib/jellyfin"
           "/var/lib/kanidm"

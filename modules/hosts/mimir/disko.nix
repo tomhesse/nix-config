@@ -232,6 +232,11 @@
               options.mountpoint = "legacy";
               mountpoint = "/var/lib/bazarr";
             };
+            "services/grafana" = {
+              type = "zfs_fs";
+              options.mountpoint = "legacy";
+              mountpoint = "/var/lib/grafana";
+            };
             "services/grocy" = {
               type = "zfs_fs";
               options.mountpoint = "legacy";
