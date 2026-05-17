@@ -2,7 +2,7 @@
   flake.modules.nixos.smartd = {
     services.smartd = {
       enable = true;
-      defaults.monitored = "-a -s (S/../.././02|L/../../7/04)";
+      defaults.monitored = "-a -s (S/../.././05|L/../../3/06)";
       notifications.mail = {
         enable = true;
         recipient = "admin@shrimphouse.xyz";
