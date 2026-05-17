@@ -24,6 +24,7 @@
         self.modules.nixos.sanoid
         self.modules.nixos.secure-boot
         self.modules.nixos.server
+        self.modules.nixos.smartctl-exporter
         self.modules.nixos.smartd
         self.modules.nixos.user-thesse
         self.modules.nixos.zfs
