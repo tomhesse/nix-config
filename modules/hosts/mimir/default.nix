@@ -15,6 +15,7 @@
         self.modules.nixos.kanidm
         self.modules.nixos.navidrome
         self.modules.nixos.nfs-server
+        self.modules.nixos.node-exporter
         self.modules.nixos.oauth2-proxy
         self.modules.nixos.paperless
         self.modules.nixos.prometheus
