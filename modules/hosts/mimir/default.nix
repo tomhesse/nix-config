@@ -62,6 +62,7 @@
         "rocket/services/paperless".useTemplate = [ "frequent" ];
         "rocket/services/postgresql".useTemplate = [ "frequent" ];
         "rocket/services/prowlarr".useTemplate = [ "frequent" ];
+        "rocket/services/prometheus".useTemplate = [ "frequent" ];
         "rocket/services/radarr".useTemplate = [ "frequent" ];
         "rocket/services/recyclarr".useTemplate = [ "frequent" ];
         "rocket/services/sabnzbd".useTemplate = [ "frequent" ];

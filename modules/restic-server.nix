@@ -68,6 +68,7 @@
           "/var/lib/recyclarr"
           "/var/lib/sabnzbd"
           "/var/lib/sonarr"
+          "/var/lib/prometheus2"
           "/var/lib/postgresql"
         ];
 

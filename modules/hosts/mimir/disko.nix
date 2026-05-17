@@ -268,6 +268,11 @@
               };
               mountpoint = "/var/lib/postgresql";
             };
+            "services/prometheus" = {
+              type = "zfs_fs";
+              options.mountpoint = "legacy";
+              mountpoint = "/var/lib/prometheus2";
+            };
             "services/radarr" = {
               type = "zfs_fs";
               options.mountpoint = "legacy";
