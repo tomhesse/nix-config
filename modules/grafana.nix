@@ -27,6 +27,7 @@
               token_url = "https://idm.shrimphouse.xyz/oauth2/token";
               api_url = "https://idm.shrimphouse.xyz/oauth2/openid/grafana/userinfo";
               use_pkce = true;
+              groups_attribute_path = "groups";
               allowed_groups = "monitoring_users@shrimphouse.xyz";
               signout_redirect_url = "https://idm.shrimphouse.xyz/ui/logout";
             };
