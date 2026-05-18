@@ -6,6 +6,14 @@
         listenAddress = "127.0.0.1";
         webExternalUrl = "https://prometheus.shrimphouse.xyz";
 
+        alertmanagers = [
+          {
+            static_configs = [
+              { targets = [ "127.0.0.1:9093" ]; }
+            ];
+          }
+        ];
+
         scrapeConfigs = [
           {
             job_name = "node";
