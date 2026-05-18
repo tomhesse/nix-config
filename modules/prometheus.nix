@@ -28,6 +28,12 @@
             ];
           }
           {
+            job_name = "alertmanager";
+            static_configs = [
+              { targets = [ "127.0.0.1:9093" ]; }
+            ];
+          }
+          {
             job_name = "grafana";
             static_configs = [
               { targets = [ "127.0.0.1:3001" ]; }
