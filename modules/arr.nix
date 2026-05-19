@@ -11,6 +11,7 @@
       self.modules.nixos.radarr
       self.modules.nixos.recyclarr
       self.modules.nixos.sabnzbd
+      self.modules.nixos.sabnzbd-exporter
       self.modules.nixos.sonarr
     ];
   };

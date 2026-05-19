@@ -602,6 +602,12 @@
             ];
           }
           {
+            job_name = "sabnzbd";
+            static_configs = [
+              { targets = [ "127.0.0.1:9387" ]; }
+            ];
+          }
+          {
             job_name = "smartctl";
             static_configs = [
               { targets = [ "127.0.0.1:9633" ]; }
