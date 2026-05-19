@@ -20,6 +20,7 @@
         self.modules.nixos.node-exporter
         self.modules.nixos.oauth2-proxy
         self.modules.nixos.paperless
+        self.modules.nixos.postgres-exporter
         self.modules.nixos.prometheus
         self.modules.nixos.restic-server
         self.modules.nixos.sanoid

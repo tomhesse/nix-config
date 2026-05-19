@@ -590,6 +590,12 @@
             ];
           }
           {
+            job_name = "postgres";
+            static_configs = [
+              { targets = [ "127.0.0.1:9187" ]; }
+            ];
+          }
+          {
             job_name = "prowlarr";
             static_configs = [
               { targets = [ "127.0.0.1:9710" ]; }
