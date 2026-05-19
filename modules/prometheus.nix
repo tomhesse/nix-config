@@ -578,15 +578,39 @@
             ];
           }
           {
+            job_name = "bazarr";
+            static_configs = [
+              { targets = [ "127.0.0.1:9711" ]; }
+            ];
+          }
+          {
             job_name = "grafana";
             static_configs = [
               { targets = [ "127.0.0.1:3001" ]; }
             ];
           }
           {
+            job_name = "prowlarr";
+            static_configs = [
+              { targets = [ "127.0.0.1:9710" ]; }
+            ];
+          }
+          {
+            job_name = "radarr";
+            static_configs = [
+              { targets = [ "127.0.0.1:9708" ]; }
+            ];
+          }
+          {
             job_name = "smartctl";
             static_configs = [
               { targets = [ "127.0.0.1:9633" ]; }
+            ];
+          }
+          {
+            job_name = "sonarr";
+            static_configs = [
+              { targets = [ "127.0.0.1:9709" ]; }
             ];
           }
         ];
