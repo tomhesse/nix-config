@@ -555,6 +555,107 @@
                     annotations:
                       summary: "SMART Wearout Indicator (instance {{ $labels.instance }})"
                       description: "Device is wearing out on {{ $labels.instance }} drive {{ $labels.device }}"
+
+              - name: postgresql
+                rules:
+                  - alert: PostgresqlDown
+                    expr: pg_up == 0
+                    for: 1m
+                    labels:
+                      severity: critical
+                    annotations:
+                      summary: "Postgresql down (instance {{ $labels.instance }})"
+                      description: "Postgresql instance is down\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+                  - alert: PostgresqlRestarted
+                    expr: time() - pg_postmaster_start_time_seconds < 60
+                    for: 0m
+                    labels:
+                      severity: critical
+                    annotations:
+                      summary: "Postgresql restarted (instance {{ $labels.instance }})"
+                      description: "Postgresql restarted\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+                  - alert: PostgresqlExporterError
+                    expr: pg_exporter_last_scrape_error > 0
+                    for: 0m
+                    labels:
+                      severity: critical
+                    annotations:
+                      summary: "Postgresql exporter error (instance {{ $labels.instance }})"
+                      description: "Postgresql exporter is showing errors. A query may be buggy in query.yaml\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+                  - alert: PostgresqlTableNotAutoVacuumed
+                    expr: ((pg_stat_user_tables_n_tup_del + pg_stat_user_tables_n_tup_upd + pg_stat_user_tables_n_tup_hot_upd) > pg_settings_autovacuum_vacuum_threshold) and (time() - pg_stat_user_tables_last_autovacuum) > 60 * 60 * 24 * 10
+                    for: 0m
+                    labels:
+                      severity: warning
+                    annotations:
+                      summary: "Postgresql table not auto vacuumed (instance {{ $labels.instance }})"
+                      description: "Table {{ $labels.relname }} has not been auto vacuumed for 10 days\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+                  - alert: PostgresqlTableNotAutoAnalyzed
+                    expr: ((pg_stat_user_tables_n_tup_del + pg_stat_user_tables_n_tup_upd + pg_stat_user_tables_n_tup_hot_upd) > pg_settings_autovacuum_analyze_threshold) and (time() - pg_stat_user_tables_last_autoanalyze) > 24 * 60 * 60 * 10
+                    for: 0m
+                    labels:
+                      severity: warning
+                    annotations:
+                      summary: "Postgresql table not auto analyzed (instance {{ $labels.instance }})"
+                      description: "Table {{ $labels.relname }} has not been auto analyzed for 10 days\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+                  - alert: PostgresqlTooManyConnections
+                    expr: sum by (instance, job, server) (pg_stat_activity_count) > min by (instance, job, server) (pg_settings_max_connections * 0.8)
+                    for: 2m
+                    labels:
+                      severity: warning
+                    annotations:
+                      summary: "Postgresql too many connections (instance {{ $labels.instance }})"
+                      description: "PostgreSQL instance has too many connections (> 80%).\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+                  - alert: PostgresqlDeadLocks
+                    expr: increase(pg_stat_database_deadlocks{datname!~"template.*|postgres",datid!="0"}[1m]) > 5
+                    for: 0m
+                    labels:
+                      severity: warning
+                    annotations:
+                      summary: "Postgresql dead locks (instance {{ $labels.instance }})"
+                      description: "PostgreSQL has dead-locks ({{ $value }} in the last minute)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+                  - alert: PostgresqlHighRollbackRate
+                    expr: sum by (namespace,datname,instance) (rate(pg_stat_database_xact_rollback{datname!~"template.*|postgres",datid!="0"}[3m])) / (sum by (namespace,datname,instance) (rate(pg_stat_database_xact_rollback{datname!~"template.*|postgres",datid!="0"}[3m])) + sum by (namespace,datname,instance) (rate(pg_stat_database_xact_commit{datname!~"template.*|postgres",datid!="0"}[3m]))) > 0.02 and (sum by (namespace,datname,instance) (rate(pg_stat_database_xact_rollback{datname!~"template.*|postgres",datid!="0"}[3m])) + sum by (namespace,datname,instance) (rate(pg_stat_database_xact_commit{datname!~"template.*|postgres",datid!="0"}[3m]))) > 0
+                    for: 0m
+                    labels:
+                      severity: warning
+                    annotations:
+                      summary: "Postgresql high rollback rate (instance {{ $labels.instance }})"
+                      description: "Ratio of transactions being aborted compared to committed is > 2 %\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+                  - alert: PostgresqlTooManyDeadTuples
+                    expr: ((pg_stat_user_tables_n_dead_tup > 10000) / (pg_stat_user_tables_n_live_tup + pg_stat_user_tables_n_dead_tup)) >= 0.1 and (pg_stat_user_tables_n_live_tup + pg_stat_user_tables_n_dead_tup) > 0
+                    for: 2m
+                    labels:
+                      severity: warning
+                    annotations:
+                      summary: "Postgresql too many dead tuples (instance {{ $labels.instance }})"
+                      description: "PostgreSQL dead tuples is too large\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+                  - alert: PostgresqlConfigurationChanged
+                    expr: '{__name__=~"pg_settings_.*",__name__!="pg_settings_transaction_read_only"} != ON(__name__, instance) {__name__=~"pg_settings_.*",__name__!="pg_settings_transaction_read_only"} OFFSET 5m'
+                    for: 0m
+                    labels:
+                      severity: info
+                    annotations:
+                      summary: "Postgresql configuration changed (instance {{ $labels.instance }})"
+                      description: "Postgres Database configuration change has occurred\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+                  - alert: PostgresqlTooManyLocksAcquired
+                    expr: ((sum by (instance) (pg_locks_count)) / (pg_settings_max_locks_per_transaction * pg_settings_max_connections)) > 0.20 and (pg_settings_max_locks_per_transaction * pg_settings_max_connections) > 0
+                    for: 2m
+                    labels:
+                      severity: critical
+                    annotations:
+                      summary: "Postgresql too many locks acquired (instance {{ $labels.instance }})"
+                      description: "Too many locks acquired on the database. If this alert happens frequently, we may need to increase the postgres setting max_locks_per_transaction.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
           ''
         ];
 
