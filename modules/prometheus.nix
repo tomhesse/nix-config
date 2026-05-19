@@ -321,7 +321,7 @@
                       description: "Disk is almost running out of available inodes (< 10% left)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
                   - alert: HostFilesystemDeviceError
-                    expr: node_filesystem_device_error{fstype!~"^(fuse.*|tmpfs|cifs|nfs)", mountpoint!~"/home/.*"} == 1
+                    expr: node_filesystem_device_error{fstype!~"^(fuse.*|tmpfs|cifs|nfs)", device_error!="permission denied"} == 1
                     for: 2m
                     labels:
                       severity: critical
