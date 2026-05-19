@@ -8,6 +8,7 @@
         port = 9709;
         url = "http://127.0.0.1:8989";
         apiKeyFile = config.sops.secrets."services/exportarr/sonarr-api-key".path;
+        environment.ENABLE_ADDITIONAL_METRICS = "true";
       };
 
       sops.secrets."services/exportarr/sonarr-api-key".sopsFile =
