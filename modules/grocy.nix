@@ -1,6 +1,6 @@
 {
   flake.modules.nixos.grocy =
-    { lib, ... }:
+    { config, lib, ... }:
     {
       services = {
         grocy = {
@@ -25,13 +25,27 @@
           useACMEHost = "grocy.shrimphouse.xyz";
           forceSSL = true;
 
-          locations."= /logout".return =
-            "307 https://auth.shrimphouse.xyz/oauth2/sign_out?rd=https://idm.shrimphouse.xyz/ui/logout";
+          locations = {
+            "~ ^/api/" = {
+              root = "${config.services.grocy.package}/public";
+              extraConfig = ''
+                auth_request off;
+                fastcgi_pass unix:${config.services.phpfpm.pools.grocy.socket};
+                include ${config.services.nginx.package}/conf/fastcgi.conf;
+                include ${config.services.nginx.package}/conf/fastcgi_params;
+                fastcgi_param SCRIPT_FILENAME $document_root/index.php;
+                fastcgi_param SCRIPT_NAME /index.php;
+              '';
+            };
 
-          locations."~ \\.php$".extraConfig = lib.mkAfter ''
-            auth_request_set $preferred_username $upstream_http_x_auth_request_preferred_username;
-            fastcgi_param HTTP_REMOTE_USER $preferred_username;
-          '';
+            "= /logout".return =
+              "307 https://auth.shrimphouse.xyz/oauth2/sign_out?rd=https://idm.shrimphouse.xyz/ui/logout";
+
+            "~ \\.php$".extraConfig = lib.mkAfter ''
+              auth_request_set $preferred_username $upstream_http_x_auth_request_preferred_username;
+              fastcgi_param HTTP_REMOTE_USER $preferred_username;
+            '';
+          };
         };
       };
 
