@@ -304,7 +304,7 @@
 
                   - alert: HostDiskMayFillIn24Hours
                     expr: predict_linear(node_filesystem_avail_bytes{fstype!~"^(fuse.*|tmpfs|cifs|nfs)"}[3h], 86400) <= 0 and node_filesystem_avail_bytes > 0
-                    for: 2m
+                    for: 1h
                     labels:
                       severity: warning
                     annotations:
