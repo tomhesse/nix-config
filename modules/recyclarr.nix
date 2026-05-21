@@ -155,7 +155,7 @@
                   until_quality = "Remux-1080p";
                   until_score = 10000;
                 };
-                min_format_score = 100;
+                min_format_score = 0;
                 quality_sort = "top";
                 qualities = [
                   {
@@ -443,7 +443,7 @@
                   until_quality = "Bluray-1080p";
                   until_score = 10000;
                 };
-                min_format_score = 100;
+                min_format_score = 0;
                 quality_sort = "top";
                 qualities = [
                   {
@@ -491,7 +491,7 @@
                   until_quality = "WEB 1080p";
                   until_score = 10000;
                 };
-                min_format_score = 100;
+                min_format_score = 0;
                 quality_sort = "top";
                 qualities = [
                   {
