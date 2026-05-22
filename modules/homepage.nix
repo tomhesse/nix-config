@@ -185,6 +185,12 @@
                     icon = "grocy";
                   };
                 }
+                {
+                  "Musivault" = {
+                    href = "https://musivault.shrimphouse.xyz";
+                    icon = "https://raw.githubusercontent.com/Jeanball/Musivault/09c9f53d6cd2187339c3490fbcd2862c7ffc6bb2/frontend/public/icons/icon-192x192.png";
+                  };
+                }
               ];
             }
           ];
