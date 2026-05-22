@@ -26,7 +26,7 @@ in
             OIDC_CLIENT_ID = "musivault";
             OIDC_ISSUER = "https://idm.shrimphouse.xyz/oauth2/openid/musivault";
             OIDC_PROVIDER_NAME = "Kanidm";
-            OIDC_REDIRECT_URI = "https://musivault.shrimphouse.xyz/auth/callback";
+            OIDC_REDIRECT_URI = "https://musivault.shrimphouse.xyz/api/auth/oidc/callback";
           };
 
           nginxVirtualHost = "musivault.shrimphouse.xyz";
@@ -65,6 +65,7 @@ in
         templates."musivault-env" = {
           content = ''
             ADMIN_PASSWORD=${config.sops.placeholder."services/musivault/admin-password"}
+            JWT_SECRET=${config.sops.placeholder."services/musivault/session-secret"}
             DISCOGS_KEY=${config.sops.placeholder."services/musivault/discogs-key"}
             DISCOGS_PAT=${config.sops.placeholder."services/musivault/discogs-pat"}
             DISCOGS_SECRET=${config.sops.placeholder."services/musivault/discogs-secret"}
