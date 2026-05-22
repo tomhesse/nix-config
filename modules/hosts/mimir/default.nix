@@ -16,6 +16,7 @@
         self.modules.nixos.jellyfin
         self.modules.nixos.kanidm
         self.modules.nixos.mongodb
+        self.modules.nixos.musivault
         self.modules.nixos.navidrome
         self.modules.nixos.nfs-server
         self.modules.nixos.node-exporter
