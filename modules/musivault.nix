@@ -22,7 +22,7 @@ in
             ADMIN_EMAIL = "admin@shrimphouse.xyz";
             ADMIN_USERNAME = "admin";
             FRONTEND_URL = "https://musivault.shrimphouse.xyz";
-            MONGO_URI = "mongodb://localhost:27017/musivault";
+            MONGO_URI = "mongodb://127.0.0.1:27017/musivault";
             OIDC_CLIENT_ID = "musivault";
             OIDC_ISSUER = "https://idm.shrimphouse.xyz/oauth2/openid/musivault";
             OIDC_PROVIDER_NAME = "Kanidm";
@@ -73,6 +73,11 @@ in
           '';
           restartUnits = [ "musivault.service" ];
         };
+      };
+
+      systemd.services.musivault = {
+        after = [ "mongodb.service" ];
+        requires = [ "mongodb.service" ];
       };
 
       security.acme.certs."musivault.shrimphouse.xyz".group = "nginx";
