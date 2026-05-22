@@ -263,6 +263,11 @@
               };
               mountpoint = "/var/db/mongodb";
             };
+            "services/musivault" = {
+              type = "zfs_fs";
+              options.mountpoint = "legacy";
+              mountpoint = "/var/lib/private/musivault";
+            };
             "services/navidrome" = {
               type = "zfs_fs";
               options.mountpoint = "legacy";

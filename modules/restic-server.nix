@@ -63,6 +63,7 @@
           "/var/lib/jellyfin"
           "/var/lib/kanidm"
           "/var/db/mongodb"
+          "/var/lib/private/musivault"
           "/var/lib/navidrome"
           "/var/lib/paperless"
           "/var/lib/private/prowlarr"
