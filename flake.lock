@@ -268,11 +268,11 @@
     },
     "nixpkgs-musivault": {
       "locked": {
-        "lastModified": 1779471700,
-        "narHash": "sha256-XWRJtGt2jHiSZ5GQZ/X/t3K6GkCJXWFSDzLlfppfLFE=",
+        "lastModified": 1779482092,
+        "narHash": "sha256-XxoiQAQupxaREfusev+cvdmzVPHy7fMva4epCH8jN5Y=",
         "owner": "tomhesse",
         "repo": "nixpkgs",
-        "rev": "12b3a011dd0967ea0444133f634daf3c9275fe5f",
+        "rev": "71140c5fd7cc1f5b3ba6e2231d5deb21e25b6397",
         "type": "github"
       },
       "original": {
