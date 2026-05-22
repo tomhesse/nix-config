@@ -196,7 +196,9 @@
           ];
         };
 
-        oauth2-proxy.nginx.virtualHosts."homepage.shrimphouse.xyz" = { };
+        oauth2-proxy.nginx.virtualHosts."homepage.shrimphouse.xyz".allowed_groups = [
+          "homepage_users@shrimphouse.xyz"
+        ];
 
         nginx.virtualHosts."homepage.shrimphouse.xyz" = {
           useACMEHost = "homepage.shrimphouse.xyz";
