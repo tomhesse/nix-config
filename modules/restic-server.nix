@@ -62,6 +62,7 @@
           "/var/lib/grocy"
           "/var/lib/jellyfin"
           "/var/lib/kanidm"
+          "/var/db/mongodb"
           "/var/lib/navidrome"
           "/var/lib/paperless"
           "/var/lib/private/prowlarr"

@@ -255,6 +255,14 @@
               };
               mountpoint = "/var/lib/kanidm";
             };
+            "services/mongodb" = {
+              type = "zfs_fs";
+              options = {
+                mountpoint = "legacy";
+                recordsize = "64K";
+              };
+              mountpoint = "/var/db/mongodb";
+            };
             "services/navidrome" = {
               type = "zfs_fs";
               options.mountpoint = "legacy";
