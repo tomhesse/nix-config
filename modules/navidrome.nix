@@ -20,7 +20,9 @@
           environmentFile = config.sops.templates."navidrome-env".path;
         };
 
-        oauth2-proxy.nginx.virtualHosts."music.shrimphouse.xyz" = { };
+        oauth2-proxy.nginx.virtualHosts."music.shrimphouse.xyz".allowed_groups = [
+          "media_users@shrimphouse.xyz"
+        ];
 
         nginx.virtualHosts."music.shrimphouse.xyz" = {
           useACMEHost = "music.shrimphouse.xyz";
