@@ -29,14 +29,14 @@ in
             OIDC_REDIRECT_URI = "https://musivault.shrimphouse.xyz/auth/callback";
           };
 
+          nginxVirtualHost = "musivault.shrimphouse.xyz";
+
           environmentFiles = [ config.sops.templates."musivault-env".path ];
         };
 
         nginx.virtualHosts."musivault.shrimphouse.xyz" = {
           useACMEHost = "musivault.shrimphouse.xyz";
           forceSSL = true;
-
-          locations."/".proxyPass = "http://127.0.0.1:${toString config.services.musivault.port}";
         };
       };
 
