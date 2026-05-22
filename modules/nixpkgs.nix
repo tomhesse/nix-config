@@ -12,6 +12,7 @@
         pkg:
         builtins.elem (lib.getName pkg) [
           "claude-code"
+          "mongodb-ce"
           "nvidia-settings"
           "nvidia-x11"
           "obsidian"
