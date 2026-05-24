@@ -5,6 +5,7 @@
       self.modules.nixos.base
       self.modules.nixos.bluetooth
       self.modules.nixos.firefox
+      self.modules.nixos.gnome-keyring
       self.modules.nixos.hyprland
       self.modules.nixos.monitors
       self.modules.nixos.pipewire
@@ -30,6 +31,7 @@
       self.modules.homeManager.feishin
       self.modules.homeManager.firefox
       self.modules.homeManager.fonts
+      self.modules.homeManager.gnome-keyring
       self.modules.homeManager.hypridle
       self.modules.homeManager.hyprland
       self.modules.homeManager.hyprlock
