@@ -27,6 +27,7 @@
       self.modules.homeManager.cliphist
       self.modules.homeManager.direnv
       self.modules.homeManager.dunst
+      self.modules.homeManager.feishin
       self.modules.homeManager.firefox
       self.modules.homeManager.fonts
       self.modules.homeManager.hypridle
