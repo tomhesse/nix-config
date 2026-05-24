@@ -7,6 +7,7 @@
           enable = true;
           settings = {
             Address = "127.0.0.1";
+            BaseUrl = "https://navidrome.shrimphouse.xyz";
             Port = 4533;
             MusicFolder = "/srv/media/music";
             EnableUserEditing = false;
