@@ -19,7 +19,9 @@
           '';
         };
 
-        oauth2-proxy.nginx.virtualHosts."grocy.shrimphouse.xyz" = { };
+        oauth2-proxy.nginx.virtualHosts."grocy.shrimphouse.xyz".allowed_groups = [
+          "grocy_users@shrimphouse.xyz"
+        ];
 
         nginx.virtualHosts."grocy.shrimphouse.xyz" = {
           useACMEHost = "grocy.shrimphouse.xyz";
