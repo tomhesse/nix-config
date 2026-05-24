@@ -159,7 +159,7 @@
                 }
                 {
                   "Navidrome" = {
-                    href = "https://music.shrimphouse.xyz";
+                    href = "https://navidrome.shrimphouse.xyz";
                     icon = "navidrome";
                   };
                 }

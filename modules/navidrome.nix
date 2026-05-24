@@ -20,12 +20,12 @@
           environmentFile = config.sops.templates."navidrome-env".path;
         };
 
-        oauth2-proxy.nginx.virtualHosts."music.shrimphouse.xyz".allowed_groups = [
+        oauth2-proxy.nginx.virtualHosts."navidrome.shrimphouse.xyz".allowed_groups = [
           "media_users@shrimphouse.xyz"
         ];
 
-        nginx.virtualHosts."music.shrimphouse.xyz" = {
-          useACMEHost = "music.shrimphouse.xyz";
+        nginx.virtualHosts."navidrome.shrimphouse.xyz" = {
+          useACMEHost = "navidrome.shrimphouse.xyz";
           forceSSL = true;
 
           locations = {
@@ -62,6 +62,6 @@
         };
       };
 
-      security.acme.certs."music.shrimphouse.xyz".group = "nginx";
+      security.acme.certs."navidrome.shrimphouse.xyz".group = "nginx";
     };
 }
