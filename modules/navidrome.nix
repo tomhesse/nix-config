@@ -1,6 +1,6 @@
 {
   flake.modules.nixos.navidrome =
-    { config, lib, ... }:
+    { config, ... }:
     {
       services = {
         navidrome = {
@@ -13,36 +13,17 @@
             EnableUserEditing = false;
             EnableDownloads = false;
             EnableStarRating = false;
-            ExtAuth.TrustedSources = "127.0.0.1/32";
-            ExtAuth.LogoutURL = "https://idm.shrimphouse.xyz/ui/logout";
             Plugins.Enabled = false;
             Scanner.PurgeMissing = "always";
           };
           environmentFile = config.sops.templates."navidrome-env".path;
         };
 
-        oauth2-proxy.nginx.virtualHosts."navidrome.shrimphouse.xyz".allowed_groups = [
-          "media_users@shrimphouse.xyz"
-        ];
-
         nginx.virtualHosts."navidrome.shrimphouse.xyz" = {
           useACMEHost = "navidrome.shrimphouse.xyz";
           forceSSL = true;
 
-          locations = {
-            "/".proxyPass = "http://127.0.0.1:4533";
-            "/".extraConfig = lib.mkAfter ''
-              auth_request_set $preferred_username $upstream_http_x_auth_request_preferred_username;
-              proxy_set_header Remote-User $preferred_username;
-            '';
-
-            "/rest/" = {
-              proxyPass = "http://127.0.0.1:4533";
-              extraConfig = ''
-                auth_request off;
-              '';
-            };
-          };
+          locations."/".proxyPass = "http://127.0.0.1:4533";
         };
       };
 
