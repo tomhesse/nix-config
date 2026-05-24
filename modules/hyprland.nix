@@ -188,14 +188,16 @@
           ];
           bindl = [
             ", XF86AudioMute, exec, ${uwsm} app -- ${media-ctl} volume mute"
-            ", XF86AudioRaiseVolume, exec, ${uwsm} app -- ${media-ctl} volume up"
-            ", XF86AudioLowerVolume, exec, ${uwsm} app -- ${media-ctl} volume down"
-            ", XF86MonBrightnessUp, exec, ${uwsm} app -- ${media-ctl} brightness up"
-            ", XF86MonBrightnessDown, exec, ${uwsm} app -- ${media-ctl} brightness down"
             ", XF86AudioPlay, exec, ${playerctl} play-pause"
             ", XF86AudioStop, exec, ${playerctl} stop"
             ", XF86AudioPrev, exec, ${playerctl} previous"
             ", XF86AudioNext, exec, ${playerctl} next"
+          ];
+          bindle = [
+            ", XF86AudioRaiseVolume, exec, ${uwsm} app -- ${media-ctl} volume up"
+            ", XF86AudioLowerVolume, exec, ${uwsm} app -- ${media-ctl} volume down"
+            ", XF86MonBrightnessUp, exec, ${uwsm} app -- ${media-ctl} brightness up"
+            ", XF86MonBrightnessDown, exec, ${uwsm} app -- ${media-ctl} brightness down"
           ];
           bindm = [
             "$mainMod, mouse:272, movewindow"
