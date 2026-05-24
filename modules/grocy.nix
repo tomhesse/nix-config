@@ -29,6 +29,21 @@
             "~ ^/api/" = {
               root = "${config.services.grocy.package}/public";
               extraConfig = ''
+                auth_request_set $preferred_username $upstream_http_x_auth_request_preferred_username;
+                error_page 401 = @api_noauth;
+
+                fastcgi_pass unix:${config.services.phpfpm.pools.grocy.socket};
+                include ${config.services.nginx.package}/conf/fastcgi.conf;
+                include ${config.services.nginx.package}/conf/fastcgi_params;
+                fastcgi_param SCRIPT_FILENAME $document_root/index.php;
+                fastcgi_param SCRIPT_NAME /index.php;
+                fastcgi_param HTTP_REMOTE_USER $preferred_username;
+              '';
+            };
+
+            "@api_noauth" = {
+              root = "${config.services.grocy.package}/public";
+              extraConfig = ''
                 auth_request off;
                 fastcgi_pass unix:${config.services.phpfpm.pools.grocy.socket};
                 include ${config.services.nginx.package}/conf/fastcgi.conf;
