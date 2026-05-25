@@ -15,6 +15,7 @@
         self.modules.nixos.homepage
         self.modules.nixos.jellyfin
         self.modules.nixos.kanidm
+        self.modules.nixos.minecraft-server
         self.modules.nixos.mongodb
         self.modules.nixos.musivault
         self.modules.nixos.navidrome
