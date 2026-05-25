@@ -80,6 +80,7 @@
           "rocket/services/jellyfin".useTemplate = [ "frequent" ];
           "rocket/services/kanidm".useTemplate = [ "frequent" ];
           "rocket/services/mongodb".useTemplate = [ "frequent" ];
+          "rocket/services/minecraft".useTemplate = [ "frequent" ];
           "rocket/services/musivault".useTemplate = [ "frequent" ];
           "rocket/services/navidrome".useTemplate = [ "frequent" ];
           "rocket/services/paperless".useTemplate = [ "frequent" ];

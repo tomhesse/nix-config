@@ -62,6 +62,7 @@
           "/var/lib/grocy"
           "/var/lib/jellyfin"
           "/var/lib/kanidm"
+          "/var/lib/minecraft"
           "/var/db/mongodb"
           "/var/lib/private/musivault"
           "/var/lib/navidrome"

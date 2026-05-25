@@ -263,6 +263,11 @@
               };
               mountpoint = "/var/db/mongodb";
             };
+            "services/minecraft" = {
+              type = "zfs_fs";
+              options.mountpoint = "legacy";
+              mountpoint = "/var/lib/minecraft";
+            };
             "services/musivault" = {
               type = "zfs_fs";
               options.mountpoint = "legacy";
