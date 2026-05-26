@@ -19,6 +19,7 @@
         self.modules.homeManager.abcde
         self.modules.homeManager.beets
         self.modules.homeManager.desktop
+        self.modules.homeManager.minecraft
         self.modules.homeManager.osu
       ];
 
