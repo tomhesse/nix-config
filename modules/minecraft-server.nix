@@ -8,6 +8,7 @@
       services.minecraft-server = {
         enable = true;
         eula = true;
+        openFirewall = true;
         package = pkgs.papermcServers.papermc-1_21_10;
 
         jvmOpts = concatStringsSep " " [
