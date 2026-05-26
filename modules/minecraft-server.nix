@@ -37,6 +37,9 @@
         ];
 
         declarative = true;
+        whitelist = {
+          Heyhoman = "114613d9-18ec-472a-9740-02e8f5297c36";
+        };
         serverProperties = {
           enforce-whitelist = true;
           force-gamemode = true;
