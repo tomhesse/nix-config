@@ -15,8 +15,12 @@
   };
 
   flake.modules.homeManager.home-manager =
-    { osConfig, ... }:
     {
+      lib,
+      osConfig ? null,
+      ...
+    }:
+    lib.mkIf (osConfig != null) {
       home.stateVersion = osConfig.system.stateVersion;
     };
 }
