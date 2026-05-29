@@ -30,7 +30,9 @@
       self.modules.homeManager.dunst
       self.modules.homeManager.feishin
       self.modules.homeManager.firefox
+      self.modules.homeManager.fish
       self.modules.homeManager.fonts
+      self.modules.homeManager.gpg
       self.modules.homeManager.gnome-keyring
       self.modules.homeManager.hypridle
       self.modules.homeManager.hyprland
@@ -41,6 +43,7 @@
       self.modules.homeManager.imv
       self.modules.homeManager.kitty
       self.modules.homeManager.mpv
+      self.modules.homeManager.nh
       self.modules.homeManager.obsidian
       self.modules.homeManager.pipewire
       self.modules.homeManager.playerctld
