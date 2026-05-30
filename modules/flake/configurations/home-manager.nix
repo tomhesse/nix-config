@@ -36,10 +36,20 @@ in
       pkgs = inputs.nixpkgs.legacyPackages.${system};
       modules = [
         "${inputs.impermanence}/home-manager.nix"
-        {
-          home._nixosModuleImported = true;
-          home.persistence."/persistent".enable = false;
-        }
+        (
+          { pkgs, ... }:
+          {
+            home._nixosModuleImported = true;
+            home.persistence."/persistent".enable = false;
+            nix = {
+              package = pkgs.nix;
+              settings.experimental-features = [
+                "nix-command"
+                "flakes"
+              ];
+            };
+          }
+        )
         module
       ];
     }
