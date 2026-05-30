@@ -1,13 +1,14 @@
+{ lib, ... }:
 {
   flake.modules.homeManager.git = {
     programs.git = {
       enable = true;
       settings = {
-        user.name = "Tom Hesse";
-        user.email = "contact@tomhesse.xyz";
+        user.name = lib.mkDefault "Tom Hesse";
+        user.email = lib.mkDefault "contact@tomhesse.xyz";
         init.defaultBranch = "main";
       };
-      signing.signByDefault = true;
+      signing.signByDefault = lib.mkDefault true;
     };
   };
 }
