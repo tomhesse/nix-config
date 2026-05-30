@@ -1,5 +1,23 @@
 # Kanidm
 
+## Upgrading
+
+Kanidm requires a sequential version upgrade process. Before bumping the package version:
+
+1. Run the upgrade check on the server to verify readiness:
+
+   ```sh
+   sudo $(systemctl cat kanidm | grep -oP 'ExecStart=\K\S+') domain upgrade-check
+   ```
+
+2. Ensure the output shows `status: PASS`.
+
+3. Update `package` in `modules/kanidm.nix` to the next version (e.g. `pkgs.kanidm_1_10`).
+
+4. Rebuild and restart the service. The domain level will be raised automatically on startup.
+
+See the [upstream upgrade guide](https://kanidm.github.io/kanidm/master/server_updates.html) for version-specific notes.
+
 ## People
 
 ```sh
