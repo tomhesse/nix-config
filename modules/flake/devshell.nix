@@ -6,6 +6,7 @@
         inputsFrom = [ config.pre-commit.devShell ];
         packages = with pkgs; [
           clevis
+          home-manager
           just
           nix-diff
           nix-output-monitor
