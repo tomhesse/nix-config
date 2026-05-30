@@ -7,7 +7,7 @@
     {
       services.kanidm = {
         enableServer = true;
-        package = pkgs.kanidm_1_9;
+        package = pkgs.kanidm_1_10;
         serverSettings = {
           bindaddress = "[::1]:8443";
           ldapbindaddress = "[::1]:636";
@@ -45,7 +45,7 @@
       services.kanidm = {
         enableClient = true;
         clientSettings.uri = "https://idm.shrimphouse.xyz";
-        package = pkgs.kanidm_1_9;
+        package = pkgs.kanidm_1_10;
       };
     };
 }
