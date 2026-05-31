@@ -9,6 +9,7 @@
           psk_Shrimphouse=${config.sops.placeholder."wireless/Shrimphouse"}
         '';
         restartUnits = [ "wpa_supplicant.service" ];
+        owner = "wpa_supplicant";
       };
 
       systemd.network.networks."20-wireless" = {
