@@ -134,8 +134,8 @@
           }
           // lib.optionalAttrs config.catppuccin.enable {
             general.col = {
-              active_border = "$mauve";
-              inactive_border = "$surface0";
+              active_border = mkLuaInline "colors.accent";
+              inactive_border = mkLuaInline "colors.surface0";
             };
           };
 
