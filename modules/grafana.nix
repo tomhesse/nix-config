@@ -13,6 +13,8 @@
               root_url = "https://grafana.shrimphouse.xyz";
             };
 
+            security.secret_key = "$__file{${config.sops.secrets."services/grafana/secret-key".path}}";
+
             "auth.generic_oauth" = {
               enabled = true;
               name = "Kanidm";
@@ -44,6 +46,11 @@
       };
 
       sops.secrets."services/grafana/oidc-client-secret" = {
+        sopsFile = ./hosts/${config.networking.hostName}/secrets/nixos.yaml;
+        owner = "grafana";
+      };
+
+      sops.secrets."services/grafana/secret-key" = {
         sopsFile = ./hosts/${config.networking.hostName}/secrets/nixos.yaml;
         owner = "grafana";
       };
