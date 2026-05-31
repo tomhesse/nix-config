@@ -5,7 +5,7 @@
     home = {
       username = "thesse";
       homeDirectory = "/home/thesse";
-      stateVersion = "25.11";
+      stateVersion = "26.05";
     };
     programs.git = {
       signing.signByDefault = false;

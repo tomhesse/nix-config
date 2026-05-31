@@ -107,7 +107,7 @@
       networking.hostId = "700e144e";
       networking.hostName = "mimir";
 
-      system.stateVersion = "25.11";
+      system.stateVersion = "26.05";
 
       time.timeZone = "Europe/Berlin";
     };
