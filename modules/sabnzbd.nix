@@ -3,11 +3,11 @@
     { config, ... }:
     {
       systemd.tmpfiles.rules = [
-        "d /var/tmp/sabnzbd 0755 sabnzbd sabnzbd -"
-        "d /var/tmp/sabnzbd/complete 0755 sabnzbd sabnzbd -"
-        "d /var/tmp/sabnzbd/incomplete 0750 sabnzbd sabnzbd -"
-        "a+ /var/tmp/sabnzbd/complete - - - - default:user:radarr:rwX,user:radarr:rwX"
-        "a+ /var/tmp/sabnzbd/complete - - - - default:user:sonarr:rwX,user:sonarr:rwX"
+        "d /var/cache/sabnzbd 0755 sabnzbd sabnzbd -"
+        "d /var/cache/sabnzbd/complete 0755 sabnzbd sabnzbd -"
+        "d /var/cache/sabnzbd/incomplete 0750 sabnzbd sabnzbd -"
+        "a+ /var/cache/sabnzbd/complete - - - - default:user:radarr:rwX,user:radarr:rwX"
+        "a+ /var/cache/sabnzbd/complete - - - - default:user:sonarr:rwX,user:sonarr:rwX"
       ];
 
       services = {
@@ -55,10 +55,10 @@
               bandwidth_max = "125M";
               bandwidth_perc = 80;
               cache_limit = "24G";
-              complete_dir = "/var/tmp/sabnzbd/complete";
+              complete_dir = "/var/cache/sabnzbd/complete";
               complete_free = "10G";
               direct_unpack = true;
-              download_dir = "/var/tmp/sabnzbd/incomplete";
+              download_dir = "/var/cache/sabnzbd/incomplete";
               download_free = "100G";
               email_account = "608deeb4-b226-44f7-bb38-4354d8029c7e";
               email_endjob = "never";
