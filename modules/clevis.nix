@@ -1,7 +1,7 @@
 {
   flake.modules.nixos.clevis = {
     boot.initrd = {
-      clevis = {
+      clevisLuksAskpass = {
         enable = true;
         useTang = true;
       };

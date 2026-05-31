@@ -43,8 +43,6 @@
       ];
 
       boot.initrd.availableKernelModules = [ "i40e" ];
-      boot.initrd.clevis.devices."mimir".secretFile = /persistent/secrets/clevis/mimir.jwe;
-
       hardware.facter.reportPath = ./facter.json;
 
       disko.zfs.enable = true;
