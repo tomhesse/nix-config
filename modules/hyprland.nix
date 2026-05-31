@@ -118,6 +118,12 @@
               border_size = 2;
               gaps_out = 10;
               layout = "master";
+            }
+            // lib.optionalAttrs config.catppuccin.enable {
+              col = {
+                active_border = mkLuaInline "colors.accent";
+                inactive_border = mkLuaInline "colors.surface0";
+              };
             };
             input = {
               kb_layout = "eu";
@@ -130,12 +136,6 @@
               disable_hyprland_logo = true;
               disable_splash_rendering = true;
               font_family = "Fira Sans";
-            };
-          }
-          // lib.optionalAttrs config.catppuccin.enable {
-            general.col = {
-              active_border = mkLuaInline "colors.accent";
-              inactive_border = mkLuaInline "colors.surface0";
             };
           };
 
