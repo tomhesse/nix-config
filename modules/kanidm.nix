@@ -6,9 +6,9 @@
     in
     {
       services.kanidm = {
-        enableServer = true;
         package = pkgs.kanidm_1_10;
-        serverSettings = {
+        server.enable = true;
+        server.settings = {
           bindaddress = "[::1]:8443";
           ldapbindaddress = "[::1]:636";
           db_fs_type = "zfs";
@@ -43,9 +43,9 @@
     { pkgs, ... }:
     {
       services.kanidm = {
-        enableClient = true;
-        clientSettings.uri = "https://idm.shrimphouse.xyz";
         package = pkgs.kanidm_1_10;
+        client.enable = true;
+        client.settings.uri = "https://idm.shrimphouse.xyz";
       };
     };
 }
