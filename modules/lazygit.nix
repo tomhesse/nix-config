@@ -9,6 +9,7 @@
       programs.lazygit = {
         enable = true;
         settings = {
+          promptToReturnFromSubprocess = false;
           git.autoFetch = false;
           gui.mouseEvents = false;
         };
