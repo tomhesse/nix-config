@@ -24,7 +24,7 @@
             config = ''require("Comment").setup()'';
           }
         ];
-        extraLuaConfig = ''
+        initLua = ''
           vim.opt.mouse = ""
           vim.opt.autoindent = true
           vim.opt.expandtab = true
