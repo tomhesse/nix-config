@@ -4,7 +4,7 @@
     {
       programs.nh = {
         enable = true;
-        flake = "${config.xdg.userDirs.extraConfig.XDG_PROJECTS_DIR}/nix/nix-config";
+        flake = "${config.xdg.userDirs.extraConfig.PROJECTS}/nix/nix-config";
       };
     };
 }

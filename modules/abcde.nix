@@ -11,7 +11,7 @@
 
         CDPARANOIAOPTS="--never-skip=40"
 
-        OUTPUTDIR="${config.xdg.userDirs.extraConfig.XDG_TEMP_DIR}/rips"
+        OUTPUTDIR="${config.xdg.userDirs.extraConfig.TEMP}/rips"
         WAVOUTPUTDIR="/tmp"
 
         OUTPUTFORMAT='${outputFormat}'

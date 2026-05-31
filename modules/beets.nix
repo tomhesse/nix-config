@@ -88,7 +88,7 @@
             comp = "Compilations/$year - $album%aunique{}/$track - $artist - $title";
           };
           item_fields.multidisc = "1 if disctotal > 1 else 0";
-          convert.dest = "${config.xdg.userDirs.extraConfig.XDG_TEMP_DIR}/MP3s";
+          convert.dest = "${config.xdg.userDirs.extraConfig.TEMP}/MP3s";
           fetchart.cautious = true;
           replaygain.backend = "ffmpeg";
         };
