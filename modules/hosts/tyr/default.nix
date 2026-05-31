@@ -21,6 +21,7 @@
         self.modules.homeManager.desktop
         self.modules.homeManager.minecraft
         self.modules.homeManager.osu
+        self.modules.homeManager.prismlauncher
       ];
 
       wallpaper = builtins.fetchurl {
