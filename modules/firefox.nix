@@ -24,7 +24,7 @@
     {
       catppuccin.firefox.enable = false;
 
-      home.persistence."/persistent".directories = [ ".mozilla" ];
+      home.persistence."/persistent".directories = [ "${config.xdg.relativeConfigHome}/mozilla" ];
 
       programs.firefox = {
         enable = true;
