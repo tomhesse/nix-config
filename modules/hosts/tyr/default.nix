@@ -34,7 +34,10 @@
       "**/steamapps/shadercache"
     ];
 
-    hardware.nvidia.open = false;
+    hardware.nvidia = {
+      open = false;
+      branch = "legacy_580";
+    };
 
     hardware.facter.reportPath = ./facter.json;
 
