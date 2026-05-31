@@ -8,6 +8,7 @@ NixOS configuration using the dendritic flake pattern
 |------|------|-------------|
 | installer | ISO | Minimal installer with SSH access |
 | loki | Laptop | Framework 13 |
+| mimir | Server | Home server |
 | tyr | Desktop | Workstation |
 
 ## Deployment
@@ -144,25 +145,27 @@ deployment with nixos-anywhere.
 
 #### Binding a device with clevis
 
-Generate a JWE file for the LUKS device:
+Hosts using the `clevis` module use `clevisLuksAskpass`, which stores the
+binding directly in the LUKS header rather than a JWE file. Bind after the
+host is deployed and running:
 
 ```bash
-just gen-clevis-jwe <hostname> <tang-ip>
+sudo clevis luks bind -d /dev/<luks-device> tang '{"url":"http://<tang-ip>:<tang-port>"}'
 ```
 
-**Important:** Use the Tang server's IP address, not its hostname. DNS is not available in the initrd during early boot.
+**Important:** Use the Tang server's IP address, not its hostname. DNS is not
+available in the initrd during early boot.
 
-The JWE file is placed in `/tmp/extra-files/<hostname>/persistent/secrets/clevis/`
-for deployment with nixos-anywhere. Then reference it in the host config:
+Verify the binding was written to the header:
 
-```nix
-boot.initrd.clevis.devices."<device>".secretFile = "/persistent/secrets/clevis/<device>.jwe";
+```bash
+sudo clevis luks list -d /dev/<luks-device>
 ```
 
 #### Verifying
 
-After deployment, reboot the client. It should obtain a network address in
-initrd via DHCP and contact the Tang server to unlock the device automatically.
+After binding, reboot the host. It should obtain a network address in initrd
+via DHCP and contact the Tang server to unlock the device automatically.
 If the Tang server is unreachable, the boot process falls back to interactive
 passphrase entry.
 
