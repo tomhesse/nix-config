@@ -25,7 +25,8 @@
             whitelist-domain = ".shrimphouse.xyz";
           };
 
-          keyFile = config.sops.templates."oauth2-proxy-env".path;
+          clientSecretFile = config.sops.secrets."services/oauth2-proxy/client-secret".path;
+          cookie.secretFile = config.sops.secrets."services/oauth2-proxy/cookie-secret".path;
         };
 
         nginx.virtualHosts."auth.shrimphouse.xyz" = {
@@ -35,21 +36,14 @@
         };
       };
 
-      sops = {
-        secrets."services/oauth2-proxy/client-secret" = {
-          sopsFile = ./hosts/${config.networking.hostName}/secrets/nixos.yaml;
-        };
-        secrets."services/oauth2-proxy/cookie-secret" = {
-          sopsFile = ./hosts/${config.networking.hostName}/secrets/nixos.yaml;
-        };
+      sops.secrets."services/oauth2-proxy/client-secret" = {
+        sopsFile = ./hosts/${config.networking.hostName}/secrets/nixos.yaml;
+        owner = "oauth2-proxy";
+      };
 
-        templates."oauth2-proxy-env" = {
-          content = ''
-            OAUTH2_PROXY_CLIENT_SECRET=${config.sops.placeholder."services/oauth2-proxy/client-secret"}
-            OAUTH2_PROXY_COOKIE_SECRET=${config.sops.placeholder."services/oauth2-proxy/cookie-secret"}
-          '';
-          restartUnits = [ "oauth2-proxy.service" ];
-        };
+      sops.secrets."services/oauth2-proxy/cookie-secret" = {
+        sopsFile = ./hosts/${config.networking.hostName}/secrets/nixos.yaml;
+        owner = "oauth2-proxy";
       };
 
       systemd.services.oauth2-proxy = {
