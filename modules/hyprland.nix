@@ -210,8 +210,7 @@
                 title = "^(File Upload)";
               };
               float = true;
-              size = "50% 50%";
-              maxsize = "50% 50%";
+              size = mkLuaInline ''{"(monitor_w*0.7)", "(monitor_h*0.7)"}'';
               center = true;
             }
             {
@@ -220,7 +219,7 @@
                 title = "^(termfilechooser)$";
               };
               float = true;
-              size = "70% 70%";
+              size = mkLuaInline ''{"(monitor_w*0.7)", "(monitor_h*0.7)"}'';
               center = true;
             }
             {
