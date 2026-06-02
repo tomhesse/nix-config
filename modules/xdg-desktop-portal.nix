@@ -15,7 +15,6 @@
 
       xdg.portal = {
         enable = true;
-        xdgOpenUsePortal = true;
         extraPortals = [ pkgs.xdg-desktop-portal-termfilechooser ];
         config.hyprland = {
           default = [
