@@ -45,6 +45,8 @@
               "files.trimFinalNewlines" = true;
               "files.trimTrailingWhitespace" = true;
 
+              "git.closeDiffOnOperation" = true;
+
               "nix.enableLanguageServer" = true;
               "nix.serverPath" = "${pkgs.nixd}/bin/nixd";
               "nix.formatterPath" = "${pkgs.nixfmt}/bin/nixfmt";
