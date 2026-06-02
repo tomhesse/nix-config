@@ -40,6 +40,9 @@
               "editor.formatOnSave" = true;
               "terminal.integrated.fontFamily" = "'FiraCode Nerd Font'";
               "files.autoSave" = "onFocusChange";
+              "files.insertFinalNewline" = true;
+              "files.trimFinalNewlines" = true;
+              "files.trimTrailingWhitespace" = true;
 
               "nix.enableLanguageServer" = true;
               "nix.serverPath" = "${pkgs.nixd}/bin/nixd";
