@@ -27,5 +27,13 @@
         enableSshSupport = true;
         pinentry.package = pkgs.pinentry-rofi;
       };
+
+      home.persistence."/persistent".directories = [
+        {
+          directory = "${config.xdg.relativeDataHome}/gnupg";
+          mode = "0700";
+        }
+      ];
+
     };
 }
