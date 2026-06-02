@@ -33,7 +33,7 @@
             {
               "telemetry.telemetryLevel" = "off";
               "update.mode" = "none";
-              "workbench.secondarySideBar.defaultVisibility" = "hidden";
+              "chat.disableAIFeatures" = true;
 
               "editor.fontFamily" = "'FiraCode Nerd Font', monospace";
               "editor.fontSize" = 14;
