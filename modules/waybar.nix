@@ -171,6 +171,9 @@
                 "steam: (.*)" = "󰓓 $1";
 
                 "dev\.zed\.Zed: (.*)" = "Zed: $1"; # TODO: Add nerd font icon
+
+                "code: (.*) - Visual Studio Code" = "󰨞 $1";
+                "code: Visual Studio Code" = "󰨞 Visual Studio Code";
               };
               separate-outputs = true;
               tooltip = false;
