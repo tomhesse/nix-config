@@ -169,6 +169,10 @@
               workspace = "3 silent";
             }
             {
+              match.class = "^(code)$";
+              workspace = "3 silent";
+            }
+            {
               match.class = "^(vesktop)$";
               workspace = "5 silent";
             }
