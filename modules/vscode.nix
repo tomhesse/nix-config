@@ -33,6 +33,7 @@
             {
               "telemetry.telemetryLevel" = "off";
               "update.mode" = "none";
+              "security.workspace.trust.enabled" = false;
               "chat.disableAIFeatures" = true;
 
               "editor.fontFamily" = "'FiraCode Nerd Font', monospace";
