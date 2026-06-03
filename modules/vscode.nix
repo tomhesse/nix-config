@@ -44,6 +44,7 @@
               "terminal.integrated.fontFamily" = "'FiraCode Nerd Font'";
               "files.autoSave" = "onFocusChange";
 
+              "git.autofetch" = true;
               "git.closeDiffOnOperation" = true;
               "typescript.suggest.paths" = false;
               "javascript.suggest.paths" = false;
