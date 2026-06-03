@@ -166,42 +166,42 @@
 
             {
               match.class = "^(firefox)$";
-              workspace = "2 silent";
+              workspace = "name:browser silent";
             }
             {
               match.class = "^(dev\\.zed\\.Zed)$";
-              workspace = "3 silent";
+              workspace = "name:editor silent";
             }
             {
               match.class = "^(code)$";
-              workspace = "3 silent";
+              workspace = "name:editor silent";
             }
             {
               match.class = "^(vesktop)$";
-              workspace = "5 silent";
+              workspace = "name:chat silent";
             }
             {
               match.class = "^(gamescope)$";
-              workspace = 10;
+              workspace = "name:gaming";
               fullscreen = true;
             }
             {
               match.class = "^(steam_app_)";
-              workspace = 10;
+              workspace = "name:gaming";
               fullscreen = true;
             }
             {
               match.initial_class = "^(Minecraft.*)";
-              workspace = 10;
+              workspace = "name:gaming";
               fullscreen = true;
             }
             {
               match.class = "^(org\\.prismlauncher\\.PrismLauncher)$";
-              workspace = "name:gaming";
+              workspace = "name:launcher";
             }
             {
               match.class = "^(steam)$";
-              workspace = "name:gaming";
+              workspace = "name:launcher";
             }
             {
               match.class = "^(feishin)$";
