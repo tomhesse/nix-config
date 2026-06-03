@@ -183,10 +183,11 @@
               format = "{icon}";
               format-icons = {
                 "1" = "";
-                "2" = "󰈹";
-                "3" = "";
-                "5" = "";
+                "browser" = "󰈹";
+                "editor" = "";
+                "chat" = "";
                 "gaming" = "";
+                "launcher" = "󰓓";
                 "music" = "󰝚";
                 "notes" = "󰠮";
                 active = "";
