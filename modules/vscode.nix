@@ -23,6 +23,7 @@
           extensions = with pkgs.vscode-extensions; [
             anthropic.claude-code
             christian-kohler.path-intellisense
+            editorconfig.editorconfig
             jnoortheen.nix-ide
           ];
 
@@ -42,9 +43,6 @@
               "editor.formatOnSave" = true;
               "terminal.integrated.fontFamily" = "'FiraCode Nerd Font'";
               "files.autoSave" = "onFocusChange";
-              "files.insertFinalNewline" = true;
-              "files.trimFinalNewlines" = true;
-              "files.trimTrailingWhitespace" = true;
 
               "git.closeDiffOnOperation" = true;
               "typescript.suggest.paths" = false;
