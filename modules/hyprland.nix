@@ -269,7 +269,14 @@
             (mkBind "Print" (dsp.exec "hyprshot -m region"))
 
             # Workspace navigation
+            (mkBind (mkKey "B") (dsp.focusWs ''"name:browser"''))
+            (mkBind (mkShiftKey "B") (dsp.moveWs ''"name:browser"''))
+            (mkBind (mkKey "E") (dsp.focusWs ''"name:editor"''))
+            (mkBind (mkShiftKey "E") (dsp.moveWs ''"name:editor"''))
+            (mkBind (mkKey "C") (dsp.focusWs ''"name:chat"''))
+            (mkBind (mkShiftKey "C") (dsp.moveWs ''"name:chat"''))
             (mkBind (mkKey "G") (dsp.focusWs ''"name:gaming"''))
+            (mkBind (mkShiftKey "G") (dsp.focusWs ''"name:launcher"''))
             (mkBind (mkShiftKey "M") (dsp.toggleSpecial "music"))
             (mkBind (mkShiftKey "O") (dsp.toggleSpecial "notes"))
 
@@ -284,7 +291,7 @@
             (mkBind (mkKey "RETURN") (dsp.layout "swapwithmaster"))
 
             # Window management
-            (mkBind (mkShiftKey "C") dsp.close)
+            (mkBind (mkShiftKey "Q") dsp.close)
             (mkBind (mkKey "F") dsp.float)
             (mkBind (mkKey "M") dsp.fullscreen)
 
