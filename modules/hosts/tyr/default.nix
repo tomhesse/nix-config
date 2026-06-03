@@ -55,6 +55,12 @@
           3
         ];
         defaultWorkspace = 1;
+        namedWorkspaces = [
+          "browser"
+          "editor"
+          "gaming"
+          "launcher"
+        ];
       };
       DP-2 = {
         description = "AOC 2490W1 APGL89A001738";
@@ -74,6 +80,7 @@
         rotation = "90";
         workspaces = [ 5 ];
         defaultWorkspace = 5;
+        namedWorkspaces = [ "chat" ];
       };
     };
 

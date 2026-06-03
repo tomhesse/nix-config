@@ -53,6 +53,10 @@
             }
             // lib.optionalAttrs (m.defaultWorkspace == ws) { default = true; }
           ) m.workspaces
+          ++ map (ws: {
+            workspace = "name:${ws}";
+            monitor = monitorId name m;
+          }) m.namedWorkspaces
         ) monitors
       );
 

@@ -84,6 +84,15 @@
                 example = 1;
                 description = "Default workspace to open on this monitor.";
               };
+              namedWorkspaces = mkOption {
+                type = types.listOf types.str;
+                default = [ ];
+                example = [
+                  "gaming"
+                  "launcher"
+                ];
+                description = "Named workspaces to pin to this monitor.";
+              };
             };
           }
         );
