@@ -22,6 +22,7 @@
         profiles.default = {
           extensions = with pkgs.vscode-extensions; [
             anthropic.claude-code
+            christian-kohler.path-intellisense
             jnoortheen.nix-ide
           ];
 
@@ -46,6 +47,8 @@
               "files.trimTrailingWhitespace" = true;
 
               "git.closeDiffOnOperation" = true;
+              "typescript.suggest.paths" = false;
+              "javascript.suggest.paths" = false;
 
               "nix.enableLanguageServer" = true;
               "nix.serverPath" = "${pkgs.nixd}/bin/nixd";
