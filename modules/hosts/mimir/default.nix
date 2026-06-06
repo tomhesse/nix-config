@@ -102,6 +102,8 @@
         };
       };
 
+      environment.persistCleanup.ignoredPaths = [ "/persistent/secrets" ];
+
       networking.hostId = "700e144e";
       networking.hostName = "mimir";
 
