@@ -49,6 +49,11 @@ in
         ];
       };
 
+      # The direct /persistent path is used instead of the standard /etc/ssh path
+      # because sops reads this key during activation (setupSecrets) before the
+      # impermanence bind mount for the file is guaranteed to exist.
+      environment.persistCleanup.ignoredPaths = [ "/persistent/etc/ssh" ];
+
       programs.ssh.knownHosts =
         lib.genAttrs hostsWithKeys (host: {
           publicKey = builtins.readFile (keyPathFor host);
