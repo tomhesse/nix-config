@@ -13,6 +13,7 @@
       enable = true;
       excludes = [
         "\\.jwe$"
+        "\\.mcp\\.json$"
         "facter\\.json$"
       ];
     };
