@@ -12,6 +12,14 @@ NixOS configuration using the dendritic flake pattern
 | tyr | Desktop | Workstation |
 | fenrir | Non-NixOS workstation (Ubuntu/WSL) | Home-manager only |
 
+## Development
+
+Enter the dev shell to get all required tools (`just`, `sops`, `home-manager`, `nix-diff`, etc.):
+
+```bash
+nix develop
+```
+
 ## Deployment
 
 All hosts are deployed remotely using [nixos-anywhere](https://github.com/nix-community/nixos-anywhere).
