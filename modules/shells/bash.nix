@@ -19,6 +19,8 @@
           "ignorespace"
         ];
         initExtra = ''
+          PROMPT_COMMAND='printf "\033]0;%s\007" "''${PWD/#$HOME/\~}"'
+
           TMUX_DEFAULT_SESSION_NAME="Main"
           TMUX_AUTOSTART=true
           TMUX_AUTOSTART_ONCE=true
