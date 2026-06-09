@@ -1,6 +1,6 @@
 { self, ... }:
 {
-  configurations.home-manager.work.module = {
+  configurations.home-manager.fenrir.module = {
     imports = [ self.modules.homeManager.cli ];
     home = {
       username = "thesse";
