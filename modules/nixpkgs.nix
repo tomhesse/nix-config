@@ -24,7 +24,5 @@
           "vscode"
           "vscode-extension-anthropic-claude-code"
         ];
-
-      nixpkgs.config.permittedInsecurePackages = [ "python3.13-beets-2.5.1" ];
     };
 }
