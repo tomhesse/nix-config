@@ -10,6 +10,7 @@ NixOS configuration using the dendritic flake pattern
 | loki | Laptop | Framework 13 |
 | mimir | Server | Home server |
 | tyr | Desktop | Workstation |
+| fenrir | Non-NixOS workstation (Ubuntu/WSL) | Home-manager only |
 
 ## Deployment
 
