@@ -26,7 +26,6 @@
       self.modules.homeManager.cli
       self.modules.homeManager.claude
       self.modules.homeManager.cliphist
-      self.modules.homeManager.direnv
       self.modules.homeManager.dunst
       self.modules.homeManager.feishin
       self.modules.homeManager.firefox
