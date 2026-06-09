@@ -11,5 +11,6 @@
       signing.signByDefault = false;
       settings.user.email = "tom.hesse@atacama.de";
     };
+    services.ssh-agent.enable = true;
   };
 }
