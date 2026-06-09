@@ -53,7 +53,7 @@
             command tmux new-session -As "''${dir}-''${md5:0:6}"
           }
 
-          if [[ "$TMUX_AUTOSTART" == true ]] && [[ -z "$TMUX" ]] && [[ -z "$SSH_CONNECTION" ]] && [[ -t 1 ]]; then
+          if [[ "$TMUX_AUTOSTART" == true ]] && [[ -z "$TMUX" ]] && [[ -z "$SSH_CONNECTION" ]] && [[ "$TERM_PROGRAM" != "vscode" ]] && [[ -t 1 ]]; then
             if [[ "$TMUX_AUTOSTART_ONCE" != true ]] || [[ -z "$TMUX_AUTOSTARTED" ]]; then
               export TMUX_AUTOSTARTED=true
               if [[ "$TMUX_AUTOCONNECT" == true ]]; then
