@@ -1,7 +1,10 @@
 { self, ... }:
 {
   configurations.home-manager.fenrir.module = {
-    imports = [ self.modules.homeManager.cli ];
+    imports = [
+      self.modules.homeManager.cli
+      self.modules.homeManager.wsl
+    ];
     home = {
       username = "thesse";
       homeDirectory = "/home/thesse";
