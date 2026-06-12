@@ -11,6 +11,7 @@
         settings = {
           promptToReturnFromSubprocess = false;
           git.autoFetch = false;
+          git.overrideGpg = true;
           gui.mouseEvents = false;
         };
       };
