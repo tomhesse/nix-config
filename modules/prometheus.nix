@@ -656,6 +656,80 @@
                     annotations:
                       summary: "Postgresql too many locks acquired (instance {{ $labels.instance }})"
                       description: "Too many locks acquired on the database. If this alert happens frequently, we may need to increase the postgres setting max_locks_per_transaction.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+              - name: blackbox
+                rules:
+                  - alert: BlackboxProbeFailed
+                    expr: probe_success == 0
+                    for: 1m
+                    labels:
+                      severity: critical
+                    annotations:
+                      summary: "Blackbox probe failed (instance {{ $labels.instance }})"
+                      description: "Probe failed\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+                  - alert: BlackboxConfigurationReloadFailure
+                    expr: blackbox_exporter_config_last_reload_successful != 1
+                    for: 0m
+                    labels:
+                      severity: warning
+                    annotations:
+                      summary: "Blackbox configuration reload failure (instance {{ $labels.instance }})"
+                      description: "Blackbox configuration reload failure\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+                  - alert: BlackboxSlowProbe
+                    expr: probe_duration_seconds > 1
+                    for: 1m
+                    labels:
+                      severity: warning
+                    annotations:
+                      summary: "Blackbox slow probe (instance {{ $labels.instance }})"
+                      description: "Blackbox probe took more than 1s to complete\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+                  - alert: BlackboxProbeHTTPFailure
+                    expr: probe_http_status_code <= 199 OR probe_http_status_code >= 400
+                    for: 1m
+                    labels:
+                      severity: critical
+                    annotations:
+                      summary: "Blackbox probe HTTP failure (instance {{ $labels.instance }})"
+                      description: "HTTP status code is not 200-399\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+                  - alert: BlackboxSSLCertificateWillExpireSoon
+                    expr: 3 <= round((last_over_time(probe_ssl_earliest_cert_expiry[10m]) - time()) / 86400, 0.1) < 20
+                    for: 0m
+                    labels:
+                      severity: warning
+                    annotations:
+                      summary: "Blackbox SSL certificate will expire soon (instance {{ $labels.instance }})"
+                      description: "SSL certificate expires in less than 20 days\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+                  - alert: BlackboxSSLCertificateWillExpireVerySoon
+                    expr: 0 <= round((last_over_time(probe_ssl_earliest_cert_expiry[10m]) - time()) / 86400, 0.1) < 3
+                    for: 0m
+                    labels:
+                      severity: critical
+                    annotations:
+                      summary: "Blackbox SSL certificate will expire very soon (instance {{ $labels.instance }})"
+                      description: "SSL certificate expires in less than 3 days\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+                  - alert: BlackboxSSLCertificateExpired
+                    expr: round((last_over_time(probe_ssl_earliest_cert_expiry[10m]) - time()) / 86400, 0.1) < 0
+                    for: 0m
+                    labels:
+                      severity: critical
+                    annotations:
+                      summary: "Blackbox SSL certificate expired (instance {{ $labels.instance }})"
+                      description: "SSL certificate has expired already\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+                  - alert: BlackboxProbeSlowHTTP
+                    expr: probe_http_duration_seconds > 1
+                    for: 1m
+                    labels:
+                      severity: warning
+                    annotations:
+                      summary: "Blackbox probe slow HTTP (instance {{ $labels.instance }})"
+                      description: "HTTP request took more than 1s\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
           ''
         ];
 
@@ -730,6 +804,55 @@
             job_name = "sonarr";
             static_configs = [
               { targets = [ "127.0.0.1:9709" ]; }
+            ];
+          }
+          {
+            job_name = "blackbox-http";
+            metrics_path = "/probe";
+            params.module = [ "http_ssl" ];
+            static_configs = [
+              {
+                targets = [
+                  "https://start.tomhesse.xyz"
+                  "https://www.tomhesse.xyz"
+                ];
+              }
+            ];
+            relabel_configs = [
+              {
+                source_labels = [ "__address__" ];
+                target_label = "__param_target";
+              }
+              {
+                source_labels = [ "__param_target" ];
+                target_label = "instance";
+              }
+              {
+                target_label = "__address__";
+                replacement = "127.0.0.1:9115";
+              }
+            ];
+          }
+          {
+            job_name = "blackbox-ldaps";
+            metrics_path = "/probe";
+            params.module = [ "ldaps_connect" ];
+            static_configs = [
+              { targets = [ "[::1]:636" ]; }
+            ];
+            relabel_configs = [
+              {
+                source_labels = [ "__address__" ];
+                target_label = "__param_target";
+              }
+              {
+                source_labels = [ "__param_target" ];
+                target_label = "instance";
+              }
+              {
+                target_label = "__address__";
+                replacement = "127.0.0.1:9115";
+              }
             ];
           }
         ];
