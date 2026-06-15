@@ -357,13 +357,13 @@
                       description: "Disk latency is growing (write operations > 100ms)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
                   - alert: HostHighCpuLoad
-                    expr: 1 - (avg without (cpu) (rate(node_cpu_seconds_total{mode="idle"}[5m]))) > .80
-                    for: 10m
+                    expr: 1 - (avg without (cpu) (rate(node_cpu_seconds_total{mode="idle"}[5m]))) > .95
+                    for: 20m
                     labels:
                       severity: warning
                     annotations:
                       summary: "Host high CPU load (instance {{ $labels.instance }})"
-                      description: "CPU load is > 80%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+                      description: "CPU load is > 95%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
                   - alert: HostCpuHighIowait
                     expr: avg without (cpu) (rate(node_cpu_seconds_total{mode="iowait"}[5m])) > .20
