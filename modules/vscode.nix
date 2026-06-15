@@ -20,12 +20,23 @@
         mutableExtensionsDir = false;
 
         profiles.default = {
-          extensions = with pkgs.vscode-extensions; [
-            anthropic.claude-code
-            christian-kohler.path-intellisense
-            editorconfig.editorconfig
-            jnoortheen.nix-ide
-          ];
+          extensions =
+            (with pkgs.vscode-extensions; [
+              anthropic.claude-code
+              christian-kohler.path-intellisense
+              editorconfig.editorconfig
+              jnoortheen.nix-ide
+            ])
+            ++ [
+              (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
+                mktplcRef = {
+                  publisher = "opentofu";
+                  name = "vscode-opentofu";
+                  version = "0.6.2";
+                  hash = "sha256-rgp++YQ8gUBjzeZk3H0XIcDu2Cp7NGuoutI8IGo5cmg=";
+                };
+              })
+            ];
 
           userSettings =
             let
@@ -49,6 +60,9 @@
               "git.closeDiffOnOperation" = true;
               "typescript.suggest.paths" = false;
               "javascript.suggest.paths" = false;
+
+              "opentofu.languageServer.path" = "${pkgs.tofu-ls}/bin/tofu-ls";
+              "opentofu.languageServer.tofu.path" = "${pkgs.opentofu}/bin/tofu";
 
               "nix.enableLanguageServer" = true;
               "nix.serverPath" = "${pkgs.nixd}/bin/nixd";
