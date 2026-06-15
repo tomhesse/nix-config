@@ -15,6 +15,8 @@
         clock24 = true;
         escapeTime = 10;
         extraConfig = ''
+          bind c new-window -c "~"
+          bind C new-window -c "#{pane_current_path}"
           bind | split-window -h -c "#{pane_current_path}"
           unbind '"'
           bind - split-window -v -c "#{pane_current_path}"
