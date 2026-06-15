@@ -8,8 +8,8 @@
       enable = true;
       commands.commit = ''
         ---
-        allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git diff:*), Bash(git commit:*)
-        description: Create a git commit
+        allowed-tools: Bash(git status:*), Bash(git diff:*)
+        description: Suggest a commit message
         ---
 
         ## Context
@@ -20,8 +20,8 @@
 
         ## Your task
 
-        Stage all changes and create a single git commit with a concise conventional commit message.
-        Do not ask for confirmation. Stage and commit in one step.
+        Suggest a single concise conventional commit message for the current changes.
+        Output only the commit message as a code block. Do not stage or commit anything.
       '';
       settings = {
         permissions = {
