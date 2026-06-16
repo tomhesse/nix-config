@@ -45,6 +45,7 @@
               flake = "(builtins.getFlake (builtins.toString ./. ))";
             in
             {
+              "workbench.startupEditor" = "none";
               "telemetry.telemetryLevel" = "off";
               "update.mode" = "none";
               "security.workspace.trust.enabled" = false;
