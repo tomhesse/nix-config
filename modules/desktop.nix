@@ -58,7 +58,6 @@
       self.modules.homeManager.xdg-desktop-portal
       self.modules.homeManager.xdg-user-dirs
       self.modules.homeManager.zathura
-      self.modules.homeManager.zed-editor
     ];
   };
 }
