@@ -10,6 +10,7 @@
       home.persistence."/persistent" = {
         directories = [
           "${config.xdg.relativeConfigHome}/Code/User"
+          ".vscode-shared"
           ".vscode/cli"
         ];
         files = [ "${config.xdg.relativeConfigHome}/Code/machineid" ];
