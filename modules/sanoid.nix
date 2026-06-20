@@ -4,6 +4,13 @@
       enable = true;
 
       templates = {
+        archive = {
+          daily = 1;
+          weekly = 2;
+          monthly = 6;
+          autosnap = true;
+          autoprune = true;
+        };
         backups = {
           daily = 2;
           weekly = 1;
