@@ -357,6 +357,25 @@
             mountpoint = "none";
           };
           datasets = {
+            "archive" = {
+              type = "zfs_fs";
+              options = {
+                canmount = "off";
+                mountpoint = "none";
+              };
+            };
+            "archive/games" = {
+              type = "zfs_fs";
+              options = {
+                canmount = "off";
+                mountpoint = "none";
+              };
+            };
+            "archive/games/osu" = {
+              type = "zfs_fs";
+              options.mountpoint = "legacy";
+              mountpoint = "/srv/archive/games/osu";
+            };
             "backups" = {
               type = "zfs_fs";
               options = {
