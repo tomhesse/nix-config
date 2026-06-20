@@ -196,6 +196,11 @@
               fullscreen = true;
             }
             {
+              match.class = "^(osu!)$";
+              workspace = "name:gaming";
+              fullscreen = true;
+            }
+            {
               match.class = "^(org\\.prismlauncher\\.PrismLauncher)$";
               workspace = "name:launcher";
             }
