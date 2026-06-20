@@ -49,6 +49,7 @@
       disko.zfs.enable = true;
 
       systemd.tmpfiles.rules = [
+        "z /srv/archive/games/osu 0755 thesse users -"
         "z /srv/media/music 0755 thesse users -"
         "a+ /srv/media/music - - - - default:user:navidrome:rX"
         "a+ /srv/media/video/anime/movies - - - - default:user:bazarr:rwX,default:user:radarr:rwX,user:bazarr:rwX,user:radarr:rwX"
