@@ -20,6 +20,8 @@
 
       nixpkgs.hostPlatform = "x86_64-linux";
 
+      boot.zfs.forceImportRoot = false;
+
       image.baseName = lib.mkForce "nixos-installer";
 
       users.users.nixos.openssh.authorizedKeys.keyFiles = [
