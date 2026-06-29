@@ -249,13 +249,13 @@
               - name: node-exporter
                 rules:
                   - alert: HostOutOfMemory
-                    expr: (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes < .05)
+                    expr: (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes < .03)
                     for: 2m
                     labels:
                       severity: warning
                     annotations:
                       summary: "Host out of memory (instance {{ $labels.instance }})"
-                      description: "Node memory is filling up (< 5% left)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+                      description: "Node memory is filling up (< 3% left)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
                   - alert: HostMemoryUnderMemoryPressure
                     expr: (deriv(node_vmstat_pgmajfault[5m]) > 1000)
