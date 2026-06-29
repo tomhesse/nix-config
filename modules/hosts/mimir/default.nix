@@ -44,6 +44,7 @@
       ];
 
       boot.initrd.availableKernelModules = [ "i40e" ];
+      boot.kernelParams = [ "zfs.zfs_arc_max=${toString (32 * 1024 * 1024 * 1024)}" ];
       hardware.facter.reportPath = ./facter.json;
 
       disko.zfs.enable = true;
