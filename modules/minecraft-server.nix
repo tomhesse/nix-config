@@ -38,6 +38,7 @@
 
         declarative = true;
         whitelist = {
+          DerLoerris1234 = "c45260bb-067e-43b7-b6e5-57aef05f05a1";
           Heyhoman = "114613d9-18ec-472a-9740-02e8f5297c36";
         };
         serverProperties = {
