@@ -30,6 +30,7 @@
 
         paths = [
           "/srv/backups/restic"
+          "/srv/backups/timemachine"
           "/srv/media/music"
         ];
 
