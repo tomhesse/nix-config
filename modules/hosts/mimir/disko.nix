@@ -421,6 +421,22 @@
               };
               mountpoint = "/srv/backups/restic/services";
             };
+            "backups/timemachine" = {
+              type = "zfs_fs";
+              options = {
+                canmount = "off";
+                mountpoint = "none";
+              };
+            };
+            "backups/timemachine/ndahlke" = {
+              type = "zfs_fs";
+              options = {
+                compression = "off";
+                mountpoint = "legacy";
+                quota = "1536G";
+              };
+              mountpoint = "/srv/backups/timemachine/ndahlke";
+            };
             "media" = {
               type = "zfs_fs";
               options = {
