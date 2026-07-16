@@ -4,5 +4,7 @@
       isSystemUser = true;
       group = "ndahlke";
     };
+
+    users.groups.ndahlke = { };
   };
 }
