@@ -1,7 +1,12 @@
 { self, ... }:
 {
   configurations.nixos.mimir.module =
-    { lib, pkgs, ... }:
+    {
+      lib,
+      pkgs,
+      config,
+      ...
+    }:
     {
       imports = [
         self.diskoConfigurations.mimir
@@ -33,6 +38,8 @@
         self.modules.nixos.smartctl-exporter
         self.modules.nixos.smartd
         self.modules.nixos.systemd-exporter
+        self.modules.nixos.samba
+        self.modules.nixos.user-ndahlke
         self.modules.nixos.user-thesse
         self.modules.nixos.zfs
       ];
@@ -57,7 +64,10 @@
         "a+ /srv/media/video/anime/shows - - - - default:user:bazarr:rwX,default:user:sonarr:rwX,user:bazarr:rwX,user:sonarr:rwX"
         "a+ /srv/media/video/movies - - - - default:user:bazarr:rwX,default:user:radarr:rwX,user:bazarr:rwX,user:radarr:rwX"
         "a+ /srv/media/video/shows - - - - default:user:bazarr:rwX,default:user:sonarr:rwX,user:bazarr:rwX,user:sonarr:rwX"
+        "d /srv/backups/timemachine/ndahlke 0700 ndahlke ndahlke -"
       ];
+
+      sops.secrets."services/samba/ndahlke/password".sopsFile = ./secrets/nixos.yaml;
 
       services = {
         grafana.provision.datasources.settings.datasources = [
@@ -76,6 +86,16 @@
           /srv/archive/games/osu tyr.shrimphouse.xyz(rw,sync,no_subtree_check)
           /srv/media/music tyr.shrimphouse.xyz(rw,sync,no_subtree_check)
         '';
+
+        samba.settings."timemachine-ndahlke" = {
+          "comment" = "Time Machine Backup";
+          "path" = "/srv/backups/timemachine/ndahlke";
+          "valid users" = "ndahlke";
+          "browsable" = "yes";
+          "writable" = "yes";
+          "vfs objects" = "catia fruit streams_xattr";
+          "fruit:time machine" = "yes";
+        };
 
         sanoid.datasets = {
           "rocket/services/bazarr".useTemplate = [ "frequent" ];
@@ -99,6 +119,7 @@
           "tank/backups/restic/hosts/loki".useTemplate = [ "backups" ];
           "tank/backups/restic/hosts/tyr".useTemplate = [ "backups" ];
           "tank/backups/restic/services".useTemplate = [ "backups" ];
+          "tank/backups/timemachine/ndahlke".useTemplate = [ "backups" ];
           "tank/media/music".useTemplate = [ "media" ];
           "tank/media/video/anime/movies".useTemplate = [ "media" ];
           "tank/media/video/anime/shows".useTemplate = [ "media" ];
@@ -106,6 +127,27 @@
           "tank/media/video/music".useTemplate = [ "media" ];
           "tank/media/video/shows".useTemplate = [ "media" ];
         };
+      };
+
+      systemd.services.samba-init-ndahlke = {
+        description = "Initialize Samba password for ndahlke";
+        wantedBy = [ "samba-smbd.service" ];
+        before = [ "samba-smbd.service" ];
+        after = [
+          "sops-nix.service"
+          "local-fs.target"
+        ];
+        serviceConfig = {
+          Type = "oneshot";
+          RemainAfterExit = true;
+        };
+        script = ''
+          mkdir -p /var/lib/samba/private
+          if ! ${pkgs.samba}/bin/pdbedit -L 2>/dev/null | grep -q "^ndahlke:"; then
+            password=$(cat ${config.sops.secrets."services/samba/ndahlke/password".path})
+            printf '%s\n%s\n' "$password" "$password" | ${pkgs.samba}/bin/smbpasswd -a -s ndahlke
+          fi
+        '';
       };
 
       environment.persistCleanup.ignoredPaths = [ "/persistent/secrets" ];
