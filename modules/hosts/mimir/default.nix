@@ -93,8 +93,9 @@
           "valid users" = "ndahlke";
           "browsable" = "yes";
           "writable" = "yes";
-          "vfs objects" = "catia fruit streams_xattr";
+          "vfs objects" = "catia fruit streams_xattr acl_xattr";
           "fruit:time machine" = "yes";
+          "acl_xattr:ignore system acls" = "yes";
         };
 
         sanoid.datasets = {
