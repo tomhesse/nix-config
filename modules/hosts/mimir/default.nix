@@ -84,6 +84,7 @@
         nfs.server.exports = ''
           /srv 10.0.10.0/24(ro,fsid=root)
           /srv/archive/games/osu tyr.shrimphouse.xyz(rw,sync,no_subtree_check)
+          /srv/backups/homeassistant 10.0.20.20(rw,sync,no_subtree_check)
           /srv/media/music tyr.shrimphouse.xyz(rw,sync,no_subtree_check)
         '';
 
@@ -117,6 +118,7 @@
           "rocket/services/sabnzbd".useTemplate = [ "frequent" ];
           "rocket/services/sonarr".useTemplate = [ "frequent" ];
           "tank/archive/games/osu".useTemplate = [ "archive" ];
+          "tank/backups/homeassistant".useTemplate = [ "backups" ];
           "tank/backups/restic/hosts/loki".useTemplate = [ "backups" ];
           "tank/backups/restic/hosts/tyr".useTemplate = [ "backups" ];
           "tank/backups/restic/services".useTemplate = [ "backups" ];

@@ -421,6 +421,14 @@
               };
               mountpoint = "/srv/backups/restic/services";
             };
+            "backups/homeassistant" = {
+              type = "zfs_fs";
+              options = {
+                compression = "off";
+                mountpoint = "legacy";
+              };
+              mountpoint = "/srv/backups/homeassistant";
+            };
             "backups/timemachine" = {
               type = "zfs_fs";
               options = {
