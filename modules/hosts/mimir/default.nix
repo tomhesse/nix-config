@@ -83,6 +83,7 @@
 
         nfs.server.exports = ''
           /srv 10.0.10.0/24(ro,fsid=root)
+          /srv 10.0.20.20(ro,fsid=root)
           /srv/archive/games/osu tyr.shrimphouse.xyz(rw,sync,no_subtree_check)
           /srv/backups/homeassistant 10.0.20.20(rw,sync,no_subtree_check,no_root_squash)
           /srv/media/music tyr.shrimphouse.xyz(rw,sync,no_subtree_check)
