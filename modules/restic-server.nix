@@ -29,6 +29,7 @@
         initialize = true;
 
         paths = [
+          "/srv/backups/homeassistant"
           "/srv/backups/restic"
           "/srv/backups/timemachine"
           "/srv/media/music"
