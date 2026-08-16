@@ -34,6 +34,7 @@
         };
         includeCoAuthoredBy = false;
         theme = "dark";
+        model = "opus";
       };
     };
   };
