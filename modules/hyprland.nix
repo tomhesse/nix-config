@@ -213,7 +213,7 @@
               workspace = "special:music";
             }
             {
-              match.class = "^(obsidian)$";
+              match.class = "^(md.Obsidian)$";
               workspace = "special:notes silent";
             }
 
