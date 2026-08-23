@@ -163,6 +163,11 @@
                 ".*: (.*)Mozilla Firefox" = "󰈹 Firefox";
                 ".*: (.*) — Mozilla Firefox" = "󰈹 $1";
 
+                "[^:]*: Mozilla Thunderbird" = "󰇮 Thunderbird";
+                "[^:]*: (.*) - .*@.* - Mozilla Thunderbird" = "󰇮 $1";
+                "[^:]*: (.*) - Mozilla Thunderbird" = "󰇮 $1";
+                "thunderbird: (.*)" = "󰇮 $1";
+
                 ".*: (.*)Discord(.*)" = " $1Discord$2";
                 "vesktop: .*" = " Discord";
 
