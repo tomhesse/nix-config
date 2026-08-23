@@ -97,6 +97,7 @@
       swaybg = getExe pkgs.swaybg;
       swaylock = getExe config.programs.swaylock.package;
       wl-copy = getExe' pkgs.wl-clipboard "wl-copy";
+      xwayland-satellite = getExe pkgs.xwayland-satellite;
 
       app =
         argv:
@@ -124,6 +125,8 @@
       programs.niri.settings = {
         prefer-no-csd = true;
         hotkey-overlay.skip-at-startup = true;
+
+        xwayland-satellite.path = xwayland-satellite;
 
         inherit outputs;
 
