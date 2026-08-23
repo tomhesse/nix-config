@@ -51,6 +51,7 @@
       self.modules.homeManager.playerctld
       self.modules.homeManager.rofi
       self.modules.homeManager.steam
+      self.modules.homeManager.swayidle
       self.modules.homeManager.swaylock
       self.modules.homeManager.thunderbird
       self.modules.homeManager.trash

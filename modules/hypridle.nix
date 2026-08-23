@@ -14,6 +14,7 @@
     {
       services.hypridle = {
         enable = true;
+        systemdTarget = "wayland-session@hyprland.desktop.target";
         settings = {
           general = {
             lock_cmd = "${uwsm} app -- ${hyprlock}";
