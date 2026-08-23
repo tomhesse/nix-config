@@ -17,6 +17,50 @@
       rofi-bluetooth = getExe pkgs.rofi-bluetooth;
 
       catppuccinEnabled = config.catppuccin.enable;
+
+      windowRewrite = {
+        ".*: ~" = " Terminal";
+        ".*: fish" = " Terminal";
+        "kitty: .*" = " Terminal";
+
+        ".*: tmux(.*)" = " Tmux";
+
+        ".*: nvim" = " Neovim";
+        ".*: nvim (.*)" = " $1";
+
+        ".*: (.*)Mozilla Firefox" = "󰈹 Firefox";
+        ".*: (.*) — Mozilla Firefox" = "󰈹 $1";
+
+        "[^:]*: Mozilla Thunderbird" = "󰇮 Thunderbird";
+        "[^:]*: (.*) - .*@.* - Mozilla Thunderbird" = "󰇮 $1";
+        "[^:]*: (.*) - Mozilla Thunderbird" = "󰇮 $1";
+        "thunderbird: (.*)" = "󰇮 $1";
+
+        ".*: (.*)Discord(.*)" = " $1Discord$2";
+        "vesktop: .*" = " Discord";
+
+        ".*: (.*) - Obsidian(.*)" = "󰠮 $1";
+
+        "steam: (.*)" = "󰓓 $1";
+
+        "code: (.*) - Visual Studio Code" = "󰨞 $1";
+        "code: Visual Studio Code" = "󰨞 Visual Studio Code";
+      };
+
+      workspaceIcons = {
+        "1" = "";
+        "browser" = "󰈹";
+        "editor" = "";
+        "chat" = "";
+        "mail" = "󰇮";
+        "gaming" = "";
+        "launcher" = "󰓓";
+        "music" = "󰝚";
+        "notes" = "󰠮";
+        active = "";
+        default = "";
+        urgent = "";
+      };
     in
     {
       programs.waybar = {
@@ -26,7 +70,9 @@
           mainBar = {
             modules-left = [
               "hyprland/workspaces"
+              "niri/workspaces"
               "hyprland/window"
+              "niri/window"
             ];
             modules-center = [
               "clock"
@@ -149,36 +195,8 @@
 
             "hyprland/window" = {
               format = "{class}: {title}";
-              rewrite = {
+              rewrite = windowRewrite // {
                 ": " = " Hyprland";
-                ".*: ~" = " Terminal";
-                ".*: fish" = " Terminal";
-                "kitty: .*" = " Terminal";
-
-                ".*: tmux(.*)" = " Tmux";
-
-                ".*: nvim" = " Neovim";
-                ".*: nvim (.*)" = " $1";
-
-                ".*: (.*)Mozilla Firefox" = "󰈹 Firefox";
-                ".*: (.*) — Mozilla Firefox" = "󰈹 $1";
-
-                "[^:]*: Mozilla Thunderbird" = "󰇮 Thunderbird";
-                "[^:]*: (.*) - .*@.* - Mozilla Thunderbird" = "󰇮 $1";
-                "[^:]*: (.*) - Mozilla Thunderbird" = "󰇮 $1";
-                "thunderbird: (.*)" = "󰇮 $1";
-
-                ".*: (.*)Discord(.*)" = " $1Discord$2";
-                "vesktop: .*" = " Discord";
-
-                ".*: (.*) - Obsidian(.*)" = "󰠮 $1";
-
-                "steam: (.*)" = "󰓓 $1";
-
-                "dev\.zed\.Zed: (.*)" = "Zed: $1"; # TODO: Add nerd font icon
-
-                "code: (.*) - Visual Studio Code" = "󰨞 $1";
-                "code: Visual Studio Code" = "󰨞 Visual Studio Code";
               };
               separate-outputs = true;
               tooltip = false;
@@ -186,21 +204,21 @@
 
             "hyprland/workspaces" = {
               format = "{icon}";
-              format-icons = {
-                "1" = "";
-                "browser" = "󰈹";
-                "editor" = "";
-                "chat" = "";
-                "mail" = "󰇮";
-                "gaming" = "";
-                "launcher" = "󰓓";
-                "music" = "󰝚";
-                "notes" = "󰠮";
-                active = "";
-                default = "";
-                urgent = "";
-              };
+              format-icons = workspaceIcons;
               show-special = true;
+            };
+
+            "niri/window" = {
+              format = "{app_id}: {title}";
+              rewrite = windowRewrite;
+              separate-outputs = true;
+              tooltip = false;
+            };
+
+            "niri/workspaces" = {
+              format = "{value}";
+              all-outputs = false;
+              display-condition = "only-populated";
             };
           };
         };
