@@ -38,8 +38,13 @@
                 example = "2560x1440";
               };
               refreshRate = mkOption {
-                type = types.ints.positive;
+                type = types.numbers.positive;
                 default = 60;
+                description = ''
+                  Refresh rate in Hz. niri requires this to match a mode reported by
+                  `niri msg outputs` exactly, to three decimals, so a fractional value
+                  may be needed (e.g. 143.998); Hyprland matches the closest mode.
+                '';
               };
               position = {
                 x = mkOption {
@@ -91,7 +96,7 @@
                   "gaming"
                   "launcher"
                 ];
-                description = "Named workspaces to pin to this monitor.";
+                description = "Named workspaces to pin to this monitor. Hyprland only.";
               };
             };
           }

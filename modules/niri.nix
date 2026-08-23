@@ -34,24 +34,58 @@
     {
       config,
       lib,
+      osConfig,
       pkgs,
       ...
     }:
     let
       inherit (lib)
         concatMap
+        elemAt
         getExe
         getExe'
         listToAttrs
+        mapAttrs'
         mod
         nameValuePair
         optionalAttrs
         range
+        splitString
+        toInt
         ;
+      inherit (osConfig) monitors;
 
       palette =
         (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
         .${config.catppuccin.flavor}.colors;
+
+      outputId = name: m: if m.description != "" then m.description else name;
+      rotation =
+        m:
+        {
+          "normal" = 0;
+          "90" = 90;
+          "180" = 180;
+          "270" = 270;
+        }
+        .${m.rotation};
+      outputs = mapAttrs' (
+        name: m:
+        let
+          res = splitString "x" m.resolution;
+        in
+        nameValuePair (outputId name m) {
+          mode = {
+            width = toInt (elemAt res 0);
+            height = toInt (elemAt res 1);
+            refresh = 1.0 * m.refreshRate;
+          };
+          position = { inherit (m.position) x y; };
+          inherit (m) scale;
+          transform.rotation = rotation m;
+          focus-at-startup = m.primary;
+        }
+      ) monitors;
 
       uwsm = getExe pkgs.uwsm;
 
@@ -90,6 +124,8 @@
       programs.niri.settings = {
         prefer-no-csd = true;
         hotkey-overlay.skip-at-startup = true;
+
+        inherit outputs;
 
         input = {
           keyboard.xkb.layout = "eu";
