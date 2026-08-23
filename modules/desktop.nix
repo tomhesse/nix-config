@@ -13,6 +13,7 @@
       self.modules.nixos.plymouth
       self.modules.nixos.sddm
       self.modules.nixos.steam
+      self.modules.nixos.swaylock
       self.modules.nixos.thunderbird
       self.modules.nixos.wireless
       self.modules.nixos.xdg-desktop-portal
@@ -50,6 +51,7 @@
       self.modules.homeManager.playerctld
       self.modules.homeManager.rofi
       self.modules.homeManager.steam
+      self.modules.homeManager.swaylock
       self.modules.homeManager.thunderbird
       self.modules.homeManager.trash
       self.modules.homeManager.utilities

@@ -61,6 +61,7 @@
       playerctl = getExe pkgs.playerctl;
       rofi = getExe pkgs.rofi;
       swaybg = getExe pkgs.swaybg;
+      swaylock = getExe config.programs.swaylock.package;
       wl-copy = getExe' pkgs.wl-clipboard "wl-copy";
 
       app =
@@ -258,6 +259,11 @@
           "Alt+Print".action.screenshot-window = { };
 
           "Mod+Shift+E".action.quit = { };
+
+          "Mod+Alt+L" = {
+            action.spawn = app [ swaylock ];
+            allow-when-locked = true;
+          };
 
           "XF86AudioMute" = {
             action.spawn = app [
