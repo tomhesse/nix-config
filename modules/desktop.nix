@@ -8,6 +8,7 @@
       self.modules.nixos.gnome-keyring
       self.modules.nixos.hyprland
       self.modules.nixos.monitors
+      self.modules.nixos.niri
       self.modules.nixos.pipewire
       self.modules.nixos.plymouth
       self.modules.nixos.sddm
@@ -43,6 +44,7 @@
       self.modules.homeManager.kitty
       self.modules.homeManager.mpv
       self.modules.homeManager.nh
+      self.modules.homeManager.niri
       self.modules.homeManager.obsidian
       self.modules.homeManager.pipewire
       self.modules.homeManager.playerctld

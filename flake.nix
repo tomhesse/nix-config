@@ -32,6 +32,13 @@
     };
     impermanence.url = "github:nix-community/impermanence";
     import-tree.url = "github:vic/import-tree";
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        nixpkgs-stable.follows = "nixpkgs";
+      };
+    };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-lib.follows = "nixpkgs";

@@ -76,13 +76,13 @@
                   2
                   3
                 ];
-                description = "Workspaces to pin to this monitor.";
+                description = "Workspaces to pin to this monitor. Hyprland only; niri workspaces are dynamic.";
               };
               defaultWorkspace = mkOption {
                 type = types.nullOr types.int;
                 default = null;
                 example = 1;
-                description = "Default workspace to open on this monitor.";
+                description = "Default workspace to open on this monitor. Hyprland only; niri uses `primary` instead.";
               };
               namedWorkspaces = mkOption {
                 type = types.listOf types.str;
