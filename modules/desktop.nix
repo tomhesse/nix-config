@@ -12,6 +12,7 @@
       self.modules.nixos.plymouth
       self.modules.nixos.sddm
       self.modules.nixos.steam
+      self.modules.nixos.thunderbird
       self.modules.nixos.wireless
       self.modules.nixos.xdg-desktop-portal
       self.modules.nixos.yubikey
@@ -22,7 +23,6 @@
 
   flake.modules.homeManager.desktop = {
     imports = [
-      self.modules.homeManager.aerc
       self.modules.homeManager.cli
       self.modules.homeManager.claude
       self.modules.homeManager.cliphist
@@ -48,6 +48,7 @@
       self.modules.homeManager.playerctld
       self.modules.homeManager.rofi
       self.modules.homeManager.steam
+      self.modules.homeManager.thunderbird
       self.modules.homeManager.trash
       self.modules.homeManager.utilities
       self.modules.homeManager.vesktop
