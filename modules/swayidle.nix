@@ -19,7 +19,9 @@
     {
       services.swayidle = {
         enable = true;
-        systemdTargets = [ "wayland-session@niri-session.target" ];
+        # uwsm names the instance after the compositor binary, and systemd escapes
+        # the hyphen: `niri-session` becomes `niri\x2dsession`
+        systemdTargets = [ ''wayland-session@niri\x2dsession.target'' ];
 
         events = {
           lock = "${uwsm} app -- ${swaylock}";
