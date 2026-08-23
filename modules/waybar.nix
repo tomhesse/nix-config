@@ -191,6 +191,7 @@
                 "browser" = "󰈹";
                 "editor" = "";
                 "chat" = "";
+                "mail" = "󰇮";
                 "gaming" = "";
                 "launcher" = "󰓓";
                 "music" = "󰝚";

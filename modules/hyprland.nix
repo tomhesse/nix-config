@@ -181,6 +181,10 @@
               workspace = "name:chat silent";
             }
             {
+              match.class = "^(thunderbird)$";
+              workspace = "name:mail silent";
+            }
+            {
               match.class = "^(gamescope)$";
               workspace = "name:gaming";
               fullscreen = true;
@@ -280,6 +284,8 @@
             (mkBind (mkShiftKey "E") (dsp.moveWs ''"name:editor"''))
             (mkBind (mkKey "C") (dsp.focusWs ''"name:chat"''))
             (mkBind (mkShiftKey "C") (dsp.moveWs ''"name:chat"''))
+            (mkBind (mkKey "T") (dsp.focusWs ''"name:mail"''))
+            (mkBind (mkShiftKey "T") (dsp.moveWs ''"name:mail"''))
             (mkBind (mkKey "G") (dsp.focusWs ''"name:gaming"''))
             (mkBind (mkShiftKey "G") (dsp.focusWs ''"name:launcher"''))
             (mkBind (mkShiftKey "M") (dsp.toggleSpecial "music"))

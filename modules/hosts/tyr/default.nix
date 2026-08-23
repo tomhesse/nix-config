@@ -60,6 +60,7 @@
           "editor"
           "gaming"
           "launcher"
+          "mail"
         ];
       };
       DP-2 = {
