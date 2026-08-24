@@ -13,7 +13,10 @@
               type = "filesystem";
               format = "vfat";
               mountpoint = "/boot";
-              mountOptions = [ "umask=0077" ];
+              mountOptions = [
+                "umask=0077"
+                "x-gvfs-hide"
+              ];
             };
           };
           luks = {
@@ -38,6 +41,7 @@
                     mountOptions = [
                       "compress=zstd"
                       "noatime"
+                      "x-gvfs-hide"
                     ];
                   };
                   "@persistent" = {
@@ -45,6 +49,7 @@
                     mountOptions = [
                       "compress=zstd"
                       "noatime"
+                      "x-gvfs-hide"
                     ];
                   };
                 };
