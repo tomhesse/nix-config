@@ -2,6 +2,7 @@
   flake.modules.homeManager.hyprsunset = {
     services.hyprsunset = {
       enable = true;
+      systemdTarget = "wayland-session@hyprland.desktop.target";
       settings = {
         profile = [
           {

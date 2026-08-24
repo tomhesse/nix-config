@@ -60,6 +60,7 @@
       self.modules.homeManager.vscode
       self.modules.homeManager.wallpaper
       self.modules.homeManager.waybar
+      self.modules.homeManager.wlsunset
       self.modules.homeManager.xdg-autostart
       self.modules.homeManager.xdg-desktop-portal
       self.modules.homeManager.xdg-user-dirs
