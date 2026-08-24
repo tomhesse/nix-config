@@ -1,6 +1,5 @@
 {
   coreutils,
-  hyprlock,
   rofi,
   systemd,
   uwsm,
@@ -10,7 +9,6 @@ writeShellApplication {
   name = "power-menu";
   runtimeInputs = [
     coreutils
-    hyprlock
     rofi
     systemd
     uwsm
@@ -30,7 +28,7 @@ writeShellApplication {
       Shutdown) exec systemctl poweroff ;;
       Reboot)   exec systemctl reboot ;;
       Suspend)  exec systemctl suspend ;;
-      Lock)     exec hyprlock ;;
+      Lock)     exec loginctl lock-session ;;
       Logout)   exec uwsm stop ;;
       *)        exit 0 ;;
     esac
