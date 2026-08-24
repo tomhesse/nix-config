@@ -15,6 +15,7 @@
       self.modules.nixos.steam
       self.modules.nixos.swaylock
       self.modules.nixos.thunderbird
+      self.modules.nixos.trash
       self.modules.nixos.wireless
       self.modules.nixos.xdg-desktop-portal
       self.modules.nixos.yubikey

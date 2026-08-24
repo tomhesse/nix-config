@@ -1,4 +1,8 @@
 {
+  flake.modules.nixos.trash = {
+    services.gvfs.enable = true;
+  };
+
   flake.modules.homeManager.trash =
     { config, ... }:
     {
