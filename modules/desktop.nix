@@ -7,6 +7,7 @@
       self.modules.nixos.firefox
       self.modules.nixos.gnome-keyring
       self.modules.nixos.monitors
+      self.modules.nixos.nautilus
       self.modules.nixos.niri
       self.modules.nixos.pipewire
       self.modules.nixos.plymouth
@@ -55,7 +56,6 @@
       self.modules.homeManager.waybar
       self.modules.homeManager.wlsunset
       self.modules.homeManager.xdg-autostart
-      self.modules.homeManager.xdg-desktop-portal
       self.modules.homeManager.xdg-user-dirs
       self.modules.homeManager.zathura
     ];

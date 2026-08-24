@@ -203,10 +203,6 @@
                 app-id = "^firefox$";
                 title = "^File Upload";
               }
-              {
-                app-id = "^kitty$";
-                title = "^termfilechooser$";
-              }
             ];
             open-floating = true;
             default-column-width.proportion = 0.7;
