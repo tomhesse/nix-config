@@ -182,7 +182,18 @@
 
         fileSystems."/persistent".neededForBoot = true;
 
+        home-manager.sharedModules = [
+          {
+            home.persistence."/persistent" = {
+              hideMounts = true;
+              allowTrash = true;
+            };
+          }
+        ];
+
         environment.persistence."/persistent" = {
+          hideMounts = true;
+          allowTrash = true;
           directories = [
             "/var/lib/nixos"
             "/var/lib/systemd/backlight"
