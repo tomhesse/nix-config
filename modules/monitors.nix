@@ -5,8 +5,6 @@
       inherit (lib)
         attrValues
         count
-        elem
-        mapAttrsToList
         mkOption
         types
         ;
@@ -18,11 +16,7 @@
           assertion = primaryCount <= 1;
           message = "At most one monitor may be set as primary, but ${toString primaryCount} are.";
         }
-      ]
-      ++ mapAttrsToList (name: m: {
-        assertion = m.defaultWorkspace == null || elem m.defaultWorkspace m.workspaces;
-        message = "Monitor ${name}: defaultWorkspace ${toString m.defaultWorkspace} must be in its workspaces list.";
-      }) config.monitors;
+      ];
 
       options.monitors = mkOption {
         type = types.attrsOf (
@@ -43,7 +37,7 @@
                 description = ''
                   Refresh rate in Hz. niri requires this to match a mode reported by
                   `niri msg outputs` exactly, to three decimals, so a fractional value
-                  may be needed (e.g. 143.998); Hyprland matches the closest mode.
+                  may be needed (e.g. 143.998).
                 '';
               };
               position = {
@@ -72,31 +66,6 @@
               primary = mkOption {
                 type = types.bool;
                 default = false;
-              };
-              workspaces = mkOption {
-                type = types.listOf types.int;
-                default = [ ];
-                example = [
-                  1
-                  2
-                  3
-                ];
-                description = "Workspaces to pin to this monitor. Hyprland only; niri workspaces are dynamic.";
-              };
-              defaultWorkspace = mkOption {
-                type = types.nullOr types.int;
-                default = null;
-                example = 1;
-                description = "Default workspace to open on this monitor. Hyprland only; niri uses `primary` instead.";
-              };
-              namedWorkspaces = mkOption {
-                type = types.listOf types.str;
-                default = [ ];
-                example = [
-                  "gaming"
-                  "launcher"
-                ];
-                description = "Named workspaces to pin to this monitor. Hyprland only.";
               };
             };
           }

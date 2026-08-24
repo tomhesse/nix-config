@@ -47,20 +47,6 @@
         "code: Visual Studio Code" = "󰨞 Visual Studio Code";
       };
 
-      workspaceIcons = {
-        "1" = "";
-        "browser" = "󰈹";
-        "editor" = "";
-        "chat" = "";
-        "mail" = "󰇮";
-        "gaming" = "";
-        "launcher" = "󰓓";
-        "music" = "󰝚";
-        "notes" = "󰠮";
-        active = "";
-        default = "";
-        urgent = "";
-      };
     in
     {
       programs.waybar = {
@@ -69,9 +55,7 @@
         settings = {
           mainBar = {
             modules-left = [
-              "hyprland/workspaces"
               "niri/workspaces"
-              "hyprland/window"
               "niri/window"
             ];
             modules-center = [
@@ -191,21 +175,6 @@
             tray = {
               icon-size = 16;
               spacing = 8;
-            };
-
-            "hyprland/window" = {
-              format = "{class}: {title}";
-              rewrite = windowRewrite // {
-                ": " = " Hyprland";
-              };
-              separate-outputs = true;
-              tooltip = false;
-            };
-
-            "hyprland/workspaces" = {
-              format = "{icon}";
-              format-icons = workspaceIcons;
-              show-special = true;
             };
 
             "niri/window" = {

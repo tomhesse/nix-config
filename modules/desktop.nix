@@ -6,7 +6,6 @@
       self.modules.nixos.bluetooth
       self.modules.nixos.firefox
       self.modules.nixos.gnome-keyring
-      self.modules.nixos.hyprland
       self.modules.nixos.monitors
       self.modules.nixos.niri
       self.modules.nixos.pipewire
@@ -35,12 +34,6 @@
       self.modules.homeManager.fonts
       self.modules.homeManager.gpg
       self.modules.homeManager.gnome-keyring
-      self.modules.homeManager.hypridle
-      self.modules.homeManager.hyprland
-      self.modules.homeManager.hyprlock
-      self.modules.homeManager.hyprpaper
-      self.modules.homeManager.hyprshot
-      self.modules.homeManager.hyprsunset
       self.modules.homeManager.imv
       self.modules.homeManager.kitty
       self.modules.homeManager.mpv
