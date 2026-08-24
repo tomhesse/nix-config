@@ -36,6 +36,7 @@
       self.modules.homeManager.fonts
       self.modules.homeManager.gpg
       self.modules.homeManager.gnome-keyring
+      self.modules.homeManager.gtk
       self.modules.homeManager.imv
       self.modules.homeManager.kitty
       self.modules.homeManager.mpv
