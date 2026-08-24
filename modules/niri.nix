@@ -193,7 +193,10 @@
             open-fullscreen = true;
           }
           {
-            matches = [ { app-id = "^code$"; } ];
+            matches = [
+              { app-id = "^code$"; }
+              { app-id = "^firefox$"; }
+            ];
             open-maximized = true;
           }
 
