@@ -7,7 +7,12 @@
       ...
     }:
     let
-      inherit (lib) getExe getExe';
+      inherit (lib)
+        getExe
+        getExe'
+        makeBinPath
+        mkForce
+        ;
 
       brightnessctl = getExe pkgs.brightnessctl;
       loginctl = getExe' pkgs.systemd "loginctl";
@@ -49,5 +54,17 @@
           }
         ];
       };
+
+      # home-manager sets PATH to just bash (swayidle runs commands via `sh -c`),
+      # but `uwsm app` shells out to `systemd-run` by bare name and fails with
+      # ENOENT without it.
+      systemd.user.services.swayidle.Service.Environment = mkForce [
+        "PATH=${
+          makeBinPath [
+            pkgs.bash
+            pkgs.systemd
+          ]
+        }"
+      ];
     };
 }
