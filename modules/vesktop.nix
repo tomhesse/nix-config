@@ -11,7 +11,6 @@
           discordBranch = "stable";
           tray = true;
           minimizeToTray = true;
-          autoStartMinimized = true;
           staticTitle = true;
           hardwareAcceleration = true;
           hardwareVideoAcceleration = true;
@@ -50,10 +49,6 @@
       home.file."${config.xdg.relativeConfigHome}/vesktop/state.json".source =
         jsonFormat.generate "vesktop-state"
           { firstLaunch = true; };
-
-      xdg.autostart.entries = [
-        "${pkgs.vesktop}/share/applications/vesktop.desktop"
-      ];
 
       home.persistence."/persistent".directories = [
         "${config.xdg.relativeConfigHome}/vesktop/sessionData"
