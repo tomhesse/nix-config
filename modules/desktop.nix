@@ -6,6 +6,7 @@
       self.modules.nixos.bluetooth
       self.modules.nixos.firefox
       self.modules.nixos.gnome-keyring
+      self.modules.nixos.limine
       self.modules.nixos.monitors
       self.modules.nixos.nautilus
       self.modules.nixos.niri

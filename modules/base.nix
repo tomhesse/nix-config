@@ -2,7 +2,6 @@
 {
   flake.modules.nixos.base = {
     imports = [
-      self.modules.nixos.boot
       self.modules.nixos.catppuccin
       self.modules.nixos.disko
       self.modules.nixos.bash

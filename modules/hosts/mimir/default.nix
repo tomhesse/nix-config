@@ -23,6 +23,7 @@
         self.modules.nixos.impermanence
         self.modules.nixos.jellyfin
         self.modules.nixos.kanidm
+        self.modules.nixos.limine
         self.modules.nixos.minecraft-server
         self.modules.nixos.mongodb
         self.modules.nixos.musivault

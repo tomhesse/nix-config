@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.boot = {
+  flake.modules.nixos.limine = {
     boot = {
       loader = {
         limine = {
