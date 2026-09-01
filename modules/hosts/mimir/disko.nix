@@ -1,521 +1,93 @@
 {
-  flake.diskoConfigurations.mimir = {
-    disko.devices = {
-      disk = {
-        boot = {
-          type = "disk";
-          device = "/dev/disk/by-id/nvme-nvme.8086-50484d42383032323030384334383044474e-494e54454c2053534450454431443438304741-00000001";
-          content = {
-            type = "gpt";
-            partitions = {
-              esp = {
-                size = "512M";
-                type = "EF00";
-                content = {
-                  type = "filesystem";
-                  format = "vfat";
-                  mountpoint = "/boot";
-                  mountOptions = [ "umask=0077" ];
-                };
-              };
-              luks = {
-                size = "100%";
-                content = {
-                  type = "luks";
-                  name = "mimir";
-                  settings.allowDiscards = true;
-                  content = {
-                    type = "btrfs";
-                    extraArgs = [ "-Lmimir" ];
-                    subvolumes = {
-                      "@" = {
-                        mountpoint = "/";
-                        mountOptions = [
-                          "compress=zstd"
-                          "noatime"
-                        ];
-                      };
-                      "@nix" = {
-                        mountpoint = "/nix";
-                        mountOptions = [
-                          "compress=zstd"
-                          "noatime"
-                        ];
-                      };
-                      "@persistent" = {
-                        mountpoint = "/persistent";
-                        mountOptions = [
-                          "compress=zstd"
-                          "noatime"
-                        ];
-                      };
-                    };
-                  };
-                };
-              };
-            };
-          };
-        };
-
-        rocket0 = {
-          type = "disk";
-          device = "/dev/disk/by-id/wwn-0x5002538f5531e4d4";
-          content = {
-            type = "gpt";
-            partitions.zfs = {
-              size = "100%";
-              content = {
-                type = "zfs";
-                pool = "rocket";
-              };
-            };
-          };
-        };
-        rocket1 = {
-          type = "disk";
-          device = "/dev/disk/by-id/wwn-0x5002538f5531e4d5";
-          content = {
-            type = "gpt";
-            partitions.zfs = {
-              size = "100%";
-              content = {
-                type = "zfs";
-                pool = "rocket";
-              };
-            };
-          };
-        };
-
-        tank0 = {
-          type = "disk";
-          device = "/dev/disk/by-id/wwn-0x5000cca278d64ea0";
-          content = {
-            type = "gpt";
-            partitions.zfs = {
-              size = "100%";
-              content = {
-                type = "zfs";
-                pool = "tank";
-              };
-            };
-          };
-        };
-        tank1 = {
-          type = "disk";
-          device = "/dev/disk/by-id/wwn-0x5000cca278d64f1f";
-          content = {
-            type = "gpt";
-            partitions.zfs = {
-              size = "100%";
-              content = {
-                type = "zfs";
-                pool = "tank";
-              };
-            };
-          };
-        };
-        tank2 = {
-          type = "disk";
-          device = "/dev/disk/by-id/wwn-0x5000cca278d63046";
-          content = {
-            type = "gpt";
-            partitions.zfs = {
-              size = "100%";
-              content = {
-                type = "zfs";
-                pool = "tank";
-              };
-            };
-          };
-        };
-        tank3 = {
-          type = "disk";
-          device = "/dev/disk/by-id/wwn-0x5000cca27ac59544";
-          content = {
-            type = "gpt";
-            partitions.zfs = {
-              size = "100%";
-              content = {
-                type = "zfs";
-                pool = "tank";
-              };
-            };
-          };
-        };
-        tank4 = {
-          type = "disk";
-          device = "/dev/disk/by-id/wwn-0x5000cca278d63e40";
-          content = {
-            type = "gpt";
-            partitions.zfs = {
-              size = "100%";
-              content = {
-                type = "zfs";
-                pool = "tank";
-              };
-            };
-          };
-        };
-        tank5 = {
-          type = "disk";
-          device = "/dev/disk/by-id/wwn-0x5000cca278d67452";
-          content = {
-            type = "gpt";
-            partitions.zfs = {
-              size = "100%";
-              content = {
-                type = "zfs";
-                pool = "tank";
-              };
-            };
-          };
-        };
-        tank6 = {
-          type = "disk";
-          device = "/dev/disk/by-id/wwn-0x5000cca278d67451";
-          content = {
-            type = "gpt";
-            partitions.zfs = {
-              size = "100%";
-              content = {
-                type = "zfs";
-                pool = "tank";
-              };
-            };
-          };
-        };
-        tank7 = {
-          type = "disk";
-          device = "/dev/disk/by-id/wwn-0x5000cca278d5e643";
-          content = {
-            type = "gpt";
-            partitions.zfs = {
-              size = "100%";
-              content = {
-                type = "zfs";
-                pool = "tank";
-              };
-            };
-          };
+  flake.diskoConfigurations.mimir =
+    let
+      esp = mountpoint: {
+        size = "2G";
+        type = "EF00";
+        content = {
+          type = "filesystem";
+          format = "vfat";
+          inherit mountpoint;
+          mountOptions = [
+            "umask=0077"
+            "nofail"
+          ];
         };
       };
 
-      zpool = {
-        rocket = {
-          type = "zpool";
-          mode = "mirror";
-          options.ashift = "12";
-          rootFsOptions = {
-            atime = "off";
-            canmount = "off";
-            compression = "zstd";
-            encryption = "aes-256-gcm";
-            keyformat = "raw";
-            keylocation = "file:///persistent/secrets/zfs/rocket.key";
-            mountpoint = "none";
+      rpoolMember = {
+        size = "100%";
+        content = {
+          type = "zfs";
+          pool = "rpool";
+        };
+      };
+    in
+    {
+      disko.devices = {
+        disk = {
+          ssd0 = {
+            type = "disk";
+            device = "/dev/disk/by-id/wwn-0x5002538f5531e4d4";
+            content = {
+              type = "gpt";
+              partitions = {
+                esp = esp "/boot1";
+                zfs = rpoolMember;
+              };
+            };
           };
-          datasets = {
-            "services" = {
-              type = "zfs_fs";
-              options = {
-                canmount = "off";
-                mountpoint = "none";
+
+          ssd1 = {
+            type = "disk";
+            device = "/dev/disk/by-id/wwn-0x5002538f5531e4d5";
+            content = {
+              type = "gpt";
+              partitions = {
+                esp = esp "/boot2";
+                zfs = rpoolMember;
               };
-            };
-            "services/prowlarr" = {
-              type = "zfs_fs";
-              options.mountpoint = "legacy";
-              mountpoint = "/var/lib/private/prowlarr";
-            };
-            "services/bazarr" = {
-              type = "zfs_fs";
-              options.mountpoint = "legacy";
-              mountpoint = "/var/lib/bazarr";
-            };
-            "services/grafana" = {
-              type = "zfs_fs";
-              options.mountpoint = "legacy";
-              mountpoint = "/var/lib/grafana";
-            };
-            "services/grocy" = {
-              type = "zfs_fs";
-              options.mountpoint = "legacy";
-              mountpoint = "/var/lib/grocy";
-            };
-            "services/jellyfin" = {
-              type = "zfs_fs";
-              options.mountpoint = "legacy";
-              mountpoint = "/var/lib/jellyfin";
-            };
-            "services/kanidm" = {
-              type = "zfs_fs";
-              options = {
-                mountpoint = "legacy";
-                recordsize = "64K";
-              };
-              mountpoint = "/var/lib/kanidm";
-            };
-            "services/mongodb" = {
-              type = "zfs_fs";
-              options = {
-                mountpoint = "legacy";
-                recordsize = "64K";
-              };
-              mountpoint = "/var/db/mongodb";
-            };
-            "services/minecraft" = {
-              type = "zfs_fs";
-              options.mountpoint = "legacy";
-              mountpoint = "/var/lib/minecraft";
-            };
-            "services/musivault" = {
-              type = "zfs_fs";
-              options.mountpoint = "legacy";
-              mountpoint = "/var/lib/private/musivault";
-            };
-            "services/navidrome" = {
-              type = "zfs_fs";
-              options.mountpoint = "legacy";
-              mountpoint = "/var/lib/navidrome";
-            };
-            "services/paperless" = {
-              type = "zfs_fs";
-              options.mountpoint = "legacy";
-              mountpoint = "/var/lib/paperless";
-            };
-            "services/postgresql" = {
-              type = "zfs_fs";
-              options = {
-                mountpoint = "legacy";
-                recordsize = "8K";
-              };
-              mountpoint = "/var/lib/postgresql";
-            };
-            "services/prometheus" = {
-              type = "zfs_fs";
-              options.mountpoint = "legacy";
-              mountpoint = "/var/lib/prometheus2";
-            };
-            "services/radarr" = {
-              type = "zfs_fs";
-              options.mountpoint = "legacy";
-              mountpoint = "/var/lib/radarr";
-            };
-            "services/recyclarr" = {
-              type = "zfs_fs";
-              options.mountpoint = "legacy";
-              mountpoint = "/var/lib/recyclarr";
-            };
-            "services/sabnzbd" = {
-              type = "zfs_fs";
-              options.mountpoint = "legacy";
-              mountpoint = "/var/lib/sabnzbd";
-            };
-            "services/sonarr" = {
-              type = "zfs_fs";
-              options.mountpoint = "legacy";
-              mountpoint = "/var/lib/sonarr";
             };
           };
         };
 
-        tank = {
+        zpool.rpool = {
           type = "zpool";
-          mode = {
-            topology = {
-              type = "topology";
-              vdev = [
-                {
-                  mode = "raidz2";
-                  members = [
-                    "tank0"
-                    "tank2"
-                    "tank4"
-                    "tank6"
-                  ];
-                }
-                {
-                  mode = "raidz2";
-                  members = [
-                    "tank1"
-                    "tank3"
-                    "tank5"
-                    "tank7"
-                  ];
-                }
-              ];
-            };
-          };
+          mode = "mirror";
           options.ashift = "12";
+
           rootFsOptions = {
+            acltype = "posixacl";
             atime = "off";
             canmount = "off";
             compression = "zstd";
-            encryption = "aes-256-gcm";
-            keyformat = "raw";
-            keylocation = "file:///persistent/secrets/zfs/tank.key";
             mountpoint = "none";
+            xattr = "sa";
           };
+
           datasets = {
-            "archive" = {
-              type = "zfs_fs";
-              options = {
-                canmount = "off";
-                mountpoint = "none";
-              };
-            };
-            "archive/games" = {
-              type = "zfs_fs";
-              options = {
-                canmount = "off";
-                mountpoint = "none";
-              };
-            };
-            "archive/games/osu" = {
+            root = {
               type = "zfs_fs";
               options.mountpoint = "legacy";
-              mountpoint = "/srv/archive/games/osu";
+              mountpoint = "/";
             };
-            "backups" = {
+
+            nix = {
+              type = "zfs_fs";
+              options.mountpoint = "legacy";
+              mountpoint = "/nix";
+            };
+
+            reserved = {
               type = "zfs_fs";
               options = {
                 canmount = "off";
                 mountpoint = "none";
+                refreservation = "44G";
               };
-            };
-            "backups/restic" = {
-              type = "zfs_fs";
-              options = {
-                canmount = "off";
-                mountpoint = "none";
-              };
-            };
-            "backups/restic/hosts" = {
-              type = "zfs_fs";
-              options = {
-                canmount = "off";
-                mountpoint = "none";
-              };
-            };
-            "backups/restic/hosts/loki" = {
-              type = "zfs_fs";
-              options = {
-                compression = "off";
-                mountpoint = "legacy";
-              };
-              mountpoint = "/srv/backups/restic/hosts/loki";
-            };
-            "backups/restic/hosts/tyr" = {
-              type = "zfs_fs";
-              options = {
-                compression = "off";
-                mountpoint = "legacy";
-              };
-              mountpoint = "/srv/backups/restic/hosts/tyr";
-            };
-            "backups/restic/services" = {
-              type = "zfs_fs";
-              options = {
-                compression = "off";
-                mountpoint = "legacy";
-              };
-              mountpoint = "/srv/backups/restic/services";
-            };
-            "backups/homeassistant" = {
-              type = "zfs_fs";
-              options = {
-                compression = "off";
-                mountpoint = "legacy";
-              };
-              mountpoint = "/srv/backups/homeassistant";
-            };
-            "backups/timemachine" = {
-              type = "zfs_fs";
-              options = {
-                canmount = "off";
-                mountpoint = "none";
-              };
-            };
-            "backups/timemachine/ndahlke" = {
-              type = "zfs_fs";
-              options = {
-                compression = "off";
-                mountpoint = "legacy";
-                quota = "1536G";
-              };
-              mountpoint = "/srv/backups/timemachine/ndahlke";
-            };
-            "media" = {
-              type = "zfs_fs";
-              options = {
-                canmount = "off";
-                mountpoint = "none";
-              };
-            };
-            "media/music" = {
-              type = "zfs_fs";
-              options = {
-                mountpoint = "legacy";
-                acltype = "posixacl";
-              };
-              mountpoint = "/srv/media/music";
-            };
-            "media/video" = {
-              type = "zfs_fs";
-              options = {
-                canmount = "off";
-                mountpoint = "none";
-              };
-            };
-            "media/video/anime" = {
-              type = "zfs_fs";
-              options = {
-                canmount = "off";
-                mountpoint = "none";
-              };
-            };
-            "media/video/anime/movies" = {
-              type = "zfs_fs";
-              options = {
-                mountpoint = "legacy";
-                acltype = "posixacl";
-              };
-              mountpoint = "/srv/media/video/anime/movies";
-            };
-            "media/video/anime/shows" = {
-              type = "zfs_fs";
-              options = {
-                mountpoint = "legacy";
-                acltype = "posixacl";
-              };
-              mountpoint = "/srv/media/video/anime/shows";
-            };
-            "media/video/movies" = {
-              type = "zfs_fs";
-              options = {
-                mountpoint = "legacy";
-                acltype = "posixacl";
-              };
-              mountpoint = "/srv/media/video/movies";
-            };
-            "media/video/music" = {
-              type = "zfs_fs";
-              options = {
-                mountpoint = "legacy";
-              };
-              mountpoint = "/srv/media/video/music";
-            };
-            "media/video/shows" = {
-              type = "zfs_fs";
-              options = {
-                mountpoint = "legacy";
-                acltype = "posixacl";
-              };
-              mountpoint = "/srv/media/video/shows";
             };
           };
         };
       };
     };
-  };
 }

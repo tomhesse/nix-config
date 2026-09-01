@@ -6,11 +6,11 @@ disk-id target:
 init-host host:
     mkdir -p modules/hosts/{{host}}
 
-# Generate SSH host key for a new host
-gen-host-key host:
-    mkdir -p /tmp/extra-files/{{host}}/persistent/etc/ssh
-    ssh-keygen -t ed25519 -f /tmp/extra-files/{{host}}/persistent/etc/ssh/ssh_host_ed25519_key -N "" -C "root@{{host}}"
-    cp /tmp/extra-files/{{host}}/persistent/etc/ssh/ssh_host_ed25519_key.pub modules/hosts/{{host}}/
+# Generate SSH host key for a new host (pass "etc/ssh" for a persistent root)
+gen-host-key host dir="persistent/etc/ssh":
+    mkdir -p /tmp/extra-files/{{host}}/{{dir}}
+    ssh-keygen -t ed25519 -f /tmp/extra-files/{{host}}/{{dir}}/ssh_host_ed25519_key -N "" -C "root@{{host}}"
+    cp /tmp/extra-files/{{host}}/{{dir}}/ssh_host_ed25519_key.pub modules/hosts/{{host}}/
 
 # Generate secure boot signing keys
 gen-sbctl-keys host:

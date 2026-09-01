@@ -55,6 +55,13 @@ nix build .#installer-iso
    just gen-host-key <hostname>
    ```
 
+   Hosts with a persistent root (no impermanence, e.g. `mimir`) keep the key at the
+   standard location instead:
+
+   ```bash
+   just gen-host-key <hostname> etc/ssh
+   ```
+
 5. Derive the age key and update `.sops.yaml`:
 
    ```bash
@@ -91,7 +98,7 @@ nix build .#installer-iso
 
     After enrollment, enable Secure Boot in the UEFI firmware settings.
 
-10. Rebuild once for limine to sign the boot files (optional, secure boot only):
+10. Rebuild once for Limine to sign the boot files (optional, secure boot only):
 
     ```bash
     just update <hostname> <user@target>
@@ -124,6 +131,35 @@ To re-enroll after a firmware or bootloader change (e.g. secure boot key rotatio
 ```bash
 sudo cryptenroll --wipe-slot=tpm2 /dev/<luks-device>
 ```
+
+### Bootloaders
+
+Bootloader choice is per host, not part of `base`:
+
+| Module | Hosts | Notes |
+|--------|-------|-------|
+| `limine` | loki, tyr | Signs its own boot files for Secure Boot |
+| `grub` | mimir | UEFI, mirrored ESPs across the ZFS root mirror |
+
+`mimir` uses GRUB solely because `boot.loader.grub.mirroredBoots` handles a
+redundant ESP natively — a ZFS root mirror gives redundant data but not a
+redundant EFI partition, and Limine has no equivalent. Each SSD carries its own
+ESP (`/boot1`, `/boot2`) with its own GRUB core image, `grub.cfg` and copied
+kernels, so either disk boots on its own.
+
+`efiInstallAsRemovable = true` with `canTouchEfiVariables = false` installs to
+the removable path (`EFI/BOOT/BOOTX64.EFI`) rather than writing an NVRAM entry,
+which would point at one specific disk and defeat the mirror.
+
+#### Verifying the mirror
+
+Do not trust the redundancy until it has been tested. With the host powered off,
+pull one SSD and boot; the box must come up with `zpool status` reporting
+DEGRADED. Reinsert, let the pool resilver, then repeat with the other disk.
+
+The ESPs are mounted `nofail`, so a missing disk does not hang boot. The
+trade-off is that `nixos-rebuild` fails at `grub-install` while a disk is
+absent, which is intentional — a loud failure is preferable to a silent one.
 
 ### Clevis Tang unlock
 
