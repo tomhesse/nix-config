@@ -19,6 +19,8 @@
         self.modules.nixos.grafana
         self.modules.nixos.grocy
         self.modules.nixos.homepage
+        # Dropped once mimir moves to a persistent ZFS root (see mimir-concept.md).
+        self.modules.nixos.impermanence
         self.modules.nixos.jellyfin
         self.modules.nixos.kanidm
         self.modules.nixos.minecraft-server

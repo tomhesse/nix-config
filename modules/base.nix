@@ -8,13 +8,13 @@
       self.modules.nixos.bash
       self.modules.nixos.fish
       self.modules.nixos.home-manager
-      self.modules.nixos.impermanence
       self.modules.nixos.local-packages
       self.modules.nixos.locale
       self.modules.nixos.networkd
       self.modules.nixos.nix
       self.modules.nixos.nixpkgs
       self.modules.nixos.openssh
+      self.modules.nixos.persistence
       # self.modules.nixos.resolved
       self.modules.nixos.sops
       self.modules.nixos.sudo

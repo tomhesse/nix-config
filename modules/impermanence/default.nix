@@ -4,6 +4,55 @@
     url = "github:nix-community/impermanence";
   };
 
+  flake.modules.nixos.persistence =
+    { config, lib, ... }:
+    let
+      inherit (lib)
+        mkOption
+        types
+        ;
+    in
+    {
+      options.environment.persistCleanup.ignoredPaths = mkOption {
+        type = types.listOf types.str;
+        default = [ ];
+        description = "Paths under persistent storage that exist outside of environment.persistence and home.persistence and should not be flagged as orphans by persist-cleanup.";
+      };
+
+      imports = [ inputs.impermanence.nixosModules.impermanence ];
+
+      config = {
+        # The ephemeral root itself lives in the impermanence module, which hosts
+        # import individually. A host that declares persisted paths but forgets that
+        # import is caught by impermanence's own neededForBoot assertion.
+        environment.persistence."/persistent" = {
+          hideMounts = true;
+          allowTrash = true;
+          directories = [
+            "/var/lib/nixos"
+            "/var/lib/systemd/backlight"
+            "/var/lib/systemd/coredump"
+            "/var/lib/systemd/timers"
+            "/var/log"
+          ];
+          files = [
+            "/etc/machine-id"
+            "/var/lib/systemd/random-seed"
+          ];
+        };
+
+        home-manager.sharedModules = [
+          {
+            home.persistence."/persistent" = {
+              inherit (config.environment.persistence."/persistent") enable;
+              hideMounts = true;
+              allowTrash = true;
+            };
+          }
+        ];
+      };
+    };
+
   flake.modules.nixos.impermanence =
     {
       config,
@@ -17,8 +66,6 @@
         escapeShellArg
         flatten
         mapAttrsToList
-        mkOption
-        types
         unique
         ;
 
@@ -159,97 +206,65 @@
       };
     in
     {
-      options.environment.persistCleanup.ignoredPaths = mkOption {
-        type = types.listOf types.str;
-        default = [ ];
-        description = "Paths under persistent storage that exist outside of environment.persistence and home.persistence and should not be flagged as orphans by persist-cleanup.";
-      };
+      # Depends on nixos.persistence for the environment.persistence options, which
+      # every host gets through nixos.base. It is not imported here: these modules are
+      # anonymous functions, so the module system cannot deduplicate a double import.
+      environment.systemPackages = [
+        btrfs-diff
+        persist-cleanup
+      ];
 
-      imports = [ inputs.impermanence.nixosModules.impermanence ];
+      boot.initrd.systemd.initrdBin = with pkgs; [
+        btrfs-progs
+        coreutils
+        findutils
+        util-linux
+      ];
 
-      config = {
-        environment.systemPackages = [
-          btrfs-diff
-          persist-cleanup
-        ];
+      fileSystems."/persistent".neededForBoot = true;
 
-        boot.initrd.systemd.initrdBin = with pkgs; [
-          btrfs-progs
-          coreutils
-          findutils
-          util-linux
-        ];
+      boot.initrd.systemd.services.rotate-root-btrfs = {
+        description = "Rotate Btrfs root subvolume before mounting sysroot";
+        wantedBy = [ "initrd.target" ];
+        after = lib.optionals hasLuks [ "cryptsetup.target" ];
+        before = [ "sysroot.mount" ];
+        unitConfig = {
+          DefaultDependencies = "no";
+          ConditionPathExists = rootDevice;
+        };
+        serviceConfig.Type = "oneshot";
+        script = ''
+          mkdir -p /btrfs_tmp
+          mount -t btrfs -o subvol=/ ${rootDevice} /btrfs_tmp
 
-        fileSystems."/persistent".neededForBoot = true;
-
-        home-manager.sharedModules = [
-          {
-            home.persistence."/persistent" = {
-              hideMounts = true;
-              allowTrash = true;
-            };
+          cleanup() {
+            umount /btrfs_tmp 2>/dev/null || true
+            rmdir /btrfs_tmp 2>/dev/null || true
           }
-        ];
+          trap cleanup EXIT
 
-        environment.persistence."/persistent" = {
-          hideMounts = true;
-          allowTrash = true;
-          directories = [
-            "/var/lib/nixos"
-            "/var/lib/systemd/backlight"
-            "/var/lib/systemd/coredump"
-            "/var/lib/systemd/timers"
-            "/var/log"
-          ];
-          files = [
-            "/etc/machine-id"
-            "/var/lib/systemd/random-seed"
-          ];
-        };
+          if [[ -e /btrfs_tmp/@ ]]; then
+            mkdir -p /btrfs_tmp/@old_roots
+            timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/@)" "+%Y-%m-%d_%H:%M:%S")
+            mv /btrfs_tmp/@ "/btrfs_tmp/@old_roots/$timestamp"
+          fi
 
-        boot.initrd.systemd.services.rotate-root-btrfs = {
-          description = "Rotate Btrfs root subvolume before mounting sysroot";
-          wantedBy = [ "initrd.target" ];
-          after = lib.optionals hasLuks [ "cryptsetup.target" ];
-          before = [ "sysroot.mount" ];
-          unitConfig = {
-            DefaultDependencies = "no";
-            ConditionPathExists = rootDevice;
-          };
-          serviceConfig.Type = "oneshot";
-          script = ''
-            mkdir -p /btrfs_tmp
-            mount -t btrfs -o subvol=/ ${rootDevice} /btrfs_tmp
+          delete_subvolume_recursively() {
+            IFS=$'\n'
+            for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
+              delete_subvolume_recursively "/btrfs_tmp/$i"
+            done
+            btrfs subvolume delete "$1"
+          }
 
-            cleanup() {
-              umount /btrfs_tmp 2>/dev/null || true
-              rmdir /btrfs_tmp 2>/dev/null || true
-            }
-            trap cleanup EXIT
+          if [[ -d /btrfs_tmp/@old_roots ]]; then
+            find /btrfs_tmp/@old_roots/ -maxdepth 1 -mtime +30 | while read -r old; do
+              delete_subvolume_recursively "$old"
+            done
+          fi
 
-            if [[ -e /btrfs_tmp/@ ]]; then
-              mkdir -p /btrfs_tmp/@old_roots
-              timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/@)" "+%Y-%m-%d_%H:%M:%S")
-              mv /btrfs_tmp/@ "/btrfs_tmp/@old_roots/$timestamp"
-            fi
-
-            delete_subvolume_recursively() {
-              IFS=$'\n'
-              for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
-                delete_subvolume_recursively "/btrfs_tmp/$i"
-              done
-              btrfs subvolume delete "$1"
-            }
-
-            if [[ -d /btrfs_tmp/@old_roots ]]; then
-              find /btrfs_tmp/@old_roots/ -maxdepth 1 -mtime +30 | while read -r old; do
-                delete_subvolume_recursively "$old"
-              done
-            fi
-
-            btrfs subvolume create /btrfs_tmp/@
-          '';
-        };
+          btrfs subvolume create /btrfs_tmp/@
+        '';
       };
     };
 }
