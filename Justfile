@@ -24,12 +24,6 @@ gen-zfs-keys host +pools:
         dd if=/dev/urandom of=/tmp/extra-files/{{host}}/persistent/secrets/zfs/${pool}.key bs=32 count=1; \
     done
 
-# Generate a clevis Tang JWE file for LUKS unlock
-gen-clevis-jwe host tang_ip:
-    mkdir -p /tmp/extra-files/{{host}}/persistent/secrets/clevis
-    @read -rsp "LUKS passphrase: " pass && echo && \
-        echo -n "$pass" | clevis encrypt tang '{"url": "http://{{tang_ip}}:7654"}' > /tmp/extra-files/{{host}}/persistent/secrets/clevis/{{host}}.jwe
-
 # Show age key derived from host SSH key
 age-key host:
     cat modules/hosts/{{host}}/ssh_host_ed25519_key.pub | ssh-to-age

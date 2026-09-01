@@ -161,23 +161,23 @@ The ESPs are mounted `nofail`, so a missing disk does not hang boot. The
 trade-off is that `nixos-rebuild` fails at `grub-install` while a disk is
 absent, which is intentional — a loud failure is preferable to a silent one.
 
-### Clevis Tang unlock
+### Tang server
 
-Hosts with the `clevis` module use network-bound disk encryption (NBDE) to
-unlock the LUKS boot partition at boot via a Tang server. The Tang server runs
-on a host with the `tang` module.
-
-#### Tang server setup
-
-The `tang` module handles everything. On first boot, tang auto-generates its
-keys in `/var/lib/private/tang` (persisted via impermanence). Retrieve the
-server advertisement for clevis binding:
+The `tang` module runs a Tang server for network-bound disk encryption. It
+handles everything: on first boot Tang auto-generates its keys in
+`/var/lib/private/tang` (persisted via impermanence). Retrieve the server
+advertisement with:
 
 ```bash
 curl http://<tang-host>:7654/adv
 ```
 
-#### ZFS encryption keys
+**Note:** Use the Tang server's IP address rather than its hostname in client
+bindings if they need to run before DNS is available.
+
+No host currently binds to it. It is kept for post-boot ZFS key delivery.
+
+### ZFS encryption keys
 
 Generate raw encryption keys for ZFS pools:
 
@@ -188,31 +188,7 @@ just gen-zfs-keys <hostname> <pool1> [pool2] ...
 Keys are placed in `/tmp/extra-files/<hostname>/persistent/secrets/zfs/` for
 deployment with nixos-anywhere.
 
-#### Binding a device with clevis
-
-Hosts using the `clevis` module use `clevisLuksAskpass`, which stores the
-binding directly in the LUKS header rather than a JWE file. Bind after the
-host is deployed and running:
-
-```bash
-sudo clevis luks bind -d /dev/<luks-device> tang '{"url":"http://<tang-ip>:<tang-port>"}'
-```
-
-**Important:** Use the Tang server's IP address, not its hostname. DNS is not
-available in the initrd during early boot.
-
-Verify the binding was written to the header:
-
-```bash
-sudo clevis luks list -d /dev/<luks-device>
-```
-
-#### Verifying
-
-After binding, reboot the host. It should obtain a network address in initrd
-via DHCP and contact the Tang server to unlock the device automatically.
-If the Tang server is unreachable, the boot process falls back to interactive
-passphrase entry.
+No host currently uses encrypted datasets.
 
 ### Updating flake inputs
 
