@@ -16,6 +16,8 @@ in
       ...
     }:
     let
+      persistent = config.environment.persistence."/persistent".enable;
+
       codebergHostKeys = pkgs.writeText "codeberg-host-keys" ''
         codeberg.org ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC8hZi7K1/2E2uBX8gwPRJAHvRAob+3Sn+y2hxiEhN0buv1igjYFTgFO2qQD8vLfU/HT/P/rqvEeTvaDfY1y/vcvQ8+YuUYyTwE2UaVU5aJv89y6PEZBYycaJCPdGIfZlLMmjilh/Sk8IWSEK6dQr+g686lu5cSWrFW60ixWpHpEVB26eRWin3lKYWSQGMwwKv4LwmW3ouqqs4Z4vsqRFqXJ/eCi3yhpT+nOjljXvZKiYTpYajqUC48IHAxTWugrKe1vXWOPxVXXMQEPsaIRc2hpK+v1LmfB7GnEGvF1UAKnEZbUuiD9PBEeD5a1MZQIzcoPWCrTxipEpuXQ5Tni4mN
         codeberg.org ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBL2pDxWr18SoiDJCGZ5LmxPygTlPu+cCKSkpqkvCyQzl5xmIMeKNdfdBpfbCGDPoZQghePzFZkKJNR/v9Win3Sc=
@@ -43,16 +45,19 @@ in
         };
         hostKeys = [
           {
-            path = "/persistent/etc/ssh/ssh_host_ed25519_key";
+            # On an ephemeral root the direct /persistent path is used instead of the
+            # standard /etc/ssh one, because sops reads this key during activation
+            # (setupSecrets) before the impermanence bind mount for the file is
+            # guaranteed to exist. Hosts with a persistent root have no /persistent and
+            # no such ordering problem, so they use the stock location.
+            path =
+              if persistent then "/persistent/etc/ssh/ssh_host_ed25519_key" else "/etc/ssh/ssh_host_ed25519_key";
             type = "ed25519";
           }
         ];
       };
 
-      # The direct /persistent path is used instead of the standard /etc/ssh path
-      # because sops reads this key during activation (setupSecrets) before the
-      # impermanence bind mount for the file is guaranteed to exist.
-      environment.persistCleanup.ignoredPaths = [ "/persistent/etc/ssh" ];
+      environment.persistCleanup.ignoredPaths = lib.optional persistent "/persistent/etc/ssh";
 
       programs.ssh.knownHosts =
         lib.genAttrs hostsWithKeys (host: {

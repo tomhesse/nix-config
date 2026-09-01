@@ -1,6 +1,9 @@
 {
   flake.modules.nixos.restic-server =
     { config, pkgs, ... }:
+    let
+      hostKey = (builtins.head config.services.openssh.hostKeys).path;
+    in
     {
       users = {
         groups.restic = { };
@@ -36,7 +39,7 @@
         ];
 
         extraOptions = [
-          "sftp.command='ssh u591202-sub1@u591202-sub1.your-storagebox.de -i /persistent/etc/ssh/ssh_host_ed25519_key -p 23 -s sftp'"
+          "sftp.command='ssh u591202-sub1@u591202-sub1.your-storagebox.de -i ${hostKey} -p 23 -s sftp'"
         ];
 
         pruneOpts = [

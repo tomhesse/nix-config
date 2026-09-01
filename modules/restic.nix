@@ -3,6 +3,7 @@
     { config, ... }:
     let
       hostname = config.networking.hostName;
+      hostKey = (builtins.head config.services.openssh.hostKeys).path;
     in
     {
       services.restic.backups.persistent = {
@@ -13,7 +14,7 @@
         paths = [ "/persistent" ];
 
         extraOptions = [
-          "sftp.command='ssh restic@mimir.shrimphouse.xyz -i /persistent/etc/ssh/ssh_host_ed25519_key -s sftp'"
+          "sftp.command='ssh restic@mimir.shrimphouse.xyz -i ${hostKey} -s sftp'"
         ];
 
         pruneOpts = [
