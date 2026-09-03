@@ -32,10 +32,19 @@ age-key host:
 sops-rekey:
     find modules -path '*/secrets/*.yaml' -exec sops updatekeys {} \;
 
-# Deploy a host using nixos-anywhere
-deploy host target:
+# Deploy a host using nixos-anywhere, regenerating its facter report
+deploy host target: (_deploy host target "regenerate")
+
+# Deploy a host using nixos-anywhere, reusing the committed facter report
+deploy-keep-facter host target: (_deploy host target "keep")
+
+[private]
+_deploy host target facter:
     #!/usr/bin/env bash
-    args=(--generate-hardware-config nixos-facter modules/hosts/{{host}}/facter.json --flake .#{{host}} --extra-files /tmp/extra-files/{{host}})
+    args=(--flake .#{{host}} --extra-files /tmp/extra-files/{{host}})
+    if [ "{{facter}}" = "regenerate" ]; then
+        args+=(--generate-hardware-config nixos-facter modules/hosts/{{host}}/facter.json)
+    fi
     for key in /tmp/extra-files/{{host}}/persistent/secrets/zfs/*.key; do
         [ -f "$key" ] && args+=(--disk-encryption-keys "${key#/tmp/extra-files/{{host}}}" "$key")
     done

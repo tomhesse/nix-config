@@ -88,6 +88,16 @@ nix build .#installer-iso
    just deploy <hostname> <user@target>
    ```
 
+   To redeploy an existing host without overwriting its committed hardware report:
+
+   ```bash
+   just deploy-keep-facter <hostname> <user@target>
+   ```
+
+   `just deploy` regenerates `modules/hosts/<hostname>/facter.json` from the machine
+   it runs against, so it picks up whatever hardware is attached at that moment —
+   including transient devices such as an installer USB stick.
+
 9. Enroll secure boot keys (optional, requires UEFI Setup Mode):
 
     Boot the target in UEFI Setup Mode, then SSH in and run:
