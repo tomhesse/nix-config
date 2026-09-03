@@ -20,18 +20,26 @@
         self.modules.homeManager.server
       ];
 
-      boot.loader.grub.mirroredBoots = [
-        {
-          path = "/boot1";
-          devices = [ "nodev" ];
-        }
-        {
-          path = "/boot2";
-          devices = [ "nodev" ];
-        }
-      ];
+      boot = {
+        kernelParams = [ "zfs.zfs_arc_max=${toString (32 * 1024 * 1024 * 1024)}" ];
 
-      boot.kernelParams = [ "zfs.zfs_arc_max=${toString (32 * 1024 * 1024 * 1024)}" ];
+        loader.grub.mirroredBoots = [
+          {
+            path = "/boot1";
+            devices = [ "nodev" ];
+          }
+          {
+            path = "/boot2";
+            devices = [ "nodev" ];
+          }
+        ];
+
+        zfs.extraPools = [
+          "scratch"
+          "tank"
+        ];
+      };
+
       hardware.facter.reportPath = ./facter.json;
 
       disko.zfs.enable = true;
