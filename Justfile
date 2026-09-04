@@ -17,13 +17,6 @@ gen-sbctl-keys host:
     mkdir -p /tmp/extra-files/{{host}}/persistent/var/lib/sbctl
     sbctl create-keys --disable-landlock --export /tmp/extra-files/{{host}}/persistent/var/lib/sbctl/keys --database-path /tmp/extra-files/{{host}}/persistent/var/lib/sbctl/GUID
 
-# Generate ZFS encryption keys
-gen-zfs-keys host +pools:
-    mkdir -p /tmp/extra-files/{{host}}/persistent/secrets/zfs
-    for pool in {{pools}}; do \
-        dd if=/dev/urandom of=/tmp/extra-files/{{host}}/persistent/secrets/zfs/${pool}.key bs=32 count=1; \
-    done
-
 # Show age key derived from host SSH key
 age-key host:
     cat modules/hosts/{{host}}/ssh_host_ed25519_key.pub | ssh-to-age
@@ -45,9 +38,6 @@ _deploy host target facter:
     if [ "{{facter}}" = "regenerate" ]; then
         args+=(--generate-hardware-config nixos-facter modules/hosts/{{host}}/facter.json)
     fi
-    for key in /tmp/extra-files/{{host}}/persistent/secrets/zfs/*.key; do
-        [ -f "$key" ] && args+=(--disk-encryption-keys "${key#/tmp/extra-files/{{host}}}" "$key")
-    done
     args+=({{target}})
     nix run github:nix-community/nixos-anywhere -- "${args[@]}"
 
