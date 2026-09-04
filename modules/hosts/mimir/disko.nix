@@ -31,6 +31,20 @@
           partitions.zfs = zfsPartition pool;
         };
       };
+
+      dataset = options: {
+        type = "zfs_fs";
+        inherit options;
+      };
+
+      container =
+        options:
+        dataset (
+          {
+            canmount = "off";
+          }
+          // options
+        );
     in
     {
       disko.devices = {
@@ -99,13 +113,15 @@
                 mountpoint = "/nix";
               };
 
-              reserved = {
-                type = "zfs_fs";
-                options = {
-                  canmount = "off";
-                  mountpoint = "none";
-                  refreservation = "44G";
-                };
+              reserved = container {
+                mountpoint = "none";
+                refreservation = "44G";
+              };
+
+              services = container {
+                mountpoint = "/srv/services";
+                recordsize = "16K";
+                compression = "lz4";
               };
             };
           };
