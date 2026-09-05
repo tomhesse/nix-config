@@ -11,6 +11,7 @@
         self.modules.nixos.podman
         self.modules.nixos.server
         self.modules.nixos.smartd
+        self.modules.nixos.socket-proxy
         self.modules.nixos.user-thesse
         self.modules.nixos.zfs
       ];
