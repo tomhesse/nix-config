@@ -113,6 +113,10 @@
                 mountpoint = "/nix";
               };
 
+              containers = dataset {
+                mountpoint = "/var/lib/containers";
+              };
+
               reserved = container {
                 mountpoint = "none";
                 refreservation = "44G";
@@ -122,6 +126,10 @@
                 mountpoint = "/srv/services";
                 recordsize = "16K";
                 compression = "lz4";
+              };
+
+              "services/traefik" = dataset {
+                mountpoint = "/srv/services/traefik";
               };
             };
           };
