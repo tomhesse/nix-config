@@ -8,6 +8,7 @@
         self.modules.nixos.common-cpu-intel
         self.modules.nixos.common-pc-ssd
         self.modules.nixos.grub
+        self.modules.nixos.podman
         self.modules.nixos.server
         self.modules.nixos.smartd
         self.modules.nixos.user-thesse
