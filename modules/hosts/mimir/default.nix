@@ -13,6 +13,7 @@
         self.modules.nixos.jellyfin
         self.modules.nixos.lldap
         self.modules.nixos.podman
+        self.modules.nixos.profilarr
         self.modules.nixos.prowlarr
         self.modules.nixos.radarr
         self.modules.nixos.sabnzbd
