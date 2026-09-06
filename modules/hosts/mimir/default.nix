@@ -34,7 +34,7 @@
       };
 
       systemd.tmpfiles.rules = [
-        "z /srv/transcode 0700 jellyfin jellyfin -"
+        "z /srv/cache/jellyfin 0700 jellyfin jellyfin -"
         "a+ /srv/media/video/anime/movies - - - - default:user:jellyfin:rX,user:jellyfin:rX"
         "a+ /srv/media/video/anime/shows - - - - default:user:jellyfin:rX,user:jellyfin:rX"
         "a+ /srv/media/video/movies - - - - default:user:jellyfin:rX,user:jellyfin:rX"

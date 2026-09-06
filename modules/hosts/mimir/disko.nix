@@ -205,9 +205,12 @@
             };
 
             datasets = {
-              transcode = dataset {
-                mountpoint = "/srv/transcode";
-                recordsize = "1M";
+              cache = container {
+                mountpoint = "/srv/cache";
+              };
+
+              "cache/jellyfin" = dataset {
+                mountpoint = "/srv/cache/jellyfin";
                 reservation = "20G";
               };
             };
