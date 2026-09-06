@@ -41,6 +41,12 @@
             uid = 400;
           };
 
+          profilarr = {
+            isSystemUser = true;
+            group = "profilarr";
+            uid = 407;
+          };
+
           prowlarr = {
             isSystemUser = true;
             group = "prowlarr";
@@ -69,6 +75,7 @@
         groups = {
           bazarr.gid = 405;
           jellyfin.gid = 400;
+          profilarr.gid = 407;
           prowlarr.gid = 403;
           radarr.gid = 402;
           sabnzbd.gid = 404;

@@ -143,6 +143,10 @@
                 mountpoint = "/srv/services/lldap";
               };
 
+              "services/profilarr" = dataset {
+                mountpoint = "/srv/services/profilarr";
+              };
+
               "services/prowlarr" = dataset {
                 mountpoint = "/srv/services/prowlarr";
               };
