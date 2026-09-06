@@ -1,20 +1,56 @@
 {
-  flake.modules.nixos.jellyfin = {
-    services = {
-      jellyfin.enable = true;
+  flake.modules.nixos.jellyfin =
+    let
+      domain = "shrimphouse.xyz";
 
-      nginx.virtualHosts."jellyfin.shrimphouse.xyz" = {
-        useACMEHost = "jellyfin.shrimphouse.xyz";
-        forceSSL = true;
+      libraries = [
+        "/srv/media/video/anime/movies"
+        "/srv/media/video/anime/shows"
+        "/srv/media/video/movies"
+        "/srv/media/video/shows"
+      ];
+    in
+    {
+      virtualisation.oci-containers.containers.jellyfin = {
+        image = "docker.io/jellyfin/jellyfin:12.0";
 
-        locations."/".proxyPass = "http://127.0.0.1:8096";
-        locations."/socket" = {
-          proxyPass = "http://127.0.0.1:8096";
-          proxyWebsockets = true;
+        networks = [ "edge" ];
+
+        user = "400:400";
+
+        volumes = [
+          "/srv/services/jellyfin:/config"
+          "/srv/cache/jellyfin:/cache"
+        ]
+        ++ map (path: "${path}:${path}:ro") libraries;
+
+        environment.JELLYFIN_PublishedServerUrl = "https://jellyfin.${domain}";
+
+        labels = {
+          "traefik.enable" = "true";
+          "traefik.http.routers.jellyfin.rule" = "Host(`jellyfin.${domain}`)";
         };
+
+        capabilities.ALL = false;
+
+        extraOptions = [
+          "--read-only"
+          "--tmpfs=/tmp"
+          "--security-opt=no-new-privileges"
+        ];
+      };
+
+      systemd = {
+        services.podman-jellyfin = {
+          after = [ "zfs-mount.service" ];
+
+          unitConfig.AssertPathIsMountPoint = [
+            "/srv/services/jellyfin"
+            "/srv/cache/jellyfin"
+          ];
+        };
+
+        tmpfiles.rules = [ "d /srv/services/jellyfin 0700 jellyfin jellyfin -" ];
       };
     };
-
-    security.acme.certs."jellyfin.shrimphouse.xyz".group = "nginx";
-  };
 }

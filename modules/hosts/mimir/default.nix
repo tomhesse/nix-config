@@ -9,6 +9,7 @@
         self.modules.nixos.common-cpu-intel
         self.modules.nixos.common-pc-ssd
         self.modules.nixos.grub
+        self.modules.nixos.jellyfin
         self.modules.nixos.lldap
         self.modules.nixos.podman
         self.modules.nixos.server
