@@ -26,6 +26,7 @@
             address = "ldap://lldap:3890";
             base_dn = baseDN;
             user = "uid=authelia,ou=people,${baseDN}";
+            users_filter = "(&(|({username_attribute}={input})({mail_attribute}={input}))(objectClass=person)(memberOf=cn=users,ou=groups,${baseDN}))";
           };
         };
 
