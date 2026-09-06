@@ -1,23 +1,51 @@
 {
-  flake.modules.nixos.sonarr = {
-    services = {
-      sonarr = {
-        enable = true;
-        settings.auth.method = "External";
-      };
+  flake.modules.nixos.sonarr =
+    let
+      domain = "shrimphouse.xyz";
 
-      oauth2-proxy.nginx.virtualHosts."sonarr.shrimphouse.xyz".allowed_groups = [
-        "arr_users@shrimphouse.xyz"
+      libraries = [
+        "/srv/media/video/anime/shows"
+        "/srv/media/video/shows"
       ];
 
-      nginx.virtualHosts."sonarr.shrimphouse.xyz" = {
-        useACMEHost = "sonarr.shrimphouse.xyz";
-        forceSSL = true;
+      imports = [ "/srv/downloads/complete" ];
+    in
+    {
+      virtualisation.oci-containers.containers.sonarr = {
+        image = "lscr.io/linuxserver/sonarr:4.0.19.2979-ls323";
 
-        locations."/".proxyPass = "http://127.0.0.1:8989";
+        networks = [ "edge" ];
+
+        volumes = [
+          "/srv/services/sonarr:/config"
+        ]
+        ++ map (path: "${path}:${path}") (libraries ++ imports);
+
+        environment = {
+          PUID = "401";
+          PGID = "401";
+          TZ = "Europe/Berlin";
+          SONARR__AUTH__METHOD = "Forms";
+          SONARR__AUTH__REQUIRED = "DisabledForLocalAddresses";
+        };
+
+        labels = {
+          "traefik.enable" = "true";
+          "traefik.http.routers.sonarr.rule" = "Host(`sonarr.${domain}`)";
+          "traefik.http.routers.sonarr.middlewares" = "authelia@docker";
+        };
+
+        extraOptions = [ "--security-opt=no-new-privileges" ];
+      };
+
+      systemd = {
+        services.podman-sonarr = {
+          after = [ "zfs-mount.service" ];
+
+          unitConfig.AssertPathIsMountPoint = libraries ++ imports ++ [ "/srv/services/sonarr" ];
+        };
+
+        tmpfiles.rules = [ "d /srv/services/sonarr 0700 sonarr sonarr -" ];
       };
     };
-
-    security.acme.certs."sonarr.shrimphouse.xyz".group = "nginx";
-  };
 }
