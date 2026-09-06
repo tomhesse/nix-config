@@ -132,6 +132,10 @@
                 mountpoint = "/srv/services/authelia";
               };
 
+              "services/jellyfin" = dataset {
+                mountpoint = "/srv/services/jellyfin";
+              };
+
               "services/lldap" = dataset {
                 mountpoint = "/srv/services/lldap";
               };
@@ -155,6 +159,37 @@
               mountpoint = "none";
               xattr = "sa";
             };
+
+            datasets = {
+              media = container {
+                mountpoint = "/srv/media";
+                recordsize = "1M";
+              };
+
+              "media/video" = container {
+                mountpoint = "/srv/media/video";
+              };
+
+              "media/video/anime" = container {
+                mountpoint = "/srv/media/video/anime";
+              };
+
+              "media/video/anime/movies" = dataset {
+                mountpoint = "/srv/media/video/anime/movies";
+              };
+
+              "media/video/anime/shows" = dataset {
+                mountpoint = "/srv/media/video/anime/shows";
+              };
+
+              "media/video/movies" = dataset {
+                mountpoint = "/srv/media/video/movies";
+              };
+
+              "media/video/shows" = dataset {
+                mountpoint = "/srv/media/video/shows";
+              };
+            };
           };
 
           scratch = {
@@ -168,6 +203,14 @@
               compression = "off";
               mountpoint = "none";
               xattr = "sa";
+            };
+
+            datasets = {
+              transcode = dataset {
+                mountpoint = "/srv/transcode";
+                recordsize = "1M";
+                reservation = "20G";
+              };
             };
           };
         };
