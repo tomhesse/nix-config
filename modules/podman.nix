@@ -51,17 +51,9 @@
           message = "podman.networks.${name}.interface exceeds the 15 character kernel limit.";
         }) config.podman.networks;
 
-        podman.networks = {
-          edge = {
-            subnet = "172.31.0.0/24";
-            gateway = "172.31.0.1";
-          };
-
-          directory = {
-            subnet = "172.31.1.0/24";
-            gateway = "172.31.1.1";
-            internal = true;
-          };
+        podman.networks.edge = {
+          subnet = "172.31.0.0/24";
+          gateway = "172.31.0.1";
         };
 
         virtualisation = {
