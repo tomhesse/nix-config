@@ -19,7 +19,27 @@
         self.modules.nixos.zfs
       ];
 
-      users.users.thesse.shell = lib.mkForce pkgs.bash;
+      users = {
+        users = {
+          thesse.shell = lib.mkForce pkgs.bash;
+
+          jellyfin = {
+            isSystemUser = true;
+            group = "jellyfin";
+            uid = 400;
+          };
+        };
+
+        groups.jellyfin.gid = 400;
+      };
+
+      systemd.tmpfiles.rules = [
+        "z /srv/transcode 0700 jellyfin jellyfin -"
+        "a+ /srv/media/video/anime/movies - - - - default:user:jellyfin:rX,user:jellyfin:rX"
+        "a+ /srv/media/video/anime/shows - - - - default:user:jellyfin:rX,user:jellyfin:rX"
+        "a+ /srv/media/video/movies - - - - default:user:jellyfin:rX,user:jellyfin:rX"
+        "a+ /srv/media/video/shows - - - - default:user:jellyfin:rX,user:jellyfin:rX"
+      ];
 
       home-manager.users.thesse.imports = [
         self.modules.homeManager.server
