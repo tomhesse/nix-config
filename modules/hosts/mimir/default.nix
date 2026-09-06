@@ -78,8 +78,12 @@
 
       systemd.tmpfiles.rules = [
         "z /srv/cache/jellyfin 0700 jellyfin jellyfin -"
-        "d /srv/downloads/complete 0755 sabnzbd sabnzbd -"
+        "d /srv/downloads/complete 0775 sabnzbd sabnzbd -"
         "d /srv/downloads/incomplete 0750 sabnzbd sabnzbd -"
+        "z /srv/media/video/anime/movies 0775 root root -"
+        "z /srv/media/video/anime/shows 0775 root root -"
+        "z /srv/media/video/movies 0775 root root -"
+        "z /srv/media/video/shows 0775 root root -"
         "a+ /srv/downloads/complete - - - - default:user:radarr:rwX,user:radarr:rwX"
         "a+ /srv/downloads/complete - - - - default:user:sonarr:rwX,user:sonarr:rwX"
         "a+ /srv/media/video/anime/movies - - - - default:user:jellyfin:rX,user:jellyfin:rX"

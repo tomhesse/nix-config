@@ -22,6 +22,7 @@
         environment = {
           PUID = "404";
           PGID = "404";
+          UMASK = "002";
           TZ = "Europe/Berlin";
         };
 

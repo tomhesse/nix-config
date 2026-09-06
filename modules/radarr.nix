@@ -24,6 +24,7 @@
         environment = {
           PUID = "402";
           PGID = "402";
+          UMASK = "002";
           TZ = "Europe/Berlin";
           RADARR__AUTH__METHOD = "Forms";
           RADARR__AUTH__REQUIRED = "DisabledForLocalAddresses";

@@ -24,6 +24,7 @@
         environment = {
           PUID = "401";
           PGID = "401";
+          UMASK = "002";
           TZ = "Europe/Berlin";
           SONARR__AUTH__METHOD = "Forms";
           SONARR__AUTH__REQUIRED = "DisabledForLocalAddresses";
