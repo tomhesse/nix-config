@@ -131,12 +131,32 @@
                 mountpoint = "/srv/services/authelia";
               };
 
+              "services/bazarr" = dataset {
+                mountpoint = "/srv/services/bazarr";
+              };
+
               "services/jellyfin" = dataset {
                 mountpoint = "/srv/services/jellyfin";
               };
 
               "services/lldap" = dataset {
                 mountpoint = "/srv/services/lldap";
+              };
+
+              "services/prowlarr" = dataset {
+                mountpoint = "/srv/services/prowlarr";
+              };
+
+              "services/radarr" = dataset {
+                mountpoint = "/srv/services/radarr";
+              };
+
+              "services/sabnzbd" = dataset {
+                mountpoint = "/srv/services/sabnzbd";
+              };
+
+              "services/sonarr" = dataset {
+                mountpoint = "/srv/services/sonarr";
               };
 
               "services/traefik" = dataset {
@@ -212,6 +232,19 @@
               "cache/jellyfin" = dataset {
                 mountpoint = "/srv/cache/jellyfin";
                 reservation = "20G";
+              };
+
+              downloads = container {
+                mountpoint = "/srv/downloads";
+                recordsize = "1M";
+              };
+
+              "downloads/complete" = dataset {
+                mountpoint = "/srv/downloads/complete";
+              };
+
+              "downloads/incomplete" = dataset {
+                mountpoint = "/srv/downloads/incomplete";
               };
             };
           };
