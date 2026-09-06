@@ -12,6 +12,7 @@
         self.modules.nixos.jellyfin
         self.modules.nixos.lldap
         self.modules.nixos.podman
+        self.modules.nixos.prowlarr
         self.modules.nixos.sabnzbd
         self.modules.nixos.server
         self.modules.nixos.smartd

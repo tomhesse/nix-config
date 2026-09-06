@@ -1,23 +1,41 @@
 {
-  flake.modules.nixos.prowlarr = {
-    services = {
-      prowlarr = {
-        enable = true;
-        settings.auth.method = "External";
+  flake.modules.nixos.prowlarr =
+    let
+      domain = "shrimphouse.xyz";
+    in
+    {
+      virtualisation.oci-containers.containers.prowlarr = {
+        image = "lscr.io/linuxserver/prowlarr:2.5.2.5491-ls158";
+
+        networks = [ "edge" ];
+
+        volumes = [ "/srv/services/prowlarr:/config" ];
+
+        environment = {
+          PUID = "403";
+          PGID = "403";
+          TZ = "Europe/Berlin";
+          PROWLARR__AUTH__METHOD = "Forms";
+          PROWLARR__AUTH__REQUIRED = "DisabledForLocalAddresses";
+        };
+
+        labels = {
+          "traefik.enable" = "true";
+          "traefik.http.routers.prowlarr.rule" = "Host(`prowlarr.${domain}`)";
+          "traefik.http.routers.prowlarr.middlewares" = "authelia@docker";
+        };
+
+        extraOptions = [ "--security-opt=no-new-privileges" ];
       };
 
-      oauth2-proxy.nginx.virtualHosts."prowlarr.shrimphouse.xyz".allowed_groups = [
-        "arr_users@shrimphouse.xyz"
-      ];
+      systemd = {
+        services.podman-prowlarr = {
+          after = [ "zfs-mount.service" ];
 
-      nginx.virtualHosts."prowlarr.shrimphouse.xyz" = {
-        useACMEHost = "prowlarr.shrimphouse.xyz";
-        forceSSL = true;
+          unitConfig.AssertPathIsMountPoint = "/srv/services/prowlarr";
+        };
 
-        locations."/".proxyPass = "http://127.0.0.1:9696";
+        tmpfiles.rules = [ "d /srv/services/prowlarr 0700 prowlarr prowlarr -" ];
       };
     };
-
-    security.acme.certs."prowlarr.shrimphouse.xyz".group = "nginx";
-  };
 }
