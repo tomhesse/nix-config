@@ -125,7 +125,6 @@
               services = container {
                 mountpoint = "/srv/services";
                 recordsize = "16K";
-                compression = "lz4";
               };
 
               "services/authelia" = dataset {
