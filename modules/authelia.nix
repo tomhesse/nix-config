@@ -53,37 +53,6 @@
           ];
         };
 
-        identity_providers.oidc = {
-          authorization_policies.admins = {
-            default_policy = "deny";
-
-            rules = [
-              {
-                policy = "two_factor";
-                subject = [ "group:admins" ];
-              }
-            ];
-          };
-
-          clients = [
-            {
-              client_id = "profilarr";
-              client_name = "Profilarr";
-              client_secret = "$pbkdf2-sha512$310000$G9hHaCv6996H5mh59hOpeQ$DpqK9caOIHpImo8d.PcMyOo9/yN3Cr/t31g.PjcoZHzlGqEnLdf5xTTUBaNDMR6mkkPBBN.Cj159YK.RwCeD0A";
-              public = false;
-              authorization_policy = "admins";
-              consent_mode = "implicit";
-              redirect_uris = [ "https://profilarr.${domain}/auth/oidc/callback" ];
-              scopes = [
-                "openid"
-                "profile"
-                "email"
-                "groups"
-              ];
-            }
-          ];
-        };
-
         session.cookies = [
           {
             inherit domain;
@@ -98,6 +67,36 @@
           sender = "Authelia <mimir@mail.${domain}>";
         };
       };
+
+      oidcConfiguration = pkgs.writeText "oidc.yml" ''
+        identity_providers:
+          oidc:
+            jwks:
+              - key: {{ secret "/secrets/oidc-jwks.pem" | mindent 10 "|" | msquote }}
+
+            authorization_policies:
+              admins:
+                default_policy: 'deny'
+                rules:
+                  - policy: 'two_factor'
+                    subject:
+                      - 'group:admins'
+
+            clients:
+              - client_id: 'profilarr'
+                client_name: 'Profilarr'
+                client_secret: '$pbkdf2-sha512$310000$G9hHaCv6996H5mh59hOpeQ$DpqK9caOIHpImo8d.PcMyOo9/yN3Cr/t31g.PjcoZHzlGqEnLdf5xTTUBaNDMR6mkkPBBN.Cj159YK.RwCeD0A'
+                public: false
+                authorization_policy: 'admins'
+                consent_mode: 'implicit'
+                redirect_uris:
+                  - 'https://profilarr.${domain}/auth/oidc/callback'
+                scopes:
+                  - 'openid'
+                  - 'profile'
+                  - 'email'
+                  - 'groups'
+      '';
     in
     {
       virtualisation.oci-containers.containers.authelia = {
@@ -107,6 +106,8 @@
         cmd = [
           "--config"
           "/config/configuration.yml"
+          "--config"
+          "/config/oidc.yml"
         ];
 
         dependsOn = [ "lldap" ];
@@ -114,9 +115,12 @@
 
         volumes = [
           "${configuration}:/config/configuration.yml:ro"
+          "${oidcConfiguration}:/config/oidc.yml:ro"
           "${config.sops.secrets."services/authelia/oidc-jwks-key".path}:/secrets/oidc-jwks.pem:ro"
           "/srv/services/authelia:/data"
         ];
+
+        environment.X_AUTHELIA_CONFIG_FILTERS = "template";
 
         environmentFiles = [ config.sops.templates."authelia-env".path ];
 
@@ -183,7 +187,6 @@
               AUTHELIA_IDENTITY_PROVIDERS_OIDC_HMAC_SECRET=${
                 config.sops.placeholder."services/authelia/oidc-hmac-secret"
               }
-              AUTHELIA_IDENTITY_PROVIDERS_OIDC_JWKS_0_KEY_FILE=/secrets/oidc-jwks.pem
             '';
             restartUnits = [ "podman-authelia.service" ];
           };
