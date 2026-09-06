@@ -24,22 +24,71 @@
         users = {
           thesse.shell = lib.mkForce pkgs.bash;
 
+          bazarr = {
+            isSystemUser = true;
+            group = "bazarr";
+            uid = 405;
+          };
+
           jellyfin = {
             isSystemUser = true;
             group = "jellyfin";
             uid = 400;
           };
+
+          prowlarr = {
+            isSystemUser = true;
+            group = "prowlarr";
+            uid = 403;
+          };
+
+          radarr = {
+            isSystemUser = true;
+            group = "radarr";
+            uid = 402;
+          };
+
+          sabnzbd = {
+            isSystemUser = true;
+            group = "sabnzbd";
+            uid = 404;
+          };
+
+          sonarr = {
+            isSystemUser = true;
+            group = "sonarr";
+            uid = 401;
+          };
         };
 
-        groups.jellyfin.gid = 400;
+        groups = {
+          bazarr.gid = 405;
+          jellyfin.gid = 400;
+          prowlarr.gid = 403;
+          radarr.gid = 402;
+          sabnzbd.gid = 404;
+          sonarr.gid = 401;
+        };
       };
 
       systemd.tmpfiles.rules = [
         "z /srv/cache/jellyfin 0700 jellyfin jellyfin -"
+        "d /srv/downloads/complete 0755 sabnzbd sabnzbd -"
+        "d /srv/downloads/incomplete 0750 sabnzbd sabnzbd -"
+        "a+ /srv/downloads/complete - - - - default:user:radarr:rwX,user:radarr:rwX"
+        "a+ /srv/downloads/complete - - - - default:user:sonarr:rwX,user:sonarr:rwX"
         "a+ /srv/media/video/anime/movies - - - - default:user:jellyfin:rX,user:jellyfin:rX"
+        "a+ /srv/media/video/anime/movies - - - - default:user:bazarr:rwX,user:bazarr:rwX"
+        "a+ /srv/media/video/anime/movies - - - - default:user:radarr:rwX,user:radarr:rwX"
         "a+ /srv/media/video/anime/shows - - - - default:user:jellyfin:rX,user:jellyfin:rX"
+        "a+ /srv/media/video/anime/shows - - - - default:user:bazarr:rwX,user:bazarr:rwX"
+        "a+ /srv/media/video/anime/shows - - - - default:user:sonarr:rwX,user:sonarr:rwX"
         "a+ /srv/media/video/movies - - - - default:user:jellyfin:rX,user:jellyfin:rX"
+        "a+ /srv/media/video/movies - - - - default:user:bazarr:rwX,user:bazarr:rwX"
+        "a+ /srv/media/video/movies - - - - default:user:radarr:rwX,user:radarr:rwX"
         "a+ /srv/media/video/shows - - - - default:user:jellyfin:rX,user:jellyfin:rX"
+        "a+ /srv/media/video/shows - - - - default:user:bazarr:rwX,user:bazarr:rwX"
+        "a+ /srv/media/video/shows - - - - default:user:sonarr:rwX,user:sonarr:rwX"
       ];
 
       home-manager.users.thesse.imports = [
