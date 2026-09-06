@@ -89,6 +89,7 @@
                 public: false
                 authorization_policy: 'admins'
                 consent_mode: 'implicit'
+                token_endpoint_auth_method: 'client_secret_post'
                 redirect_uris:
                   - 'https://profilarr.${domain}/auth/oidc/callback'
                 scopes:
