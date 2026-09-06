@@ -35,6 +35,17 @@
 
           rules = [
             {
+              domain = [
+                "bazarr.${domain}"
+                "prowlarr.${domain}"
+                "radarr.${domain}"
+                "sabnzbd.${domain}"
+                "sonarr.${domain}"
+              ];
+              subject = [ "group:admins" ];
+              policy = "two_factor";
+            }
+            {
               domain = [ "traefik.${domain}" ];
               subject = [ "group:admins" ];
               policy = "two_factor";
