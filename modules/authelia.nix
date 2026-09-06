@@ -53,6 +53,37 @@
           ];
         };
 
+        identity_providers.oidc = {
+          authorization_policies.admins = {
+            default_policy = "deny";
+
+            rules = [
+              {
+                policy = "two_factor";
+                subject = [ "group:admins" ];
+              }
+            ];
+          };
+
+          clients = [
+            {
+              client_id = "profilarr";
+              client_name = "Profilarr";
+              client_secret = "$pbkdf2-sha512$310000$G9hHaCv6996H5mh59hOpeQ$DpqK9caOIHpImo8d.PcMyOo9/yN3Cr/t31g.PjcoZHzlGqEnLdf5xTTUBaNDMR6mkkPBBN.Cj159YK.RwCeD0A";
+              public = false;
+              authorization_policy = "admins";
+              consent_mode = "implicit";
+              redirect_uris = [ "https://profilarr.${domain}/auth/oidc/callback" ];
+              scopes = [
+                "openid"
+                "profile"
+                "email"
+                "groups"
+              ];
+            }
+          ];
+        };
+
         session.cookies = [
           {
             inherit domain;
@@ -83,6 +114,7 @@
 
         volumes = [
           "${configuration}:/config/configuration.yml:ro"
+          "${config.sops.secrets."services/authelia/oidc-jwks-key".path}:/secrets/oidc-jwks.pem:ro"
           "/srv/services/authelia:/data"
         ];
 
@@ -129,6 +161,8 @@
             "services/authelia/storage-encryption-key" = { inherit sopsFile; };
             "services/authelia/reset-jwt-secret" = { inherit sopsFile; };
             "services/authelia/ldap-password" = { inherit sopsFile; };
+            "services/authelia/oidc-hmac-secret" = { inherit sopsFile; };
+            "services/authelia/oidc-jwks-key" = { inherit sopsFile; };
             "services/authelia/smtp-password" = { inherit sopsFile; };
           };
 
@@ -146,6 +180,10 @@
               }
               AUTHELIA_NOTIFIER_SMTP_USERNAME=608deeb4-b226-44f7-bb38-4354d8029c7e
               AUTHELIA_NOTIFIER_SMTP_PASSWORD=${config.sops.placeholder."services/authelia/smtp-password"}
+              AUTHELIA_IDENTITY_PROVIDERS_OIDC_HMAC_SECRET=${
+                config.sops.placeholder."services/authelia/oidc-hmac-secret"
+              }
+              AUTHELIA_IDENTITY_PROVIDERS_OIDC_JWKS_0_KEY_FILE=/secrets/oidc-jwks.pem
             '';
             restartUnits = [ "podman-authelia.service" ];
           };
