@@ -128,6 +128,14 @@
                 compression = "lz4";
               };
 
+              "services/authelia" = dataset {
+                mountpoint = "/srv/services/authelia";
+              };
+
+              "services/lldap" = dataset {
+                mountpoint = "/srv/services/lldap";
+              };
+
               "services/traefik" = dataset {
                 mountpoint = "/srv/services/traefik";
               };
