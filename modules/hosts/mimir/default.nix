@@ -66,6 +66,12 @@
             uid = 404;
           };
 
+          seerr = {
+            isSystemUser = true;
+            group = "seerr";
+            uid = 408;
+          };
+
           sonarr = {
             isSystemUser = true;
             group = "sonarr";
@@ -80,6 +86,7 @@
           prowlarr.gid = 403;
           radarr.gid = 402;
           sabnzbd.gid = 404;
+          seerr.gid = 408;
           sonarr.gid = 401;
         };
       };

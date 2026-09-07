@@ -159,6 +159,10 @@
                 mountpoint = "/srv/services/sabnzbd";
               };
 
+              "services/seerr" = dataset {
+                mountpoint = "/srv/services/seerr";
+              };
+
               "services/sonarr" = dataset {
                 mountpoint = "/srv/services/sonarr";
               };
