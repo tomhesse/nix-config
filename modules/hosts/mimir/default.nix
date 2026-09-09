@@ -23,6 +23,7 @@
         self.modules.nixos.smartd
         self.modules.nixos.socket-proxy
         self.modules.nixos.sonarr
+        self.modules.nixos.syncoid
         self.modules.nixos.traefik
         self.modules.nixos.user-thesse
         self.modules.nixos.zfs
@@ -130,10 +131,21 @@
           recursive = true;
         };
 
+        "tank/backups/services" = {
+          useTemplate = [ "replica" ];
+          recursive = true;
+        };
+
         "tank/media" = {
           useTemplate = [ "media" ];
           recursive = true;
         };
+      };
+
+      services.syncoid.commands."rpool/services" = {
+        target = "tank/backups/services";
+        recursive = true;
+        recvOptions = "u o compression=zstd o readonly=on";
       };
 
       home-manager.users.thesse.imports = [
