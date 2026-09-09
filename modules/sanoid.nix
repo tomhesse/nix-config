@@ -24,6 +24,14 @@
           autoprune = true;
         };
 
+        restic = {
+          hourly = 0;
+          daily = 30;
+          monthly = 0;
+          autosnap = true;
+          autoprune = true;
+        };
+
         services = {
           hourly = 48;
           daily = 14;
