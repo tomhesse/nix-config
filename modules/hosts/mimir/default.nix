@@ -123,6 +123,8 @@
       ];
 
       services.sanoid.datasets = {
+        "rpool/root".useTemplate = [ "system" ];
+
         "rpool/services" = {
           useTemplate = [ "services" ];
           recursive = true;
