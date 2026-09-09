@@ -17,6 +17,7 @@
         self.modules.nixos.prowlarr
         self.modules.nixos.radarr
         self.modules.nixos.sabnzbd
+        self.modules.nixos.sanoid
         self.modules.nixos.seerr
         self.modules.nixos.server
         self.modules.nixos.smartd
@@ -120,6 +121,11 @@
         "a+ /srv/media/video/shows - - - - default:user:bazarr:rwX,user:bazarr:rwX"
         "a+ /srv/media/video/shows - - - - default:user:sonarr:rwX,user:sonarr:rwX"
       ];
+
+      services.sanoid.datasets."rpool/services" = {
+        useTemplate = [ "services" ];
+        recursive = true;
+      };
 
       home-manager.users.thesse.imports = [
         self.modules.homeManager.server
