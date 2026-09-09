@@ -16,6 +16,14 @@
           autoprune = true;
         };
 
+        replica = {
+          hourly = 48;
+          daily = 30;
+          monthly = 0;
+          autosnap = false;
+          autoprune = true;
+        };
+
         services = {
           hourly = 48;
           daily = 14;
