@@ -9,11 +9,12 @@
     in
     {
       users = {
-        groups.restic = { };
+        groups.restic.gid = 420;
 
         users.restic = {
           isSystemUser = true;
           group = "restic";
+          uid = 420;
           home = "/srv/backups/restic";
           shell = "${pkgs.bash}/bin/bash";
           openssh.authorizedKeys.keys = map (
