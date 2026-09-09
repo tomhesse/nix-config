@@ -1,37 +1,19 @@
+{ self, ... }:
 {
   flake.modules.nixos.sanoid = {
+    imports = [ self.modules.nixos.notify-failure ];
+
     services.sanoid = {
       enable = true;
 
-      templates = {
-        archive = {
-          daily = 1;
-          weekly = 2;
-          monthly = 6;
-          autosnap = true;
-          autoprune = true;
-        };
-        backups = {
-          daily = 2;
-          weekly = 1;
-          autosnap = true;
-          autoprune = true;
-        };
-        frequent = {
-          daily = 7;
-          weekly = 4;
-          monthly = 3;
-          autosnap = true;
-          autoprune = true;
-        };
-        media = {
-          daily = 2;
-          weekly = 2;
-          monthly = 1;
-          autosnap = true;
-          autoprune = true;
-        };
+      templates.services = {
+        hourly = 48;
+        daily = 14;
+        autosnap = true;
+        autoprune = true;
       };
     };
+
+    systemd.services.sanoid.onFailure = [ "notify-failure@sanoid.service" ];
   };
 }
