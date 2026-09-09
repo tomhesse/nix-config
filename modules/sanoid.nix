@@ -9,6 +9,7 @@
       templates.services = {
         hourly = 48;
         daily = 14;
+        monthly = 0;
         autosnap = true;
         autoprune = true;
       };
