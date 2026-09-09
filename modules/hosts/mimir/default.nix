@@ -16,6 +16,7 @@
         self.modules.nixos.profilarr
         self.modules.nixos.prowlarr
         self.modules.nixos.radarr
+        self.modules.nixos.restic-server
         self.modules.nixos.sabnzbd
         self.modules.nixos.sanoid
         self.modules.nixos.seerr
@@ -128,6 +129,11 @@
 
         "rpool/services" = {
           useTemplate = [ "services" ];
+          recursive = true;
+        };
+
+        "tank/backups/restic" = {
+          useTemplate = [ "restic" ];
           recursive = true;
         };
 
