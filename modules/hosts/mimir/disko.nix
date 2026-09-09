@@ -188,6 +188,10 @@
             };
 
             datasets = {
+              backups = container {
+                mountpoint = "/srv/backups";
+              };
+
               media = container {
                 mountpoint = "/srv/media";
                 recordsize = "1M";
