@@ -122,9 +122,16 @@
         "a+ /srv/media/video/shows - - - - default:user:sonarr:rwX,user:sonarr:rwX"
       ];
 
-      services.sanoid.datasets."rpool/services" = {
-        useTemplate = [ "services" ];
-        recursive = true;
+      services.sanoid.datasets = {
+        "rpool/services" = {
+          useTemplate = [ "services" ];
+          recursive = true;
+        };
+
+        "tank/media" = {
+          useTemplate = [ "media" ];
+          recursive = true;
+        };
       };
 
       home-manager.users.thesse.imports = [
