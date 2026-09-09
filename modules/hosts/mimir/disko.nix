@@ -192,6 +192,19 @@
                 mountpoint = "/srv/backups";
               };
 
+              "backups/restic" = container {
+                mountpoint = "/srv/backups/restic";
+                recordsize = "1M";
+              };
+
+              "backups/restic/loki" = dataset {
+                mountpoint = "/srv/backups/restic/loki";
+              };
+
+              "backups/restic/tyr" = dataset {
+                mountpoint = "/srv/backups/restic/tyr";
+              };
+
               media = container {
                 mountpoint = "/srv/media";
                 recordsize = "1M";
