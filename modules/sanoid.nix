@@ -23,6 +23,14 @@
           autosnap = true;
           autoprune = true;
         };
+
+        system = {
+          hourly = 24;
+          daily = 30;
+          monthly = 0;
+          autosnap = true;
+          autoprune = true;
+        };
       };
     };
 
