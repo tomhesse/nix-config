@@ -124,36 +124,6 @@
         "a+ /srv/media/video/shows - - - - default:user:sonarr:rwX,user:sonarr:rwX"
       ];
 
-      services.sanoid.datasets = {
-        "rpool/root".useTemplate = [ "system" ];
-
-        "rpool/services" = {
-          useTemplate = [ "services" ];
-          recursive = true;
-        };
-
-        "tank/backups/restic" = {
-          useTemplate = [ "restic" ];
-          recursive = true;
-        };
-
-        "tank/backups/services" = {
-          useTemplate = [ "replica" ];
-          recursive = true;
-        };
-
-        "tank/media" = {
-          useTemplate = [ "media" ];
-          recursive = true;
-        };
-      };
-
-      services.syncoid.commands."rpool/services" = {
-        target = "tank/backups/services";
-        recursive = true;
-        recvOptions = "u o compression=zstd o readonly=on";
-      };
-
       home-manager.users.thesse.imports = [
         self.modules.homeManager.server
       ];
