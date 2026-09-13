@@ -40,6 +40,14 @@
           autoprune = true;
         };
 
+        timemachine = {
+          hourly = 0;
+          daily = 14;
+          monthly = 0;
+          autosnap = true;
+          autoprune = true;
+        };
+
         system = {
           hourly = 24;
           daily = 30;
