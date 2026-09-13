@@ -63,6 +63,11 @@
             recursive = true;
           };
 
+          "tank/backups/timemachine" = {
+            useTemplate = [ "timemachine" ];
+            recursive = true;
+          };
+
           "tank/media" = {
             useTemplate = [ "media" ];
             recursive = true;

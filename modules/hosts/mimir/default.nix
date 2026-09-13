@@ -18,6 +18,7 @@
         self.modules.nixos.radarr
         self.modules.nixos.restic-server
         self.modules.nixos.sabnzbd
+        self.modules.nixos.samba
         self.modules.nixos.sanoid
         self.modules.nixos.seerr
         self.modules.nixos.server
