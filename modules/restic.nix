@@ -7,14 +7,14 @@
     in
     {
       services.restic.backups.persistent = {
-        repository = "sftp:restic@mimir.shrimphouse.xyz:/srv/backups/restic/${hostname}";
+        repository = "sftp:restic-${hostname}@mimir.shrimphouse.xyz:/srv/backups/restic/${hostname}";
         passwordFile = config.sops.secrets."services/restic/password".path;
         initialize = true;
 
         paths = [ "/persistent" ];
 
         extraOptions = [
-          "sftp.command='ssh restic@mimir.shrimphouse.xyz -i ${hostKey} -s sftp'"
+          "sftp.command='ssh restic-${hostname}@mimir.shrimphouse.xyz -i ${hostKey} -s sftp'"
         ];
 
         pruneOpts = [
