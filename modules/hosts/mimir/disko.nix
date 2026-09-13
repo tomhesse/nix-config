@@ -205,6 +205,16 @@
                 mountpoint = "/srv/backups/restic/tyr";
               };
 
+              "backups/timemachine" = container {
+                mountpoint = "/srv/backups/timemachine";
+                recordsize = "1M";
+              };
+
+              "backups/timemachine/macmini" = dataset {
+                mountpoint = "/srv/backups/timemachine/macmini";
+                refquota = "1100G";
+              };
+
               media = container {
                 mountpoint = "/srv/media";
                 recordsize = "1M";
