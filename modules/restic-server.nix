@@ -1,28 +1,33 @@
 {
   flake.modules.nixos.restic-server =
-    { pkgs, ... }:
+    { lib, pkgs, ... }:
     let
-      clients = [
-        "loki"
-        "tyr"
-      ];
+      clients = {
+        loki = 420;
+        tyr = 421;
+      };
     in
     {
       users = {
-        groups.restic.gid = 420;
+        groups = lib.mapAttrs' (host: id: lib.nameValuePair "restic-${host}" { gid = id; }) clients;
 
-        users.restic = {
-          isSystemUser = true;
-          group = "restic";
-          uid = 420;
-          home = "/srv/backups/restic";
-          shell = "${pkgs.bash}/bin/bash";
-          openssh.authorizedKeys.keys = map (
-            host: "restrict ${builtins.readFile ./hosts/${host}/ssh_host_ed25519_key.pub}"
-          ) clients;
-        };
+        users = lib.mapAttrs' (
+          host: id:
+          lib.nameValuePair "restic-${host}" {
+            isSystemUser = true;
+            group = "restic-${host}";
+            uid = id;
+            home = "/srv/backups/restic/${host}";
+            shell = "${pkgs.bash}/bin/bash";
+            openssh.authorizedKeys.keys = [
+              "restrict ${builtins.readFile ./hosts/${host}/ssh_host_ed25519_key.pub}"
+            ];
+          }
+        ) clients;
       };
 
-      systemd.tmpfiles.rules = map (host: "z /srv/backups/restic/${host} 0700 restic restic -") clients;
+      systemd.tmpfiles.rules = lib.mapAttrsToList (
+        host: _: "z /srv/backups/restic/${host} 0700 restic-${host} restic-${host} -"
+      ) clients;
     };
 }
