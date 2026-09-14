@@ -4,6 +4,8 @@
     let
       domain = "shrimphouse.xyz";
       baseDN = "dc=shrimphouse,dc=xyz";
+
+      uid = 440;
     in
     {
       virtualisation.oci-containers.containers.lldap = {
@@ -11,7 +13,7 @@
 
         networks = [ "edge" ];
 
-        user = "1000:1000";
+        user = "${toString uid}:${toString uid}";
 
         volumes = [ "/srv/services/lldap:/data" ];
 
@@ -51,6 +53,16 @@
         ];
       };
 
+      users = {
+        groups.lldap.gid = uid;
+
+        users.lldap = {
+          isSystemUser = true;
+          group = "lldap";
+          inherit uid;
+        };
+      };
+
       systemd = {
         services.podman-lldap = {
           after = [ "zfs-mount.service" ];
@@ -58,7 +70,7 @@
           serviceConfig.TimeoutStartSec = lib.mkForce 120;
         };
 
-        tmpfiles.rules = [ "d /srv/services/lldap 0700 1000 1000 -" ];
+        tmpfiles.rules = [ "d /srv/services/lldap 0700 lldap lldap -" ];
       };
 
       sops =
