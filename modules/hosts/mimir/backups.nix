@@ -1,6 +1,6 @@
 {
   configurations.nixos.mimir.module =
-    { config, ... }:
+    { config, pkgs, ... }:
     {
       services = {
         restic.backups.offsite-services =
@@ -45,6 +45,18 @@
             };
           };
 
+        samba.settings.macmini = {
+          path = "/srv/backups/timemachine/macmini";
+          "valid users" = "macmini";
+          "force user" = "macmini";
+          "force group" = "macmini";
+          writable = "yes";
+          browsable = "yes";
+          "vfs objects" = "catia fruit streams_xattr";
+          "fruit:time machine" = "yes";
+          "fruit:time machine max size" = "1T";
+        };
+
         sanoid.datasets = {
           "rpool/root".useTemplate = [ "system" ];
 
@@ -81,11 +93,46 @@
         };
       };
 
-      systemd.services.restic-backups-offsite-services = {
-        path = [ config.boot.zfs.package ];
-        onFailure = [ "notify-failure@%N.service" ];
+      users = {
+        groups.macmini.gid = 430;
+
+        users.macmini = {
+          isSystemUser = true;
+          group = "macmini";
+          uid = 430;
+        };
       };
 
-      sops.secrets."services/restic/offsite-password".sopsFile = ./secrets/nixos.yaml;
+      systemd = {
+        tmpfiles.rules = [ "z /srv/backups/timemachine/macmini 0700 macmini macmini -" ];
+
+        services = {
+          restic-backups-offsite-services = {
+            path = [ config.boot.zfs.package ];
+            onFailure = [ "notify-failure@%N.service" ];
+          };
+
+          samba-macmini-password = {
+            wantedBy = [ "multi-user.target" ];
+            after = [ "samba-smbd.service" ];
+            onFailure = [ "notify-failure@%N.service" ];
+
+            serviceConfig = {
+              Type = "oneshot";
+              RemainAfterExit = true;
+            };
+
+            script = ''
+              pw=$(cat ${config.sops.secrets."services/samba/macmini/password".path})
+              printf '%s\n%s\n' "$pw" "$pw" | ${pkgs.samba}/bin/smbpasswd -s -a macmini
+            '';
+          };
+        };
+      };
+
+      sops.secrets = {
+        "services/restic/offsite-password".sopsFile = ./secrets/nixos.yaml;
+        "services/samba/macmini/password".sopsFile = ./secrets/nixos.yaml;
+      };
     };
 }
