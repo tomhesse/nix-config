@@ -130,6 +130,8 @@
         groups = {
           homeassistant.gid = 431;
           macmini.gid = 430;
+          restic-loki.gid = 420;
+          restic-tyr.gid = 421;
         };
 
         users = {
@@ -144,12 +146,36 @@
             group = "macmini";
             uid = 430;
           };
+
+          restic-loki = {
+            isSystemUser = true;
+            group = "restic-loki";
+            uid = 420;
+            home = "/srv/backups/restic/loki";
+            shell = "${pkgs.bash}/bin/bash";
+            openssh.authorizedKeys.keys = [
+              "restrict ${builtins.readFile ../loki/ssh_host_ed25519_key.pub}"
+            ];
+          };
+
+          restic-tyr = {
+            isSystemUser = true;
+            group = "restic-tyr";
+            uid = 421;
+            home = "/srv/backups/restic/tyr";
+            shell = "${pkgs.bash}/bin/bash";
+            openssh.authorizedKeys.keys = [
+              "restrict ${builtins.readFile ../tyr/ssh_host_ed25519_key.pub}"
+            ];
+          };
         };
       };
 
       systemd = {
         tmpfiles.rules = [
           "z /srv/backups/homeassistant 0700 homeassistant homeassistant -"
+          "z /srv/backups/restic/loki 0700 restic-loki restic-loki -"
+          "z /srv/backups/restic/tyr 0700 restic-tyr restic-tyr -"
           "z /srv/backups/timemachine/macmini 0700 macmini macmini -"
         ];
 
