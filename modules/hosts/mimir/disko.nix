@@ -192,6 +192,12 @@
                 mountpoint = "/srv/backups";
               };
 
+              "backups/homeassistant" = dataset {
+                mountpoint = "/srv/backups/homeassistant";
+                recordsize = "1M";
+                refquota = "100G";
+              };
+
               "backups/restic" = container {
                 mountpoint = "/srv/backups/restic";
                 recordsize = "1M";
