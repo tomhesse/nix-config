@@ -12,6 +12,7 @@
         self.modules.nixos.grub
         self.modules.nixos.jellyfin
         self.modules.nixos.lldap
+        self.modules.nixos.nfs-server
         self.modules.nixos.podman
         self.modules.nixos.profilarr
         self.modules.nixos.prowlarr

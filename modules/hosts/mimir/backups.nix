@@ -3,6 +3,10 @@
     { config, pkgs, ... }:
     {
       services = {
+        nfs.server.exports = ''
+          /srv/backups/homeassistant 10.0.20.20(rw,sync,no_subtree_check,all_squash,anonuid=431,anongid=431)
+        '';
+
         restic.backups.offsite-services =
           let
             target = "u591202-sub1@u591202-sub1.your-storagebox.de";
@@ -65,6 +69,8 @@
             recursive = true;
           };
 
+          "tank/backups/homeassistant".useTemplate = [ "homeassistant" ];
+
           "tank/backups/restic" = {
             useTemplate = [ "restic" ];
             recursive = true;
@@ -94,17 +100,31 @@
       };
 
       users = {
-        groups.macmini.gid = 430;
+        groups = {
+          homeassistant.gid = 431;
+          macmini.gid = 430;
+        };
 
-        users.macmini = {
-          isSystemUser = true;
-          group = "macmini";
-          uid = 430;
+        users = {
+          homeassistant = {
+            isSystemUser = true;
+            group = "homeassistant";
+            uid = 431;
+          };
+
+          macmini = {
+            isSystemUser = true;
+            group = "macmini";
+            uid = 430;
+          };
         };
       };
 
       systemd = {
-        tmpfiles.rules = [ "z /srv/backups/timemachine/macmini 0700 macmini macmini -" ];
+        tmpfiles.rules = [
+          "z /srv/backups/homeassistant 0700 homeassistant homeassistant -"
+          "z /srv/backups/timemachine/macmini 0700 macmini macmini -"
+        ];
 
         services = {
           restic-backups-offsite-services = {
