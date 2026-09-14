@@ -205,6 +205,23 @@
         };
       };
 
+      system.activationScripts.preUpgradeSnapshot = ''
+        if [ ! -e /run/current-system ] || [ "$(readlink -f /run/current-system)" != "$systemConfig" ]; then
+          if [ -e /run/booted-system ]; then
+            zfs=/run/booted-system/sw/bin/zfs
+          else
+            zfs="$systemConfig/sw/bin/zfs"
+          fi
+
+          "$zfs" snapshot -r "rpool/services@pre-upgrade-$(date +%F-%H%M%S)"
+
+          "$zfs" list -H -d 1 -o name -t snapshot -s creation rpool/services \
+            | grep '@pre-upgrade-' \
+            | head -n -5 \
+            | while read -r snap; do "$zfs" destroy -r "$snap"; done
+        fi
+      '';
+
       sops.secrets = {
         "services/restic/offsite-password".sopsFile = ./secrets/nixos.yaml;
         "services/samba/macmini/password".sopsFile = ./secrets/nixos.yaml;
