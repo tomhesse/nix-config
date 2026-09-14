@@ -3,6 +3,8 @@
     let
       domain = "shrimphouse.xyz";
 
+      uid = 400;
+
       libraries = [
         "/srv/media/video/anime/movies"
         "/srv/media/video/anime/shows"
@@ -16,7 +18,7 @@
 
         networks = [ "edge" ];
 
-        user = "400:400";
+        user = "${toString uid}:${toString uid}";
 
         volumes = [
           "/srv/services/jellyfin:/config"
@@ -38,6 +40,16 @@
           "--tmpfs=/tmp"
           "--security-opt=no-new-privileges"
         ];
+      };
+
+      users = {
+        groups.jellyfin.gid = uid;
+
+        users.jellyfin = {
+          isSystemUser = true;
+          group = "jellyfin";
+          inherit uid;
+        };
       };
 
       systemd = {

@@ -2,6 +2,8 @@
   flake.modules.nixos.prowlarr =
     let
       domain = "shrimphouse.xyz";
+
+      uid = 403;
     in
     {
       virtualisation.oci-containers.containers.prowlarr = {
@@ -12,8 +14,8 @@
         volumes = [ "/srv/services/prowlarr:/config" ];
 
         environment = {
-          PUID = "403";
-          PGID = "403";
+          PUID = toString uid;
+          PGID = toString uid;
           TZ = "Europe/Berlin";
           PROWLARR__AUTH__METHOD = "Forms";
           PROWLARR__AUTH__REQUIRED = "DisabledForLocalAddresses";
@@ -26,6 +28,16 @@
         };
 
         extraOptions = [ "--security-opt=no-new-privileges" ];
+      };
+
+      users = {
+        groups.prowlarr.gid = uid;
+
+        users.prowlarr = {
+          isSystemUser = true;
+          group = "prowlarr";
+          inherit uid;
+        };
       };
 
       systemd = {

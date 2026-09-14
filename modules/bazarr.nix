@@ -3,6 +3,8 @@
     let
       domain = "shrimphouse.xyz";
 
+      uid = 405;
+
       libraries = [
         "/srv/media/video/anime/movies"
         "/srv/media/video/anime/shows"
@@ -22,8 +24,8 @@
         ++ map (path: "${path}:${path}") libraries;
 
         environment = {
-          PUID = "405";
-          PGID = "405";
+          PUID = toString uid;
+          PGID = toString uid;
           UMASK = "002";
           TZ = "Europe/Berlin";
         };
@@ -35,6 +37,16 @@
         };
 
         extraOptions = [ "--security-opt=no-new-privileges" ];
+      };
+
+      users = {
+        groups.bazarr.gid = uid;
+
+        users.bazarr = {
+          isSystemUser = true;
+          group = "bazarr";
+          inherit uid;
+        };
       };
 
       systemd = {

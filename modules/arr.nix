@@ -48,6 +48,16 @@
             extraOptions = [ "--security-opt=no-new-privileges" ];
           };
 
+          users = {
+            groups.${app}.gid = uid;
+
+            users.${app} = {
+              isSystemUser = true;
+              group = app;
+              inherit uid;
+            };
+          };
+
           systemd = {
             services."podman-${app}" = {
               after = [ "zfs-mount.service" ];

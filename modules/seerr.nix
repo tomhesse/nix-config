@@ -2,6 +2,8 @@
   flake.modules.nixos.seerr =
     let
       domain = "shrimphouse.xyz";
+
+      uid = 408;
     in
     {
       virtualisation.oci-containers.containers.seerr = {
@@ -9,7 +11,7 @@
 
         networks = [ "edge" ];
 
-        user = "408:408";
+        user = "${toString uid}:${toString uid}";
 
         volumes = [ "/srv/services/seerr:/app/config" ];
 
@@ -29,6 +31,16 @@
           "--init"
           "--security-opt=no-new-privileges"
         ];
+      };
+
+      users = {
+        groups.seerr.gid = uid;
+
+        users.seerr = {
+          isSystemUser = true;
+          group = "seerr";
+          inherit uid;
+        };
       };
 
       systemd = {

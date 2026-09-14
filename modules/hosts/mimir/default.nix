@@ -31,70 +31,7 @@
         self.modules.nixos.zfs
       ];
 
-      users = {
-        users = {
-          thesse.shell = lib.mkForce pkgs.bash;
-
-          bazarr = {
-            isSystemUser = true;
-            group = "bazarr";
-            uid = 405;
-          };
-
-          jellyfin = {
-            isSystemUser = true;
-            group = "jellyfin";
-            uid = 400;
-          };
-
-          profilarr = {
-            isSystemUser = true;
-            group = "profilarr";
-            uid = 407;
-          };
-
-          prowlarr = {
-            isSystemUser = true;
-            group = "prowlarr";
-            uid = 403;
-          };
-
-          radarr = {
-            isSystemUser = true;
-            group = "radarr";
-            uid = 402;
-          };
-
-          sabnzbd = {
-            isSystemUser = true;
-            group = "sabnzbd";
-            uid = 404;
-          };
-
-          seerr = {
-            isSystemUser = true;
-            group = "seerr";
-            uid = 408;
-          };
-
-          sonarr = {
-            isSystemUser = true;
-            group = "sonarr";
-            uid = 401;
-          };
-        };
-
-        groups = {
-          bazarr.gid = 405;
-          jellyfin.gid = 400;
-          profilarr.gid = 407;
-          prowlarr.gid = 403;
-          radarr.gid = 402;
-          sabnzbd.gid = 404;
-          seerr.gid = 408;
-          sonarr.gid = 401;
-        };
-      };
+      users.users.thesse.shell = lib.mkForce pkgs.bash;
 
       systemd.tmpfiles.rules = [
         "z /srv/cache/jellyfin 0700 jellyfin jellyfin -"

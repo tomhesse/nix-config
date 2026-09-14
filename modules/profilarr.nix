@@ -3,6 +3,8 @@
     { config, ... }:
     let
       domain = "shrimphouse.xyz";
+
+      uid = 407;
     in
     {
       virtualisation.oci-containers.containers.profilarr = {
@@ -17,8 +19,8 @@
           OIDC_CLIENT_ID = "profilarr";
           OIDC_DISCOVERY_URL = "https://auth.${domain}/.well-known/openid-configuration";
           ORIGIN = "https://profilarr.${domain}";
-          PUID = "407";
-          PGID = "407";
+          PUID = toString uid;
+          PGID = toString uid;
           TZ = "Europe/Berlin";
         };
 
@@ -30,6 +32,16 @@
         };
 
         extraOptions = [ "--security-opt=no-new-privileges" ];
+      };
+
+      users = {
+        groups.profilarr.gid = uid;
+
+        users.profilarr = {
+          isSystemUser = true;
+          group = "profilarr";
+          inherit uid;
+        };
       };
 
       systemd = {

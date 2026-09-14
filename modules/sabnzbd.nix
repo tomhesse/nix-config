@@ -3,6 +3,8 @@
     let
       domain = "shrimphouse.xyz";
 
+      uid = 404;
+
       stages = [
         "/srv/downloads/complete"
         "/srv/downloads/incomplete"
@@ -20,8 +22,8 @@
         ++ map (path: "${path}:${path}") stages;
 
         environment = {
-          PUID = "404";
-          PGID = "404";
+          PUID = toString uid;
+          PGID = toString uid;
           UMASK = "002";
           TZ = "Europe/Berlin";
         };
@@ -33,6 +35,16 @@
         };
 
         extraOptions = [ "--security-opt=no-new-privileges" ];
+      };
+
+      users = {
+        groups.sabnzbd.gid = uid;
+
+        users.sabnzbd = {
+          isSystemUser = true;
+          group = "sabnzbd";
+          inherit uid;
+        };
       };
 
       systemd = {
