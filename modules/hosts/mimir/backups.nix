@@ -1,39 +1,25 @@
 {
   configurations.nixos.mimir.module =
     { config, pkgs, ... }:
+    let
+      target = "u591202-sub1@u591202-sub1.your-storagebox.de";
+      hostKey = (builtins.head config.services.openssh.hostKeys).path;
+    in
     {
       services = {
         nfs.server.exports = ''
           /srv/backups/homeassistant 10.0.20.20(rw,sync,no_subtree_check,all_squash,anonuid=431,anongid=431)
         '';
 
-        restic.backups.offsite-services =
-          let
-            target = "u591202-sub1@u591202-sub1.your-storagebox.de";
-            hostKey = (builtins.head config.services.openssh.hostKeys).path;
-            syncoid = "syncoid-rpool-services";
-          in
-          {
-            repository = "sftp:${target}:services";
+        restic.backups = {
+          offsite-homeassistant = {
+            repository = "sftp:${target}:homeassistant";
             passwordFile = config.sops.secrets."services/restic/offsite-password".path;
             initialize = true;
 
-            paths = [ "/srv/backups/services" ];
+            paths = [ "/srv/backups/homeassistant" ];
 
             extraOptions = [ "sftp.command='ssh ${target} -i ${hostKey} -p 23 -s sftp'" ];
-
-            backupPrepareCommand = ''
-              mounted=$(zfs list -H -o mounted -r tank/backups/services) || exit 1
-              case "$mounted" in
-                *no*)
-                  echo "replica datasets are not mounted" >&2
-                  exit 1
-                  ;;
-              esac
-              systemctl stop ${syncoid}.timer ${syncoid}.service
-            '';
-
-            backupCleanupCommand = "systemctl start ${syncoid}.timer";
 
             pruneOpts = [
               "--keep-daily 7"
@@ -43,11 +29,52 @@
             ];
 
             timerConfig = {
-              OnCalendar = "03:00";
+              OnCalendar = "06:30";
               Persistent = true;
               RandomizedDelaySec = "1h";
             };
           };
+
+          offsite-services =
+            let
+              syncoid = "syncoid-rpool-services";
+            in
+            {
+              repository = "sftp:${target}:services";
+              passwordFile = config.sops.secrets."services/restic/offsite-password".path;
+              initialize = true;
+
+              paths = [ "/srv/backups/services" ];
+
+              extraOptions = [ "sftp.command='ssh ${target} -i ${hostKey} -p 23 -s sftp'" ];
+
+              backupPrepareCommand = ''
+                mounted=$(zfs list -H -o mounted -r tank/backups/services) || exit 1
+                case "$mounted" in
+                  *no*)
+                    echo "replica datasets are not mounted" >&2
+                    exit 1
+                    ;;
+                esac
+                systemctl stop ${syncoid}.timer ${syncoid}.service
+              '';
+
+              backupCleanupCommand = "systemctl start ${syncoid}.timer";
+
+              pruneOpts = [
+                "--keep-daily 7"
+                "--keep-weekly 4"
+                "--keep-monthly 12"
+                "--keep-yearly 2"
+              ];
+
+              timerConfig = {
+                OnCalendar = "03:00";
+                Persistent = true;
+                RandomizedDelaySec = "1h";
+              };
+            };
+        };
 
         samba.settings.macmini = {
           path = "/srv/backups/timemachine/macmini";
@@ -127,6 +154,8 @@
         ];
 
         services = {
+          restic-backups-offsite-homeassistant.onFailure = [ "notify-failure@%N.service" ];
+
           restic-backups-offsite-services = {
             path = [ config.boot.zfs.package ];
             onFailure = [ "notify-failure@%N.service" ];
