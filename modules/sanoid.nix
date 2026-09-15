@@ -7,6 +7,15 @@
       enable = true;
 
       templates = {
+        archive = {
+          hourly = 0;
+          daily = 0;
+          weekly = 8;
+          monthly = 0;
+          autosnap = true;
+          autoprune = true;
+        };
+
         homeassistant = {
           hourly = 0;
           daily = 30;
