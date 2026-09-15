@@ -16,6 +16,14 @@
           autoprune = true;
         };
 
+        documents = {
+          hourly = 0;
+          daily = 30;
+          monthly = 0;
+          autosnap = true;
+          autoprune = true;
+        };
+
         homeassistant = {
           hourly = 0;
           daily = 30;
