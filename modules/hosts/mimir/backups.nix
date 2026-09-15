@@ -35,6 +35,28 @@
             };
           };
 
+          offsite-music = {
+            repository = "sftp:${target}:music";
+            passwordFile = config.sops.secrets."services/restic/offsite-password".path;
+            initialize = true;
+
+            paths = [ "/srv/media/music" ];
+
+            extraOptions = [ "sftp.command='ssh ${target} -i ${hostKey} -p 23 -s sftp'" ];
+
+            pruneOpts = [
+              "--keep-weekly 8"
+              "--keep-monthly 12"
+              "--keep-yearly 2"
+            ];
+
+            timerConfig = {
+              OnCalendar = "Sun 02:00";
+              Persistent = true;
+              RandomizedDelaySec = "1h";
+            };
+          };
+
           offsite-services =
             let
               syncoid = "syncoid-rpool-services";
@@ -197,6 +219,8 @@
 
         services = {
           restic-backups-offsite-homeassistant.onFailure = [ "notify-failure@%N.service" ];
+
+          restic-backups-offsite-music.onFailure = [ "notify-failure@%N.service" ];
 
           restic-backups-offsite-services = {
             path = [ config.boot.zfs.package ];
