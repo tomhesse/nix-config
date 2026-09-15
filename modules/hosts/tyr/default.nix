@@ -69,7 +69,7 @@
     };
 
     fileSystems."/mnt/archive/games/osu" = {
-      device = "mimir.shrimphouse.xyz:/archive/games/osu";
+      device = "mimir.shrimphouse.xyz:/srv/archive/games/osu";
       fsType = "nfs4";
       options = [
         "noauto"
