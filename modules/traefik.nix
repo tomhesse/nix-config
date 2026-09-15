@@ -80,10 +80,16 @@
 
         environmentFiles = [ config.sops.templates."traefik-env".path ];
 
+        capabilities = {
+          ALL = false;
+          NET_BIND_SERVICE = true;
+        };
+
         extraOptions = [
           "--health-cmd=traefik healthcheck --ping"
           "--health-timeout=5s"
           "--health-start-period=10s"
+          "--security-opt=no-new-privileges"
         ];
       };
 
