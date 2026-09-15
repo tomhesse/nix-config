@@ -35,7 +35,7 @@
       users.users.thesse.shell = lib.mkForce pkgs.bash;
 
       services.nfs.server.exports = ''
-        /srv/archive/games/osu 10.0.10.11(rw,sync,no_subtree_check,all_squash,anonuid=1000,anongid=100)
+        /srv/archive/games/osu 10.0.10.11(rw,sync,no_subtree_check)
         /srv/media/music 10.0.10.11(rw,sync,no_subtree_check,all_squash,anonuid=406,anongid=406)
       '';
 
