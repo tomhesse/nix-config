@@ -143,6 +143,10 @@
                 mountpoint = "/srv/services/lldap";
               };
 
+              "services/navidrome" = dataset {
+                mountpoint = "/srv/services/navidrome";
+              };
+
               "services/profilarr" = dataset {
                 mountpoint = "/srv/services/profilarr";
               };
@@ -224,6 +228,10 @@
               media = container {
                 mountpoint = "/srv/media";
                 recordsize = "1M";
+              };
+
+              "media/music" = dataset {
+                mountpoint = "/srv/media/music";
               };
 
               "media/video" = container {
