@@ -91,6 +91,11 @@
         sanoid.datasets = {
           "rpool/root".useTemplate = [ "system" ];
 
+          "tank/archive" = {
+            useTemplate = [ "archive" ];
+            recursive = true;
+          };
+
           "rpool/services" = {
             useTemplate = [ "services" ];
             recursive = true;

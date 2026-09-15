@@ -35,10 +35,12 @@
       users.users.thesse.shell = lib.mkForce pkgs.bash;
 
       services.nfs.server.exports = ''
+        /srv/archive/games/osu 10.0.10.11(rw,sync,no_subtree_check,all_squash,anonuid=1000,anongid=100)
         /srv/media/music 10.0.10.11(rw,sync,no_subtree_check,all_squash,anonuid=406,anongid=406)
       '';
 
       systemd.tmpfiles.rules = [
+        "z /srv/archive/games/osu 0700 thesse users -"
         "z /srv/cache/jellyfin 0700 jellyfin jellyfin -"
         "d /srv/downloads/complete 0775 sabnzbd sabnzbd -"
         "d /srv/downloads/incomplete 0750 sabnzbd sabnzbd -"
