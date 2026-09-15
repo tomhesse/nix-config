@@ -12,6 +12,7 @@
         self.modules.nixos.grub
         self.modules.nixos.jellyfin
         self.modules.nixos.lldap
+        self.modules.nixos.navidrome
         self.modules.nixos.nfs-server
         self.modules.nixos.podman
         self.modules.nixos.profilarr
@@ -37,6 +38,7 @@
         "z /srv/cache/jellyfin 0700 jellyfin jellyfin -"
         "d /srv/downloads/complete 0775 sabnzbd sabnzbd -"
         "d /srv/downloads/incomplete 0750 sabnzbd sabnzbd -"
+        "z /srv/media/music 0700 navidrome navidrome -"
         "z /srv/media/video/anime/movies 0775 root root -"
         "z /srv/media/video/anime/shows 0775 root root -"
         "z /srv/media/video/movies 0775 root root -"
