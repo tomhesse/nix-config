@@ -77,6 +77,8 @@
 
           networks = [ "edge" ];
 
+          user = "999:1000";
+
           cmd = [
             "valkey-server"
             "--save"
