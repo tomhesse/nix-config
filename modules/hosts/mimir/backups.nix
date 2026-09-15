@@ -35,6 +35,29 @@
             };
           };
 
+          offsite-documents = {
+            repository = "sftp:${target}:documents";
+            passwordFile = config.sops.secrets."services/restic/offsite-password".path;
+            initialize = true;
+
+            paths = [ "/srv/documents" ];
+
+            extraOptions = [ "sftp.command='ssh ${target} -i ${hostKey} -p 23 -s sftp'" ];
+
+            pruneOpts = [
+              "--keep-daily 7"
+              "--keep-weekly 4"
+              "--keep-monthly 12"
+              "--keep-yearly 2"
+            ];
+
+            timerConfig = {
+              OnCalendar = "04:00";
+              Persistent = true;
+              RandomizedDelaySec = "1h";
+            };
+          };
+
           offsite-music = {
             repository = "sftp:${target}:music";
             passwordFile = config.sops.secrets."services/restic/offsite-password".path;
@@ -125,6 +148,11 @@
 
           "tank/backups/homeassistant".useTemplate = [ "homeassistant" ];
 
+          "tank/documents" = {
+            useTemplate = [ "documents" ];
+            recursive = true;
+          };
+
           "tank/backups/restic" = {
             useTemplate = [ "restic" ];
             recursive = true;
@@ -207,6 +235,8 @@
         ];
 
         services = {
+          restic-backups-offsite-documents.onFailure = [ "notify-failure@%N.service" ];
+
           restic-backups-offsite-homeassistant.onFailure = [ "notify-failure@%N.service" ];
 
           restic-backups-offsite-music.onFailure = [ "notify-failure@%N.service" ];
