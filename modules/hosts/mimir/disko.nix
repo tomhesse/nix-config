@@ -196,6 +196,19 @@
                 mountpoint = "/srv/backups";
               };
 
+              archive = container {
+                mountpoint = "/srv/archive";
+                recordsize = "1M";
+              };
+
+              "archive/games" = container {
+                mountpoint = "/srv/archive/games";
+              };
+
+              "archive/games/osu" = dataset {
+                mountpoint = "/srv/archive/games/osu";
+              };
+
               "backups/homeassistant" = dataset {
                 mountpoint = "/srv/backups/homeassistant";
                 recordsize = "1M";
