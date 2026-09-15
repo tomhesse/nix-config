@@ -149,18 +149,7 @@
         syncoid.commands."rpool/services" = {
           target = "tank/backups/services";
           recursive = true;
-          recvOptions = "u o compression=zstd o readonly=on";
-
-          localTargetAllow = [
-            "change-key"
-            "compression"
-            "create"
-            "mount"
-            "mountpoint"
-            "readonly"
-            "receive"
-            "rollback"
-          ];
+          recvOptions = "u o compression=zstd";
         };
       };
 
