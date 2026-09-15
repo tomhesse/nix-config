@@ -19,8 +19,6 @@
 
           networks = [ "edge" ];
 
-          user = "${toString uid}:${toString uid}";
-
           volumes = [
             "/srv/documents/paperless:/usr/src/paperless/media"
             "/srv/services/paperless:/usr/src/paperless/data"
@@ -34,6 +32,8 @@
             PAPERLESS_TIKA_GOTENBERG_ENDPOINT = "http://paperless-gotenberg:3000";
             PAPERLESS_URL = "https://paperless.${domain}";
             TZ = "Europe/Berlin";
+            USERMAP_GID = toString uid;
+            USERMAP_UID = toString uid;
           };
 
           environmentFiles = [ config.sops.templates."paperless-env".path ];
