@@ -68,12 +68,17 @@
           "services/navidrome/lastfm-api-secret" = {
             sopsFile = ./hosts/${config.networking.hostName}/secrets/nixos.yaml;
           };
+
+          "services/navidrome/password-encryption-key" = {
+            sopsFile = ./hosts/${config.networking.hostName}/secrets/nixos.yaml;
+          };
         };
 
         templates."navidrome-env" = {
           content = ''
             ND_LASTFM_APIKEY=${config.sops.placeholder."services/navidrome/lastfm-api-key"}
             ND_LASTFM_SECRET=${config.sops.placeholder."services/navidrome/lastfm-api-secret"}
+            ND_PASSWORDENCRYPTIONKEY=${config.sops.placeholder."services/navidrome/password-encryption-key"}
           '';
           restartUnits = [ "podman-navidrome.service" ];
         };
