@@ -14,6 +14,7 @@
         self.modules.nixos.lldap
         self.modules.nixos.navidrome
         self.modules.nixos.nfs-server
+        self.modules.nixos.paperless
         self.modules.nixos.podman
         self.modules.nixos.profilarr
         self.modules.nixos.prowlarr
