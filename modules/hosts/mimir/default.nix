@@ -34,6 +34,10 @@
 
       users.users.thesse.shell = lib.mkForce pkgs.bash;
 
+      services.nfs.server.exports = ''
+        /srv/media/music 10.0.10.11(rw,sync,no_subtree_check,all_squash,anonuid=406,anongid=406)
+      '';
+
       systemd.tmpfiles.rules = [
         "z /srv/cache/jellyfin 0700 jellyfin jellyfin -"
         "d /srv/downloads/complete 0775 sabnzbd sabnzbd -"
