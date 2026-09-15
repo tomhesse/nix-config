@@ -79,7 +79,7 @@
     };
 
     fileSystems."/mnt/music" = {
-      device = "mimir.shrimphouse.xyz:/media/music";
+      device = "mimir.shrimphouse.xyz:/srv/media/music";
       fsType = "nfs4";
       options = [
         "noauto"
