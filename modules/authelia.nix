@@ -83,6 +83,20 @@
                       - 'group:admins'
 
             clients:
+              - client_id: 'paperless'
+                client_name: 'Paperless'
+                client_secret: '$pbkdf2-sha512$310000$Ne0.05cN4N4NejJ2IFGmIg$/AO2TgEl1D12XbI0A.VP6cfFqB3RbrKsyKLL/Ovr1VzvNmFunt4whRtkzkmh56VRcf3DhH1KQUC.g9pv/2RxGw'
+                public: false
+                consent_mode: 'implicit'
+                token_endpoint_auth_method: 'client_secret_basic'
+                redirect_uris:
+                  - 'https://paperless.${domain}/accounts/oidc/authelia/login/callback/'
+                scopes:
+                  - 'openid'
+                  - 'profile'
+                  - 'email'
+                  - 'groups'
+
               - client_id: 'profilarr'
                 client_name: 'Profilarr'
                 client_secret: '$pbkdf2-sha512$310000$G9hHaCv6996H5mh59hOpeQ$DpqK9caOIHpImo8d.PcMyOo9/yN3Cr/t31g.PjcoZHzlGqEnLdf5xTTUBaNDMR6mkkPBBN.Cj159YK.RwCeD0A'
