@@ -147,6 +147,10 @@
                 mountpoint = "/srv/services/navidrome";
               };
 
+              "services/paperless" = dataset {
+                mountpoint = "/srv/services/paperless";
+              };
+
               "services/profilarr" = dataset {
                 mountpoint = "/srv/services/profilarr";
               };
@@ -236,6 +240,16 @@
               "backups/timemachine/macmini" = dataset {
                 mountpoint = "/srv/backups/timemachine/macmini";
                 refquota = "1100G";
+              };
+
+              documents = container {
+                mountpoint = "/srv/documents";
+                compression = "zstd";
+                recordsize = "128K";
+              };
+
+              "documents/paperless" = dataset {
+                mountpoint = "/srv/documents/paperless";
               };
 
               media = container {
