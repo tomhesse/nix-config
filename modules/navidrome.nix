@@ -1,38 +1,73 @@
 {
   flake.modules.nixos.navidrome =
     { config, ... }:
+    let
+      domain = "shrimphouse.xyz";
+
+      uid = 406;
+    in
     {
-      services = {
-        navidrome = {
-          enable = true;
-          settings = {
-            Address = "127.0.0.1";
-            BaseUrl = "https://navidrome.shrimphouse.xyz";
-            Port = 4533;
-            MusicFolder = "/srv/media/music";
-            EnableUserEditing = false;
-            EnableDownloads = false;
-            EnableStarRating = false;
-            Plugins.Enabled = false;
-            Scanner.PurgeMissing = "always";
-          };
-          environmentFile = config.sops.templates."navidrome-env".path;
+      virtualisation.oci-containers.containers.navidrome = {
+        image = "ghcr.io/navidrome/navidrome:0.64.0";
+
+        networks = [ "edge" ];
+
+        user = "${toString uid}:${toString uid}";
+
+        volumes = [
+          "/srv/services/navidrome:/data"
+          "/srv/media/music:/music:ro"
+        ];
+
+        environment = {
+          ND_ENABLEDOWNLOADS = "false";
+          TZ = "Europe/Berlin";
         };
 
-        nginx.virtualHosts."navidrome.shrimphouse.xyz" = {
-          useACMEHost = "navidrome.shrimphouse.xyz";
-          forceSSL = true;
+        environmentFiles = [ config.sops.templates."navidrome-env".path ];
 
-          locations."/".proxyPass = "http://127.0.0.1:4533";
+        labels = {
+          "traefik.enable" = "true";
+          "traefik.http.routers.navidrome.rule" = "Host(`music.${domain}`)";
+        };
+
+        capabilities.ALL = false;
+
+        extraOptions = [ "--security-opt=no-new-privileges" ];
+      };
+
+      users = {
+        groups.navidrome.gid = uid;
+
+        users.navidrome = {
+          isSystemUser = true;
+          group = "navidrome";
+          inherit uid;
         };
       };
 
-      sops = {
-        secrets."services/navidrome/lastfm-api-key" = {
-          sopsFile = ./hosts/${config.networking.hostName}/secrets/nixos.yaml;
+      systemd = {
+        services.podman-navidrome = {
+          after = [ "zfs-mount.service" ];
+
+          unitConfig.AssertPathIsMountPoint = [
+            "/srv/media/music"
+            "/srv/services/navidrome"
+          ];
         };
-        secrets."services/navidrome/lastfm-api-secret" = {
-          sopsFile = ./hosts/${config.networking.hostName}/secrets/nixos.yaml;
+
+        tmpfiles.rules = [ "d /srv/services/navidrome 0700 navidrome navidrome -" ];
+      };
+
+      sops = {
+        secrets = {
+          "services/navidrome/lastfm-api-key" = {
+            sopsFile = ./hosts/${config.networking.hostName}/secrets/nixos.yaml;
+          };
+
+          "services/navidrome/lastfm-api-secret" = {
+            sopsFile = ./hosts/${config.networking.hostName}/secrets/nixos.yaml;
+          };
         };
 
         templates."navidrome-env" = {
@@ -40,10 +75,8 @@
             ND_LASTFM_APIKEY=${config.sops.placeholder."services/navidrome/lastfm-api-key"}
             ND_LASTFM_SECRET=${config.sops.placeholder."services/navidrome/lastfm-api-secret"}
           '';
-          restartUnits = [ "navidrome.service" ];
+          restartUnits = [ "podman-navidrome.service" ];
         };
       };
-
-      security.acme.certs."navidrome.shrimphouse.xyz".group = "nginx";
     };
 }
