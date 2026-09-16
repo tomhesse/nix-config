@@ -71,6 +71,8 @@
 
           capabilities.ALL = false;
 
+          log-driver = "passthrough";
+
           extraOptions = [ "--security-opt=no-new-privileges" ];
         };
 
