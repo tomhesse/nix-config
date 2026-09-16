@@ -36,6 +36,8 @@
           "traefik.http.routers.bazarr.middlewares" = "authelia@docker";
         };
 
+        log-driver = "passthrough";
+
         extraOptions = [ "--security-opt=no-new-privileges" ];
       };
 
