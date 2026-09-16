@@ -178,6 +178,7 @@
           target = "tank/backups/services";
           recursive = true;
           recvOptions = "u o compression=zstd";
+          extraArgs = [ "--exclude-snaps=pre-upgrade-" ];
         };
       };
 
