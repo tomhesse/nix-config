@@ -7,6 +7,7 @@
       self.modules.nixos.framework-13-7040-amd
       self.modules.nixos.impermanence
       self.modules.nixos.kanidm-client
+      self.modules.nixos.nfs-client
       self.modules.nixos.restic
       self.modules.nixos.secure-boot
       self.modules.nixos.user-thesse
@@ -30,6 +31,17 @@
         scale = 2;
         primary = true;
       };
+    };
+
+    fileSystems."/mnt/music" = {
+      device = "mimir.shrimphouse.xyz:/srv/media/music";
+      fsType = "nfs4";
+      options = [
+        "noauto"
+        "ro"
+        "x-systemd.automount"
+        "x-systemd.idle-timeout=600"
+      ];
     };
 
     time.timeZone = "Europe/Berlin";
