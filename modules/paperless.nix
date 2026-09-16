@@ -49,7 +49,7 @@
         };
 
         paperless-gotenberg = {
-          image = "docker.io/gotenberg/gotenberg:8.25";
+          image = "docker.io/gotenberg/gotenberg:8.34";
 
           networks = [ "edge" ];
 
@@ -65,7 +65,7 @@
         };
 
         paperless-tika = {
-          image = "docker.io/apache/tika:4.0.0-1-full";
+          image = "docker.io/apache/tika:3.3.1.0";
 
           networks = [ "edge" ];
 
@@ -77,7 +77,7 @@
         };
 
         paperless-valkey = {
-          image = "docker.io/valkey/valkey:8.1.10-alpine";
+          image = "docker.io/valkey/valkey:9.1.2-alpine";
 
           networks = [ "edge" ];
 
