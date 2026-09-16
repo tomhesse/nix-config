@@ -43,6 +43,8 @@
             "traefik.http.routers.paperless.rule" = "Host(`paperless.${domain}`)";
           };
 
+          log-driver = "passthrough";
+
           extraOptions = [ "--security-opt=no-new-privileges" ];
         };
 
