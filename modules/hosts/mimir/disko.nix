@@ -143,6 +143,10 @@
                 mountpoint = "/srv/services/lldap";
               };
 
+              "services/minecraft" = dataset {
+                mountpoint = "/srv/services/minecraft";
+              };
+
               "services/navidrome" = dataset {
                 mountpoint = "/srv/services/navidrome";
               };
