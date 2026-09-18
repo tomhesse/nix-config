@@ -16,6 +16,7 @@
             repository = "sftp:${target}:homeassistant";
             passwordFile = config.sops.secrets."services/restic/offsite-password".path;
             initialize = true;
+            runCheck = true;
 
             paths = [ "/srv/backups/homeassistant" ];
 
@@ -39,6 +40,7 @@
             repository = "sftp:${target}:documents";
             passwordFile = config.sops.secrets."services/restic/offsite-password".path;
             initialize = true;
+            runCheck = true;
 
             paths = [ "/srv/documents" ];
 
@@ -62,6 +64,7 @@
             repository = "sftp:${target}:music";
             passwordFile = config.sops.secrets."services/restic/offsite-password".path;
             initialize = true;
+            runCheck = true;
 
             paths = [ "/srv/media/music" ];
 
@@ -88,6 +91,7 @@
               repository = "sftp:${target}:services";
               passwordFile = config.sops.secrets."services/restic/offsite-password".path;
               initialize = true;
+              runCheck = true;
 
               paths = [ "/srv/backups/services" ];
 
@@ -228,6 +232,11 @@
       };
 
       systemd = {
+        timers.restic-check.timerConfig = {
+          Persistent = true;
+          RandomizedDelaySec = "1h";
+        };
+
         tmpfiles.rules = [
           "z /srv/backups/homeassistant 0700 homeassistant homeassistant -"
           "z /srv/backups/restic/loki 0700 restic-loki restic-loki -"
@@ -245,6 +254,22 @@
           restic-backups-offsite-services = {
             path = [ config.boot.zfs.package ];
             onFailure = [ "notify-failure@%N.service" ];
+          };
+
+          restic-check = {
+            description = "Verify a rotating subset of the offsite repository data";
+            startAt = "*-*-01 12:00";
+            onFailure = [ "notify-failure@%N.service" ];
+
+            serviceConfig.Type = "oneshot";
+
+            script = ''
+              subset="$(date +%-m)/12"
+
+              for repo in documents music services; do
+                /run/current-system/sw/bin/restic-offsite-"$repo" check --read-data-subset="$subset"
+              done
+            '';
           };
 
           samba-macmini-password = {
