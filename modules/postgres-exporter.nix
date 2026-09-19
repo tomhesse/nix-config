@@ -1,9 +1,0 @@
-{
-  flake.modules.nixos.postgres-exporter = {
-    services.prometheus.exporters.postgres = {
-      enable = true;
-      listenAddress = "127.0.0.1";
-      runAsLocalSuperUser = true;
-    };
-  };
-}
