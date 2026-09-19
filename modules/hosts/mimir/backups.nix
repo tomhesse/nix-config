@@ -1,6 +1,11 @@
 {
   configurations.nixos.mimir.module =
-    { config, pkgs, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     let
       target = "u591202-sub1@u591202-sub1.your-storagebox.de";
       hostKey = (builtins.head config.services.openssh.hostKeys).path;
@@ -83,46 +88,40 @@
             };
           };
 
-          offsite-services =
-            let
-              syncoid = "syncoid-rpool-services";
-            in
-            {
-              repository = "sftp:${target}:services";
-              passwordFile = config.sops.secrets."services/restic/offsite-password".path;
-              initialize = true;
-              runCheck = true;
+          offsite-services = {
+            repository = "sftp:${target}:services";
+            passwordFile = config.sops.secrets."services/restic/offsite-password".path;
+            initialize = true;
+            runCheck = true;
 
-              paths = [ "/srv/backups/services" ];
+            paths = map (dataset: "/srv/${dataset}/.zfs/snapshot/restic") (
+              lib.filter (lib.hasPrefix "services/") (
+                builtins.attrNames config.disko.devices.zpool.rpool.datasets
+              )
+            );
 
-              extraOptions = [ "sftp.command='ssh ${target} -i ${hostKey} -p 23 -s sftp'" ];
+            extraOptions = [ "sftp.command='ssh ${target} -i ${hostKey} -p 23 -s sftp'" ];
 
-              backupPrepareCommand = ''
-                mounted=$(zfs list -H -o mounted -r tank/backups/services) || exit 1
-                case "$mounted" in
-                  *no*)
-                    echo "replica datasets are not mounted" >&2
-                    exit 1
-                    ;;
-                esac
-                systemctl stop ${syncoid}.timer ${syncoid}.service
-              '';
+            backupPrepareCommand = ''
+              zfs destroy -r rpool/services@restic 2>/dev/null || true
+              zfs snapshot -r rpool/services@restic
+            '';
 
-              backupCleanupCommand = "systemctl start ${syncoid}.timer";
+            backupCleanupCommand = "zfs destroy -r rpool/services@restic";
 
-              pruneOpts = [
-                "--keep-daily 7"
-                "--keep-weekly 4"
-                "--keep-monthly 12"
-                "--keep-yearly 2"
-              ];
+            pruneOpts = [
+              "--keep-daily 7"
+              "--keep-weekly 4"
+              "--keep-monthly 12"
+              "--keep-yearly 2"
+            ];
 
-              timerConfig = {
-                OnCalendar = "03:00";
-                Persistent = true;
-                RandomizedDelaySec = "1h";
-              };
+            timerConfig = {
+              OnCalendar = "03:00";
+              Persistent = true;
+              RandomizedDelaySec = "1h";
             };
+          };
         };
 
         samba.settings.macmini = {
@@ -182,7 +181,10 @@
           target = "tank/backups/services";
           recursive = true;
           recvOptions = "u o compression=zstd";
-          extraArgs = [ "--exclude-snaps=pre-upgrade-" ];
+          extraArgs = [
+            "--exclude-snaps=pre-upgrade-"
+            "--exclude-snaps=restic"
+          ];
         };
       };
 
