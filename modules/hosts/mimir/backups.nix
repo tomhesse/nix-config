@@ -9,6 +9,28 @@
     let
       target = "u591202-sub1@u591202-sub1.your-storagebox.de";
       hostKey = (builtins.head config.services.openssh.hostKeys).path;
+
+      sanity = {
+        documents = {
+          minSize = 30 * 1024 * 1024;
+          maxAgeDays = 2;
+        };
+
+        homeassistant = {
+          minSize = 700 * 1024 * 1024;
+          maxAgeDays = 2;
+        };
+
+        music = {
+          minSize = 30 * 1024 * 1024 * 1024;
+          maxAgeDays = 9;
+        };
+
+        services = {
+          minSize = 600 * 1024 * 1024;
+          maxAgeDays = 2;
+        };
+      };
     in
     {
       services = {
@@ -235,9 +257,16 @@
       };
 
       systemd = {
-        timers.restic-check.timerConfig = {
-          Persistent = true;
-          RandomizedDelaySec = "1h";
+        timers = {
+          restic-check.timerConfig = {
+            Persistent = true;
+            RandomizedDelaySec = "1h";
+          };
+
+          restic-sanity.timerConfig = {
+            Persistent = true;
+            RandomizedDelaySec = "1h";
+          };
         };
 
         tmpfiles.rules = [
@@ -272,6 +301,51 @@
               for repo in documents music services; do
                 /run/current-system/sw/bin/restic-offsite-"$repo" check --read-data-subset="$subset"
               done
+            '';
+          };
+
+          restic-sanity = {
+            description = "Assert the offsite repositories still hold real data";
+            startAt = "09:00";
+            onFailure = [ "notify-failure@%N.service" ];
+            path = [ pkgs.jq ];
+
+            serviceConfig.Type = "oneshot";
+
+            script = ''
+              status=0
+
+              check() {
+                repo="$1"
+                min_size="$2"
+                max_age="$3"
+                restic="/run/current-system/sw/bin/restic-offsite-$repo"
+
+                time=$("$restic" snapshots latest --json | jq -r '.[0].time // empty') || time=""
+                if [ -z "$time" ]; then
+                  echo "$repo: no snapshots" >&2
+                  status=1
+                  return
+                fi
+
+                age=$(( ( $(date +%s) - $(date -d "$time" +%s) ) / 86400 ))
+                if [ "$age" -gt "$max_age" ]; then
+                  echo "$repo: newest snapshot is $age days old, limit $max_age" >&2
+                  status=1
+                fi
+
+                size=$("$restic" stats latest --mode restore-size --json | jq -r '.total_size') || size=0
+                if [ "$min_size" -gt 0 ] && [ "$size" -lt "$min_size" ]; then
+                  echo "$repo: latest snapshot holds $size bytes, floor $min_size" >&2
+                  status=1
+                fi
+              }
+
+              ${lib.concatStringsSep "\n" (
+                lib.mapAttrsToList (repo: t: "check ${repo} ${toString t.minSize} ${toString t.maxAgeDays}") sanity
+              )}
+
+              exit $status
             '';
           };
 
