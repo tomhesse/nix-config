@@ -236,6 +236,10 @@
                 mountpoint = "/srv/backups/restic/tyr";
               };
 
+              "backups/services" = container {
+                mountpoint = "/srv/backups/services";
+              };
+
               "backups/timemachine" = container {
                 mountpoint = "/srv/backups/timemachine";
                 recordsize = "1M";
