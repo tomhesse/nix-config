@@ -22,6 +22,8 @@
       };
     };
 
+    restic.offsite.user = "u591202-sub3";
+
     hardware.facter.reportPath = ./facter.json;
 
     monitors = {
