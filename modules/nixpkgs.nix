@@ -2,7 +2,6 @@
   flake-file.inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-lib.follows = "nixpkgs";
-    nixpkgs-musivault.url = "github:tomhesse/nixpkgs/musivault-init";
   };
 
   flake.modules.nixos.nixpkgs =
@@ -12,7 +11,6 @@
         pkg:
         builtins.elem (lib.getName pkg) [
           "claude-code"
-          "mongodb-ce"
           "nvidia-kernel-modules"
           "nvidia-settings"
           "nvidia-x11"

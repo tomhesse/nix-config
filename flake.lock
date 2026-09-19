@@ -304,22 +304,6 @@
         "url": "https://channels.nixos.org/nixos-26.05/nixexprs.tar.xz"
       }
     },
-    "nixpkgs-musivault": {
-      "locked": {
-        "lastModified": 1780817364,
-        "narHash": "sha256-YNzCgCAudzr0om7ITmntc1F58rf2VIaJb5whM3AIVUw=",
-        "owner": "tomhesse",
-        "repo": "nixpkgs",
-        "rev": "cef5a6f59f75da8e369a8ddc1020b5a50bd93068",
-        "type": "github"
-      },
-      "original": {
-        "owner": "tomhesse",
-        "ref": "musivault-init",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1768564909,
@@ -397,7 +381,6 @@
         "nixpkgs-lib": [
           "nixpkgs"
         ],
-        "nixpkgs-musivault": "nixpkgs-musivault",
         "pkgs-by-name-for-flake-parts": "pkgs-by-name-for-flake-parts",
         "sops-nix": "sops-nix",
         "systems": "systems"
