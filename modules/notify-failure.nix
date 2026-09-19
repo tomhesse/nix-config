@@ -1,3 +1,4 @@
+{ self, ... }:
 {
   flake.modules.nixos.notify-failure =
     { config, pkgs, ... }:
@@ -13,6 +14,8 @@
       '';
     in
     {
+      imports = [ self.modules.nixos.msmtp ];
+
       systemd.services."notify-failure@" = {
         description = "Failure notification for %i";
 
