@@ -184,6 +184,7 @@
           extraArgs = [
             "--exclude-snaps=pre-upgrade-"
             "--exclude-snaps=restic"
+            "--skip-parent"
           ];
         };
       };
