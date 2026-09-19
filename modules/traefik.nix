@@ -14,6 +14,8 @@
         ping = { };
 
         entryPoints = {
+          traefik.address = ":8080";
+
           web = {
             address = ":80";
             http.redirections.entryPoint = {
@@ -64,6 +66,7 @@
         ports = [
           "80:80"
           "443:443"
+          "8080:8080"
         ];
 
         volumes = [
