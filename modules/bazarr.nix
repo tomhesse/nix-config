@@ -34,6 +34,10 @@
           "traefik.enable" = "true";
           "traefik.http.routers.bazarr.rule" = "Host(`bazarr.${domain}`)";
           "traefik.http.routers.bazarr.middlewares" = "authelia@docker";
+          "traefik.http.routers.bazarr-health.rule" = "Host(`bazarr.${domain}`) && Path(`/api/system/ping`)";
+          "traefik.http.routers.bazarr-health.entrypoints" = "websecure";
+          "traefik.http.routers.bazarr-health.middlewares" = "ha-only@docker";
+          "traefik.http.routers.bazarr-health.priority" = "100";
         };
 
         log-driver = "passthrough";
