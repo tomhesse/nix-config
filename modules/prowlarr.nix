@@ -25,6 +25,10 @@
           "traefik.enable" = "true";
           "traefik.http.routers.prowlarr.rule" = "Host(`prowlarr.${domain}`)";
           "traefik.http.routers.prowlarr.middlewares" = "authelia@docker";
+          "traefik.http.routers.prowlarr-health.rule" = "Host(`prowlarr.${domain}`) && Path(`/ping`)";
+          "traefik.http.routers.prowlarr-health.entrypoints" = "websecure";
+          "traefik.http.routers.prowlarr-health.middlewares" = "ha-only@docker";
+          "traefik.http.routers.prowlarr-health.priority" = "100";
         };
 
         extraOptions = [ "--security-opt=no-new-privileges" ];
