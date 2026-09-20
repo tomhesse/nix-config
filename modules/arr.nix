@@ -43,6 +43,10 @@
               "traefik.enable" = "true";
               "traefik.http.routers.${app}.rule" = "Host(`${app}.${domain}`)";
               "traefik.http.routers.${app}.middlewares" = "authelia@docker";
+              "traefik.http.routers.${app}-health.rule" = "Host(`${app}.${domain}`) && Path(`/ping`)";
+              "traefik.http.routers.${app}-health.entrypoints" = "websecure";
+              "traefik.http.routers.${app}-health.middlewares" = "ha-only@docker";
+              "traefik.http.routers.${app}-health.priority" = "100";
             };
 
             extraOptions = [ "--security-opt=no-new-privileges" ];

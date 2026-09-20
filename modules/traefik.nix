@@ -4,6 +4,8 @@
     let
       domain = "shrimphouse.xyz";
 
+      homeassistant = "10.0.20.20";
+
       staticConfig = (pkgs.formats.yaml { }).generate "traefik.yml" {
         global.checkNewVersion = false;
 
@@ -79,6 +81,7 @@
           "traefik.http.routers.dashboard.rule" = "Host(`traefik.${domain}`)";
           "traefik.http.routers.dashboard.service" = "api@internal";
           "traefik.http.routers.dashboard.middlewares" = "authelia@docker";
+          "traefik.http.middlewares.ha-only.ipallowlist.sourcerange" = "${homeassistant}/32";
         };
 
         environmentFiles = [ config.sops.templates."traefik-env".path ];
