@@ -32,6 +32,11 @@
           "traefik.enable" = "true";
           "traefik.http.routers.sabnzbd.rule" = "Host(`sabnzbd.${domain}`)";
           "traefik.http.routers.sabnzbd.middlewares" = "authelia@docker";
+          "traefik.http.routers.sabnzbd-health.rule" =
+            "Host(`sabnzbd.${domain}`) && Path(`/api`) && Query(`mode`, `version`)";
+          "traefik.http.routers.sabnzbd-health.entrypoints" = "websecure";
+          "traefik.http.routers.sabnzbd-health.middlewares" = "ha-only@docker";
+          "traefik.http.routers.sabnzbd-health.priority" = "100";
         };
 
         extraOptions = [ "--security-opt=no-new-privileges" ];
