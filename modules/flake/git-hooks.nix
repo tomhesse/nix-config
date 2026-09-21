@@ -41,7 +41,10 @@
     # Secrets
     ripsecrets = {
       enable = true;
-      excludes = [ "\\.pub$" ];
+      excludes = [
+        "\\.asc$"
+        "\\.pub$"
+      ];
     };
 
     # Spell checker
