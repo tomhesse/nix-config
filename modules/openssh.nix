@@ -24,15 +24,10 @@ in
         codeberg.org ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIVIC02vnjFyL+I4RHfvIGNtOgJMe769VTF1VR4EB3ZB
       '';
 
-      githubHostKeys = pkgs.fetchurl {
-        url = "https://api.github.com/meta";
-        name = "github-host-keys";
-        hash = "sha256-xzrF0EXNKjWdIgK3m1UfsipjhGPV3b5e1ZsbOZiGnIg=";
-        downloadToTemp = true;
-        postFetch = ''
-          ${pkgs.jq}/bin/jq -r '.ssh_keys[] | "github.com " + .' $downloadedFile > $out
-        '';
-      };
+      githubHostKeys = pkgs.writeText "github-host-keys" ''
+        github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl
+        github.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEmKSENjQEezOmxkZMy7opKgwFB9nkt5YRrYMjNuG5N87uRgg6CLrbo5wAdT/y6v0mKV0U2w0WZ2YB/++Tpockg=
+      '';
     in
     {
       services.openssh = {
