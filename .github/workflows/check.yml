@@ -1,4 +1,4 @@
-name: lint
+name: check
 
 on:
   push:
@@ -16,7 +16,7 @@ permissions:
   contents: read
 
 jobs:
-  lint:
+  check:
     runs-on: ubuntu-latest
 
     steps:
@@ -33,3 +33,16 @@ jobs:
           nix build --no-link --print-build-logs \
             .#checks.x86_64-linux.pre-commit \
             .#checks.x86_64-linux.check-flake-file
+
+      - name: Build the local packages
+        run: |
+          nix build --no-link --print-build-logs \
+            .#media-ctl \
+            .#power-menu
+
+      - name: Evaluate every configuration
+        run: |
+          nix eval --json .#nixosConfigurations --apply \
+            'cs: builtins.mapAttrs (_: c: c.config.system.build.toplevel.drvPath) cs'
+          nix eval --json .#homeConfigurations --apply \
+            'cs: builtins.mapAttrs (_: c: c.activationPackage.drvPath) cs'
