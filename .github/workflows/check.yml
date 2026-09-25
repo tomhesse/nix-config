@@ -3,9 +3,9 @@ name: check
 on:
   push:
     branches: [main]
-    paths-ignore: ["**.md"]
+    paths-ignore: ["**.md", ".github/renovate.json"]
   pull_request:
-    paths-ignore: ["**.md"]
+    paths-ignore: ["**.md", ".github/renovate.json"]
   workflow_dispatch:
 
 concurrency:
