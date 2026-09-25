@@ -2,5 +2,5 @@
 {
   imports = [ inputs.flake-file.flakeModules.default ];
 
-  flake-file.inputs.flake-file.url = "github:vic/flake-file";
+  flake-file.inputs.flake-file.url = "github:denful/flake-file";
 }
