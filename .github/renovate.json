@@ -1,0 +1,16 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "timezone": "Europe/Berlin",
+  "enabledManagers": ["nix"],
+  "nix": {
+    "enabled": true
+  },
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 6am on sunday"],
+    "commitMessageAction": "update the flake inputs"
+  },
+  "semanticCommits": "enabled",
+  "semanticCommitScope": "flake"
+}
