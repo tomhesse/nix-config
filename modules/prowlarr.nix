@@ -7,7 +7,7 @@
     in
     {
       virtualisation.oci-containers.containers.prowlarr = {
-        image = "lscr.io/linuxserver/prowlarr:2.5.2.5491-ls158";
+        image = "lscr.io/linuxserver/prowlarr:2.6.5.5623-ls162";
 
         networks = [ "edge" ];
 
