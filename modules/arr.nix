@@ -5,7 +5,7 @@
       domain = "shrimphouse.xyz";
 
       images = {
-        radarr = "lscr.io/linuxserver/radarr:6.3.0.10514-ls314";
+        radarr = "lscr.io/linuxserver/radarr:6.4.4.10685-ls318";
         sonarr = "lscr.io/linuxserver/sonarr:4.0.20.3014-ls326";
       };
 
