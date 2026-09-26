@@ -56,7 +56,7 @@
           cmd = [
             "gotenberg"
             "--chromium-disable-javascript=true"
-            "--chromium-allow-list=file:///tmp/.*"
+            "--chromium-allow-list=^file:///tmp/.*"
           ];
 
           capabilities.ALL = false;
