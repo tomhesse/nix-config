@@ -115,7 +115,7 @@
     in
     {
       virtualisation.oci-containers.containers.authelia = {
-        image = "ghcr.io/authelia/authelia:4.39.22";
+        image = "ghcr.io/authelia/authelia:4.39.28";
 
         entrypoint = "authelia";
         cmd = [
