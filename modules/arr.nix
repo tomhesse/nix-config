@@ -35,8 +35,7 @@
               PGID = toString uid;
               UMASK = "002";
               TZ = "Europe/Berlin";
-              "${lib.toUpper app}__AUTH__METHOD" = "Forms";
-              "${lib.toUpper app}__AUTH__REQUIRED" = "DisabledForLocalAddresses";
+              "${lib.toUpper app}__AUTH__METHOD" = "External";
             };
 
             labels = {
