@@ -35,6 +35,10 @@
       "semanticCommitScope": "{{{replace '\\.nix$' '' (replace '^modules/' '' packageFile)}}}"
     },
     {
+      "matchPackageNames": ["docker.io/apache/tika"],
+      "allowedVersions": "<4"
+    },
+    {
       "matchPackageNames": ["lscr.io/linuxserver/**"],
       "versioning": "regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(\\.(?<build>\\d+))?-ls(?<revision>\\d+)$"
     }
