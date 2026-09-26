@@ -8,7 +8,7 @@
     in
     {
       virtualisation.oci-containers.containers.navidrome = {
-        image = "ghcr.io/navidrome/navidrome:0.64.0";
+        image = "ghcr.io/navidrome/navidrome:0.64.2";
 
         networks = [ "edge" ];
 
