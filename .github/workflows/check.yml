@@ -46,3 +46,14 @@ jobs:
             'cs: builtins.mapAttrs (_: c: c.config.system.build.toplevel.drvPath) cs'
           nix eval --json .#homeConfigurations --apply \
             'cs: builtins.mapAttrs (_: c: c.activationPackage.drvPath) cs'
+
+      - name: Check that every container image tag exists
+        run: |
+          grep -rhoP 'image = "\K[^"]+' modules/ | sort -u > /tmp/images.txt
+          cat /tmp/images.txt
+          nix shell nixpkgs#skopeo -c bash -c '
+            set -e
+            while read -r image; do
+              skopeo inspect --raw "docker://$image" > /dev/null
+            done < /tmp/images.txt
+          '
