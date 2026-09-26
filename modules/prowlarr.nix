@@ -17,8 +17,7 @@
           PUID = toString uid;
           PGID = toString uid;
           TZ = "Europe/Berlin";
-          PROWLARR__AUTH__METHOD = "Forms";
-          PROWLARR__AUTH__REQUIRED = "DisabledForLocalAddresses";
+          PROWLARR__AUTH__METHOD = "External";
         };
 
         labels = {
