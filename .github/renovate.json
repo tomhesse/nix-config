@@ -2,7 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
   "timezone": "Europe/Berlin",
-  "enabledManagers": ["nix", "github-actions"],
+  "enabledManagers": ["nix", "github-actions", "custom.regex"],
   "nix": {
     "enabled": true
   },
@@ -12,6 +12,15 @@
     "commitMessageAction": "update the flake inputs",
     "semanticCommitScope": "flake"
   },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/^modules/.*\\.nix$/"],
+      "matchStrings": ["image = \"(?<depName>[^:\"]+):(?<currentValue>[^\"]+)\""],
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "docker"
+    }
+  ],
   "packageRules": [
     {
       "matchManagers": ["github-actions"],
@@ -19,6 +28,15 @@
       "schedule": ["before 6am on sunday"],
       "semanticCommitType": "ci",
       "semanticCommitScope": null
+    },
+    {
+      "matchManagers": ["custom.regex"],
+      "dependencyDashboardApproval": true,
+      "semanticCommitScope": "containers"
+    },
+    {
+      "matchPackageNames": ["lscr.io/linuxserver/**"],
+      "versioning": "regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(\\.(?<build>\\d+))?-ls(?<revision>\\d+)$"
     }
   ],
   "semanticCommits": "enabled"
