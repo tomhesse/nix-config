@@ -32,7 +32,7 @@
     {
       "matchManagers": ["custom.regex"],
       "dependencyDashboardApproval": true,
-      "semanticCommitScope": "containers"
+      "semanticCommitScope": "{{{replace '\\.nix$' '' (replace '^modules/' '' packageFile)}}}"
     },
     {
       "matchPackageNames": ["lscr.io/linuxserver/**"],
