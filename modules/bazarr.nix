@@ -14,7 +14,7 @@
     in
     {
       virtualisation.oci-containers.containers.bazarr = {
-        image = "lscr.io/linuxserver/bazarr:v1.6.0-ls362";
+        image = "lscr.io/linuxserver/bazarr:v1.6.2-ls366";
 
         networks = [ "edge" ];
 
