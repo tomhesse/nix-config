@@ -12,7 +12,7 @@
     in
     {
       virtualisation.oci-containers.containers.sabnzbd = {
-        image = "lscr.io/linuxserver/sabnzbd:5.1.2-ls271";
+        image = "lscr.io/linuxserver/sabnzbd:5.1.3-ls274";
 
         networks = [ "edge" ];
 
