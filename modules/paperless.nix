@@ -57,6 +57,8 @@
             "gotenberg"
             "--chromium-disable-javascript=true"
             "--chromium-allow-list=^file:///tmp/.*"
+            "--chromium-deny-private-ips=true"
+            "--chromium-deny-public-ips=true"
           ];
 
           capabilities.ALL = false;
