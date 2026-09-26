@@ -14,7 +14,7 @@
     in
     {
       virtualisation.oci-containers.containers.jellyfin = {
-        image = "docker.io/jellyfin/jellyfin:12.0";
+        image = "docker.io/jellyfin/jellyfin:12.1";
 
         networks = [ "edge" ];
 
