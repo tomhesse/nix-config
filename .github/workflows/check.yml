@@ -50,10 +50,11 @@ jobs:
       - name: Check that every container image tag exists
         run: |
           grep -rhoP 'image = "\K[^"]+' modules/ | sort -u > /tmp/images.txt
-          cat /tmp/images.txt
           nix shell nixpkgs#skopeo -c bash -c '
             set -e
             while read -r image; do
-              skopeo inspect --raw "docker://$image" > /dev/null
+              printf "%-55s " "$image"
+              skopeo inspect --retry-times 3 --raw "docker://$image" > /dev/null
+              echo ok
             done < /tmp/images.txt
           '
