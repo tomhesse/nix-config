@@ -88,6 +88,9 @@
           extraOptions = [
             "--security-opt=no-new-privileges"
             "--shm-size=128m"
+            "--health-cmd=/usr/local/bin/healthcheck.sh"
+            "--health-interval=10s"
+            "--health-start-period=5m"
           ];
         };
 
