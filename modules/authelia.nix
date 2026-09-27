@@ -100,6 +100,11 @@
                     name: 'immich_role'
                     attribute: 'immich_role'
 
+            scopes:
+              immich:
+                claims:
+                  - 'immich_role'
+
             clients:
               - client_id: 'immich'
                 client_name: 'Immich'
@@ -119,6 +124,7 @@
                   - 'openid'
                   - 'profile'
                   - 'email'
+                  - 'immich'
 
               - client_id: 'paperless'
                 client_name: 'Paperless'
