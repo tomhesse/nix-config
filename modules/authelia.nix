@@ -83,6 +83,23 @@
                       - 'group:admins'
 
             clients:
+              - client_id: 'immich'
+                client_name: 'Immich'
+                client_secret: '$pbkdf2-sha512$310000$O2aDSK0MK.Dncmz3/fhszA$.8dDBIwARpoBwW7I8oJFEk9FrtgMqX8.owBTX8naT.NtAApdmEoW5Mnv4lVXqe/3uiLjkfOYtRhQp4SxrAygtg'
+                public: false
+                consent_mode: 'implicit'
+                require_pkce: true
+                pkce_challenge_method: 'S256'
+                token_endpoint_auth_method: 'client_secret_basic'
+                redirect_uris:
+                  - 'https://photos.${domain}/auth/login'
+                  - 'https://photos.${domain}/user-settings'
+                  - 'app.immich:///oauth-callback'
+                scopes:
+                  - 'openid'
+                  - 'profile'
+                  - 'email'
+
               - client_id: 'paperless'
                 client_name: 'Paperless'
                 client_secret: '$pbkdf2-sha512$310000$Ne0.05cN4N4NejJ2IFGmIg$/AO2TgEl1D12XbI0A.VP6cfFqB3RbrKsyKLL/Ovr1VzvNmFunt4whRtkzkmh56VRcf3DhH1KQUC.g9pv/2RxGw'
