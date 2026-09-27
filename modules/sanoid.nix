@@ -41,6 +41,14 @@
           autoprune = true;
         };
 
+        pictures = {
+          hourly = 0;
+          daily = 30;
+          monthly = 0;
+          autosnap = true;
+          autoprune = true;
+        };
+
         replica = {
           hourly = 48;
           daily = 30;
