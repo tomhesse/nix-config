@@ -17,6 +17,8 @@
 
         totp.issuer = domain;
 
+        definitions.user_attributes.immich_role.expression = ''"admins" in groups ? "admin" : "user"'';
+
         authentication_backend = {
           password_change.disable = true;
           password_reset.custom_url = "https://users.${domain}/reset-password/step1";
@@ -89,12 +91,22 @@
                     subject:
                       - 'group:admins'
 
+            claims_policies:
+              immich:
+                id_token:
+                  - 'immich_role'
+                custom_claims:
+                  immich_role:
+                    name: 'immich_role'
+                    attribute: 'immich_role'
+
             clients:
               - client_id: 'immich'
                 client_name: 'Immich'
                 client_secret: '$pbkdf2-sha512$310000$O2aDSK0MK.Dncmz3/fhszA$.8dDBIwARpoBwW7I8oJFEk9FrtgMqX8.owBTX8naT.NtAApdmEoW5Mnv4lVXqe/3uiLjkfOYtRhQp4SxrAygtg'
                 public: false
                 authorization_policy: 'household'
+                claims_policy: 'immich'
                 consent_mode: 'implicit'
                 require_pkce: true
                 pkce_challenge_method: 'S256'
