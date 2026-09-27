@@ -117,9 +117,11 @@
             runCheck = true;
 
             paths = map (dataset: "/srv/${dataset}/.zfs/snapshot/restic") (
-              lib.filter (lib.hasPrefix "services/") (
-                builtins.attrNames config.disko.devices.zpool.rpool.datasets
-              )
+              lib.filter (
+                dataset:
+                lib.hasPrefix "services/" dataset
+                && (config.disko.devices.zpool.rpool.datasets.${dataset}.options.canmount or "on") != "off"
+              ) (builtins.attrNames config.disko.devices.zpool.rpool.datasets)
             );
 
             extraOptions = [ "sftp.command='ssh ${target} -i ${hostKey} -p 23 -s sftp'" ];
