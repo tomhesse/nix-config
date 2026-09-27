@@ -82,12 +82,19 @@
                     subject:
                       - 'group:admins'
 
+              household:
+                default_policy: 'one_factor'
+                rules:
+                  - policy: 'two_factor'
+                    subject:
+                      - 'group:admins'
+
             clients:
               - client_id: 'immich'
                 client_name: 'Immich'
                 client_secret: '$pbkdf2-sha512$310000$O2aDSK0MK.Dncmz3/fhszA$.8dDBIwARpoBwW7I8oJFEk9FrtgMqX8.owBTX8naT.NtAApdmEoW5Mnv4lVXqe/3uiLjkfOYtRhQp4SxrAygtg'
                 public: false
-                authorization_policy: 'one_factor'
+                authorization_policy: 'household'
                 consent_mode: 'implicit'
                 require_pkce: true
                 pkce_challenge_method: 'S256'
