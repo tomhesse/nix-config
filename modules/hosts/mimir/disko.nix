@@ -273,16 +273,20 @@
                 recordsize = "1M";
               };
 
+              "media/immich" = container {
+                mountpoint = "/srv/media/immich";
+              };
+
+              "media/immich/encoded-video" = dataset {
+                mountpoint = "/srv/media/immich/encoded-video";
+              };
+
+              "media/immich/originals" = dataset {
+                mountpoint = "/srv/media/immich/originals";
+              };
+
               "media/music" = dataset {
                 mountpoint = "/srv/media/music";
-              };
-
-              "media/pictures" = dataset {
-                mountpoint = "/srv/media/pictures";
-              };
-
-              "media/pictures/encoded-video" = dataset {
-                mountpoint = "/srv/media/pictures/encoded-video";
               };
 
               "media/video" = container {

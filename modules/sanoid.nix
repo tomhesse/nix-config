@@ -32,18 +32,18 @@
           autoprune = true;
         };
 
-        media = {
+        immich = {
           hourly = 0;
-          daily = 0;
-          weekly = 8;
+          daily = 30;
           monthly = 0;
           autosnap = true;
           autoprune = true;
         };
 
-        pictures = {
+        media = {
           hourly = 0;
-          daily = 30;
+          daily = 0;
+          weekly = 8;
           monthly = 0;
           autosnap = true;
           autoprune = true;

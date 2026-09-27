@@ -22,8 +22,8 @@
           user = "${toString uid}:${toString uid}";
 
           volumes = [
-            "/srv/media/pictures:/data"
-            "/srv/media/pictures/encoded-video:/data/encoded-video"
+            "/srv/media/immich/originals:/data"
+            "/srv/media/immich/encoded-video:/data/encoded-video"
             "/srv/cache/immich/thumbs:/data/thumbs"
           ];
 
@@ -130,8 +130,8 @@
 
             unitConfig.AssertPathIsMountPoint = [
               "/srv/cache/immich/thumbs"
-              "/srv/media/pictures"
-              "/srv/media/pictures/encoded-video"
+              "/srv/media/immich/encoded-video"
+              "/srv/media/immich/originals"
             ];
           };
 

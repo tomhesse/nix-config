@@ -21,14 +21,14 @@
           maxAgeDays = 2;
         };
 
+        immich = {
+          minSize = 0;
+          maxAgeDays = 2;
+        };
+
         music = {
           minSize = 30 * 1024 * 1024 * 1024;
           maxAgeDays = 9;
-        };
-
-        pictures = {
-          minSize = 0;
-          maxAgeDays = 2;
         };
 
         services = {
@@ -115,15 +115,13 @@
             };
           };
 
-          offsite-pictures = {
-            repository = "sftp:${target}:pictures";
+          offsite-immich = {
+            repository = "sftp:${target}:immich";
             passwordFile = config.sops.secrets."services/restic/offsite-password".path;
             initialize = true;
             runCheck = true;
 
-            paths = [ "/srv/media/pictures" ];
-
-            exclude = [ "/srv/media/pictures/encoded-video" ];
+            paths = [ "/srv/media/immich/originals" ];
 
             extraOptions = [ "sftp.command='ssh ${target} -i ${hostKey} -p 23 -s sftp'" ];
 
@@ -231,9 +229,9 @@
             recursive = true;
           };
 
-          "tank/media/pictures".useTemplate = [ "pictures" ];
+          "tank/media/immich/encoded-video".useTemplate = [ "media" ];
 
-          "tank/media/pictures/encoded-video".useTemplate = [ "media" ];
+          "tank/media/immich/originals".useTemplate = [ "immich" ];
         };
 
         syncoid.commands."rpool/services" = {
@@ -318,9 +316,9 @@
 
           restic-backups-offsite-homeassistant.onFailure = [ "notify-failure@%N.service" ];
 
-          restic-backups-offsite-music.onFailure = [ "notify-failure@%N.service" ];
+          restic-backups-offsite-immich.onFailure = [ "notify-failure@%N.service" ];
 
-          restic-backups-offsite-pictures.onFailure = [ "notify-failure@%N.service" ];
+          restic-backups-offsite-music.onFailure = [ "notify-failure@%N.service" ];
 
           restic-backups-offsite-services = {
             path = [ config.boot.zfs.package ];
@@ -337,7 +335,7 @@
             script = ''
               subset="$(date +%-m)/12"
 
-              for repo in documents music pictures services; do
+              for repo in documents immich music services; do
                 /run/current-system/sw/bin/restic-offsite-"$repo" check --read-data-subset="$subset"
               done
             '';
