@@ -306,6 +306,7 @@
 
         tmpfiles.rules = [
           "z /srv/backups/homeassistant 0700 homeassistant homeassistant -"
+          "z /srv/backups/restic 0755 root root -"
           "z /srv/backups/restic/loki 0700 restic-loki restic-loki -"
           "z /srv/backups/restic/tyr 0700 restic-tyr restic-tyr -"
           "z /srv/backups/timemachine/macmini 0700 macmini macmini -"
