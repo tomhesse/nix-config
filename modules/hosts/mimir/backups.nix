@@ -22,7 +22,7 @@
         };
 
         immich = {
-          minSize = 0;
+          minSize = 5 * 1024 * 1024 * 1024;
           maxAgeDays = 2;
         };
 
