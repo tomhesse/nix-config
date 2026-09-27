@@ -10,6 +10,7 @@
         self.modules.nixos.common-cpu-intel
         self.modules.nixos.common-pc-ssd
         self.modules.nixos.grub
+        self.modules.nixos.immich
         self.modules.nixos.jellyfin
         self.modules.nixos.lldap
         self.modules.nixos.minecraft
@@ -43,10 +44,14 @@
 
       systemd.tmpfiles.rules = [
         "z /srv/archive/games/osu 0700 thesse users -"
+        "z /srv/cache/immich/models 0700 immich immich -"
+        "z /srv/cache/immich/thumbs 0700 immich immich -"
         "z /srv/cache/jellyfin 0700 jellyfin jellyfin -"
         "d /srv/downloads/complete 0775 sabnzbd sabnzbd -"
         "d /srv/downloads/incomplete 0750 sabnzbd sabnzbd -"
         "z /srv/media/music 0700 navidrome navidrome -"
+        "z /srv/media/pictures 0700 immich immich -"
+        "z /srv/media/pictures/encoded-video 0700 immich immich -"
         "z /srv/media/video/anime/movies 0775 root root -"
         "z /srv/media/video/anime/shows 0775 root root -"
         "z /srv/media/video/movies 0775 root root -"
