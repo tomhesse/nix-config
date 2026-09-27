@@ -87,10 +87,7 @@
 
           extraOptions = [
             "--security-opt=no-new-privileges"
-            "--health-cmd=pg_isready --username=immich --dbname=immich"
-            "--health-interval=10s"
-            "--health-timeout=3s"
-            "--health-start-period=30s"
+            "--shm-size=128m"
           ];
         };
 
