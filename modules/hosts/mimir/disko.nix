@@ -135,6 +135,14 @@
                 mountpoint = "/srv/services/bazarr";
               };
 
+              "services/immich" = container {
+                mountpoint = "/srv/services/immich";
+              };
+
+              "services/immich/postgres" = dataset {
+                mountpoint = "/srv/services/immich/postgres";
+              };
+
               "services/jellyfin" = dataset {
                 mountpoint = "/srv/services/jellyfin";
               };
@@ -269,6 +277,14 @@
                 mountpoint = "/srv/media/music";
               };
 
+              "media/pictures" = dataset {
+                mountpoint = "/srv/media/pictures";
+              };
+
+              "media/pictures/encoded-video" = dataset {
+                mountpoint = "/srv/media/pictures/encoded-video";
+              };
+
               "media/video" = container {
                 mountpoint = "/srv/media/video";
               };
@@ -311,6 +327,20 @@
             datasets = {
               cache = container {
                 mountpoint = "/srv/cache";
+              };
+
+              "cache/immich" = container {
+                mountpoint = "/srv/cache/immich";
+              };
+
+              "cache/immich/models" = dataset {
+                mountpoint = "/srv/cache/immich/models";
+              };
+
+              "cache/immich/thumbs" = dataset {
+                mountpoint = "/srv/cache/immich/thumbs";
+                recordsize = "128K";
+                reservation = "20G";
               };
 
               "cache/jellyfin" = dataset {
