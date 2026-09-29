@@ -7,7 +7,7 @@
     in
     {
       virtualisation.oci-containers.containers.seerr = {
-        image = "ghcr.io/seerr-team/seerr:v3.4.1";
+        image = "ghcr.io/seerr-team/seerr:v3.5.0";
 
         networks = [ "edge" ];
 
