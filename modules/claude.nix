@@ -2,7 +2,16 @@
   flake.modules.homeManager.claude =
     { pkgs, ... }:
     {
-      home.packages = [ pkgs.claude-code ];
+      home.packages = [
+        (pkgs.symlinkJoin {
+          name = "claude-code-wrapped";
+          paths = [ pkgs.claude-code ];
+          nativeBuildInputs = [ pkgs.makeWrapper ];
+          postBuild = ''
+            wrapProgram $out/bin/claude --prefix PATH : ${pkgs.nodejs}/bin
+          '';
+        })
+      ];
 
       home.persistence."/persistent" = {
         directories = [ ".claude" ];
