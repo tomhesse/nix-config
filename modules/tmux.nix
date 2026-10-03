@@ -15,6 +15,10 @@
         clock24 = true;
         escapeTime = 10;
         extraConfig = ''
+          set -g allow-passthrough on
+          set -s extended-keys on
+          set -as terminal-features 'xterm*:extkeys'
+
           bind c new-window -c "~"
           bind C new-window -c "#{pane_current_path}"
           bind | split-window -h -c "#{pane_current_path}"
