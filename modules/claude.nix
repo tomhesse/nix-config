@@ -5,7 +5,7 @@
       home.packages = [
         (pkgs.symlinkJoin {
           name = "claude-code-wrapped";
-          paths = [ pkgs.claude-code ];
+          paths = [ pkgs.unstable.claude-code ];
           nativeBuildInputs = [ pkgs.makeWrapper ];
           postBuild = ''
             wrapProgram $out/bin/claude --prefix PATH : ${pkgs.nodejs}/bin
