@@ -23,12 +23,12 @@
         profiles.default = {
           extensions =
             (with pkgs.vscode-extensions; [
-              anthropic.claude-code
               christian-kohler.path-intellisense
               editorconfig.editorconfig
               jnoortheen.nix-ide
             ])
             ++ [
+              pkgs.unstable.vscode-extensions.anthropic.claude-code
               (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
                 mktplcRef = {
                   publisher = "opentofu";
