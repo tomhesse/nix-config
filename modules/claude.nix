@@ -8,12 +8,15 @@
           paths = [ pkgs.unstable.claude-code ];
           nativeBuildInputs = [ pkgs.makeWrapper ];
           postBuild = ''
-            wrapProgram $out/bin/claude --prefix PATH : ${
-              lib.makeBinPath [
-                pkgs.nodejs
-                pkgs.uv
-              ]
-            }
+            wrapProgram $out/bin/claude \
+              --prefix PATH : ${
+                lib.makeBinPath [
+                  pkgs.nodejs
+                  pkgs.uv
+                  pkgs.python3
+                ]
+              } \
+              --set UV_PYTHON_DOWNLOADS never
           '';
         })
       ];
