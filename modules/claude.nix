@@ -22,5 +22,10 @@
         directories = [ ".claude" ];
         files = [ ".claude.json" ];
       };
+
+      sops.secrets = {
+        "services/unifi-mcp/password" = { };
+        "services/unifi-mcp/api-key" = { };
+      };
     };
 }
