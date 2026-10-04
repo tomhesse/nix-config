@@ -196,6 +196,7 @@
             matches = [
               { app-id = "^code$"; }
               { app-id = "^firefox$"; }
+              { app-id = "^kitty$"; }
             ];
             open-maximized = true;
           }
