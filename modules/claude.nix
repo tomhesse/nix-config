@@ -1,6 +1,6 @@
 {
   flake.modules.homeManager.claude =
-    { pkgs, ... }:
+    { lib, pkgs, ... }:
     {
       home.packages = [
         (pkgs.symlinkJoin {
@@ -8,7 +8,12 @@
           paths = [ pkgs.unstable.claude-code ];
           nativeBuildInputs = [ pkgs.makeWrapper ];
           postBuild = ''
-            wrapProgram $out/bin/claude --prefix PATH : ${pkgs.nodejs}/bin
+            wrapProgram $out/bin/claude --prefix PATH : ${
+              lib.makeBinPath [
+                pkgs.nodejs
+                pkgs.uv
+              ]
+            }
           '';
         })
       ];
