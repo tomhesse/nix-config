@@ -51,6 +51,7 @@
               "security.workspace.trust.enabled" = false;
               "chat.disableAIFeatures" = true;
               "claudeCode.preferredLocation" = "panel";
+              "claudeCode.hideOnboarding" = true;
 
               "editor.fontFamily" = "'FiraCode Nerd Font', monospace";
               "editor.fontSize" = 14;
