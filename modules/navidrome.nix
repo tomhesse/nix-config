@@ -21,7 +21,6 @@
 
         environment = {
           ND_BASEURL = "https://music.${domain}";
-          ND_ENABLEDOWNLOADS = "false";
           TZ = "Europe/Berlin";
         };
 
