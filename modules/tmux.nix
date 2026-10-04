@@ -16,7 +16,7 @@
         escapeTime = 10;
         extraConfig = ''
           set -g allow-passthrough on
-          set -s extended-keys on
+          set -s extended-keys always
           set -as terminal-features 'xterm*:extkeys'
 
           bind c new-window -c "~"
