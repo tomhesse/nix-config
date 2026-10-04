@@ -198,6 +198,7 @@
               { app-id = "^firefox$"; }
               { app-id = "^kitty$"; }
               { app-id = "^thunderbird$"; }
+              { app-id = "^feishin$"; }
             ];
             open-maximized = true;
           }
