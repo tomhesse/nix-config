@@ -92,6 +92,7 @@
         };
 
         extraOptions = [
+          "--ip=172.31.0.254"
           "--health-cmd=traefik healthcheck --ping"
           "--health-timeout=5s"
           "--health-start-period=10s"
