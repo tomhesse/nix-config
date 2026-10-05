@@ -74,7 +74,7 @@
           };
 
           tank0 = zfsDisk "tank" "/dev/disk/by-id/wwn-0x5000cca278d64ea0";
-          tank1 = zfsDisk "tank" "/dev/disk/by-id/wwn-0x5000cca278d64f1f";
+          tank1 = zfsDisk "tank" "/dev/disk/by-id/wwn-0x5000cca270b3bd48";
           tank2 = zfsDisk "tank" "/dev/disk/by-id/wwn-0x5000cca278d63046";
           tank3 = zfsDisk "tank" "/dev/disk/by-id/wwn-0x5000cca27ac59544";
           tank4 = zfsDisk "tank" "/dev/disk/by-id/wwn-0x5000cca278d63e40";

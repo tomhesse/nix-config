@@ -2,6 +2,10 @@
   "version": 1,
   "system": "x86_64-linux",
   "virtualisation": "none",
+  "uefi": {
+    "supported": true,
+    "platform_size": 64
+  },
   "hardware": {
     "bios": {
       "apm_info": {
@@ -869,6 +873,7 @@
           "mmio_stale_data",
           "retbleed",
           "gds",
+          "spectre_v2_user",
           "vmscape"
         ],
         "power_management": [
@@ -885,7 +890,6 @@
         "fpu_exception": false,
         "cpuid_level": 22,
         "write_protect": false,
-        "tlb_size": 32586,
         "clflush_size": 64,
         "cache_alignment": 64,
         "address_sizes": {
@@ -909,8 +913,8 @@
           "value": 133
         },
         "slot": {
-          "bus": 11,
-          "number": 2
+          "bus": 0,
+          "number": 3
         },
         "base_class": {
           "hex": "0106",
@@ -937,15 +941,15 @@
           "name": "W3D0",
           "value": 0
         },
-        "serial": "AAHLD90H",
+        "serial": "AAHLD8ZH",
         "model": "HGST HUH721212AL",
         "sysfs_id": "/class/block/sdf",
-        "sysfs_bus_id": "11:0:2:0",
-        "sysfs_device_link": "/devices/pci0000:b2/0000:b2:00.0/0000:b3:00.0/host11/port-11:2/end_device-11:2/target11:0:2/11:0:2:0",
+        "sysfs_bus_id": "0:0:3:0",
+        "sysfs_device_link": "/devices/pci0000:b2/0000:b2:00.0/0000:b3:00.0/host0/port-0:3/end_device-0:3/target0:0:3/0:0:3:0",
         "unix_device_names": [
-          "/dev/disk/by-id/ata-HGST_HUH721212ALE604_AAHLD90H",
-          "/dev/disk/by-id/wwn-0x5000cca278d67452",
-          "/dev/disk/by-path/pci-0000:b3:00.0-sas-phy1-lun-0",
+          "/dev/disk/by-id/ata-HGST_HUH721212ALE604_AAHLD8ZH",
+          "/dev/disk/by-id/wwn-0x5000cca278d67451",
+          "/dev/disk/by-path/pci-0000:b3:00.0-sas-phy3-lun-0",
           "/dev/sdf"
         ],
         "resources": [
@@ -1072,8 +1076,8 @@
           "value": 133
         },
         "slot": {
-          "bus": 11,
-          "number": 0
+          "bus": 0,
+          "number": 1
         },
         "base_class": {
           "hex": "0106",
@@ -1100,15 +1104,15 @@
           "name": "W3D0",
           "value": 0
         },
-        "serial": "AAHK5EWH",
+        "serial": "AAHKXWHH",
         "model": "HGST HUH721212AL",
         "sysfs_id": "/class/block/sdd",
-        "sysfs_bus_id": "11:0:0:0",
-        "sysfs_device_link": "/devices/pci0000:b2/0000:b2:00.0/0000:b3:00.0/host11/port-11:0/end_device-11:0/target11:0:0/11:0:0:0",
+        "sysfs_bus_id": "0:0:1:0",
+        "sysfs_device_link": "/devices/pci0000:b2/0000:b2:00.0/0000:b3:00.0/host0/port-0:1/end_device-0:1/target0:0:1/0:0:1:0",
         "unix_device_names": [
-          "/dev/disk/by-id/ata-HGST_HUH721212ALE604_AAHK5EWH",
-          "/dev/disk/by-id/wwn-0x5000cca278d5e643",
-          "/dev/disk/by-path/pci-0000:b3:00.0-sas-phy2-lun-0",
+          "/dev/disk/by-id/ata-HGST_HUH721212ALE604_AAHKXWHH",
+          "/dev/disk/by-id/wwn-0x5000cca278d63e40",
+          "/dev/disk/by-path/pci-0000:b3:00.0-sas-phy0-lun-0",
           "/dev/sdd"
         ],
         "resources": [
@@ -1152,7 +1156,7 @@
           "value": 133
         },
         "slot": {
-          "bus": 9,
+          "bus": 10,
           "number": 0
         },
         "base_class": {
@@ -1183,8 +1187,8 @@
         "serial": "S663NL0Y306743",
         "model": "SAMSUNG MZ7L3240",
         "sysfs_id": "/class/block/sdb",
-        "sysfs_bus_id": "9:0:0:0",
-        "sysfs_device_link": "/devices/pci0000:00/0000:00:17.0/ata10/host9/target9:0:0/9:0:0:0",
+        "sysfs_bus_id": "10:0:0:0",
+        "sysfs_device_link": "/devices/pci0000:00/0000:00:17.0/ata10/host10/target10:0:0/10:0:0:0",
         "unix_device_names": [
           "/dev/disk/by-id/ata-SAMSUNG_MZ7L3240HCHQ-00A07_S663NL0Y306743",
           "/dev/disk/by-id/wwn-0x5002538f5531e4d4",
@@ -1233,8 +1237,8 @@
           "value": 133
         },
         "slot": {
-          "bus": 11,
-          "number": 7
+          "bus": 0,
+          "number": 6
         },
         "base_class": {
           "hex": "0106",
@@ -1258,19 +1262,19 @@
         },
         "revision": {
           "hex": "0000",
-          "name": "W3D0",
+          "name": "T3D0",
           "value": 0
         },
-        "serial": "AAHKU52H",
+        "serial": "2AGD8RZY",
         "model": "HGST HUH721212AL",
-        "sysfs_id": "/class/block/sdk",
-        "sysfs_bus_id": "11:0:7:0",
-        "sysfs_device_link": "/devices/pci0000:b2/0000:b2:00.0/0000:b3:00.0/host11/port-11:7/end_device-11:7/target11:0:7/11:0:7:0",
+        "sysfs_id": "/class/block/sdi",
+        "sysfs_bus_id": "0:0:6:0",
+        "sysfs_device_link": "/devices/pci0000:b2/0000:b2:00.0/0000:b3:00.0/host0/port-0:6/end_device-0:6/target0:0:6/0:0:6:0",
         "unix_device_names": [
-          "/dev/disk/by-id/ata-HGST_HUH721212ALE604_AAHKU52H",
-          "/dev/disk/by-id/wwn-0x5000cca278d63046",
-          "/dev/disk/by-path/pci-0000:b3:00.0-sas-phy7-lun-0",
-          "/dev/sdk"
+          "/dev/disk/by-id/ata-HGST_HUH721212ALE600_2AGD8RZY",
+          "/dev/disk/by-id/wwn-0x5000cca27ac59544",
+          "/dev/disk/by-path/pci-0000:b3:00.0-sas-phy6-lun-0",
+          "/dev/sdi"
         ],
         "resources": [
           {
@@ -1313,8 +1317,8 @@
           "value": 133
         },
         "slot": {
-          "bus": 11,
-          "number": 5
+          "bus": 0,
+          "number": 4
         },
         "base_class": {
           "hex": "0106",
@@ -1341,16 +1345,16 @@
           "name": "W3D0",
           "value": 0
         },
-        "serial": "AAHL2BUH",
+        "serial": "AAHL27RH",
         "model": "HGST HUH721212AL",
-        "sysfs_id": "/class/block/sdi",
-        "sysfs_bus_id": "11:0:5:0",
-        "sysfs_device_link": "/devices/pci0000:b2/0000:b2:00.0/0000:b3:00.0/host11/port-11:5/end_device-11:5/target11:0:5/11:0:5:0",
+        "sysfs_id": "/class/block/sdg",
+        "sysfs_bus_id": "0:0:4:0",
+        "sysfs_device_link": "/devices/pci0000:b2/0000:b2:00.0/0000:b3:00.0/host0/port-0:4/end_device-0:4/target0:0:4/0:0:4:0",
         "unix_device_names": [
-          "/dev/disk/by-id/ata-HGST_HUH721212ALE604_AAHL2BUH",
-          "/dev/disk/by-id/wwn-0x5000cca278d64f1f",
-          "/dev/disk/by-path/pci-0000:b3:00.0-sas-phy5-lun-0",
-          "/dev/sdi"
+          "/dev/disk/by-id/ata-HGST_HUH721212ALE604_AAHL27RH",
+          "/dev/disk/by-id/wwn-0x5000cca278d64ea0",
+          "/dev/disk/by-path/pci-0000:b3:00.0-sas-phy4-lun-0",
+          "/dev/sdg"
         ],
         "resources": [
           {
@@ -1393,8 +1397,8 @@
           "value": 133
         },
         "slot": {
-          "bus": 11,
-          "number": 3
+          "bus": 0,
+          "number": 2
         },
         "base_class": {
           "hex": "0106",
@@ -1421,16 +1425,16 @@
           "name": "W3D0",
           "value": 0
         },
-        "serial": "AAHLD8ZH",
+        "serial": "AAHLD90H",
         "model": "HGST HUH721212AL",
-        "sysfs_id": "/class/block/sdg",
-        "sysfs_bus_id": "11:0:3:0",
-        "sysfs_device_link": "/devices/pci0000:b2/0000:b2:00.0/0000:b3:00.0/host11/port-11:3/end_device-11:3/target11:0:3/11:0:3:0",
+        "sysfs_id": "/class/block/sde",
+        "sysfs_bus_id": "0:0:2:0",
+        "sysfs_device_link": "/devices/pci0000:b2/0000:b2:00.0/0000:b3:00.0/host0/port-0:2/end_device-0:2/target0:0:2/0:0:2:0",
         "unix_device_names": [
-          "/dev/disk/by-id/ata-HGST_HUH721212ALE604_AAHLD8ZH",
-          "/dev/disk/by-id/wwn-0x5000cca278d67451",
-          "/dev/disk/by-path/pci-0000:b3:00.0-sas-phy3-lun-0",
-          "/dev/sdg"
+          "/dev/disk/by-id/ata-HGST_HUH721212ALE604_AAHLD90H",
+          "/dev/disk/by-id/wwn-0x5000cca278d67452",
+          "/dev/disk/by-path/pci-0000:b3:00.0-sas-phy1-lun-0",
+          "/dev/sde"
         ],
         "resources": [
           {
@@ -1473,8 +1477,8 @@
           "value": 133
         },
         "slot": {
-          "bus": 11,
-          "number": 1
+          "bus": 0,
+          "number": 0
         },
         "base_class": {
           "hex": "0106",
@@ -1501,16 +1505,16 @@
           "name": "W3D0",
           "value": 0
         },
-        "serial": "AAHKXWHH",
+        "serial": "AAHK5EWH",
         "model": "HGST HUH721212AL",
-        "sysfs_id": "/class/block/sde",
-        "sysfs_bus_id": "11:0:1:0",
-        "sysfs_device_link": "/devices/pci0000:b2/0000:b2:00.0/0000:b3:00.0/host11/port-11:1/end_device-11:1/target11:0:1/11:0:1:0",
+        "sysfs_id": "/class/block/sdc",
+        "sysfs_bus_id": "0:0:0:0",
+        "sysfs_device_link": "/devices/pci0000:b2/0000:b2:00.0/0000:b3:00.0/host0/port-0:0/end_device-0:0/target0:0:0/0:0:0:0",
         "unix_device_names": [
-          "/dev/disk/by-id/ata-HGST_HUH721212ALE604_AAHKXWHH",
-          "/dev/disk/by-id/wwn-0x5000cca278d63e40",
-          "/dev/disk/by-path/pci-0000:b3:00.0-sas-phy0-lun-0",
-          "/dev/sde"
+          "/dev/disk/by-id/ata-HGST_HUH721212ALE604_AAHK5EWH",
+          "/dev/disk/by-id/wwn-0x5000cca278d5e643",
+          "/dev/disk/by-path/pci-0000:b3:00.0-sas-phy2-lun-0",
+          "/dev/sdc"
         ],
         "resources": [
           {
@@ -1553,7 +1557,7 @@
           "value": 133
         },
         "slot": {
-          "bus": 8,
+          "bus": 9,
           "number": 0
         },
         "base_class": {
@@ -1584,8 +1588,8 @@
         "serial": "S663NL0Y306744",
         "model": "SAMSUNG MZ7L3240",
         "sysfs_id": "/class/block/sda",
-        "sysfs_bus_id": "8:0:0:0",
-        "sysfs_device_link": "/devices/pci0000:00/0000:00:17.0/ata9/host8/target8:0:0/8:0:0:0",
+        "sysfs_bus_id": "9:0:0:0",
+        "sysfs_device_link": "/devices/pci0000:00/0000:00:17.0/ata9/host9/target9:0:0/9:0:0:0",
         "unix_device_names": [
           "/dev/disk/by-id/ata-SAMSUNG_MZ7L3240HCHQ-00A07_S663NL0Y306744",
           "/dev/disk/by-id/wwn-0x5002538f5531e4d5",
@@ -1622,6 +1626,39 @@
       },
       {
         "index": 171,
+        "attached_to": 0,
+        "class_list": [
+          "disk",
+          "block_device"
+        ],
+        "base_class": {
+          "hex": "0106",
+          "name": "Mass Storage Device",
+          "value": 262
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Disk",
+          "value": 0
+        },
+        "model": "Disk",
+        "sysfs_id": "/class/block/zram0",
+        "unix_device_names": [
+          "/dev/disk/by-label/zram0",
+          "/dev/disk/by-uuid/df6c05f0-612e-4071-bf27-9f3c6359cb25",
+          "/dev/zram0"
+        ],
+        "resources": [
+          {
+            "type": "size",
+            "unit": "sectors",
+            "value_1": 12185216,
+            "value_2": 4096
+          }
+        ]
+      },
+      {
+        "index": 172,
         "attached_to": 123,
         "class_list": [
           "disk",
@@ -1634,8 +1671,8 @@
           "value": 133
         },
         "slot": {
-          "bus": 11,
-          "number": 6
+          "bus": 0,
+          "number": 7
         },
         "base_class": {
           "hex": "0106",
@@ -1659,18 +1696,18 @@
         },
         "revision": {
           "hex": "0000",
-          "name": "T3D0",
+          "name": "W3D0",
           "value": 0
         },
-        "serial": "2AGD8RZY",
+        "serial": "AAHKU52H",
         "model": "HGST HUH721212AL",
         "sysfs_id": "/class/block/sdj",
-        "sysfs_bus_id": "11:0:6:0",
-        "sysfs_device_link": "/devices/pci0000:b2/0000:b2:00.0/0000:b3:00.0/host11/port-11:6/end_device-11:6/target11:0:6/11:0:6:0",
+        "sysfs_bus_id": "0:0:7:0",
+        "sysfs_device_link": "/devices/pci0000:b2/0000:b2:00.0/0000:b3:00.0/host0/port-0:7/end_device-0:7/target0:0:7/0:0:7:0",
         "unix_device_names": [
-          "/dev/disk/by-id/ata-HGST_HUH721212ALE600_2AGD8RZY",
-          "/dev/disk/by-id/wwn-0x5000cca27ac59544",
-          "/dev/disk/by-path/pci-0000:b3:00.0-sas-phy6-lun-0",
+          "/dev/disk/by-id/ata-HGST_HUH721212ALE604_AAHKU52H",
+          "/dev/disk/by-id/wwn-0x5000cca278d63046",
+          "/dev/disk/by-path/pci-0000:b3:00.0-sas-phy7-lun-0",
           "/dev/sdj"
         ],
         "resources": [
@@ -1701,21 +1738,21 @@
         ]
       },
       {
-        "index": 172,
+        "index": 173,
         "attached_to": 123,
         "class_list": [
           "disk",
-          "ide",
+          "scsi",
           "block_device"
         ],
         "bus_type": {
-          "hex": "0085",
-          "name": "IDE",
-          "value": 133
+          "hex": "0084",
+          "name": "SCSI",
+          "value": 132
         },
         "slot": {
-          "bus": 11,
-          "number": 4
+          "bus": 0,
+          "number": 8
         },
         "base_class": {
           "hex": "0106",
@@ -1734,25 +1771,26 @@
         },
         "device": {
           "hex": "0000",
-          "name": "HUH721212AL",
+          "name": "HUH721212AL5200",
           "value": 0
         },
         "revision": {
           "hex": "0000",
-          "name": "W3D0",
+          "name": "A3D0",
           "value": 0
         },
-        "serial": "AAHL27RH",
-        "model": "HGST HUH721212AL",
+        "serial": "8HK5VB5H",
+        "model": "HGST HUH721212AL5200",
         "sysfs_id": "/class/block/sdh",
-        "sysfs_bus_id": "11:0:4:0",
-        "sysfs_device_link": "/devices/pci0000:b2/0000:b2:00.0/0000:b3:00.0/host11/port-11:4/end_device-11:4/target11:0:4/11:0:4:0",
+        "sysfs_bus_id": "0:0:8:0",
+        "sysfs_device_link": "/devices/pci0000:b2/0000:b2:00.0/0000:b3:00.0/host0/port-0:8/end_device-0:8/target0:0:8/0:0:8:0",
         "unix_device_names": [
-          "/dev/disk/by-id/ata-HGST_HUH721212ALE604_AAHL27RH",
-          "/dev/disk/by-id/wwn-0x5000cca278d64ea0",
-          "/dev/disk/by-path/pci-0000:b3:00.0-sas-phy4-lun-0",
+          "/dev/disk/by-id/scsi-35000cca270b3bd48",
+          "/dev/disk/by-id/wwn-0x5000cca270b3bd48",
+          "/dev/disk/by-path/pci-0000:b3:00.0-sas-phy5-lun-0",
           "/dev/sdh"
         ],
+        "unix_device_name2": "/dev/sg9",
         "resources": [
           {
             "type": "disk_geo",
@@ -1888,8 +1926,8 @@
     ],
     "hub": [
       {
-        "index": 174,
-        "attached_to": 176,
+        "index": 175,
+        "attached_to": 177,
         "class_list": [
           "usb",
           "hub"
@@ -1968,7 +2006,7 @@
         "module_alias": "usb:v0557p7000d0000dc09dsc00dp01ic09isc00ip00in00"
       },
       {
-        "index": 176,
+        "index": 177,
         "attached_to": 149,
         "class_list": [
           "usb",
@@ -1990,7 +2028,7 @@
         },
         "vendor": {
           "hex": "1d6b",
-          "name": "Linux 6.12.77 xhci-hcd",
+          "name": "Linux 6.18.55 xhci-hcd",
           "value": 7531
         },
         "device": {
@@ -2000,11 +2038,11 @@
         },
         "revision": {
           "hex": "0000",
-          "name": "6.12",
+          "name": "6.18",
           "value": 0
         },
         "serial": "0000:00:14.0",
-        "model": "Linux 6.12.77 xhci-hcd xHCI Host Controller",
+        "model": "Linux 6.18.55 xhci-hcd xHCI Host Controller",
         "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb1/1-0:1.0",
         "sysfs_bus_id": "1-0:1.0",
         "resources": [
@@ -2052,10 +2090,10 @@
         "driver_modules": [
           "usbcore"
         ],
-        "module_alias": "usb:v1D6Bp0002d0612dc09dsc00dp01ic09isc00ip00in00"
+        "module_alias": "usb:v1D6Bp0002d0618dc09dsc00dp01ic09isc00ip00in00"
       },
       {
-        "index": 177,
+        "index": 178,
         "attached_to": 149,
         "class_list": [
           "usb",
@@ -2077,7 +2115,7 @@
         },
         "vendor": {
           "hex": "1d6b",
-          "name": "Linux 6.12.77 xhci-hcd",
+          "name": "Linux 6.18.55 xhci-hcd",
           "value": 7531
         },
         "device": {
@@ -2087,11 +2125,11 @@
         },
         "revision": {
           "hex": "0000",
-          "name": "6.12",
+          "name": "6.18",
           "value": 0
         },
         "serial": "0000:00:14.0",
-        "model": "Linux 6.12.77 xhci-hcd xHCI Host Controller",
+        "model": "Linux 6.18.55 xhci-hcd xHCI Host Controller",
         "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb2/2-0:1.0",
         "sysfs_bus_id": "2-0:1.0",
         "detail": {
@@ -2129,13 +2167,13 @@
         "driver_modules": [
           "usbcore"
         ],
-        "module_alias": "usb:v1D6Bp0003d0612dc09dsc00dp03ic09isc00ip00in00"
+        "module_alias": "usb:v1D6Bp0003d0618dc09dsc00dp03ic09isc00ip00in00"
       }
     ],
     "keyboard": [
       {
-        "index": 173,
-        "attached_to": 174,
+        "index": 174,
+        "attached_to": 175,
         "class_list": [
           "keyboard",
           "usb"
@@ -2263,8 +2301,8 @@
     ],
     "mouse": [
       {
-        "index": 175,
-        "attached_to": 174,
+        "index": 176,
+        "attached_to": 175,
         "class_list": [
           "mouse",
           "usb"
@@ -2536,7 +2574,7 @@
     ],
     "network_interface": [
       {
-        "index": 178,
+        "index": 194,
         "attached_to": 0,
         "class_list": [
           "network_interface"
@@ -2558,7 +2596,7 @@
         ]
       },
       {
-        "index": 179,
+        "index": 199,
         "attached_to": 110,
         "class_list": [
           "network_interface"
@@ -2599,7 +2637,7 @@
         ]
       },
       {
-        "index": 180,
+        "index": 202,
         "attached_to": 40,
         "class_list": [
           "network_interface"
