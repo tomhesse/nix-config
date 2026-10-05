@@ -14,6 +14,7 @@
             mount
             recycle-bin
             git
+            lazygit
             ;
         };
 
@@ -58,6 +59,14 @@
             ];
             run = "plugin recycle-bin";
             desc = "Open Recycle Bin menu";
+          }
+          {
+            on = [
+              "g"
+              "i"
+            ];
+            run = "plugin lazygit";
+            desc = "Open lazygit";
           }
         ];
       };
