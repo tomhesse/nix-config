@@ -258,6 +258,10 @@
                 refquota = "1100G";
               };
 
+              "backups/unifi" = dataset {
+                mountpoint = "/srv/backups/unifi";
+              };
+
               documents = container {
                 mountpoint = "/srv/documents";
                 compression = "zstd";

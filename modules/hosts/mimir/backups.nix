@@ -175,6 +175,30 @@
               RandomizedDelaySec = "1h";
             };
           };
+
+          offsite-unifi = {
+            repository = "sftp:${target}:unifi";
+            passwordFile = config.sops.secrets."services/restic/offsite-password".path;
+            initialize = true;
+            runCheck = true;
+
+            paths = [ "/srv/backups/unifi" ];
+
+            extraOptions = [ "sftp.command='ssh ${target} -i ${hostKey} -p 23 -s sftp'" ];
+
+            pruneOpts = [
+              "--keep-daily 7"
+              "--keep-weekly 4"
+              "--keep-monthly 12"
+              "--keep-yearly 2"
+            ];
+
+            timerConfig = {
+              OnCalendar = "07:00";
+              Persistent = true;
+              RandomizedDelaySec = "1h";
+            };
+          };
         };
 
         samba.settings.macmini = {
@@ -310,6 +334,7 @@
           "z /srv/backups/restic/loki 0700 restic-loki restic-loki -"
           "z /srv/backups/restic/tyr 0700 restic-tyr restic-tyr -"
           "z /srv/backups/timemachine/macmini 0700 macmini macmini -"
+          "z /srv/backups/unifi 0700 thesse users -"
         ];
 
         services = {
@@ -320,6 +345,8 @@
           restic-backups-offsite-immich.onFailure = [ "notify-failure@%N.service" ];
 
           restic-backups-offsite-music.onFailure = [ "notify-failure@%N.service" ];
+
+          restic-backups-offsite-unifi.onFailure = [ "notify-failure@%N.service" ];
 
           restic-backups-offsite-services = {
             path = [ config.boot.zfs.package ];
