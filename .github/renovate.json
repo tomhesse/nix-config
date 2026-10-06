@@ -34,7 +34,6 @@
     },
     {
       "matchManagers": ["custom.regex"],
-      "dependencyDashboardApproval": true,
       "semanticCommitScope": "{{{replace '\\.nix$' '' (replace '^modules/' '' packageFile)}}}"
     },
     {
