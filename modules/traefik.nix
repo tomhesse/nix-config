@@ -60,7 +60,7 @@
     in
     {
       virtualisation.oci-containers.containers.traefik = {
-        image = "docker.io/traefik:v3.7.13";
+        image = "docker.io/traefik:v3.7.14";
 
         dependsOn = [ "socket-proxy" ];
         networks = [ "edge" ];
