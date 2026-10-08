@@ -5,6 +5,7 @@
       settings = {
         vim_keys = true;
         swap_disk = false;
+        show_disks = false;
       };
     };
   };
