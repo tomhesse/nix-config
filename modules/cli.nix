@@ -3,6 +3,7 @@
   flake.modules.homeManager.cli = {
     imports = [
       self.modules.homeManager.base
+      self.modules.homeManager.delta
       self.modules.homeManager.direnv
       self.modules.homeManager.gh
       self.modules.homeManager.gh-dash
