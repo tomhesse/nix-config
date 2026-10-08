@@ -11,6 +11,7 @@
           name = "gh-wrapped";
           paths = [ pkgs.gh ];
           nativeBuildInputs = [ pkgs.makeWrapper ];
+          meta.mainProgram = "gh";
           postBuild = ''
             wrapProgram $out/bin/gh \
               --run '[ -r ${token} ] && export GH_TOKEN="$(< ${token})"'
