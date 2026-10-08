@@ -4,6 +4,7 @@
     imports = [
       self.modules.homeManager.base
       self.modules.homeManager.direnv
+      self.modules.homeManager.gh
       self.modules.homeManager.git
       self.modules.homeManager.lazygit
       self.modules.homeManager.starship
