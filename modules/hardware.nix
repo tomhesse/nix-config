@@ -1,5 +1,11 @@
 { inputs, ... }:
 {
+  allowedUnfree = [
+    "nvidia-kernel-modules"
+    "nvidia-settings"
+    "nvidia-x11"
+  ];
+
   flake-file.inputs.nixos-hardware = {
     url = "github:NixOS/nixos-hardware";
   };

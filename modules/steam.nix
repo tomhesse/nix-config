@@ -1,4 +1,9 @@
 {
+  allowedUnfree = [
+    "steam"
+    "steam-unwrapped"
+  ];
+
   flake.modules.nixos.steam = {
     hardware.xpadneo.enable = true;
 

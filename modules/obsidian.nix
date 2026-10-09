@@ -1,4 +1,6 @@
 {
+  allowedUnfree = [ "obsidian" ];
+
   flake.modules.homeManager.obsidian =
     { config, pkgs, ... }:
     {

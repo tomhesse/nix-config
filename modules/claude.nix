@@ -1,4 +1,9 @@
 {
+  allowedUnfree = [
+    "claude-code"
+    "vscode-extension-anthropic-claude-code"
+  ];
+
   flake.modules.homeManager.claude =
     {
       config,
