@@ -13,6 +13,9 @@
       ];
     in
     {
+      # Needs nixos.authelia on the same host for this option.
+      authelia.adminDomains = [ "bazarr.${domain}" ];
+
       virtualisation.oci-containers.containers.bazarr = {
         image = "lscr.io/linuxserver/bazarr:v1.6.2-ls366";
 

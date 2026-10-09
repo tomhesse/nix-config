@@ -1,11 +1,18 @@
 {
   flake.modules.nixos.authelia =
-    { config, pkgs, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     let
       domain = "shrimphouse.xyz";
       baseDN = "dc=shrimphouse,dc=xyz";
 
-      configuration = (pkgs.formats.yaml { }).generate "configuration.yml" {
+      yaml = pkgs.formats.yaml { };
+
+      configuration = yaml.generate "configuration.yml" {
         theme = "dark";
 
         log.level = "info";
@@ -17,7 +24,7 @@
 
         totp.issuer = domain;
 
-        definitions.user_attributes.immich_role.expression = ''"admins" in groups ? "admin" : "user"'';
+        definitions.user_attributes = config.authelia.userAttributes;
 
         authentication_backend = {
           password_change.disable = true;
@@ -37,18 +44,7 @@
 
           rules = [
             {
-              domain = [
-                "bazarr.${domain}"
-                "prowlarr.${domain}"
-                "radarr.${domain}"
-                "sabnzbd.${domain}"
-                "sonarr.${domain}"
-              ];
-              subject = [ "group:admins" ];
-              policy = "two_factor";
-            }
-            {
-              domain = [ "traefik.${domain}" ];
+              domain = lib.sort lib.lessThan config.authelia.adminDomains;
               subject = [ "group:admins" ];
               policy = "two_factor";
             }
@@ -90,165 +86,149 @@
                   - policy: 'two_factor'
                     subject:
                       - 'group:admins'
-
-            claims_policies:
-              immich:
-                id_token:
-                  - 'immich_role'
-                custom_claims:
-                  immich_role:
-                    name: 'immich_role'
-                    attribute: 'immich_role'
-
-            scopes:
-              immich:
-                claims:
-                  - 'immich_role'
-
-            clients:
-              - client_id: 'immich'
-                client_name: 'Immich'
-                client_secret: '$pbkdf2-sha512$310000$O2aDSK0MK.Dncmz3/fhszA$.8dDBIwARpoBwW7I8oJFEk9FrtgMqX8.owBTX8naT.NtAApdmEoW5Mnv4lVXqe/3uiLjkfOYtRhQp4SxrAygtg'
-                public: false
-                authorization_policy: 'household'
-                claims_policy: 'immich'
-                consent_mode: 'implicit'
-                require_pkce: true
-                pkce_challenge_method: 'S256'
-                token_endpoint_auth_method: 'client_secret_basic'
-                redirect_uris:
-                  - 'https://photos.${domain}/auth/login'
-                  - 'https://photos.${domain}/user-settings'
-                  - 'app.immich:///oauth-callback'
-                scopes:
-                  - 'openid'
-                  - 'profile'
-                  - 'email'
-                  - 'immich'
-
-              - client_id: 'paperless'
-                client_name: 'Paperless'
-                client_secret: '$pbkdf2-sha512$310000$Ne0.05cN4N4NejJ2IFGmIg$/AO2TgEl1D12XbI0A.VP6cfFqB3RbrKsyKLL/Ovr1VzvNmFunt4whRtkzkmh56VRcf3DhH1KQUC.g9pv/2RxGw'
-                public: false
-                authorization_policy: 'one_factor'
-                consent_mode: 'implicit'
-                token_endpoint_auth_method: 'client_secret_basic'
-                redirect_uris:
-                  - 'https://paperless.${domain}/accounts/oidc/authelia/login/callback/'
-                scopes:
-                  - 'openid'
-                  - 'profile'
-                  - 'email'
-                  - 'groups'
-
-              - client_id: 'profilarr'
-                client_name: 'Profilarr'
-                client_secret: '$pbkdf2-sha512$310000$G9hHaCv6996H5mh59hOpeQ$DpqK9caOIHpImo8d.PcMyOo9/yN3Cr/t31g.PjcoZHzlGqEnLdf5xTTUBaNDMR6mkkPBBN.Cj159YK.RwCeD0A'
-                public: false
-                authorization_policy: 'admins'
-                consent_mode: 'implicit'
-                token_endpoint_auth_method: 'client_secret_post'
-                redirect_uris:
-                  - 'https://profilarr.${domain}/auth/oidc/callback'
-                scopes:
-                  - 'openid'
-                  - 'profile'
-                  - 'email'
-                  - 'groups'
       '';
+
+      oidcClients = yaml.generate "oidc-clients.yml" {
+        identity_providers.oidc = {
+          claims_policies = config.authelia.oidc.claimsPolicies;
+          scopes = config.authelia.oidc.scopes;
+          clients = lib.mapAttrsToList (
+            id: client: { client_id = id; } // client
+          ) config.authelia.oidc.clients;
+        };
+      };
     in
     {
-      virtualisation.oci-containers.containers.authelia = {
-        image = "ghcr.io/authelia/authelia:4.39.28";
-
-        entrypoint = "authelia";
-        cmd = [
-          "--config"
-          "/config/configuration.yml"
-          "--config"
-          "/config/oidc.yml"
-        ];
-
-        dependsOn = [ "lldap" ];
-        networks = [ "edge" ];
-
-        volumes = [
-          "${configuration}:/config/configuration.yml:ro"
-          "${oidcConfiguration}:/config/oidc.yml:ro"
-          "${config.sops.secrets."services/authelia/oidc-jwks-key".path}:/secrets/oidc-jwks.pem:ro"
-          "/srv/services/authelia:/data"
-        ];
-
-        environment.X_AUTHELIA_CONFIG_FILTERS = "template";
-
-        environmentFiles = [ config.sops.templates."authelia-env".path ];
-
-        labels = {
-          "traefik.enable" = "true";
-          "traefik.http.routers.authelia.rule" = "Host(`auth.${domain}`)";
-          "traefik.http.middlewares.authelia.forwardauth.address" =
-            "http://authelia:9091/api/authz/forward-auth";
-          "traefik.http.middlewares.authelia.forwardauth.trustforwardheader" = "true";
-          "traefik.http.middlewares.authelia.forwardauth.authresponseheaders" =
-            "Remote-User,Remote-Groups,Remote-Email,Remote-Name";
+      options.authelia = {
+        adminDomains = lib.mkOption {
+          type = lib.types.listOf lib.types.str;
+          default = [ ];
+          description = "Hostnames that require two-factor authentication for the admins group.";
         };
 
-        capabilities.ALL = false;
-
-        extraOptions = [
-          "--read-only"
-          "--security-opt=no-new-privileges"
-          "--health-cmd=wget --quiet --tries=1 --spider http://localhost:9091/api/health"
-          "--health-timeout=3s"
-          "--health-start-period=10s"
-        ];
-      };
-
-      systemd = {
-        services.podman-authelia = {
-          after = [ "zfs-mount.service" ];
-          unitConfig.AssertPathIsMountPoint = "/srv/services/authelia";
-          partOf = [ "podman-lldap.service" ];
+        userAttributes = lib.mkOption {
+          inherit (yaml) type;
+          default = { };
+          description = "Custom user attributes, rendered into definitions.user_attributes.";
         };
 
-        tmpfiles.rules = [ "d /srv/services/authelia 0700 root root -" ];
-      };
-
-      sops =
-        let
-          sopsFile = ./hosts/${config.networking.hostName}/secrets/nixos.yaml;
-        in
-        {
-          secrets = {
-            "services/authelia/session-secret" = { inherit sopsFile; };
-            "services/authelia/storage-encryption-key" = { inherit sopsFile; };
-            "services/authelia/reset-jwt-secret" = { inherit sopsFile; };
-            "services/authelia/ldap-password" = { inherit sopsFile; };
-            "services/authelia/oidc-hmac-secret" = { inherit sopsFile; };
-            "services/authelia/oidc-jwks-key" = { inherit sopsFile; };
-            "services/authelia/smtp-password" = { inherit sopsFile; };
+        oidc = {
+          clients = lib.mkOption {
+            type = lib.types.attrsOf yaml.type;
+            default = { };
+            description = "OIDC clients keyed by client_id, in Authelia's own snake_case schema.";
           };
 
-          templates."authelia-env" = {
-            content = ''
-              AUTHELIA_SESSION_SECRET=${config.sops.placeholder."services/authelia/session-secret"}
-              AUTHELIA_STORAGE_ENCRYPTION_KEY=${
-                config.sops.placeholder."services/authelia/storage-encryption-key"
-              }
-              AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET=${
-                config.sops.placeholder."services/authelia/reset-jwt-secret"
-              }
-              AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD=${
-                config.sops.placeholder."services/authelia/ldap-password"
-              }
-              AUTHELIA_NOTIFIER_SMTP_USERNAME=608deeb4-b226-44f7-bb38-4354d8029c7e
-              AUTHELIA_NOTIFIER_SMTP_PASSWORD=${config.sops.placeholder."services/authelia/smtp-password"}
-              AUTHELIA_IDENTITY_PROVIDERS_OIDC_HMAC_SECRET=${
-                config.sops.placeholder."services/authelia/oidc-hmac-secret"
-              }
-            '';
-            restartUnits = [ "podman-authelia.service" ];
+          claimsPolicies = lib.mkOption {
+            inherit (yaml) type;
+            default = { };
+            description = "Custom claims policies, rendered into identity_providers.oidc.claims_policies.";
+          };
+
+          scopes = lib.mkOption {
+            inherit (yaml) type;
+            default = { };
+            description = "Custom scopes, rendered into identity_providers.oidc.scopes.";
           };
         };
+      };
+
+      config = {
+        virtualisation.oci-containers.containers.authelia = {
+          image = "ghcr.io/authelia/authelia:4.39.28";
+
+          entrypoint = "authelia";
+          cmd = [
+            "--config"
+            "/config/configuration.yml"
+            "--config"
+            "/config/oidc.yml"
+            "--config"
+            "/config/oidc-clients.yml"
+          ];
+
+          dependsOn = [ "lldap" ];
+          networks = [ "edge" ];
+
+          volumes = [
+            "${configuration}:/config/configuration.yml:ro"
+            "${oidcConfiguration}:/config/oidc.yml:ro"
+            "${oidcClients}:/config/oidc-clients.yml:ro"
+            "${config.sops.secrets."services/authelia/oidc-jwks-key".path}:/secrets/oidc-jwks.pem:ro"
+            "/srv/services/authelia:/data"
+          ];
+
+          environment.X_AUTHELIA_CONFIG_FILTERS = "template";
+
+          environmentFiles = [ config.sops.templates."authelia-env".path ];
+
+          labels = {
+            "traefik.enable" = "true";
+            "traefik.http.routers.authelia.rule" = "Host(`auth.${domain}`)";
+            "traefik.http.middlewares.authelia.forwardauth.address" =
+              "http://authelia:9091/api/authz/forward-auth";
+            "traefik.http.middlewares.authelia.forwardauth.trustforwardheader" = "true";
+            "traefik.http.middlewares.authelia.forwardauth.authresponseheaders" =
+              "Remote-User,Remote-Groups,Remote-Email,Remote-Name";
+          };
+
+          capabilities.ALL = false;
+
+          extraOptions = [
+            "--read-only"
+            "--security-opt=no-new-privileges"
+            "--health-cmd=wget --quiet --tries=1 --spider http://localhost:9091/api/health"
+            "--health-timeout=3s"
+            "--health-start-period=10s"
+          ];
+        };
+
+        systemd = {
+          services.podman-authelia = {
+            after = [ "zfs-mount.service" ];
+            unitConfig.AssertPathIsMountPoint = "/srv/services/authelia";
+            partOf = [ "podman-lldap.service" ];
+          };
+
+          tmpfiles.rules = [ "d /srv/services/authelia 0700 root root -" ];
+        };
+
+        sops =
+          let
+            sopsFile = ./hosts/${config.networking.hostName}/secrets/nixos.yaml;
+          in
+          {
+            secrets = {
+              "services/authelia/session-secret" = { inherit sopsFile; };
+              "services/authelia/storage-encryption-key" = { inherit sopsFile; };
+              "services/authelia/reset-jwt-secret" = { inherit sopsFile; };
+              "services/authelia/ldap-password" = { inherit sopsFile; };
+              "services/authelia/oidc-hmac-secret" = { inherit sopsFile; };
+              "services/authelia/oidc-jwks-key" = { inherit sopsFile; };
+              "services/authelia/smtp-password" = { inherit sopsFile; };
+            };
+
+            templates."authelia-env" = {
+              content = ''
+                AUTHELIA_SESSION_SECRET=${config.sops.placeholder."services/authelia/session-secret"}
+                AUTHELIA_STORAGE_ENCRYPTION_KEY=${
+                  config.sops.placeholder."services/authelia/storage-encryption-key"
+                }
+                AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET=${
+                  config.sops.placeholder."services/authelia/reset-jwt-secret"
+                }
+                AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD=${
+                  config.sops.placeholder."services/authelia/ldap-password"
+                }
+                AUTHELIA_NOTIFIER_SMTP_USERNAME=608deeb4-b226-44f7-bb38-4354d8029c7e
+                AUTHELIA_NOTIFIER_SMTP_PASSWORD=${config.sops.placeholder."services/authelia/smtp-password"}
+                AUTHELIA_IDENTITY_PROVIDERS_OIDC_HMAC_SECRET=${
+                  config.sops.placeholder."services/authelia/oidc-hmac-secret"
+                }
+              '';
+              restartUnits = [ "podman-authelia.service" ];
+            };
+          };
+      };
     };
 }

@@ -20,6 +20,9 @@
           mounts = libraries ++ [ "/srv/downloads/complete" ];
         in
         {
+          # Needs nixos.authelia on the same host for this option.
+          authelia.adminDomains = [ "${app}.${domain}" ];
+
           virtualisation.oci-containers.containers.${app} = {
             inherit image;
 

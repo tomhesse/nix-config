@@ -7,6 +7,46 @@
       uid = 411;
     in
     {
+      # Needs nixos.authelia on the same host for these options.
+      authelia = {
+        userAttributes.immich_role.expression = ''"admins" in groups ? "admin" : "user"'';
+
+        oidc = {
+          claimsPolicies.immich = {
+            id_token = [ "immich_role" ];
+            custom_claims.immich_role = {
+              name = "immich_role";
+              attribute = "immich_role";
+            };
+          };
+
+          scopes.immich.claims = [ "immich_role" ];
+
+          clients.immich = {
+            client_name = "Immich";
+            client_secret = "$pbkdf2-sha512$310000$O2aDSK0MK.Dncmz3/fhszA$.8dDBIwARpoBwW7I8oJFEk9FrtgMqX8.owBTX8naT.NtAApdmEoW5Mnv4lVXqe/3uiLjkfOYtRhQp4SxrAygtg";
+            public = false;
+            authorization_policy = "household";
+            claims_policy = "immich";
+            consent_mode = "implicit";
+            require_pkce = true;
+            pkce_challenge_method = "S256";
+            token_endpoint_auth_method = "client_secret_basic";
+            redirect_uris = [
+              "https://photos.${domain}/auth/login"
+              "https://photos.${domain}/user-settings"
+              "app.immich:///oauth-callback"
+            ];
+            scopes = [
+              "openid"
+              "profile"
+              "email"
+              "immich"
+            ];
+          };
+        };
+      };
+
       virtualisation.oci-containers.containers = {
         immich = {
           image = "ghcr.io/immich-app/immich-server:v3.2.4";

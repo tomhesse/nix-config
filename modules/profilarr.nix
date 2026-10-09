@@ -7,6 +7,23 @@
       uid = 407;
     in
     {
+      # Needs nixos.authelia on the same host for these options.
+      authelia.oidc.clients.profilarr = {
+        client_name = "Profilarr";
+        client_secret = "$pbkdf2-sha512$310000$G9hHaCv6996H5mh59hOpeQ$DpqK9caOIHpImo8d.PcMyOo9/yN3Cr/t31g.PjcoZHzlGqEnLdf5xTTUBaNDMR6mkkPBBN.Cj159YK.RwCeD0A";
+        public = false;
+        authorization_policy = "admins";
+        consent_mode = "implicit";
+        token_endpoint_auth_method = "client_secret_post";
+        redirect_uris = [ "https://profilarr.${domain}/auth/oidc/callback" ];
+        scopes = [
+          "openid"
+          "profile"
+          "email"
+          "groups"
+        ];
+      };
+
       virtualisation.oci-containers.containers.profilarr = {
         image = "ghcr.io/dictionarry-hub/profilarr:2.2.0";
 

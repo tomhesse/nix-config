@@ -59,6 +59,9 @@
       };
     in
     {
+      # Needs nixos.authelia on the same host for this option.
+      authelia.adminDomains = [ "traefik.${domain}" ];
+
       virtualisation.oci-containers.containers.traefik = {
         image = "docker.io/traefik:v3.7.14";
 
