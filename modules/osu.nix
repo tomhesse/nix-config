@@ -1,4 +1,6 @@
 {
+  allowedUnfree = [ "osu-lazer-bin" ];
+
   flake.modules.homeManager.osu =
     { config, pkgs, ... }:
     {

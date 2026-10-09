@@ -1,4 +1,6 @@
 {
+  allowedUnfree = [ "vscode" ];
+
   flake.modules.homeManager.vscode =
     {
       config,

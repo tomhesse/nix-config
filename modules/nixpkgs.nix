@@ -1,4 +1,9 @@
-{ inputs, ... }:
+{
+  config,
+  inputs,
+  lib,
+  ...
+}:
 let
   overlay = _final: prev: {
     unstable = import inputs.nixpkgs-unstable {
@@ -8,35 +13,29 @@ let
   };
 in
 {
-  flake-file.inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
-    nixpkgs-lib.follows = "nixpkgs";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+  options.allowedUnfree = lib.mkOption {
+    type = lib.types.listOf lib.types.str;
+    default = [ ];
+    description = "Names of unfree packages that feature modules need. Each module declares its own.";
   };
 
-  flake.overlays.unstable = overlay;
-
-  flake.modules.nixos.nixpkgs =
-    { lib, ... }:
-    {
-      nixpkgs = {
-        overlays = [ overlay ];
-
-        config.allowUnfreePredicate =
-          pkg:
-          builtins.elem (lib.getName pkg) [
-            "claude-code"
-            "nvidia-kernel-modules"
-            "nvidia-settings"
-            "nvidia-x11"
-            "obsidian"
-            "osu-lazer-bin"
-            "steam"
-            "steam-unwrapped"
-            "unrar"
-            "vscode"
-            "vscode-extension-anthropic-claude-code"
-          ];
-      };
+  config = {
+    flake-file.inputs = {
+      nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
+      nixpkgs-lib.follows = "nixpkgs";
+      nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     };
+
+    flake.overlays.unstable = overlay;
+
+    flake.modules.nixos.nixpkgs =
+      { lib, ... }:
+      {
+        nixpkgs = {
+          overlays = [ overlay ];
+
+          config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) config.allowedUnfree;
+        };
+      };
+  };
 }
