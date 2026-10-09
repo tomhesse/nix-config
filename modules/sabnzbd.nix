@@ -11,6 +11,9 @@
       ];
     in
     {
+      # Needs nixos.authelia on the same host for this option.
+      authelia.adminDomains = [ "sabnzbd.${domain}" ];
+
       virtualisation.oci-containers.containers.sabnzbd = {
         image = "lscr.io/linuxserver/sabnzbd:5.1.3-ls274";
 

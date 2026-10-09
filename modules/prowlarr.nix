@@ -6,6 +6,9 @@
       uid = 403;
     in
     {
+      # Needs nixos.authelia on the same host for this option.
+      authelia.adminDomains = [ "prowlarr.${domain}" ];
+
       virtualisation.oci-containers.containers.prowlarr = {
         image = "lscr.io/linuxserver/prowlarr:2.6.5.5623-ls163";
 
