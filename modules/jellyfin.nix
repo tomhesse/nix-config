@@ -62,7 +62,11 @@
           ];
         };
 
-        tmpfiles.rules = [ "d /srv/services/jellyfin 0700 jellyfin jellyfin -" ];
+        tmpfiles.rules = [
+          "d /srv/services/jellyfin 0700 jellyfin jellyfin -"
+          "z /srv/cache/jellyfin 0700 jellyfin jellyfin -"
+        ]
+        ++ map (path: "a+ ${path} - - - - default:user:jellyfin:rX,user:jellyfin:rX") libraries;
       };
     };
 }

@@ -62,7 +62,11 @@
           unitConfig.AssertPathIsMountPoint = stages ++ [ "/srv/services/sabnzbd" ];
         };
 
-        tmpfiles.rules = [ "d /srv/services/sabnzbd 0700 sabnzbd sabnzbd -" ];
+        tmpfiles.rules = [
+          "d /srv/services/sabnzbd 0700 sabnzbd sabnzbd -"
+          "d /srv/downloads/complete 0775 sabnzbd sabnzbd -"
+          "d /srv/downloads/incomplete 0750 sabnzbd sabnzbd -"
+        ];
       };
     };
 }

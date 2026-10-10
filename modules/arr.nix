@@ -71,7 +71,10 @@
               unitConfig.AssertPathIsMountPoint = mounts ++ [ "/srv/services/${app}" ];
             };
 
-            tmpfiles.rules = [ "d /srv/services/${app} 0700 ${app} ${app} -" ];
+            tmpfiles.rules = [
+              "d /srv/services/${app} 0700 ${app} ${app} -"
+            ]
+            ++ map (path: "a+ ${path} - - - - default:user:${app}:rwX,user:${app}:rwX") mounts;
           };
         };
     in

@@ -42,39 +42,19 @@
         /srv/media/music 10.0.10.11(rw,sync,no_subtree_check,all_squash,anonuid=406,anongid=406) 10.0.10.12(ro,sync,no_subtree_check,all_squash,anonuid=406,anongid=406)
       '';
 
-      systemd.tmpfiles.rules = [
+      # Ahead of the services' ACL grants: whichever rule creates a library's default
+      # ACL first decides its default group entry.
+      systemd.tmpfiles.rules = lib.mkBefore [
         "z /srv/archive/games/osu 0700 thesse users -"
-        "z /srv/cache/immich/models 0700 immich immich -"
-        "z /srv/cache/immich/thumbs 0700 immich immich -"
-        "z /srv/cache/jellyfin 0700 jellyfin jellyfin -"
-        "d /srv/downloads/complete 0775 sabnzbd sabnzbd -"
-        "d /srv/downloads/incomplete 0750 sabnzbd sabnzbd -"
-        "z /srv/media/immich/encoded-video 0700 immich immich -"
-        "z /srv/media/immich/originals 0700 immich immich -"
-        "z /srv/media/music 0700 navidrome navidrome -"
         "z /srv/media/video/anime/movies 0775 root root -"
         "z /srv/media/video/anime/shows 0775 root root -"
         "z /srv/media/video/movies 0775 root root -"
         "z /srv/media/video/shows 0775 root root -"
         "a+ /srv/downloads/complete - - - - default:mask::rwx"
-        "a+ /srv/downloads/complete - - - - default:user:radarr:rwX,user:radarr:rwX"
-        "a+ /srv/downloads/complete - - - - default:user:sonarr:rwX,user:sonarr:rwX"
         "a+ /srv/media/video/anime/movies - - - - default:mask::rwx"
-        "a+ /srv/media/video/anime/movies - - - - default:user:jellyfin:rX,user:jellyfin:rX"
-        "a+ /srv/media/video/anime/movies - - - - default:user:bazarr:rwX,user:bazarr:rwX"
-        "a+ /srv/media/video/anime/movies - - - - default:user:radarr:rwX,user:radarr:rwX"
         "a+ /srv/media/video/anime/shows - - - - default:mask::rwx"
-        "a+ /srv/media/video/anime/shows - - - - default:user:jellyfin:rX,user:jellyfin:rX"
-        "a+ /srv/media/video/anime/shows - - - - default:user:bazarr:rwX,user:bazarr:rwX"
-        "a+ /srv/media/video/anime/shows - - - - default:user:sonarr:rwX,user:sonarr:rwX"
         "a+ /srv/media/video/movies - - - - default:mask::rwx"
-        "a+ /srv/media/video/movies - - - - default:user:jellyfin:rX,user:jellyfin:rX"
-        "a+ /srv/media/video/movies - - - - default:user:bazarr:rwX,user:bazarr:rwX"
-        "a+ /srv/media/video/movies - - - - default:user:radarr:rwX,user:radarr:rwX"
         "a+ /srv/media/video/shows - - - - default:mask::rwx"
-        "a+ /srv/media/video/shows - - - - default:user:jellyfin:rX,user:jellyfin:rX"
-        "a+ /srv/media/video/shows - - - - default:user:bazarr:rwX,user:bazarr:rwX"
-        "a+ /srv/media/video/shows - - - - default:user:sonarr:rwX,user:sonarr:rwX"
       ];
 
       home-manager.users.thesse.imports = [

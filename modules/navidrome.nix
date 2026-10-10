@@ -58,7 +58,10 @@
           ];
         };
 
-        tmpfiles.rules = [ "d /srv/services/navidrome 0700 navidrome navidrome -" ];
+        tmpfiles.rules = [
+          "d /srv/services/navidrome 0700 navidrome navidrome -"
+          "z /srv/media/music 0700 navidrome navidrome -"
+        ];
       };
 
       sops = {
