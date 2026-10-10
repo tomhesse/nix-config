@@ -7,7 +7,8 @@
       ...
     }:
     let
-      target = "u591202-sub1@u591202-sub1.your-storagebox.de";
+      user = "u591202-sub1";
+      target = "${user}@${user}.your-storagebox.de";
       hostKey = (builtins.head config.services.openssh.hostKeys).path;
 
       sanity = {
@@ -38,6 +39,9 @@
       };
     in
     {
+      programs.ssh.knownHosts."[${user}.your-storagebox.de]:23".publicKey =
+        "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA5EB5p/5Hp3hGW1oHok+PIOH9Pbn7cnUiGmUEBrCVjnAw+HrKyN8bYVV0dIGllswYXwkG/+bgiBlE6IVIBAq+JwVWu1Sss3KarHY3OvFJUXZoZyRRg/Gc/+LRCE7lyKpwWQ70dbelGRyyJFH36eNv6ySXoUYtGkwlU5IVaHPApOxe4LHPZa/qhSRbPo2hwoh0orCtgejRebNtW5nlx00DNFgsvn8Svz2cIYLxsPVzKgUxs8Zxsxgn+Q/UvR7uq4AbAhyBMLxv7DjJ1pc7PJocuTno2Rw9uMZi1gkjbnmiOh6TTXIEWbnroyIhwc8555uto9melEUmWNQ+C+PwAK+MPw==";
+
       services = {
         nfs.server.exports = ''
           /srv/backups/homeassistant 10.0.20.20(rw,sync,no_subtree_check,all_squash,anonuid=431,anongid=431)

@@ -3,9 +3,11 @@
   flake.modules.nixos.base = {
     imports = [
       self.modules.nixos.catppuccin
+      self.modules.nixos.codeberg
       self.modules.nixos.disko
       self.modules.nixos.bash
       self.modules.nixos.fish
+      self.modules.nixos.github
       self.modules.nixos.home-manager
       self.modules.nixos.local-packages
       self.modules.nixos.locale
