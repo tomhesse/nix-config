@@ -188,7 +188,13 @@
           };
         };
 
-        tmpfiles.rules = [ "d /srv/services/immich/postgres 0700 immich immich -" ];
+        tmpfiles.rules = [
+          "d /srv/services/immich/postgres 0700 immich immich -"
+          "z /srv/cache/immich/models 0700 immich immich -"
+          "z /srv/cache/immich/thumbs 0700 immich immich -"
+          "z /srv/media/immich/encoded-video 0700 immich immich -"
+          "z /srv/media/immich/originals 0700 immich immich -"
+        ];
       };
 
       sops = {

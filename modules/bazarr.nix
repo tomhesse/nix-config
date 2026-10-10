@@ -65,7 +65,10 @@
           unitConfig.AssertPathIsMountPoint = libraries ++ [ "/srv/services/bazarr" ];
         };
 
-        tmpfiles.rules = [ "d /srv/services/bazarr 0700 bazarr bazarr -" ];
+        tmpfiles.rules = [
+          "d /srv/services/bazarr 0700 bazarr bazarr -"
+        ]
+        ++ map (path: "a+ ${path} - - - - default:user:bazarr:rwX,user:bazarr:rwX") libraries;
       };
     };
 }
