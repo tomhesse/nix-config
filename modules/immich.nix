@@ -49,7 +49,7 @@
 
       virtualisation.oci-containers.containers = {
         immich = {
-          image = "ghcr.io/immich-app/immich-server:v3.2.4";
+          image = "ghcr.io/immich-app/immich-server:v3.3.1";
 
           dependsOn = [
             "immich-machine-learning"
@@ -89,7 +89,7 @@
         };
 
         immich-machine-learning = {
-          image = "ghcr.io/immich-app/immich-machine-learning:v3.2.4";
+          image = "ghcr.io/immich-app/immich-machine-learning:v3.3.1";
 
           networks = [ "edge" ];
 
