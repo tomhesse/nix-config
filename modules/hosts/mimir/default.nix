@@ -37,55 +37,12 @@
 
       users.users.thesse.shell = lib.mkForce pkgs.bash;
 
-      services.nfs.server.exports = ''
-        /srv/archive/games/osu 10.0.10.11(rw,sync,no_subtree_check)
-        /srv/media/music 10.0.10.11(rw,sync,no_subtree_check,all_squash,anonuid=406,anongid=406) 10.0.10.12(ro,sync,no_subtree_check,all_squash,anonuid=406,anongid=406)
-      '';
-
-      systemd.tmpfiles.rules = lib.mkBefore [
-        "z /srv/archive/games/osu 0700 thesse users -"
-        "z /srv/media/video/anime/movies 0775 root root -"
-        "z /srv/media/video/anime/shows 0775 root root -"
-        "z /srv/media/video/movies 0775 root root -"
-        "z /srv/media/video/shows 0775 root root -"
-        "a+ /srv/downloads/complete - - - - default:mask::rwx"
-        "a+ /srv/media/video/anime/movies - - - - default:mask::rwx"
-        "a+ /srv/media/video/anime/shows - - - - default:mask::rwx"
-        "a+ /srv/media/video/movies - - - - default:mask::rwx"
-        "a+ /srv/media/video/shows - - - - default:mask::rwx"
-      ];
-
       home-manager.users.thesse.imports = [
         self.modules.homeManager.server
       ];
 
-      boot = {
-        kernelParams = [ "zfs.zfs_arc_max=${toString (32 * 1024 * 1024 * 1024)}" ];
-
-        loader.grub.mirroredBoots = [
-          {
-            path = "/boot1";
-            devices = [ "nodev" ];
-          }
-          {
-            path = "/boot2";
-            devices = [ "nodev" ];
-          }
-        ];
-
-        zfs.extraPools = [
-          "scratch"
-          "tank"
-        ];
-      };
-
       hardware.facter.reportPath = ./facter.json;
 
-      disko.zfs.enable = true;
-
-      environment.persistence."/persistent".enable = false;
-
-      networking.hostId = "700e144e";
       networking.hostName = "mimir";
 
       system.stateVersion = "26.05";
