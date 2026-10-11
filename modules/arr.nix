@@ -20,7 +20,10 @@
           mounts = libraries ++ [ "/srv/downloads/complete" ];
         in
         {
-          imports = [ self.modules.nixos.authelia ];
+          imports = [
+            self.modules.nixos.authelia
+            self.modules.nixos.podman
+          ];
 
           authelia.adminDomains = [ "${app}.${domain}" ];
 

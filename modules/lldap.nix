@@ -1,3 +1,4 @@
+{ self, ... }:
 {
   flake.modules.nixos.lldap =
     { config, lib, ... }:
@@ -8,6 +9,10 @@
       uid = 440;
     in
     {
+      imports = [
+        self.modules.nixos.podman
+      ];
+
       virtualisation.oci-containers.containers.lldap = {
         image = "docker.io/lldap/lldap:2026-08-28-alpine-rootless";
 

@@ -1,3 +1,4 @@
+{ self, ... }:
 {
   flake.modules.nixos.minecraft =
     let
@@ -9,6 +10,10 @@
       ];
     in
     {
+      imports = [
+        self.modules.nixos.podman
+      ];
+
       virtualisation.oci-containers.containers.minecraft = {
         image = "docker.io/itzg/minecraft-server:2026.9.2-java21";
 

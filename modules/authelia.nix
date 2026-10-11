@@ -1,3 +1,4 @@
+{ self, ... }:
 {
   flake.modules.nixos.authelia =
     {
@@ -99,6 +100,11 @@
       };
     in
     {
+      imports = [
+        self.modules.nixos.lldap
+        self.modules.nixos.podman
+      ];
+
       options.authelia = {
         adminDomains = lib.mkOption {
           type = lib.types.listOf lib.types.str;

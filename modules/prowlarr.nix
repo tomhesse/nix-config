@@ -7,7 +7,10 @@
       uid = 403;
     in
     {
-      imports = [ self.modules.nixos.authelia ];
+      imports = [
+        self.modules.nixos.authelia
+        self.modules.nixos.podman
+      ];
 
       authelia.adminDomains = [ "prowlarr.${domain}" ];
 

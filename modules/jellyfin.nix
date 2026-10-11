@@ -1,3 +1,4 @@
+{ self, ... }:
 {
   flake.modules.nixos.jellyfin =
     let
@@ -13,6 +14,10 @@
       ];
     in
     {
+      imports = [
+        self.modules.nixos.podman
+      ];
+
       virtualisation.oci-containers.containers.jellyfin = {
         image = "docker.io/jellyfin/jellyfin:12.2";
 

@@ -60,7 +60,11 @@
       };
     in
     {
-      imports = [ self.modules.nixos.authelia ];
+      imports = [
+        self.modules.nixos.authelia
+        self.modules.nixos.podman
+        self.modules.nixos.socket-proxy
+      ];
 
       authelia.adminDomains = [ "traefik.${domain}" ];
 
