@@ -19,9 +19,15 @@
       systemd.services."notify-failure@" = {
         description = "Failure notification for %i";
 
+        startLimitBurst = 12;
+        startLimitIntervalSec = 2 * 60 * 60;
+
         serviceConfig = {
           Type = "oneshot";
           ExecStart = "${notify} %i";
+          Restart = "on-failure";
+          RestartMode = "direct";
+          RestartSec = "5min";
         };
       };
     };
