@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, self, ... }:
 {
   flake-file.inputs.impermanence = {
     url = "github:nix-community/impermanence";
@@ -206,9 +206,8 @@
       };
     in
     {
-      # Depends on nixos.persistence for the environment.persistence options, which
-      # every host gets through nixos.base. It is not imported here: these modules are
-      # anonymous functions, so the module system cannot deduplicate a double import.
+      imports = [ self.modules.nixos.persistence ];
+
       environment.systemPackages = [
         btrfs-diff
         persist-cleanup

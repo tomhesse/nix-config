@@ -1,3 +1,4 @@
+{ self, ... }:
 {
   flake.modules.nixos.sabnzbd =
     let
@@ -11,7 +12,8 @@
       ];
     in
     {
-      # Needs nixos.authelia on the same host for this option.
+      imports = [ self.modules.nixos.authelia ];
+
       authelia.adminDomains = [ "sabnzbd.${domain}" ];
 
       virtualisation.oci-containers.containers.sabnzbd = {
