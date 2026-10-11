@@ -16,6 +16,8 @@
         pkgs.nodejs
         pkgs.uv
         pkgs.python3
+        pkgs.bubblewrap
+        pkgs.socat
       ];
     in
     {
