@@ -3,7 +3,7 @@
   flake.modules.nixos.notify-failure =
     { config, pkgs, ... }:
     let
-      address = "admin@shrimphouse.xyz";
+      address = config.msmtp.adminAddress;
 
       notify = pkgs.writeShellScript "notify-failure" ''
         {
