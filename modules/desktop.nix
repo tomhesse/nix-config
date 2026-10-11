@@ -30,7 +30,6 @@
       self.modules.homeManager.cli
       self.modules.homeManager.claude
       self.modules.homeManager.cliphist
-      self.modules.homeManager.dunst
       self.modules.homeManager.feishin
       self.modules.homeManager.firefox
       self.modules.homeManager.fish
@@ -49,6 +48,7 @@
       self.modules.homeManager.rofi
       self.modules.homeManager.steam
       self.modules.homeManager.swayidle
+      self.modules.homeManager.swaync
       self.modules.homeManager.swaylock
       self.modules.homeManager.thunderbird
       self.modules.homeManager.trash

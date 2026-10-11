@@ -7,7 +7,7 @@
       ...
     }:
     let
-      inherit (lib) getExe optionalString;
+      inherit (lib) getExe getExe' optionalString;
 
       uwsm = getExe pkgs.uwsm;
 
@@ -15,6 +15,7 @@
       pavucontrol = getExe pkgs.pavucontrol;
       power-menu = getExe pkgs.local.power-menu;
       rofi-bluetooth = getExe pkgs.rofi-bluetooth;
+      swaync-client = getExe' pkgs.swaynotificationcenter "swaync-client";
 
       catppuccinEnabled = config.catppuccin.enable;
 
@@ -71,6 +72,7 @@
               "network"
               "power-profiles-daemon"
               "tray"
+              "custom/notification"
               "custom/power-menu"
             ];
 
@@ -105,6 +107,26 @@
 
             cpu = {
               format = "󰍛 {usage}%";
+            };
+
+            "custom/notification" = {
+              format = "{icon}";
+              format-icons = {
+                notification = "󰂞";
+                none = "󰂚";
+                dnd-notification = "󰂛";
+                dnd-none = "󰂛";
+                inhibited-notification = "󰂞";
+                inhibited-none = "󰂚";
+                dnd-inhibited-notification = "󰂛";
+                dnd-inhibited-none = "󰂛";
+              };
+              return-type = "json";
+              exec = "${swaync-client} -swb";
+              on-click = "${swaync-client} -t -sw";
+              on-click-right = "${swaync-client} -d -sw";
+              escape = true;
+              tooltip = false;
             };
 
             "custom/power-menu" = {
@@ -232,6 +254,7 @@
           #bluetooth,
           #clock,
           #cpu,
+          #custom-notification,
           #custom-power-menu,
           #memory,
           #mpris,
@@ -252,6 +275,7 @@
           #battery,
           #bluetooth,
           #cpu,
+          #custom-notification,
           #custom-power-menu,
           #memory,
           #network,
@@ -268,6 +292,7 @@
           #battery,
           #bluetooth,
           #cpu,
+          #custom-notification,
           #custom-power-menu,
           #memory,
           #network,
@@ -281,6 +306,7 @@
           /* Square-corner modules */
           #battery,
           #bluetooth,
+          #custom-notification,
           #memory,
           #network,
           #power-profiles-daemon,
@@ -290,6 +316,7 @@
           }
 
           /* Shared transitions (glow-enabled modules) */
+          #custom-notification,
           #custom-power-menu,
           #network,
           #power-profiles-daemon,
@@ -298,6 +325,7 @@
           }
 
           /* Unified hover glow */
+          #custom-notification:hover,
           #custom-power-menu:hover,
           #network:hover,
           #power-profiles-daemon:hover,
