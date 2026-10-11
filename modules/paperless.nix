@@ -8,7 +8,10 @@
       uid = 409;
     in
     {
-      imports = [ self.modules.nixos.authelia ];
+      imports = [
+        self.modules.nixos.authelia
+        self.modules.nixos.podman
+      ];
 
       authelia.oidc.clients.paperless = {
         client_name = "Paperless";

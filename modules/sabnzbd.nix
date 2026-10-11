@@ -12,7 +12,10 @@
       ];
     in
     {
-      imports = [ self.modules.nixos.authelia ];
+      imports = [
+        self.modules.nixos.authelia
+        self.modules.nixos.podman
+      ];
 
       authelia.adminDomains = [ "sabnzbd.${domain}" ];
 

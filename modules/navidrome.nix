@@ -1,3 +1,4 @@
+{ self, ... }:
 {
   flake.modules.nixos.navidrome =
     { config, ... }:
@@ -7,6 +8,10 @@
       uid = 406;
     in
     {
+      imports = [
+        self.modules.nixos.podman
+      ];
+
       virtualisation.oci-containers.containers.navidrome = {
         image = "ghcr.io/navidrome/navidrome:0.64.2";
 

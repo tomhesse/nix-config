@@ -1,7 +1,10 @@
+{ self, ... }:
 {
   flake.modules.nixos.socket-proxy =
     { lib, ... }:
     {
+      imports = [ self.modules.nixos.podman ];
+
       virtualisation.oci-containers.containers.socket-proxy = {
         image = "ghcr.io/tecnativa/docker-socket-proxy:v0.5.0";
         pull = "missing";

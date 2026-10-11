@@ -1,3 +1,4 @@
+{ self, ... }:
 {
   flake.modules.nixos.seerr =
     let
@@ -6,6 +7,10 @@
       uid = 408;
     in
     {
+      imports = [
+        self.modules.nixos.podman
+      ];
+
       virtualisation.oci-containers.containers.seerr = {
         image = "ghcr.io/seerr-team/seerr:v3.5.0";
 

@@ -42,8 +42,6 @@
         /srv/media/music 10.0.10.11(rw,sync,no_subtree_check,all_squash,anonuid=406,anongid=406) 10.0.10.12(ro,sync,no_subtree_check,all_squash,anonuid=406,anongid=406)
       '';
 
-      # Ahead of the services' ACL grants: whichever rule creates a library's default
-      # ACL first decides its default group entry.
       systemd.tmpfiles.rules = lib.mkBefore [
         "z /srv/archive/games/osu 0700 thesse users -"
         "z /srv/media/video/anime/movies 0775 root root -"

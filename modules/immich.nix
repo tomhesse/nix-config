@@ -8,7 +8,10 @@
       uid = 411;
     in
     {
-      imports = [ self.modules.nixos.authelia ];
+      imports = [
+        self.modules.nixos.authelia
+        self.modules.nixos.podman
+      ];
 
       authelia = {
         userAttributes.immich_role.expression = ''"admins" in groups ? "admin" : "user"'';
