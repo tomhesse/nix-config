@@ -1,3 +1,4 @@
+{ self, ... }:
 {
   flake.modules.nixos.profilarr =
     { config, ... }:
@@ -7,7 +8,8 @@
       uid = 407;
     in
     {
-      # Needs nixos.authelia on the same host for these options.
+      imports = [ self.modules.nixos.authelia ];
+
       authelia.oidc.clients.profilarr = {
         client_name = "Profilarr";
         client_secret = "$pbkdf2-sha512$310000$G9hHaCv6996H5mh59hOpeQ$DpqK9caOIHpImo8d.PcMyOo9/yN3Cr/t31g.PjcoZHzlGqEnLdf5xTTUBaNDMR6mkkPBBN.Cj159YK.RwCeD0A";

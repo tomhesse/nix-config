@@ -1,3 +1,4 @@
+{ self, ... }:
 {
   flake.modules.nixos.bazarr =
     let
@@ -13,7 +14,8 @@
       ];
     in
     {
-      # Needs nixos.authelia on the same host for this option.
+      imports = [ self.modules.nixos.authelia ];
+
       authelia.adminDomains = [ "bazarr.${domain}" ];
 
       virtualisation.oci-containers.containers.bazarr = {

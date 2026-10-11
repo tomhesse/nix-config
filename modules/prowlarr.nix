@@ -1,3 +1,4 @@
+{ self, ... }:
 {
   flake.modules.nixos.prowlarr =
     let
@@ -6,7 +7,8 @@
       uid = 403;
     in
     {
-      # Needs nixos.authelia on the same host for this option.
+      imports = [ self.modules.nixos.authelia ];
+
       authelia.adminDomains = [ "prowlarr.${domain}" ];
 
       virtualisation.oci-containers.containers.prowlarr = {

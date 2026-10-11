@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, self, ... }:
 {
   flake.modules.nixos =
     let
@@ -20,7 +20,8 @@
           mounts = libraries ++ [ "/srv/downloads/complete" ];
         in
         {
-          # Needs nixos.authelia on the same host for this option.
+          imports = [ self.modules.nixos.authelia ];
+
           authelia.adminDomains = [ "${app}.${domain}" ];
 
           virtualisation.oci-containers.containers.${app} = {

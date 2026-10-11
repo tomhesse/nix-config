@@ -1,3 +1,4 @@
+{ self, ... }:
 {
   flake.modules.nixos.immich =
     { config, ... }:
@@ -7,7 +8,8 @@
       uid = 411;
     in
     {
-      # Needs nixos.authelia on the same host for these options.
+      imports = [ self.modules.nixos.authelia ];
+
       authelia = {
         userAttributes.immich_role.expression = ''"admins" in groups ? "admin" : "user"'';
 

@@ -1,3 +1,4 @@
+{ self, ... }:
 {
   flake.modules.nixos.traefik =
     { config, pkgs, ... }:
@@ -59,7 +60,8 @@
       };
     in
     {
-      # Needs nixos.authelia on the same host for this option.
+      imports = [ self.modules.nixos.authelia ];
+
       authelia.adminDomains = [ "traefik.${domain}" ];
 
       virtualisation.oci-containers.containers.traefik = {
