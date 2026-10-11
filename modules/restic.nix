@@ -71,10 +71,22 @@
           };
         };
 
-        systemd.services = {
-          restic-backups-persistent.onFailure = [ "notify-failure@%N.service" ];
-          restic-backups-offsite.onFailure = [ "notify-failure@%N.service" ];
-        };
+        systemd.services =
+          lib.genAttrs
+            [
+              "restic-backups-persistent"
+              "restic-backups-offsite"
+            ]
+            (_: {
+              onFailure = [ "notify-failure@%N.service" ];
+              startLimitBurst = 3;
+              startLimitIntervalSec = 12 * 60 * 60;
+              serviceConfig = {
+                Restart = "on-failure";
+                RestartMode = "direct";
+                RestartSec = "5min";
+              };
+            });
 
         sops.secrets = {
           "services/restic/password".sopsFile = ./hosts/${hostname}/secrets/nixos.yaml;
