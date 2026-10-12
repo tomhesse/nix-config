@@ -9,7 +9,6 @@
       self.modules.nixos.fish
       self.modules.nixos.github
       self.modules.nixos.home-manager
-      self.modules.nixos.local-packages
       self.modules.nixos.locale
       self.modules.nixos.networkd
       self.modules.nixos.nix
