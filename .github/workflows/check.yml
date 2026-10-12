@@ -32,11 +32,6 @@ jobs:
             .#checks.x86_64-linux.pre-commit \
             .#checks.x86_64-linux.check-flake-file
 
-      - name: Build the local packages
-        run: |
-          nix build --no-link --print-build-logs \
-            .#power-menu
-
       - name: Evaluate every configuration
         run: |
           nix eval --json .#nixosConfigurations --apply \
