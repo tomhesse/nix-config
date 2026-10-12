@@ -12,7 +12,7 @@
       uwsm = getExe pkgs.uwsm;
 
       pavucontrol = getExe pkgs.pavucontrol;
-      power-menu = getExe pkgs.local.power-menu;
+      wleave = getExe config.programs.wleave.package;
       rofi-bluetooth = getExe pkgs.rofi-bluetooth;
       swaync-client = getExe' pkgs.swaynotificationcenter "swaync-client";
       swayosd-client = getExe' config.services.swayosd.package "swayosd-client";
@@ -132,7 +132,7 @@
             "custom/power-menu" = {
               format = " ";
               tooltip = false;
-              on-click = "${uwsm} app -- ${power-menu}";
+              on-click = "${uwsm} app -- ${wleave}";
             };
 
             memory = {

@@ -299,8 +299,6 @@
           "Ctrl+Print".action.screenshot-screen = { };
           "Alt+Print".action.screenshot-window = { };
 
-          "Mod+Shift+E".action.quit = { };
-
           "Mod+Alt+L" = {
             action.spawn = app [ swaylock ];
             allow-when-locked = true;
