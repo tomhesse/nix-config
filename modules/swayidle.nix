@@ -29,7 +29,7 @@
         systemdTargets = [ ''wayland-session@niri\x2dsession.target'' ];
 
         events = {
-          lock = "${uwsm} app -- ${swaylock}";
+          lock = "${uwsm} app -- ${swaylock} -f";
           before-sleep = "${swaylock} -f";
         };
 
