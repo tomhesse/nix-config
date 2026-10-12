@@ -35,7 +35,6 @@ jobs:
       - name: Build the local packages
         run: |
           nix build --no-link --print-build-logs \
-            .#media-ctl \
             .#power-menu
 
       - name: Evaluate every configuration
