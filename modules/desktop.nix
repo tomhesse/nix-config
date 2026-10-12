@@ -15,6 +15,7 @@
       self.modules.nixos.sddm
       self.modules.nixos.steam
       self.modules.nixos.swaylock
+      self.modules.nixos.swayosd
       self.modules.nixos.thunderbird
       self.modules.nixos.trash
       self.modules.nixos.wireless
@@ -49,6 +50,7 @@
       self.modules.homeManager.steam
       self.modules.homeManager.swayidle
       self.modules.homeManager.swaync
+      self.modules.homeManager.swayosd
       self.modules.homeManager.swaylock
       self.modules.homeManager.thunderbird
       self.modules.homeManager.trash

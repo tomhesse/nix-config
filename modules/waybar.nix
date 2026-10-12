@@ -11,11 +11,11 @@
 
       uwsm = getExe pkgs.uwsm;
 
-      media-ctl = getExe pkgs.local.media-ctl;
       pavucontrol = getExe pkgs.pavucontrol;
       power-menu = getExe pkgs.local.power-menu;
       rofi-bluetooth = getExe pkgs.rofi-bluetooth;
       swaync-client = getExe' pkgs.swaynotificationcenter "swaync-client";
+      swayosd-client = getExe' config.services.swayosd.package "swayosd-client";
 
       catppuccinEnabled = config.catppuccin.enable;
 
@@ -189,8 +189,8 @@
                 ];
               };
               on-click = "${uwsm} app -- ${pavucontrol}";
-              on-scroll-up = "${uwsm} app -- ${media-ctl} volume up";
-              on-scroll-down = "${uwsm} app -- ${media-ctl} volume down";
+              on-scroll-up = "${swayosd-client} --output-volume +5";
+              on-scroll-down = "${swayosd-client} --output-volume -5";
               tooltip = false;
             };
 

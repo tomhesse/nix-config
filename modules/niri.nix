@@ -91,11 +91,11 @@
 
       cliphist = getExe pkgs.cliphist;
       kitty = getExe pkgs.kitty;
-      media-ctl = getExe pkgs.local.media-ctl;
       playerctl = getExe pkgs.playerctl;
       rofi = getExe pkgs.rofi;
       swaybg = getExe pkgs.swaybg;
       swaylock = getExe config.programs.swaylock.package;
+      swayosd-client = getExe' config.services.swayosd.package "swayosd-client";
       wl-copy = getExe' pkgs.wl-clipboard "wl-copy";
       xwayland-satellite = getExe pkgs.xwayland-satellite;
 
@@ -307,42 +307,42 @@
           };
 
           "XF86AudioMute" = {
-            action.spawn = app [
-              media-ctl
-              "volume"
-              "mute"
+            action.spawn = [
+              swayosd-client
+              "--output-volume"
+              "mute-toggle"
             ];
             allow-when-locked = true;
           };
           "XF86AudioRaiseVolume" = {
-            action.spawn = app [
-              media-ctl
-              "volume"
-              "up"
+            action.spawn = [
+              swayosd-client
+              "--output-volume"
+              "+5"
             ];
             allow-when-locked = true;
           };
           "XF86AudioLowerVolume" = {
-            action.spawn = app [
-              media-ctl
-              "volume"
-              "down"
+            action.spawn = [
+              swayosd-client
+              "--output-volume"
+              "-5"
             ];
             allow-when-locked = true;
           };
           "XF86MonBrightnessUp" = {
-            action.spawn = app [
-              media-ctl
-              "brightness"
-              "up"
+            action.spawn = [
+              swayosd-client
+              "--brightness"
+              "+5"
             ];
             allow-when-locked = true;
           };
           "XF86MonBrightnessDown" = {
-            action.spawn = app [
-              media-ctl
-              "brightness"
-              "down"
+            action.spawn = [
+              swayosd-client
+              "--brightness"
+              "-5"
             ];
             allow-when-locked = true;
           };
