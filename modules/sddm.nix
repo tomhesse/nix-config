@@ -7,10 +7,7 @@
     {
       services.displayManager.sddm = {
         enable = true;
-        wayland = {
-          enable = true;
-          compositor = "kwin";
-        };
+        wayland.enable = true;
 
         settings.Theme = {
           CursorTheme = "catppuccin-${flavor}-${accent}-cursors";

@@ -1,4 +1,31 @@
-{ inputs, ... }:
+{ inputs, lib, ... }:
+let
+  inherit (lib)
+    elemAt
+    mapAttrs'
+    nameValuePair
+    splitString
+    toInt
+    ;
+
+  niriOutputs = mapAttrs' (
+    name: m:
+    let
+      res = splitString "x" m.resolution;
+    in
+    nameValuePair (if m.description != "" then m.description else name) {
+      mode = {
+        width = toInt (elemAt res 0);
+        height = toInt (elemAt res 1);
+        refresh = 1.0 * m.refreshRate;
+      };
+      position = { inherit (m.position) x y; };
+      inherit (m) scale;
+      transform.rotation = if m.rotation == "normal" then 0 else toInt m.rotation;
+      focus-at-startup = m.primary;
+    }
+  );
+in
 {
   flake-file.inputs.niri = {
     url = "github:sodiboo/niri-flake";
@@ -9,7 +36,28 @@
   };
 
   flake.modules.nixos.niri =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
+    let
+      inherit (config.services.displayManager.sddm.settings) Theme;
+
+      greeterConfig =
+        (lib.evalModules {
+          modules = [
+            inputs.niri.lib.internal.settings-module
+            {
+              programs.niri.settings = {
+                hotkey-overlay.skip-at-startup = true;
+                outputs = niriOutputs config.monitors;
+                input.keyboard.xkb.layout = "eu";
+                cursor = {
+                  theme = Theme.CursorTheme;
+                  size = Theme.CursorSize;
+                };
+              };
+            }
+          ];
+        }).config.programs.niri.finalConfig;
+    in
     {
       imports = [ inputs.niri.nixosModules.niri ];
 
@@ -19,6 +67,14 @@
       };
 
       niri-flake.cache.enable = false;
+
+      services.displayManager.sddm = lib.mkIf config.services.displayManager.sddm.enable {
+        wayland.compositorCommand = "${lib.getExe pkgs.niri} -c ${
+          inputs.niri.lib.internal.validated-config-for pkgs pkgs.niri greeterConfig
+        }";
+        extraPackages = [ pkgs.kdePackages.layer-shell-qt ];
+        settings.General.GreeterEnvironment = "QT_WAYLAND_SHELL_INTEGRATION=layer-shell";
+      };
 
       programs.uwsm = {
         enable = true;
@@ -41,51 +97,17 @@
     let
       inherit (lib)
         concatMap
-        elemAt
         getExe
         getExe'
         listToAttrs
-        mapAttrs'
         mod
         nameValuePair
         optionalAttrs
         range
-        splitString
-        toInt
         ;
-      inherit (osConfig) monitors;
-
       palette =
         (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
         .${config.catppuccin.flavor}.colors;
-
-      outputId = name: m: if m.description != "" then m.description else name;
-      rotation =
-        m:
-        {
-          "normal" = 0;
-          "90" = 90;
-          "180" = 180;
-          "270" = 270;
-        }
-        .${m.rotation};
-      outputs = mapAttrs' (
-        name: m:
-        let
-          res = splitString "x" m.resolution;
-        in
-        nameValuePair (outputId name m) {
-          mode = {
-            width = toInt (elemAt res 0);
-            height = toInt (elemAt res 1);
-            refresh = 1.0 * m.refreshRate;
-          };
-          position = { inherit (m.position) x y; };
-          inherit (m) scale;
-          transform.rotation = rotation m;
-          focus-at-startup = m.primary;
-        }
-      ) monitors;
 
       uwsm = getExe pkgs.uwsm;
 
@@ -128,7 +150,7 @@
 
         xwayland-satellite.path = xwayland-satellite;
 
-        inherit outputs;
+        outputs = niriOutputs osConfig.monitors;
 
         input = {
           keyboard.xkb.layout = "eu";
