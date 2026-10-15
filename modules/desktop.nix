@@ -39,6 +39,7 @@
       self.modules.homeManager.gnome-keyring
       self.modules.homeManager.gtk
       self.modules.homeManager.imv
+      self.modules.homeManager.jellyfin-desktop
       self.modules.homeManager.kitty
       self.modules.homeManager.mpv
       self.modules.homeManager.nh
