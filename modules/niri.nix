@@ -221,6 +221,7 @@ in
               { app-id = "^kitty$"; }
               { app-id = "^thunderbird$"; }
               { app-id = "^feishin$"; }
+              { app-id = "^org\\.jellyfin\\.JellyfinDesktop$"; }
             ];
             open-maximized = true;
           }
