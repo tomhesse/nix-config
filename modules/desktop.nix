@@ -9,6 +9,7 @@
       self.modules.nixos.limine
       self.modules.nixos.monitors
       self.modules.nixos.nautilus
+      self.modules.nixos.networkd
       self.modules.nixos.niri
       self.modules.nixos.pipewire
       self.modules.nixos.plymouth
