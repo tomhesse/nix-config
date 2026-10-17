@@ -10,7 +10,6 @@
       self.modules.nixos.github
       self.modules.nixos.home-manager
       self.modules.nixos.locale
-      self.modules.nixos.networkd
       self.modules.nixos.nix
       self.modules.nixos.nixpkgs
       self.modules.nixos.openssh

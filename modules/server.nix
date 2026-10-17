@@ -5,6 +5,7 @@
       self.modules.nixos.base
       self.modules.nixos.lts-kernel
       self.modules.nixos.msmtp
+      self.modules.nixos.networkd
     ];
   };
 
