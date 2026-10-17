@@ -187,6 +187,19 @@ bindings if they need to run before DNS is available.
 
 No host currently binds to it. It is kept for post-boot ZFS key delivery.
 
+### Wi-Fi
+
+loki and tyr run NetworkManager. Shrimphouse is declared in
+`modules/networkmanager.nix` with its PSK from sops. Other networks are joined
+imperatively with `nmcli` (no sudo needed) and survive reboots, since
+`/etc/NetworkManager/system-connections` is persisted:
+
+```bash
+nmcli device wifi list
+nmcli device wifi connect "<SSID>" --ask
+nmcli connection delete "<SSID>"   # forget a network
+```
+
 ### ZFS encryption keys
 
 Generate raw encryption keys for ZFS pools:
