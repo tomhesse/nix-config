@@ -1,6 +1,11 @@
 {
   flake.modules.nixos.user-thesse =
-    { config, pkgs, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     {
       sops.secrets."users/thesse/password".neededForUsers = true;
       sops.secrets."users/thesse/age-key".owner = "thesse";
@@ -10,7 +15,10 @@
         uid = 1000;
         shell = pkgs.fish;
         hashedPasswordFile = config.sops.secrets."users/thesse/password".path;
-        extraGroups = [ "wheel" ];
+        extraGroups = [
+          "wheel"
+        ]
+        ++ lib.optional config.networking.networkmanager.enable "networkmanager";
         openssh.authorizedKeys.keyFiles = [ ./ssh.pub ];
       };
 

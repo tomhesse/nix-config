@@ -9,7 +9,7 @@
       self.modules.nixos.limine
       self.modules.nixos.monitors
       self.modules.nixos.nautilus
-      self.modules.nixos.networkd
+      self.modules.nixos.networkmanager
       self.modules.nixos.niri
       self.modules.nixos.pipewire
       self.modules.nixos.plymouth
@@ -19,7 +19,6 @@
       self.modules.nixos.swayosd
       self.modules.nixos.thunderbird
       self.modules.nixos.trash
-      self.modules.nixos.wireless
       self.modules.nixos.xdg-desktop-portal
       self.modules.nixos.yubikey
       self.modules.nixos.zen-kernel
