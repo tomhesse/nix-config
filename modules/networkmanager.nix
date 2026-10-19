@@ -17,6 +17,8 @@
         restartUnits = [ "NetworkManager-ensure-profiles.service" ];
       };
 
+      hardware.facter.detected.dhcp.enable = false;
+
       networking.networkmanager = {
         enable = true;
         ensureProfiles = {
