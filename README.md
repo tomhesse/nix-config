@@ -200,6 +200,45 @@ nmcli device wifi connect "<SSID>" --ask
 nmcli connection delete "<SSID>"   # forget a network
 ```
 
+### Home VPN (loki)
+
+loki has a WireGuard profile, `shrimphouse-vpn-01`, for the gateway at
+`vpn.shrimphouse.xyz`, declared in `modules/hosts/loki/vpn.nix`. It never
+connects on its own; bring it up when something at home is needed:
+
+```bash
+nmcli connection up shrimphouse-vpn-01
+nmcli connection down shrimphouse-vpn-01
+```
+
+It is an IPv4-only split tunnel: only `10.0.20.0/24` and the tunnel's DNS
+server (`10.0.200.1`) go through it. Everything else, including IPv6, keeps
+using the local network. While it is up, DNS lookups go to `10.0.200.1`.
+
+Setting up the peer:
+
+```bash
+wg genkey | tee loki.key | wg pubkey   # public key goes to the gateway
+wg genpsk > loki.psk                   # preshared key goes to the gateway too
+sops modules/hosts/loki/secrets/nixos.yaml
+```
+
+In the sops file, add both keys under `services.wireguard`:
+
+```yaml
+services:
+  wireguard:
+    shrimphouse-vpn-01: <contents of loki.key>
+    shrimphouse-vpn-01-psk: <contents of loki.psk>
+```
+
+Register loki's public key, the preshared key and loki's tunnel address as a
+peer on the gateway, fill in the gateway values at the top of `vpn.nix`, and
+delete `loki.key` and `loki.psk`.
+
+To check the state: `nmcli connection show --active` and
+`sudo wg show wg-shrimphouse` (look for `latest handshake`).
+
 ### ZFS encryption keys
 
 Generate raw encryption keys for ZFS pools:
