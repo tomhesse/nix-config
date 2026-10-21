@@ -37,7 +37,7 @@
         volumes = [ "/srv/services/profilarr:/config" ];
 
         environment = {
-          AUTH = "oidc";
+          AUTH = "on";
           OIDC_CLIENT_ID = "profilarr";
           OIDC_DISCOVERY_URL = "https://auth.${domain}/.well-known/openid-configuration";
           ORIGIN = "https://profilarr.${domain}";
