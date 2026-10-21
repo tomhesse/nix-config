@@ -22,6 +22,14 @@
       ],
       "datasourceTemplate": "docker",
       "versioningTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/^modules/.*\\.nix$/"],
+      "matchStrings": [
+        "\"(?<depName>[a-z0-9][a-z0-9._-]*)==(?<currentValue>[0-9][0-9a-zA-Z.]*)\""
+      ],
+      "datasourceTemplate": "pypi"
     }
   ],
   "packageRules": [
@@ -35,6 +43,11 @@
     {
       "matchManagers": ["custom.regex"],
       "semanticCommitScope": "{{{replace '\\.nix$' '' (replace '^modules/' '' packageFile)}}}"
+    },
+    {
+      "matchManagers": ["custom.regex"],
+      "matchDatasources": ["pypi"],
+      "schedule": ["before 6am on sunday"]
     },
     {
       "matchPackageNames": ["docker.io/apache/tika"],
