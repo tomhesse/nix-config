@@ -30,7 +30,7 @@
       };
 
       virtualisation.oci-containers.containers.profilarr = {
-        image = "ghcr.io/dictionarry-hub/profilarr:2.2.0";
+        image = "ghcr.io/dictionarry-hub/profilarr:2.3.1";
 
         networks = [ "edge" ];
 
