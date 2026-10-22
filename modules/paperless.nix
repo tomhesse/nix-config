@@ -89,7 +89,7 @@
         };
 
         paperless-tika = {
-          image = "docker.io/apache/tika:3.3.1.0";
+          image = "docker.io/apache/tika:3.3.3.0";
 
           networks = [ "edge" ];
 
