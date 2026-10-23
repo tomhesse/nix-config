@@ -26,12 +26,18 @@
               inherit sopsFile;
               owner = "thesse";
             };
+            "services/hermes/telegram-bot-token" = { inherit sopsFile; };
+            "services/hermes/telegram-user-id" = { inherit sopsFile; };
           };
 
           templates."hermes-env" = {
             owner = "thesse";
+            restartUnits = [ "home-manager-thesse.service" ];
             content = ''
               OPENROUTER_API_KEY=${config.sops.placeholder."services/openrouter/api-key"}
+              TELEGRAM_BOT_TOKEN=${config.sops.placeholder."services/hermes/telegram-bot-token"}
+              TELEGRAM_ALLOWED_USERS=${config.sops.placeholder."services/hermes/telegram-user-id"}
+              TELEGRAM_HOME_CHANNEL=${config.sops.placeholder."services/hermes/telegram-user-id"}
             '';
           };
         };
@@ -134,6 +140,30 @@
           display.skin = "catppuccin";
 
           sessions.auto_archive = true;
+
+          platforms.telegram.extra = {
+            drop_pending_on_cold_boot = false;
+            dm_topics = [
+              {
+                chat_id = "\${TELEGRAM_HOME_CHANNEL}";
+                topics = [
+                  {
+                    name = "General";
+                    thread_id = 153;
+                  }
+                  {
+                    name = "Home";
+                    thread_id = 155;
+                  }
+                  {
+                    name = "Notes";
+                    thread_id = 157;
+                    skill = "obsidian";
+                  }
+                ];
+              }
+            ];
+          };
         };
       };
 
