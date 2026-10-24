@@ -11,51 +11,27 @@
       pkgs,
       ...
     }:
-    let
-      path = lib.makeBinPath [
-        pkgs.nodejs
-        pkgs.uv
-        pkgs.python3
-        pkgs.bubblewrap
-        pkgs.socat
-      ];
-    in
     {
-      home.packages = [
-        (pkgs.symlinkJoin {
-          name = "claude-code-wrapped";
-          paths = [ pkgs.unstable.claude-code ];
-          nativeBuildInputs = [ pkgs.makeWrapper ];
-          postBuild = ''
-            wrapProgram $out/bin/claude \
-              --prefix PATH : ${path} \
-              --set UV_PYTHON_DOWNLOADS never
-          '';
-        })
-      ];
-
-      programs.vscode.profiles.default = lib.mkIf config.programs.vscode.enable {
-        extensions = [ pkgs.unstable.vscode-extensions.anthropic.claude-code ];
-        userSettings = {
-          "claudeCode.preferredLocation" = "panel";
-          "claudeCode.hideOnboarding" = true;
-          # The extension runs its bundled binary through this, passing it as $1.
-          "claudeCode.claudeProcessWrapper" = "${pkgs.writeShellScript "claude-vscode" ''
-            export PATH=${path}:$PATH
-            export UV_PYTHON_DOWNLOADS=never
-            exec "$@"
-          ''}";
+      programs.claude-code = {
+        enable = true;
+        configDir = "${config.xdg.configHome}/claude";
+        settings = {
+          theme = "auto";
+          sandbox.enabled = true;
         };
       };
 
-      home.persistence."/persistent" = {
-        directories = [ ".claude" ];
-        files = [ ".claude.json" ];
+      programs.vscode.profiles.default = lib.mkIf config.programs.vscode.enable {
+        extensions = [ pkgs.vscode-extensions.anthropic.claude-code ];
+
+        userSettings."claudeCode.hideOnboarding" = true;
       };
 
-      sops.secrets = {
-        "services/unifi-mcp/password" = { };
-        "services/unifi-mcp/api-key" = { };
-      };
+      home.packages = with pkgs; [
+        bubblewrap
+        socat
+      ];
+
+      home.persistence."/persistent".directories = [ ".config/claude" ];
     };
 }
