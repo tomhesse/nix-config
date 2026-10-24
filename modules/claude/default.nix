@@ -23,6 +23,7 @@
         settings = {
           theme = "auto";
           sandbox.enabled = true;
+          includeCoAuthoredBy = false;
         };
       };
 
