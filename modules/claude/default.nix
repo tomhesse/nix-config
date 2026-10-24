@@ -15,6 +15,11 @@
       programs.claude-code = {
         enable = true;
         configDir = "${config.xdg.configHome}/claude";
+
+        skills.obsidian = pkgs.replaceVars ./skills/obsidian.md {
+          vaultPath = "${config.xdg.userDirs.documents}/obsidian/Prime Vault";
+        };
+
         settings = {
           theme = "auto";
           sandbox.enabled = true;
