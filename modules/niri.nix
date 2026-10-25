@@ -216,7 +216,6 @@ in
           }
           {
             matches = [
-              { app-id = "^code$"; }
               { app-id = "^firefox$"; }
               { app-id = "^kitty$"; }
               { app-id = "^thunderbird$"; }
