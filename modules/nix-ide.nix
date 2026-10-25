@@ -8,7 +8,7 @@
       ...
     }:
     {
-      programs.vscode.profiles.default = lib.mkIf config.programs.vscode.enable {
+      programs.vscodium.profiles.default = lib.mkIf config.programs.vscodium.enable {
         extensions = [ pkgs.vscode-extensions.jnoortheen.nix-ide ];
 
         userSettings =

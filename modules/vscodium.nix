@@ -1,7 +1,5 @@
 {
-  allowedUnfree = [ "vscode" ];
-
-  flake.modules.homeManager.vscode =
+  flake.modules.homeManager.vscodium =
     {
       config,
       pkgs,
@@ -10,14 +8,14 @@
     {
       home.persistence."/persistent" = {
         directories = [
-          "${config.xdg.relativeConfigHome}/Code/User"
-          ".vscode-shared"
-          ".vscode/cli"
+          "${config.xdg.relativeConfigHome}/VSCodium/User"
+          "${config.xdg.relativeConfigHome}/VSCodium/Backups"
+          ".vscode-oss-shared"
         ];
-        files = [ "${config.xdg.relativeConfigHome}/Code/machineid" ];
+        files = [ "${config.xdg.relativeConfigHome}/VSCodium/machineid" ];
       };
 
-      programs.vscode = {
+      programs.vscodium = {
         enable = true;
         mutableExtensionsDir = false;
 
@@ -26,10 +24,7 @@
 
           userSettings = {
             "workbench.startupEditor" = "none";
-            "telemetry.telemetryLevel" = "off";
-            "update.mode" = "none";
             "security.workspace.trust.enabled" = false;
-            "chat.disableAIFeatures" = true;
 
             "editor.fontFamily" = "'FiraCode Nerd Font', monospace";
             "editor.fontSize" = 14;

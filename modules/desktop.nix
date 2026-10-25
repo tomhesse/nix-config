@@ -60,7 +60,7 @@
       self.modules.homeManager.trash
       self.modules.homeManager.utilities
       self.modules.homeManager.vesktop
-      self.modules.homeManager.vscode
+      self.modules.homeManager.vscodium
       self.modules.homeManager.wallpaper
       self.modules.homeManager.waybar
       self.modules.homeManager.wleave
