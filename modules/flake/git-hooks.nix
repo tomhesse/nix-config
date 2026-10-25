@@ -8,6 +8,9 @@
   };
 
   perSystem.pre-commit.settings.hooks = {
+    # Commits
+    convco.enable = true;
+
     # Editorconfig
     editorconfig-checker = {
       enable = true;
