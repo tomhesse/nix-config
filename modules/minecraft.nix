@@ -15,7 +15,7 @@
       ];
 
       virtualisation.oci-containers.containers.minecraft = {
-        image = "docker.io/itzg/minecraft-server:2026.10.0-java21";
+        image = "docker.io/itzg/minecraft-server:2026.10.1-java21";
 
         networks = [ "edge" ];
 
