@@ -8,6 +8,7 @@
         user.email = lib.mkDefault "contact@tomhesse.xyz";
         init.defaultBranch = "main";
         fetch.prune = true;
+        pull.rebase = true;
       };
       signing.signByDefault = lib.mkDefault true;
     };
