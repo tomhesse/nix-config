@@ -9,6 +9,7 @@
         init.defaultBranch = "main";
         fetch.prune = true;
         pull.rebase = true;
+        rebase.autoStash = true;
       };
       signing.signByDefault = lib.mkDefault true;
     };
