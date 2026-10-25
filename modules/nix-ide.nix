@@ -19,9 +19,9 @@
           {
             "nix.enableLanguageServer" = true;
             "nix.serverPath" = "${pkgs.nixd}/bin/nixd";
-            "nix.formatterPath" = "${pkgs.nixfmt}/bin/nixfmt";
             "nix.serverSettings" = {
               "nixd" = {
+                "formatting"."command" = [ "${pkgs.nixfmt}/bin/nixfmt" ];
                 "nixpkgs"."expr" = "import ${flake}.inputs.nixpkgs { }";
                 "options" = {
                   "nixos"."expr" = "${flake}.nixosConfigurations.${host}.options";
