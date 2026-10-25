@@ -11,7 +11,8 @@
     "enabled": true,
     "schedule": ["before 6am on sunday"],
     "commitMessageAction": "update the flake inputs",
-    "semanticCommitScope": "flake"
+    "semanticCommitScope": "flake",
+    "automerge": true
   },
   "customManagers": [
     {
