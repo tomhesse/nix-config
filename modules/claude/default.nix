@@ -22,7 +22,10 @@
 
         settings = {
           theme = "auto";
-          sandbox.enabled = true;
+          sandbox = {
+            enabled = true;
+            filesystem.allowWrite = [ "~/.cache/pre-commit" ];
+          };
           includeCoAuthoredBy = false;
         };
       };
