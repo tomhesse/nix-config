@@ -15,8 +15,8 @@
             mktplcRef = {
               publisher = "opentofu";
               name = "vscode-opentofu";
-              version = "0.6.2";
-              hash = "sha256-rgp++YQ8gUBjzeZk3H0XIcDu2Cp7NGuoutI8IGo5cmg=";
+              version = "0.6.3";
+              hash = "sha256-q1Em4j1vlwCKcoXWRUArVkGlAMIrGb9onJBWlUFjRgU=";
             };
           })
         ];
