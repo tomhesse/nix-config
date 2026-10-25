@@ -11,6 +11,16 @@
       pkgs,
       ...
     }:
+    let
+      statusline = pkgs.writeShellApplication {
+        name = "claude-statusline";
+        runtimeInputs = with pkgs; [
+          git
+          jq
+        ];
+        text = builtins.readFile ./statusline.sh;
+      };
+    in
     {
       programs.claude-code = {
         enable = true;
@@ -27,6 +37,11 @@
             filesystem.allowWrite = [ "~/.cache/pre-commit" ];
           };
           includeCoAuthoredBy = false;
+
+          statusLine = {
+            type = "command";
+            command = lib.getExe statusline;
+          };
         };
       };
 
