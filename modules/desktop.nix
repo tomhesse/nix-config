@@ -31,6 +31,7 @@
       self.modules.homeManager.cli
       self.modules.homeManager.claude
       self.modules.homeManager.cliphist
+      self.modules.homeManager.editorconfig
       self.modules.homeManager.feishin
       self.modules.homeManager.firefox
       self.modules.homeManager.fish
@@ -44,6 +45,7 @@
       self.modules.homeManager.mpv
       self.modules.homeManager.nh
       self.modules.homeManager.niri
+      self.modules.homeManager.nix-ide
       self.modules.homeManager.obsidian
       self.modules.homeManager.opentofu
       self.modules.homeManager.pipewire

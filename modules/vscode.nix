@@ -4,7 +4,6 @@
   flake.modules.homeManager.vscode =
     {
       config,
-      osConfig,
       pkgs,
       ...
     }:
@@ -23,48 +22,25 @@
         mutableExtensionsDir = false;
 
         profiles.default = {
-          extensions = with pkgs.vscode-extensions; [
-            christian-kohler.path-intellisense
-            editorconfig.editorconfig
-            jnoortheen.nix-ide
-          ];
+          extensions = [ pkgs.vscode-extensions.christian-kohler.path-intellisense ];
 
-          userSettings =
-            let
-              host = osConfig.networking.hostName;
-              flake = "(builtins.getFlake (builtins.toString ./. ))";
-            in
-            {
-              "workbench.startupEditor" = "none";
-              "telemetry.telemetryLevel" = "off";
-              "update.mode" = "none";
-              "security.workspace.trust.enabled" = false;
-              "chat.disableAIFeatures" = true;
+          userSettings = {
+            "workbench.startupEditor" = "none";
+            "telemetry.telemetryLevel" = "off";
+            "update.mode" = "none";
+            "security.workspace.trust.enabled" = false;
+            "chat.disableAIFeatures" = true;
 
-              "editor.fontFamily" = "'FiraCode Nerd Font', monospace";
-              "editor.fontSize" = 14;
-              "editor.formatOnSave" = true;
-              "terminal.integrated.fontFamily" = "'FiraCode Nerd Font'";
-              "files.autoSave" = "onFocusChange";
+            "editor.fontFamily" = "'FiraCode Nerd Font', monospace";
+            "editor.fontSize" = 14;
+            "editor.formatOnSave" = true;
+            "terminal.integrated.fontFamily" = "'FiraCode Nerd Font'";
+            "files.autoSave" = "onFocusChange";
 
-              "git.closeDiffOnOperation" = true;
-              "typescript.suggest.paths" = false;
-              "javascript.suggest.paths" = false;
-
-              "nix.enableLanguageServer" = true;
-              "nix.serverPath" = "${pkgs.nixd}/bin/nixd";
-              "nix.formatterPath" = "${pkgs.nixfmt}/bin/nixfmt";
-              "nix.serverSettings" = {
-                "nixd" = {
-                  "nixpkgs"."expr" = "import ${flake}.inputs.nixpkgs { }";
-                  "options" = {
-                    "nixos"."expr" = "${flake}.nixosConfigurations.${host}.options";
-                    "home-manager"."expr" =
-                      "${flake}.nixosConfigurations.${host}.options.home-manager.users.type.getSubOptions []";
-                  };
-                };
-              };
-            };
+            "git.closeDiffOnOperation" = true;
+            "typescript.suggest.paths" = false;
+            "javascript.suggest.paths" = false;
+          };
         };
       };
     };
