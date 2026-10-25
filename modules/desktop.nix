@@ -45,6 +45,7 @@
       self.modules.homeManager.nh
       self.modules.homeManager.niri
       self.modules.homeManager.obsidian
+      self.modules.homeManager.opentofu
       self.modules.homeManager.pipewire
       self.modules.homeManager.playerctld
       self.modules.homeManager.rofi
