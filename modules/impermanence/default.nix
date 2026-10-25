@@ -122,14 +122,38 @@
           findutils
         ];
         text = ''
+          usage() {
+            echo "Find paths in the persistence store that are not declared for ${config.networking.hostName}"
+            echo "and optionally delete them."
+            echo
+            echo "USAGE: persist-cleanup [OPTIONS]"
+            echo
+            echo "OPTIONS:"
+            echo "  -n, --dry-run   List the orphaned paths without offering to delete them"
+            echo "  -h, --help      Show this help message and exit"
+          }
+
+          DRY_RUN=0
+          while [[ $# -gt 0 ]]; do
+            case "$1" in
+              -n | --dry-run) DRY_RUN=1 ;;
+              -h | --help)
+                usage
+                exit 0
+                ;;
+              *)
+                echo "Error: unknown option: $1" >&2
+                echo >&2
+                usage >&2
+                exit 1
+                ;;
+            esac
+            shift
+          done
+
           if [[ $EUID -ne 0 ]]; then
             echo "Error: must be run as root" >&2
             exit 1
-          fi
-
-          DRY_RUN=0
-          if [[ "''${1:-}" == "--dry-run" ]]; then
-            DRY_RUN=1
           fi
 
           declared=(
