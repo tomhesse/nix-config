@@ -30,7 +30,10 @@
       programs.vscode.profiles.default = lib.mkIf config.programs.vscode.enable {
         extensions = [ pkgs.vscode-extensions.anthropic.claude-code ];
 
-        userSettings."claudeCode.hideOnboarding" = true;
+        userSettings = {
+          "claudeCode.hideOnboarding" = true;
+          "claudeCode.preferredLocation" = "panel";
+        };
       };
 
       home.packages = with pkgs; [
