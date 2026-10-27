@@ -140,7 +140,7 @@
         };
 
         immich-valkey = {
-          image = "docker.io/valkey/valkey:9.1.2-alpine";
+          image = "docker.io/valkey/valkey:9.1.3-alpine";
 
           networks = [ "edge" ];
 
