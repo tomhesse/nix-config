@@ -62,8 +62,6 @@
     }:
     let
       inherit (lib)
-        concatStringsSep
-        escapeShellArg
         flatten
         mapAttrsToList
         unique
@@ -121,112 +119,12 @@
           coreutils
           findutils
         ];
-        text = ''
-          usage() {
-            echo "Find paths in the persistence store that are not declared for ${config.networking.hostName}"
-            echo "and optionally delete them."
-            echo
-            echo "USAGE: persist-cleanup [OPTIONS]"
-            echo
-            echo "OPTIONS:"
-            echo "  -n, --dry-run   List the orphaned paths without offering to delete them"
-            echo "  -h, --help      Show this help message and exit"
-          }
-
-          DRY_RUN=0
-          while [[ $# -gt 0 ]]; do
-            case "$1" in
-              -n | --dry-run) DRY_RUN=1 ;;
-              -h | --help)
-                usage
-                exit 0
-                ;;
-              *)
-                echo "Error: unknown option: $1" >&2
-                echo >&2
-                usage >&2
-                exit 1
-                ;;
-            esac
-            shift
-          done
-
-          if [[ $EUID -ne 0 ]]; then
-            echo "Error: must be run as root" >&2
-            exit 1
-          fi
-
-          declared=(
-            ${concatStringsSep "\n  " (
-              map escapeShellArg (nixosPaths ++ hmPaths ++ config.environment.persistCleanup.ignoredPaths)
-            )}
-          )
-
-          persist_bases=(
-            ${concatStringsSep "\n  " (map escapeShellArg persistBases)}
-          )
-
-          is_needed() {
-            local path="$1" d
-            for d in "''${declared[@]}"; do
-              [[ "$path" == "$d" ]] && return 0
-              [[ "$path" == "$d/"* ]] && return 0
-              [[ "$d" == "$path/"* ]] && return 0
-            done
-            return 1
-          }
-
-          is_parent_only() {
-            local path="$1" d
-            for d in "''${declared[@]}"; do
-              [[ "$d" == "$path/"* ]] && return 0
-            done
-            return 1
-          }
-
-          orphans=()
-
-          scan() {
-            local dir="$1" entry
-            while IFS= read -r -d "" entry; do
-              if ! is_needed "$entry"; then
-                orphans+=("$entry")
-              elif [[ -d "$entry" ]] && is_parent_only "$entry"; then
-                scan "$entry"
-              fi
-            done < <(find "$dir" -mindepth 1 -maxdepth 1 -print0 2>/dev/null || true)
-          }
-
-          for base in "''${persist_bases[@]}"; do
-            [[ -d "$base" ]] && scan "$base"
-          done
-
-          if [[ ''${#orphans[@]} -eq 0 ]]; then
-            echo "Nothing to clean up — all paths in the persistence store are declared."
-            exit 0
-          fi
-
-          echo "Orphaned paths in the persistence store not declared for ${config.networking.hostName}:"
-          for o in "''${orphans[@]}"; do
-            echo "  $o"
-          done
-
-          if [[ "$DRY_RUN" -eq 1 ]]; then
-            exit 0
-          fi
-
-          echo ""
-          read -r -p "Delete all of the above? [y/N] " confirm
-          if [[ "$confirm" == [yY]* ]]; then
-            for o in "''${orphans[@]}"; do
-              rm -rf -- "$o"
-              echo "Deleted: $o"
-            done
-            echo "Done."
-          else
-            echo "Aborted."
-          fi
-        '';
+        runtimeEnv = {
+          host_name = config.networking.hostName;
+          declared = nixosPaths ++ hmPaths ++ config.environment.persistCleanup.ignoredPaths;
+          persist_bases = persistBases;
+        };
+        text = builtins.readFile ./persist-cleanup.sh;
       };
     in
     {
