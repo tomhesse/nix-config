@@ -71,7 +71,7 @@
         };
 
         paperless-gotenberg = {
-          image = "docker.io/gotenberg/gotenberg:8.38";
+          image = "docker.io/gotenberg/gotenberg:8.39";
 
           networks = [ "edge" ];
 
