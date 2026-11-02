@@ -141,28 +141,32 @@
 
           sessions.auto_archive = true;
 
-          platforms.telegram.extra = {
-            drop_pending_on_cold_boot = false;
-            dm_topics = [
-              {
-                chat_id = "\${TELEGRAM_HOME_CHANNEL}";
-                topics = [
-                  {
-                    name = "General";
-                    thread_id = 153;
-                  }
-                  {
-                    name = "Home";
-                    thread_id = 155;
-                  }
-                  {
-                    name = "Notes";
-                    thread_id = 157;
-                    skill = "obsidian";
-                  }
-                ];
-              }
-            ];
+          platforms.telegram = {
+            gateway_restart_notification = false;
+
+            extra = {
+              drop_pending_on_cold_boot = false;
+              dm_topics = [
+                {
+                  chat_id = "\${TELEGRAM_HOME_CHANNEL}";
+                  topics = [
+                    {
+                      name = "General";
+                      thread_id = 153;
+                    }
+                    {
+                      name = "Home";
+                      thread_id = 155;
+                    }
+                    {
+                      name = "Notes";
+                      thread_id = 157;
+                      skill = "obsidian";
+                    }
+                  ];
+                }
+              ];
+            };
           };
         };
       };
