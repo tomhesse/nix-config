@@ -12,6 +12,8 @@
       ...
     }:
     let
+      vaultPath = "${config.xdg.userDirs.documents}/obsidian/Prime Vault";
+
       statusline = pkgs.writeShellApplication {
         name = "claude-statusline";
         runtimeInputs = with pkgs; [
@@ -26,15 +28,16 @@
         enable = true;
         configDir = "${config.xdg.configHome}/claude";
 
-        skills.obsidian = pkgs.replaceVars ./skills/obsidian.md {
-          vaultPath = "${config.xdg.userDirs.documents}/obsidian/Prime Vault";
-        };
+        skills.obsidian = pkgs.replaceVars ./skills/obsidian.md { inherit vaultPath; };
 
         settings = {
           theme = "auto";
           sandbox = {
             enabled = true;
-            filesystem.allowWrite = [ "~/.cache/pre-commit" ];
+            filesystem.allowWrite = [
+              "~/.cache/pre-commit"
+              vaultPath
+            ];
           };
           includeCoAuthoredBy = false;
 
