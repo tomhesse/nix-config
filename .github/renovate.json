@@ -63,6 +63,10 @@
       "allowedVersions": "<4"
     },
     {
+      "matchPackageNames": ["docker.io/gotenberg/gotenberg"],
+      "allowedVersions": "<9"
+    },
+    {
       "matchPackageNames": ["lscr.io/linuxserver/**"],
       "versioning": "regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(\\.(?<build>\\d+))?-ls(?<revision>\\d+)$"
     }
