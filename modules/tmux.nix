@@ -1,8 +1,22 @@
 {
   flake.modules.homeManager.tmux =
-    { config, pkgs, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     let
       continuum = "${pkgs.tmuxPlugins.continuum}/share/tmux-plugins/continuum";
+
+      # swap-window errors on an empty slot and move-window on an occupied one, so
+      # trying them in order places the window either way, and -d keeps focus on the
+      # window that moved. Alt is the modifier because kitty sends a bare digit for
+      # ctrl+<n>, which tmux matches as its own select-window binding.
+      moveWindowBinds = lib.concatMapStringsSep "\n" (
+        slot:
+        "bind -N \"Move window to slot ${slot}\" M-${slot} run-shell 'tmux swap-window -d -t :${slot} 2>/dev/null || tmux move-window -t :${slot}'"
+      ) (map toString (lib.range 1 9));
     in
     {
       home.persistence."/persistent".directories = [
@@ -105,6 +119,11 @@
             bind | split-window -h -c "#{pane_current_path}"
             unbind '"'
             bind - split-window -v -c "#{pane_current_path}"
+            set -g renumber-windows on
+
+            ${moveWindowBinds}
+            bind -r -N "Nudge window left" M-p swap-window -d -t :-1
+            bind -r -N "Nudge window right" M-n swap-window -d -t :+1
 
             set -g status-right-length 100
             set -g status-left-length 100
