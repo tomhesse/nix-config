@@ -69,7 +69,7 @@
       authelia.adminDomains = [ "traefik.${domain}" ];
 
       virtualisation.oci-containers.containers.traefik = {
-        image = "docker.io/traefik:v3.7.17";
+        image = "docker.io/traefik:v3.7.18";
 
         dependsOn = [ "socket-proxy" ];
         networks = [ "edge" ];
