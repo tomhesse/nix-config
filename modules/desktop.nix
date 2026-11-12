@@ -36,6 +36,7 @@
       self.modules.homeManager.firefox
       self.modules.homeManager.fish
       self.modules.homeManager.fonts
+      self.modules.homeManager.github
       self.modules.homeManager.gpg
       self.modules.homeManager.gnome-keyring
       self.modules.homeManager.gtk
