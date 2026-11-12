@@ -44,8 +44,8 @@
 
         "steam: (.*)" = "󰓓 $1";
 
-        "code: (.*) - Visual Studio Code" = "󰨞 $1";
-        "code: Visual Studio Code" = "󰨞 Visual Studio Code";
+        "codium: (.*) - VSCodium" = "󰨞 $1";
+        "codium: VSCodium" = "󰨞 VSCodium";
       };
 
     in
