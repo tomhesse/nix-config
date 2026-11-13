@@ -7,8 +7,6 @@
       ...
     }:
     let
-      continuum = "${pkgs.tmuxPlugins.continuum}/share/tmux-plugins/continuum";
-
       # swap-window errors on an empty slot and move-window on an occupied one, so
       # trying them in order places the window either way, and -d keeps focus on the
       # window that moved. Alt is the modifier because kitty sends a bare digit for
@@ -128,8 +126,7 @@
             set -g status-right-length 100
             set -g status-left-length 100
             set -g status-left ""
-            set -g status-right "#(${continuum}/scripts/continuum_save.sh)"
-            set -ag status-right "#{E:@catppuccin_status_session}"
+            set -g status-right "#{E:@catppuccin_status_session}"
             set -ag status-right "#{E:@catppuccin_status_user}"
             set -ag status-right "#{E:@catppuccin_status_host}"
             set -ag status-right "#{E:@catppuccin_status_date_time}"
@@ -145,13 +142,6 @@
               extraConfig = ''
                 set -g @resurrect-dir '${config.xdg.stateHome}/tmux/resurrect'
                 set -g @resurrect-capture-pane-contents 'on'
-              '';
-            }
-            {
-              plugin = pkgs.tmuxPlugins.continuum;
-              extraConfig = ''
-                set -g @continuum-restore 'on'
-                set -g @continuum-save-interval '10'
               '';
             }
           ];
