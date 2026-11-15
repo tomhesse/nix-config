@@ -92,7 +92,7 @@
             args = [
               "--python"
               (lib.getExe pkgs.python3)
-              "unifi-network-mcp==0.45.0"
+              "unifi-network-mcp==0.45.2"
             ];
             env = {
               UV_PYTHON_DOWNLOADS = "never";
