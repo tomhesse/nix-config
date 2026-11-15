@@ -64,7 +64,8 @@
     },
     {
       "matchPackageNames": ["docker.io/apache/tika"],
-      "allowedVersions": "<4"
+      "allowedVersions": "<4",
+      "changelogUrl": "https://github.com/apache/tika/blob/main/CHANGES.txt"
     },
     {
       "matchPackageNames": ["docker.io/gotenberg/gotenberg"],
