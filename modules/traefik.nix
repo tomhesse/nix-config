@@ -120,13 +120,13 @@
       };
 
       sops = {
-        secrets."services/acme/scaleway-secret-key" = {
+        secrets."services/traefik/scaleway-secret-key" = {
           sopsFile = ./hosts/${config.networking.hostName}/secrets/nixos.yaml;
         };
 
         templates."traefik-env" = {
           content = ''
-            SCW_SECRET_KEY=${config.sops.placeholder."services/acme/scaleway-secret-key"}
+            SCW_SECRET_KEY=${config.sops.placeholder."services/traefik/scaleway-secret-key"}
           '';
           restartUnits = [ "podman-traefik.service" ];
         };
