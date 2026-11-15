@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
   flake-file.inputs.hermes-agent = {
-    url = "github:NousResearch/hermes-agent/v0.23.0";
+    url = "github:NousResearch/hermes-agent/v0.23.1";
     inputs = {
       flake-parts.follows = "flake-parts";
       home-manager.follows = "home-manager";
