@@ -59,6 +59,10 @@
       "schedule": ["before 6am on sunday"]
     },
     {
+      "matchPackageNames": ["docker.io/traefik"],
+      "sourceUrl": "https://github.com/traefik/traefik"
+    },
+    {
       "matchPackageNames": ["docker.io/apache/tika"],
       "allowedVersions": "<4"
     },
