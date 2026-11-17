@@ -28,7 +28,10 @@
         mutableExtensionsDir = false;
 
         profiles.default = {
-          extensions = [ pkgs.vscode-extensions.christian-kohler.path-intellisense ];
+          extensions = [
+            pkgs.vscode-extensions.christian-kohler.path-intellisense
+            pkgs.vscode-extensions.gruntfuggly.todo-tree
+          ];
 
           userSettings = {
             "workbench.startupEditor" = "none";
