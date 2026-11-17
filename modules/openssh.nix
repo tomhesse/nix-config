@@ -24,11 +24,12 @@ in
         };
         hostKeys = [
           {
-            # On an ephemeral root the direct /persistent path is used instead of the
-            # standard /etc/ssh one, because sops reads this key during activation
-            # (setupSecrets) before the impermanence bind mount for the file is
-            # guaranteed to exist. Hosts with a persistent root have no /persistent and
-            # no such ordering problem, so they use the stock location.
+            # HACK: an ephemeral root reaches past the bind mount to the key itself.
+            # The direct /persistent path is used instead of the standard /etc/ssh one
+            # because sops reads this key during activation (setupSecrets) before the
+            # impermanence bind mount for the file is guaranteed to exist. Hosts with a
+            # persistent root have no /persistent and no such ordering problem, so they
+            # use the stock location.
             path =
               if persistent then "/persistent/etc/ssh/ssh_host_ed25519_key" else "/etc/ssh/ssh_host_ed25519_key";
             type = "ed25519";

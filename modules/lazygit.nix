@@ -7,12 +7,12 @@
         "${config.xdg.relativeStateHome}/lazygit/state.yml"
       ];
 
+      # HACK: pre-migrate the theme until the catppuccin input tracks release-26.11.
       # lazygit migrates stale config keys unconditionally and then fails writing
       # the result back to the read-only store, so hand it an already-migrated
       # theme. The port moved authorColors under gui.theme in catppuccin/nix#1049,
       # but release-26.05 froze its port sources at the branch cut and will not
-      # get it; drop this once the input tracks the 26.11 release branch. The
-      # skip-if-nested check makes it a plain copy by then.
+      # get it. The skip-if-nested check makes this a plain copy by then.
       catppuccin.sources.lazygit =
         pkgs.runCommand "catppuccin-lazygit-migrated"
           {

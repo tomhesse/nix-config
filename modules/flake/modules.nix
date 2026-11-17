@@ -21,6 +21,10 @@ let
       };
 in
 {
+  # HACK: local stand-in for flake-parts' flakeModules.modules, which leaves the
+  # module-system key unset (an open upstream question), so a module imported by
+  # several others declares the same options more than once. Drop this once upstream
+  # sets the key.
   options.flake.modules = mkOption {
     type = types.lazyAttrsOf (types.lazyAttrsOf types.deferredModule);
     description = "Groups of modules published by the flake, keyed by class.";

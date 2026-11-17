@@ -5,6 +5,8 @@
       inherit (lib) mkOption types;
     in
     {
+      # HACK: declare podman's bridge networks here because nothing upstream creates
+      # them; see the option description below.
       options.podman.networks = mkOption {
         type = types.attrsOf (
           types.submodule (

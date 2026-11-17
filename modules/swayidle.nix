@@ -55,6 +55,7 @@
         ];
       };
 
+      # HACK: widen the unit's PATH so `uwsm app` can resolve systemd-run.
       # home-manager sets PATH to just bash (swayidle runs commands via `sh -c`),
       # but `uwsm app` shells out to `systemd-run` by bare name and fails with
       # ENOENT without it.
