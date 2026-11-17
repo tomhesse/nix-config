@@ -15,7 +15,7 @@
       authelia.adminDomains = [ "prowlarr.${domain}" ];
 
       virtualisation.oci-containers.containers.prowlarr = {
-        image = "lscr.io/linuxserver/prowlarr:2.7.0.5723-ls168";
+        image = "lscr.io/linuxserver/prowlarr:3.0.2.5780-ls169";
 
         networks = [ "edge" ];
 
