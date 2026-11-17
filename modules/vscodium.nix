@@ -25,6 +25,9 @@
           userSettings = {
             "workbench.startupEditor" = "none";
             "security.workspace.trust.enabled" = false;
+            "json.schemaDownload.trustedDomains" = {
+              "https://docs.renovatebot.com/" = true;
+            };
 
             "editor.fontFamily" = "'FiraCode Nerd Font', monospace";
             "editor.fontSize" = 14;
