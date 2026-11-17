@@ -1,3 +1,4 @@
+{ inputs, ... }:
 {
   flake.modules.homeManager.vscodium =
     {
@@ -13,6 +14,13 @@
           ".vscode-oss-shared"
         ];
         files = [ "${config.xdg.relativeConfigHome}/VSCodium/machineid" ];
+      };
+
+      # catppuccin's vscode port builds with pnpm_10, which nixpkgs now marks
+      # insecure at 10.34.0 (CVE-2026-55487 and friends); pnpm_10_latest is the
+      # patched 10.34.5. Drop this once nixpkgs bumps pnpm_10 itself.
+      catppuccin.sources.vscode = (import inputs.catppuccin { inherit pkgs; }).packages.vscode.override {
+        pnpm_10 = pkgs.pnpm_10_latest;
       };
 
       programs.vscodium = {
