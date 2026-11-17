@@ -17,7 +17,7 @@
 
         gh.settings.pager = delta;
         gh-dash.settings.pager.diff = "${delta} --paging always";
-        lazygit.settings.git.pagers = [ { pager = "${delta} --paging=never"; } ];
+        lazygit.settings.git.diffRenderers = [ { command = "${delta} --paging=never"; } ];
       };
     };
 }
