@@ -6,6 +6,7 @@
       imports = [
         self.diskoConfigurations.mimir
         self.modules.nixos.authelia
+        self.modules.nixos.auto-upgrade
         self.modules.nixos.bazarr
         self.modules.nixos.common-cpu-intel
         self.modules.nixos.common-pc-ssd
