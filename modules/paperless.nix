@@ -31,7 +31,7 @@
 
       virtualisation.oci-containers.containers = {
         paperless = {
-          image = "ghcr.io/paperless-ngx/paperless-ngx:3.5.0";
+          image = "ghcr.io/paperless-ngx/paperless-ngx:3.5.1";
 
           dependsOn = [
             "paperless-gotenberg"
