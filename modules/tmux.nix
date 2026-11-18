@@ -7,7 +7,6 @@
       ...
     }:
     let
-      # HACK: tmux has no single "place this window in slot n" command.
       # swap-window errors on an empty slot and move-window on an occupied one, so
       # trying them in order places the window either way, and -d keeps focus on the
       # window that moved. Alt is the modifier because kitty sends a bare digit for

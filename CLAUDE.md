@@ -84,7 +84,7 @@ Traefik imports `nixos.socket-proxy`, each Authelia-protected service imports
 This only works because `modules/flake/modules.nix` gives every `flake.modules.*` a
 module-system `key`, so repeated imports deduplicate instead of declaring the same
 options twice. It is a local replacement for flake-parts' `flakeModules.modules`, which
-leaves the key unset (`# TODO: set key?` upstream) — do not import both, and do not drop
+leaves the key unset (an open TODO upstream) — do not import both, and do not drop
 the key.
 
 ### Role aggregation
