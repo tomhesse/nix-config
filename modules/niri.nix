@@ -148,6 +148,8 @@ in
         prefer-no-csd = true;
         hotkey-overlay.skip-at-startup = true;
 
+        screenshot-path = "${config.xdg.userDirs.pictures}/screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png";
+
         xwayland-satellite.path = xwayland-satellite;
 
         outputs = niriOutputs osConfig.monitors;
