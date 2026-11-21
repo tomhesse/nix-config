@@ -34,7 +34,10 @@
       ];
 
       programs.vscodium.profiles.default = lib.mkIf config.programs.vscodium.enable {
-        extensions = [ pkgs.vscode-extensions.github.vscode-github-actions ];
+        extensions = [
+          pkgs.vscode-extensions.github.vscode-github-actions
+          pkgs.vscode-extensions.github.vscode-pull-request-github
+        ];
       };
     };
 }
