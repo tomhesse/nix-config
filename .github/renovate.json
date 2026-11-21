@@ -65,7 +65,10 @@
     {
       "matchPackageNames": ["docker.io/apache/tika"],
       "allowedVersions": "<4",
-      "changelogUrl": "https://github.com/apache/tika/blob/{{{replace '\\.\\d+$' '' newVersion}}}/CHANGES.txt"
+      "changelogUrl": "https://github.com/apache/tika/blob/{{{replace '\\.\\d+$' '' newVersion}}}/CHANGES.txt",
+      "prBodyNotes": [
+        "Image changelog (base image, bundled tools, rebuild revisions): [apache/tika-docker CHANGES.md](https://github.com/apache/tika-docker/blob/main/CHANGES.md)"
+      ]
     },
     {
       "matchPackageNames": ["docker.io/gotenberg/gotenberg"],
