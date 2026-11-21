@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, self, ... }:
 {
   flake.modules.homeManager.vscodium =
     {
@@ -7,6 +7,8 @@
       ...
     }:
     {
+      imports = [ self.modules.homeManager.gnome-keyring ];
+
       home.persistence."/persistent" = {
         directories = [
           "${config.xdg.relativeConfigHome}/VSCodium/User"
@@ -27,6 +29,15 @@
       programs.vscodium = {
         enable = true;
         mutableExtensionsDir = false;
+
+        # Electron picks a password store from XDG_CURRENT_DESKTOP, and niri is not
+        # a name it knows, so it falls back to plaintext storage and VSCodium warns
+        # that no OS keyring was found. gnome-keyring does own org.freedesktop.secrets
+        # here, so name it explicitly instead.
+        argvSettings = {
+          password-store = "gnome-libsecret";
+          enable-crash-reporter = false;
+        };
 
         profiles.default = {
           extensions = [
