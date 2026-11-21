@@ -59,6 +59,7 @@
             "files.autoSave" = "onFocusChange";
 
             "git.closeDiffOnOperation" = true;
+            "git.confirmSync" = false;
             "typescript.suggest.paths" = false;
             "javascript.suggest.paths" = false;
           };
