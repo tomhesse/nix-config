@@ -4,6 +4,7 @@
   "timezone": "Europe/Berlin",
   "assignees": ["tomhesse"],
   "enabledManagers": ["nix", "github-actions", "custom.regex"],
+  "prHourlyLimit": 5,
   "nix": {
     "enabled": true
   },
@@ -42,6 +43,10 @@
     }
   ],
   "packageRules": [
+    {
+      "matchUpdateTypes": ["lockFileMaintenance"],
+      "prPriority": 10
+    },
     {
       "matchManagers": ["github-actions"],
       "groupName": "the github actions",
