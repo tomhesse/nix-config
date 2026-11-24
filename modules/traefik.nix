@@ -102,8 +102,17 @@
 
         extraOptions = [
           "--ip=172.31.0.254"
-          "--health-cmd=traefik healthcheck --ping"
-          "--health-timeout=5s"
+
+          # HACK: retry inside the probe. podman runs the first healthcheck the
+          # moment the container starts and its transient unit exits non-zero on
+          # a failed probe even inside the start period, which only holds the
+          # container's status at "starting". switch-to-configuration scans for
+          # failed units at the end of a switch and exits 4 on any, so losing
+          # that startup race fails nixos-upgrade. podman 6 passes
+          # --ignore-result to the unit; 5.8.9 has no such flag.
+          "--health-cmd=until traefik healthcheck --ping; do sleep 1; done"
+          "--health-interval=10s"
+          "--health-timeout=10s"
           "--health-start-period=10s"
           "--security-opt=no-new-privileges"
         ];
