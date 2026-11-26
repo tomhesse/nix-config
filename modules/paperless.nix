@@ -101,7 +101,7 @@
         };
 
         paperless-valkey = {
-          image = "docker.io/valkey/valkey:9.2.0-alpine";
+          image = "docker.io/valkey/valkey:9.2.1-alpine";
 
           networks = [ "edge" ];
 
